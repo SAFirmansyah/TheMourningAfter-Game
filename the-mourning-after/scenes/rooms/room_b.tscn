@@ -1,0 +1,72 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/room.gd" id="1_room"]
+[ext_resource type="Material" path="res://materials/ground.tres" id="2_ground"]
+[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_exit"]
+[ext_resource type="PackedScene" path="res://scenes/test/prop.tscn" id="4_prop"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
+material = ExtResource("2_ground")
+size = Vector2(24, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_long"]
+size = Vector3(24.4, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_short"]
+size = Vector3(0.4, 2, 16.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gap"]
+size = Vector3(0.4, 2, 6.4)
+
+[node name="RoomB" type="Node3D"]
+script = ExtResource("1_room")
+ground_tint = Color(0.62, 0.58, 0.38, 1)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_floor")
+
+[node name="PlayerStart" type="Marker3D" parent="."]
+
+[node name="Walls" type="StaticBody3D" parent="."]
+
+[node name="North" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
+shape = SubResource("BoxShape3D_long")
+
+[node name="South" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
+shape = SubResource("BoxShape3D_long")
+
+[node name="East" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 0)
+shape = SubResource("BoxShape3D_short")
+
+[node name="WestUpper" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, -5)
+shape = SubResource("BoxShape3D_gap")
+
+[node name="WestLower" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 5)
+shape = SubResource("BoxShape3D_gap")
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="Prop1" parent="Props" instance=ExtResource("4_prop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5)
+
+[node name="Prop2" parent="Props" instance=ExtResource("4_prop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+
+[node name="Prop3" parent="Props" instance=ExtResource("4_prop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
+
+[node name="Prop4" parent="Props" instance=ExtResource("4_prop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+
+[node name="Prop5" parent="Props" instance=ExtResource("4_prop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+
+[node name="West" parent="." instance=ExtResource("3_exit")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -12, 0, 0)
+target_room = "res://scenes/rooms/room_a.tscn"
+target_entry = &"East"

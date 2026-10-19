@@ -1,0 +1,25 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_player"]
+[ext_resource type="Script" path="res://scripts/visual/facing_card.gd" id="2_card"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
+radius = 0.35
+height = 1.8
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("card")]
+motion_mode = 1
+script = ExtResource("1_player")
+card = NodePath("Card")
+
+[node name="Card" type="Sprite3D" parent="."]
+offset = Vector2(0, 64)
+pixel_size = 0.014
+alpha_cut = 1
+texture = ExtResource("3_icon")
+script = ExtResource("2_card")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_body")

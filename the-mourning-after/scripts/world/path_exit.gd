@@ -1,0 +1,26 @@
+class_name PathExit
+extends Area3D
+## Path out of a room. Local +X points out of the room.
+
+signal player_entered
+
+@export_file("*.tscn") var target_room := ""
+@export var target_entry: StringName = &"" # PathExit node name in the target room
+
+@onready var spawn_point: Marker3D = $Spawn
+@onready var path_mesh: MeshInstance3D = $PathMesh
+
+
+func _ready() -> void:
+	body_entered.connect(_on_body_entered)
+
+
+func outward_direction() -> Vector3:
+	var dir := global_basis.x
+	dir.y = 0.0
+	return dir.normalized()
+
+
+func _on_body_entered(body: Node3D) -> void:
+	if body is Player and target_room != "":
+		player_entered.emit()
