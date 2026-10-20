@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/interaction_hud.gd" id="1_hud"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="2_icon"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prompt"]
 content_margin_left = 22.0
@@ -12,7 +13,7 @@ border_width_left = 2
 border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
-border_color = Color(0.78, 0.66, 0.38, 0.9)
+border_color = Color(0.78, 0.66, 0.38, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -20,9 +21,9 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dialogue"]
 content_margin_left = 56.0
-content_margin_top = 36.0
+content_margin_top = 40.0
 content_margin_right = 56.0
-content_margin_bottom = 36.0
+content_margin_bottom = 40.0
 bg_color = Color(0.11, 0.11, 0.12, 0.94)
 border_width_left = 5
 border_width_top = 5
@@ -36,9 +37,77 @@ corner_radius_bottom_left = 6
 shadow_color = Color(0, 0, 0, 0.5)
 shadow_size = 12
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_name"]
+content_margin_left = 26.0
+content_margin_top = 6.0
+content_margin_right = 26.0
+content_margin_bottom = 6.0
+bg_color = Color(0.16, 0.13, 0.08, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.78, 0.66, 0.38, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [node name="InteractionHUD" type="CanvasLayer"]
 layer = 5
 script = ExtResource("1_hud")
+
+[node name="Overlay" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Portraits" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PlayerPortrait" type="TextureRect" parent="Portraits"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = -820.0
+offset_right = 560.0
+offset_bottom = -320.0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("2_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CharacterPortrait" type="TextureRect" parent="Portraits"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -560.0
+offset_top = -820.0
+offset_right = -60.0
+offset_bottom = -320.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("2_icon")
+expand_mode = 1
+stretch_mode = 5
+flip_h = true
 
 [node name="Prompt" type="PanelContainer" parent="."]
 anchors_preset = 7
@@ -62,7 +131,8 @@ text = "E - Interact"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Dialogue" type="PanelContainer" parent="."]
+[node name="Dialogue" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -75,11 +145,34 @@ offset_bottom = -80.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
+
+[node name="Box" type="PanelContainer" parent="Dialogue"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_dialogue")
 
-[node name="Label" type="Label" parent="Dialogue"]
+[node name="Label" type="Label" parent="Dialogue/Box"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 34
 text = "Sample dialogue text appears here, wrapping across the width of the box like the narrator text in Hades. >"
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="NameTag" type="PanelContainer" parent="Dialogue"]
+layout_mode = 1
+offset_left = 48.0
+offset_right = 48.0
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_name")
+
+[node name="Label" type="Label" parent="Dialogue/NameTag"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
+theme_override_font_sizes/font_size = 28
+text = "Speaker"

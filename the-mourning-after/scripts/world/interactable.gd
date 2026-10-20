@@ -1,20 +1,31 @@
 @tool
 class_name Interactable
 extends Area3D
-## Shows the interact prompt when the player is in range; pressing interact reads out its lines.
-## One line = single text box. More lines = pages advanced with LMB.
+## Shows the interact prompt when the player is in range.
+## Lines set: narration text box. Conversation set: talk with overlay and portraits.
+## Neither set: instant action (listen for `interacted`).
 
 signal interacted
 signal finished
 
 @export var prompt_label := "Interact"
-@export var lines: PackedStringArray = ["Sample text."]
+@export var enabled := true
 @export var interact_radius := 2.2: # TUNE: distance at which the prompt appears (m)
 	set(value):
 		interact_radius = value
 		_apply_radius()
 
+@export_group("Narration")
+@export var lines: PackedStringArray = []
+
+@export_group("Conversation")
+@export var character_name := ""
+@export var character_portrait: Texture2D # placeholder until portraits exist
+@export var character_portrait_tint := Color.WHITE
+@export var conversation: Array[DialogueLine] = []
+
 var player_in_range := false
+var player: Player
 
 
 func _ready() -> void:
@@ -24,10 +35,19 @@ func _ready() -> void:
 	add_to_group(&"interactable")
 	body_entered.connect(func(body: Node3D) -> void:
 		if body is Player:
-			player_in_range = true)
+			player_in_range = true
+			player = body)
 	body_exited.connect(func(body: Node3D) -> void:
 		if body is Player:
 			player_in_range = false)
+
+
+func is_conversation() -> bool:
+	return not conversation.is_empty()
+
+
+func page_count() -> int:
+	return conversation.size() if is_conversation() else lines.size()
 
 
 func _apply_radius() -> void:

@@ -8,6 +8,8 @@ signal dash_ended
 
 @export var card: Sprite3D
 @export var camera_rig: CameraRig
+@export var display_name := "Player" # name shown in conversations
+@export var portrait: Texture2D # conversation portrait; placeholder uses the card
 
 @export_group("Movement")
 @export var base_move_speed := 5.0 # TUNE: walk speed at 1x (m/s)
@@ -33,6 +35,7 @@ var forced_input := Vector2.ZERO # screen-space direction used while input is di
 
 var _facing := Vector2.DOWN
 var _dashing := false
+var _dash_queued := false
 var _dash_time_left := 0.0
 var _iframe_time_left := 0.0
 var _dash_velocity := Vector3.ZERO
@@ -52,8 +55,10 @@ func _physics_process(delta: float) -> void:
 		_facing = input.normalized()
 
 	_recharge_dashes(delta)
-	if input_enabled and Input.is_action_just_pressed("dash"):
-		_try_dash()
+	if _dash_queued:
+		_dash_queued = false
+		if input_enabled:
+			_try_dash()
 
 	if _dashing:
 		velocity = _dash_velocity
@@ -74,6 +79,12 @@ func _physics_process(delta: float) -> void:
 
 	if card and input.x != 0.0:
 		card.flip_h = input.x < 0.0
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	# Event-based so presses consumed by UI (e.g. Space advancing text) never dash.
+	if input_enabled and event.is_action_pressed(&"dash"):
+		_dash_queued = true
 
 
 func _process(_delta: float) -> void:

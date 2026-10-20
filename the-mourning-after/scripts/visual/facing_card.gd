@@ -8,6 +8,8 @@ const OCCLUDER_MATERIAL := preload("res://materials/card_occluder.tres")
 @export var pivot_at_feet := true
 @export var see_through_over_player := false # environment props: turn see-through where they cover the player
 
+var visual_offset := Vector3.ZERO # editor preview only: extra offset for animated cards
+
 
 func _ready() -> void:
 	process_physics_priority = 20 # after camera rig
@@ -33,7 +35,7 @@ func _process(_delta: float) -> void:
 	# Editor preview: visual only, saved rotation untouched.
 	var cam := _editor_camera()
 	if cam:
-		RenderingServer.instance_set_transform(get_instance(), Transform3D(_facing_basis(cam), global_position))
+		RenderingServer.instance_set_transform(get_instance(), Transform3D(_facing_basis(cam), global_position + visual_offset))
 
 
 func _facing_basis(cam: Camera3D) -> Basis:
