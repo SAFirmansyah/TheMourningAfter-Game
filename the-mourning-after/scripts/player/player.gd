@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody3D
 ## Screen-relative movement on the floor plane, with dash charges and i-frames.
+## Dashing passes through environment objects; walls still block.
 
 signal dash_started
 signal dash_ended
@@ -21,6 +22,9 @@ signal dash_ended
 @export var dash_duration := 0.15 # TUNE: dash time (s)
 @export var dash_recharge_time := 0.8 # TUNE: time to refill one charge (s)
 @export var dash_iframe_extra := 0.05 # TUNE: i-frames after dash ends (s)
+@export var dash_max_extension := 0.3 # TUNE: extra dash time allowed to finish exiting an object (s)
+@export_range(0.0, 1.0) var dash_transparency := 0.45 # TUNE: card see-through amount while dashing (0 = opaque, 1 = invisible)
+@export_flags_3d_physics var dash_phase_layers := 2 # layers passed through while dashing
 
 var is_invulnerable := false
 var dashes_available := 0
@@ -28,10 +32,13 @@ var input_enabled := true
 var forced_input := Vector2.ZERO # screen-space direction used while input is disabled
 
 var _facing := Vector2.DOWN
+var _dashing := false
 var _dash_time_left := 0.0
 var _iframe_time_left := 0.0
 var _dash_velocity := Vector3.ZERO
 var _recharge_progress := 0.0
+
+@onready var _body_shape: CollisionShape3D = $CollisionShape3D
 
 
 func _ready() -> void:
@@ -48,20 +55,19 @@ func _physics_process(delta: float) -> void:
 	if input_enabled and Input.is_action_just_pressed("dash"):
 		_try_dash()
 
-	if _dash_time_left > 0.0:
+	if _dashing:
 		velocity = _dash_velocity
 		_dash_time_left -= delta
-		if _dash_time_left <= 0.0:
-			velocity = velocity.limit_length(base_move_speed * move_speed_multiplier)
-			_iframe_time_left = dash_iframe_extra
-			dash_ended.emit()
+		var still_inside := _overlaps_phase_layers() and _dash_time_left > -dash_max_extension
+		if _dash_time_left <= 0.0 and not still_inside:
+			_end_dash()
 	else:
 		var target := _to_world(input) * base_move_speed * move_speed_multiplier
 		var rate := acceleration if input != Vector2.ZERO else deceleration
 		velocity = velocity.move_toward(target, rate * delta)
 
 	_iframe_time_left = maxf(0.0, _iframe_time_left - delta)
-	is_invulnerable = _dash_time_left > 0.0 or _iframe_time_left > 0.0
+	is_invulnerable = _dashing or _iframe_time_left > 0.0
 
 	velocity.y = 0.0
 	move_and_slide()
@@ -76,18 +82,43 @@ func _process(_delta: float) -> void:
 
 func teleport(pos: Vector3) -> void:
 	global_position = pos
+	if _dashing:
+		_end_dash()
 	velocity = Vector3.ZERO
-	_dash_time_left = 0.0
 	reset_physics_interpolation()
 
 
 func _try_dash() -> void:
-	if dashes_available <= 0 or _dash_time_left > 0.0:
+	if dashes_available <= 0 or _dashing:
 		return
 	dashes_available -= 1
+	_dashing = true
 	_dash_time_left = dash_duration
 	_dash_velocity = _to_world(_facing) * (dash_distance / dash_duration)
+	collision_mask &= ~dash_phase_layers
+	if card:
+		card.transparency = dash_transparency
 	dash_started.emit()
+
+
+func _end_dash() -> void:
+	_dashing = false
+	_dash_time_left = 0.0
+	collision_mask |= dash_phase_layers
+	velocity = velocity.limit_length(base_move_speed * move_speed_multiplier)
+	_iframe_time_left = dash_iframe_extra
+	if card:
+		card.transparency = 0.0
+	dash_ended.emit()
+
+
+func _overlaps_phase_layers() -> bool:
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = _body_shape.shape
+	query.transform = _body_shape.global_transform
+	query.collision_mask = dash_phase_layers
+	query.exclude = [get_rid()]
+	return not get_world_3d().direct_space_state.intersect_shape(query, 1).is_empty()
 
 
 func _recharge_dashes(delta: float) -> void:

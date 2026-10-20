@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://scenes/camera/camera_rig.tscn" id="3_rig"]
 [ext_resource type="PackedScene" path="res://scenes/rooms/room_a.tscn" id="4_room_a"]
+[ext_resource type="PackedScene" path="res://scenes/ui/interaction_hud.tscn" id="5_hud"]
 
 [sub_resource type="Environment" id="Environment_bg"]
 background_mode = 1
@@ -24,6 +25,9 @@ camera_rig = NodePath("../CameraRig")
 
 [node name="CameraRig" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("3_rig")]
 follow_target = NodePath("../Player")
+
+[node name="InteractionHUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_hud")]
+player = NodePath("../Player")
 
 [node name="Transition" type="CanvasLayer" parent="."]
 layer = 10

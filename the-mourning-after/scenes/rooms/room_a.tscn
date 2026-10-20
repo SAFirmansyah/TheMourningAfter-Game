@@ -4,6 +4,7 @@
 [ext_resource type="Material" path="res://materials/ground.tres" id="2_ground"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_exit"]
 [ext_resource type="PackedScene" path="res://scenes/test/prop.tscn" id="4_prop"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="5_interact"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
 material = ExtResource("2_ground")
@@ -70,3 +71,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
 target_room = "res://scenes/rooms/room_b.tscn"
 target_entry = &"West"
+
+[node name="Interactable" parent="Props/Prop2" instance=ExtResource("5_interact")]
+lines = PackedStringArray("This interaction opens up a textbox!")
