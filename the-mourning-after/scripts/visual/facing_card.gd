@@ -3,12 +3,21 @@ class_name FacingCard
 extends Sprite3D
 ## 2D card that turns to face the active camera's position, pivoting at its feet.
 
-const OCCLUDER_MATERIAL := preload("res://materials/card_occluder.tres")
+const CARD_MATERIAL := preload("res://materials/card.tres")
 
 @export var pivot_at_feet := true
-@export var see_through_over_player := false # environment props: turn see-through where they cover the player
+@export var see_through_over_player := false: # environment props: turn see-through where they cover the player
+	set(value):
+		see_through_over_player = value
+		_setup_material()
+@export var sway := false: # foliage-style wind sway
+	set(value):
+		sway = value
+		_setup_material()
 
 var visual_offset := Vector3.ZERO # editor preview only: extra offset for animated cards
+
+var _card_material: ShaderMaterial
 
 
 func _ready() -> void:
@@ -16,9 +25,7 @@ func _ready() -> void:
 	billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	texture_changed.connect(_on_texture_changed)
 	_apply_pivot()
-	if see_through_over_player and not Engine.is_editor_hint():
-		material_override = OCCLUDER_MATERIAL.duplicate()
-		_sync_occluder_texture()
+	_setup_material()
 
 
 func _physics_process(_delta: float) -> void:
@@ -57,13 +64,37 @@ func _editor_camera() -> Camera3D:
 
 func _on_texture_changed() -> void:
 	_apply_pivot()
-	_sync_occluder_texture()
+	_sync_card_material()
 
 
-func _sync_occluder_texture() -> void:
-	if material_override is ShaderMaterial:
-		material_override.set_shader_parameter("card_texture", texture)
-		material_override.set_shader_parameter("card_modulate", modulate)
+## Custom card material only when a feature needs it. In the editor it's applied through the
+## renderer so previews never get saved into scenes; the player cutout is game-only.
+func _setup_material() -> void:
+	if not is_node_ready():
+		return
+	var editor := Engine.is_editor_hint()
+	if not (see_through_over_player or sway):
+		_card_material = null
+		if editor:
+			RenderingServer.instance_geometry_set_material_override(get_instance(), RID())
+		else:
+			material_override = null
+		return
+	if _card_material == null:
+		_card_material = CARD_MATERIAL.duplicate()
+	_card_material.set_shader_parameter("occlusion_enabled", see_through_over_player and not editor)
+	_card_material.set_shader_parameter("sway_enabled", sway)
+	_sync_card_material()
+	if editor:
+		RenderingServer.instance_geometry_set_material_override(get_instance(), _card_material.get_rid())
+	else:
+		material_override = _card_material
+
+
+func _sync_card_material() -> void:
+	if _card_material:
+		_card_material.set_shader_parameter("card_texture", texture)
+		_card_material.set_shader_parameter("card_modulate", modulate)
 
 
 func _apply_pivot() -> void:

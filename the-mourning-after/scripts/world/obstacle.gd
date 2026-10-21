@@ -9,8 +9,18 @@ const BOX_HEIGHT := 2.0
 @export var card: Sprite3D
 @export var footprint_depth := 0.6 # TUNE: collision depth, front to back (m)
 @export var footprint_width_scale := 1.0 # TUNE: collision width as a fraction of the card's width
+@export var sway := false: # foliage-style wind sway on the card
+	set(value):
+		sway = value
+		if card:
+			card.sway = sway
 
 @onready var _shape_node: CollisionShape3D = $CollisionShape3D
+
+
+func _ready() -> void:
+	if card:
+		card.sway = sway
 
 
 func _process(_delta: float) -> void:
