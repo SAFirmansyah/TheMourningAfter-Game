@@ -12,6 +12,7 @@ extends Node3D
 @onready var rooms: Node3D = $Rooms
 @onready var fade: ColorRect = $Transition/Fade
 @onready var save_indicator: SaveIndicator = $SaveIndicator
+@onready var skip_prompt: SkipPrompt = $SkipPrompt
 
 var current_room: Room
 var _transitioning := false
@@ -24,6 +25,9 @@ var _room_changes := {}
 
 
 func _ready() -> void:
+	skip_prompt.skip_requested.connect(func() -> void:
+		if _cutscene:
+			_cutscene.skip())
 	var placed: Room
 	for child in rooms.get_children():
 		if child is Room:
@@ -57,8 +61,10 @@ func play_cutscene(path: String, fade_back_in := true) -> void:
 	get_tree().paused = true
 	_cutscene = cutscene
 	add_child(cutscene)
+	skip_prompt.begin()
 	await _fade_to(0.0)
 	await cutscene.play()
+	skip_prompt.end()
 	await _fade_to(1.0)
 	_cutscene = null
 	cutscene.queue_free()
@@ -76,11 +82,13 @@ func set_menu_paused(on: bool) -> void:
 	if on:
 		_tree_was_paused = get_tree().paused
 		get_tree().paused = true
+		skip_prompt.frozen = true
 		if _cutscene:
 			_cutscene.process_mode = Node.PROCESS_MODE_DISABLED
 		if _fade_tween and _fade_tween.is_running():
 			_fade_tween.pause()
 	else:
+		skip_prompt.frozen = false
 		if _cutscene:
 			_cutscene.process_mode = Node.PROCESS_MODE_ALWAYS
 		if _fade_tween and _fade_tween.is_valid():
