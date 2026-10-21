@@ -16,7 +16,7 @@ extends CanvasLayer
 @onready var prompt: Control = $Prompt
 @onready var prompt_label: Label = $Prompt/Label
 @onready var dialogue: Control = $Dialogue
-@onready var dialogue_label: Label = $Dialogue/Box/Label
+@onready var dialogue_label: StreamedLabel = $Dialogue/Box/Label
 @onready var name_tag: Control = $Dialogue/NameTag
 @onready var name_label: Label = $Dialogue/NameTag/Label
 
@@ -90,6 +90,9 @@ func _open(it: Interactable) -> void:
 
 
 func _advance() -> void:
+	if dialogue_label.is_streaming():
+		dialogue_label.skip()
+		return
 	_page += 1
 	if _page >= _active.page_count():
 		_close()
@@ -111,7 +114,7 @@ func _show_page() -> void:
 		text = _active.lines[_page]
 	if _page < _active.page_count() - 1:
 		text += more_marker
-	dialogue_label.text = text
+	dialogue_label.stream(text)
 
 
 func _close() -> void:

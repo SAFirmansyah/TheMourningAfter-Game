@@ -2,7 +2,7 @@ class_name Room
 extends Node3D
 ## One room. Forwards its path exits to the world.
 
-signal exit_requested(target_room: String, target_entry: StringName, exit_direction: Vector3)
+signal exit_requested(target_room: String, target_entry: StringName, exit_direction: Vector3, cutscene: String)
 
 @export var ground_tint := Color.WHITE
 
@@ -12,7 +12,7 @@ func _ready() -> void:
 	for exit in get_exits():
 		exit.path_mesh.set_instance_shader_parameter("tint", ground_tint)
 		exit.player_entered.connect(func() -> void:
-			exit_requested.emit(exit.target_room, exit.target_entry, exit.outward_direction()))
+			exit_requested.emit(exit.target_room, exit.target_entry, exit.outward_direction(), exit.cutscene))
 
 
 func get_exits() -> Array[PathExit]:
