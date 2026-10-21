@@ -17,6 +17,8 @@ size = Vector3(6.4, 2, 0.4)
 size = Vector3(0.4, 2, 4.4)
 
 [node name="PathExit" type="Area3D"]
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("1_exit")
 
 [node name="Trigger" type="CollisionShape3D" parent="."]

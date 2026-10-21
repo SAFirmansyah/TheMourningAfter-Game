@@ -4,6 +4,8 @@
 [ext_resource type="Material" path="res://materials/ground.tres" id="2_ground"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_exit"]
 [ext_resource type="PackedScene" path="res://scenes/test/prop.tscn" id="4_prop"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="5_interact"]
+[ext_resource type="PackedScene" path="res://scenes/loot/loot_pickup.tscn" id="6_loot"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
 material = ExtResource("2_ground")
@@ -70,3 +72,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -12, 0, 0)
 target_room = "res://scenes/rooms/room_a.tscn"
 target_entry = &"East"
+
+[node name="Interactable" parent="Props/Prop2" instance=ExtResource("5_interact")]
+lines = PackedStringArray("This is a multi-line interaction.", "The same textbox has this line...", "...and this one too.")
+
+[node name="Loot" type="Node3D" parent="."]
+
+[node name="Loot1" parent="Loot" instance=ExtResource("6_loot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -1.5)
+tint = Color(1, 0.85, 0.35, 1)
+auto_collect = true
+
+[node name="Loot2" parent="Loot" instance=ExtResource("6_loot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 2)
+tint = Color(0.6, 0.85, 1, 1)
+
+[node name="Loot3" parent="Loot" instance=ExtResource("6_loot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2.5)
+tint = Color(1, 0.5, 0.75, 1)
+auto_collect = true
+
+[node name="Loot4" parent="Loot" instance=ExtResource("6_loot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, 1)
+tint = Color(0.7, 1, 0.55, 1)
+
+[node name="Loot5" parent="Loot" instance=ExtResource("6_loot")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5.5)
+tint = Color(1, 0.85, 0.35, 1)
+auto_collect = true
