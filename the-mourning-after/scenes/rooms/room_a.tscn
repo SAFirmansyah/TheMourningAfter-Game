@@ -98,6 +98,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
 target_room = "res://scenes/rooms/room_b.tscn"
 target_entry = &"West"
+cutscene = "res://scenes/cutscenes/test_cutscene.tscn"
 
 [node name="Interactable" parent="Props/Prop2" instance=ExtResource("5_interact")]
 lines = PackedStringArray("This interaction opens up a textbox!")

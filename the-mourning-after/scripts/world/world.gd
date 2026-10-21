@@ -1,6 +1,6 @@
 class_name World
 extends Node3D
-## Holds the player and camera; swaps rooms when a path exit is entered.
+## Holds the player and camera; swaps rooms when a path exit is entered; plays cutscenes.
 ## Starts in whichever room is placed under Rooms.
 
 @export var fade_time := 0.35 # TUNE: fade to/from black per room change (s)
@@ -12,6 +12,7 @@ extends Node3D
 
 var current_room: Room
 var _transitioning := false
+var _in_cutscene := false
 
 
 func _ready() -> void:
@@ -21,14 +22,38 @@ func _ready() -> void:
 			return
 
 
-func _on_exit_requested(target_room: String, target_entry: StringName, exit_direction: Vector3) -> void:
-	if _transitioning:
+## Plays a cutscene scene (a Cutscene root) over everything, pausing gameplay.
+## Callable from any trigger: story beats, room changes, first launch, etc.
+func play_cutscene(path: String, fade_back_in := true) -> void:
+	if _in_cutscene:
+		return
+	_in_cutscene = true
+	var cutscene: Cutscene = (load(path) as PackedScene).instantiate()
+	cutscene.process_mode = Node.PROCESS_MODE_ALWAYS
+	if fade.color.a < 1.0:
+		await _fade_to(1.0)
+	get_tree().paused = true
+	add_child(cutscene)
+	await _fade_to(0.0)
+	await cutscene.play()
+	await _fade_to(1.0)
+	cutscene.queue_free()
+	get_tree().paused = false
+	_in_cutscene = false
+	if fade_back_in:
+		await _fade_to(0.0)
+
+
+func _on_exit_requested(target_room: String, target_entry: StringName, exit_direction: Vector3, cutscene: String) -> void:
+	if _transitioning or _in_cutscene:
 		return
 	_transitioning = true
 	player.input_enabled = false
 	player.forced_input = Vector2(exit_direction.x, exit_direction.z)
 	await _fade_to(1.0)
 	_load_room(target_room, target_entry)
+	if cutscene != "":
+		await play_cutscene(cutscene, false)
 	await _fade_to(0.0)
 	player.forced_input = Vector2.ZERO
 	player.input_enabled = true
@@ -59,6 +84,6 @@ func _enter_room(room: Room, entry: StringName) -> void:
 
 
 func _fade_to(alpha: float) -> void:
-	var tween := create_tween()
+	var tween := create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	tween.tween_property(fade, "color:a", alpha, fade_time)
 	await tween.finished

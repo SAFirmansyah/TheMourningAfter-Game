@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/ui/interaction_hud.gd" id="1_hud"]
 [ext_resource type="Texture2D" path="res://icon.svg" id="2_icon"]
+[ext_resource type="Script" path="res://scripts/ui/streamed_label.gd" id="3_stream"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prompt"]
 content_margin_left = 22.0
@@ -162,6 +163,7 @@ theme_override_font_sizes/font_size = 34
 text = "Sample dialogue text appears here, wrapping across the width of the box like the narrator text in Hades. >"
 vertical_alignment = 1
 autowrap_mode = 3
+script = ExtResource("3_stream")
 
 [node name="NameTag" type="PanelContainer" parent="Dialogue"]
 layout_mode = 1
