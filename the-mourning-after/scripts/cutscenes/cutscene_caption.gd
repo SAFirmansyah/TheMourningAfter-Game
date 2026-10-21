@@ -45,8 +45,11 @@ func start() -> void:
 
 
 func _wait(seconds: float) -> void:
-	if seconds > 0.0:
-		await get_tree().create_timer(seconds, true).timeout
+	var elapsed := 0.0
+	while elapsed < seconds:
+		await get_tree().process_frame
+		if can_process():
+			elapsed += get_process_delta_time()
 
 
 func _fade(alpha: float) -> void:
