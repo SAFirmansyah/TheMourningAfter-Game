@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/interaction_hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="6_pause"]
 [ext_resource type="PackedScene" path="res://scenes/ui/save_indicator.tscn" id="7_saving"]
+[ext_resource type="PackedScene" path="res://scenes/ui/skip_prompt.tscn" id="8_skip"]
 
 [sub_resource type="Environment" id="Environment_bg"]
 background_mode = 1
@@ -47,3 +48,5 @@ color = Color(0, 0, 0, 0)
 world = NodePath("..")
 
 [node name="SaveIndicator" parent="." instance=ExtResource("7_saving")]
+
+[node name="SkipPrompt" parent="." instance=ExtResource("8_skip")]

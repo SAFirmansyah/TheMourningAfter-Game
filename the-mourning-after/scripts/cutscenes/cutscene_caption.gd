@@ -12,6 +12,7 @@ signal done
 @onready var label: StreamedLabel = $Label
 
 var _running := false
+var _run_id := 0
 
 
 func _ready() -> void:
@@ -27,7 +28,11 @@ func start() -> void:
 	if lines.is_empty():
 		return
 	_running = true
+	_run_id += 1
+	var run := _run_id
 	await _wait(start_delay)
+	if run != _run_id:
+		return
 	modulate.a = 0.0
 	show()
 	label.stream(lines[0].text)
@@ -37,8 +42,24 @@ func start() -> void:
 			label.stream(lines[i].text)
 		if label.is_streaming():
 			await label.stream_finished
+		if run != _run_id:
+			return
 		await _wait(lines[i].hold_time)
+		if run != _run_id:
+			return
 	await _fade(0.0)
+	if run != _run_id:
+		return
+	hide()
+	_running = false
+	done.emit()
+
+
+func stop() -> void:
+	if not _running:
+		return
+	_run_id += 1
+	label.skip()
 	hide()
 	_running = false
 	done.emit()
