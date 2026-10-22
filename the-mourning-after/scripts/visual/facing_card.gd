@@ -6,6 +6,7 @@ extends Sprite3D
 const CARD_MATERIAL := preload("res://materials/card.tres")
 
 @export var pivot_at_feet := true
+@export var turn_sideways := true # off: only tilts toward the camera, never turns left/right (wall facades)
 @export var see_through_over_player := false: # environment props: turn see-through where they cover the player
 	set(value):
 		see_through_over_player = value
@@ -47,6 +48,9 @@ func _process(_delta: float) -> void:
 
 func _facing_basis(cam: Camera3D) -> Basis:
 	var away := global_position - cam.global_position
+	if not turn_sideways:
+		var right := get_parent_node_3d().global_basis.x.normalized() if get_parent_node_3d() else Vector3.RIGHT
+		away -= right * away.dot(right)
 	if away.length_squared() < 0.0001:
 		return global_basis
 	return Basis.looking_at(away, cam.global_basis.y).scaled(global_basis.get_scale())

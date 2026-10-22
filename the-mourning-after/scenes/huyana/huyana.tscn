@@ -1,0 +1,53 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/world.gd" id="1_world"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/camera/camera_rig.tscn" id="3_rig"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/sanctuary.tscn" id="4_room_a"]
+[ext_resource type="PackedScene" path="res://scenes/ui/interaction_hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="6_pause"]
+[ext_resource type="PackedScene" path="res://scenes/ui/save_indicator.tscn" id="7_saving"]
+[ext_resource type="PackedScene" path="res://scenes/ui/skip_prompt.tscn" id="8_skip"]
+
+[sub_resource type="Environment" id="Environment_bg"]
+background_mode = 1
+background_color = Color(0.09, 0.1, 0.12, 1)
+
+[node name="Huyana" type="Node3D"]
+script = ExtResource("1_world")
+load_save_on_start = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bg")
+
+[node name="Rooms" type="Node3D" parent="."]
+
+[node name="Sanctuary" parent="Rooms" instance=ExtResource("4_room_a")]
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("2_player")]
+camera_rig = NodePath("../CameraRig")
+
+[node name="CameraRig" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("3_rig")]
+follow_target = NodePath("../Player")
+
+[node name="InteractionHUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_hud")]
+player = NodePath("../Player")
+
+[node name="Transition" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Fade" type="ColorRect" parent="Transition"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("world") instance=ExtResource("6_pause")]
+world = NodePath("..")
+
+[node name="SaveIndicator" parent="." instance=ExtResource("7_saving")]
+
+[node name="SkipPrompt" parent="." instance=ExtResource("8_skip")]
