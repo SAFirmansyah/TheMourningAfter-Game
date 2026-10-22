@@ -1,0 +1,60 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/room.gd" id="1_room"]
+[ext_resource type="Material" path="res://materials/ground.tres" id="2_ground"]
+[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_exit"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
+material = ExtResource("2_ground")
+size = Vector2(16, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_North"]
+size = Vector3(16.40, 2, 0.40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_South"]
+size = Vector3(16.40, 2, 0.40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_WestUpper"]
+size = Vector3(0.40, 2, 6.40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_WestLower"]
+size = Vector3(0.40, 2, 6.40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_East"]
+size = Vector3(0.40, 2, 16.40)
+
+[node name="Altar" type="Node3D"]
+script = ExtResource("1_room")
+ground_tint = Color(0.5, 0.42, 0.55, 1)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_floor")
+
+[node name="PlayerStart" type="Marker3D" parent="."]
+
+[node name="Walls" type="StaticBody3D" parent="."]
+
+[node name="North" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8.0)
+shape = SubResource("BoxShape3D_North")
+
+[node name="South" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8.0)
+shape = SubResource("BoxShape3D_South")
+
+[node name="WestUpper" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 1, -5.0)
+shape = SubResource("BoxShape3D_WestUpper")
+
+[node name="WestLower" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 1, 5.0)
+shape = SubResource("BoxShape3D_WestLower")
+
+[node name="East" type="CollisionShape3D" parent="Walls"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 1, 0)
+shape = SubResource("BoxShape3D_East")
+
+[node name="West" parent="." instance=ExtResource("3_exit")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -8.0, 0, 0)
+target_room = "res://scenes/huyana/sanctuary.tscn"
+target_entry = &"East"
