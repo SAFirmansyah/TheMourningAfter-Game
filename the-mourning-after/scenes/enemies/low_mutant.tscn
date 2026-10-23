@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dwl4exhk82y7p"]
+
+[ext_resource type="Script" uid="uid://dsabkrdimbjiq" path="res://scripts/enemies/low_mutant.gd" id="1_w71w8"]
+[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="2_m2su8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vlovs"]
+radius = 0.35
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhy0a"]
+radius = 0.35
+height = 1.8
+
+[node name="Low_Mutant" type="CharacterBody3D" unique_id=465252760]
+collision_layer = 8
+collision_mask = 23
+motion_mode = 1
+script = ExtResource("1_w71w8")
+metadata/_custom_type_script = "uid://dnbf3vat68acm"
+
+[node name="Card" type="Sprite3D" parent="." unique_id=1358649332]
+offset = Vector2(0, 64)
+texture = ExtResource("2_m2su8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=936884657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_vlovs")
+
+[node name="Area3D" type="Area3D" parent="." unique_id=963939070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Area3D" unique_id=1732531385]
+shape = SubResource("CapsuleShape3D_jhy0a")

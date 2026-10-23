@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SelfHealAbility" format=3 uid="uid://bvc3p2aosce47"]
+
+[ext_resource type="Script" uid="uid://c2tcoh261gq30" path="res://scripts/weapons/self_heal_ability.gd" id="1_ppyev"]
+
+[resource]
+script = ExtResource("1_ppyev")
+heal_amount = 20.0
+metadata/_custom_type_script = "uid://c2tcoh261gq30"

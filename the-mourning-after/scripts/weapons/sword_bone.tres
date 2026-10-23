@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://v2yujm0adh2x"]
+
+[ext_resource type="Script" uid="uid://bfhfm0g7hqbui" path="res://scripts/weapons/weapon_ability.gd" id="1_f7xm7"]
+[ext_resource type="Script" uid="uid://c483ka4fsmtcq" path="res://scripts/weapons/poison_damage_ability.gd" id="2_lhm5k"]
+[ext_resource type="Script" uid="uid://dver5jfnn77l2" path="res://scripts/weapons/weapon_data.gd" id="2_llh28"]
+
+[sub_resource type="Resource" id="Resource_lhm5k"]
+script = ExtResource("2_lhm5k")
+metadata/_custom_type_script = "uid://c483ka4fsmtcq"
+
+[sub_resource type="Resource" id="Resource_mrvpm"]
+script = ExtResource("2_lhm5k")
+metadata/_custom_type_script = "uid://c483ka4fsmtcq"
+
+[resource]
+script = ExtResource("2_llh28")
+weapon_name = "Bone Sword"
+damage = 18.0
+abilities = Array[ExtResource("1_f7xm7")]([SubResource("Resource_lhm5k")])
+charge_per_attack = 22.0
+charged_abilities = Array[ExtResource("1_f7xm7")]([SubResource("Resource_mrvpm")])
+metadata/_custom_type_script = "uid://dver5jfnn77l2"

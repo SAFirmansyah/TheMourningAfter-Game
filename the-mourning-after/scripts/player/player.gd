@@ -5,6 +5,8 @@ extends CharacterBody3D
 
 signal dash_started
 signal dash_ended
+signal attack_started
+signal attack_ended
 
 @export var card: Sprite3D
 @export var camera_rig: CameraRig
@@ -28,6 +30,10 @@ signal dash_ended
 @export_range(0.0, 1.0) var dash_transparency := 0.45 # TUNE: card see-through amount while dashing (0 = opaque, 1 = invisible)
 @export_flags_3d_physics var dash_phase_layers := 2 # layers passed through while dashing
 
+@export_group("Combat")
+@export var weapon: WeaponData
+@export var attack_reach := 1 # TUNE: distance hitbox sits in front of player center
+
 var is_invulnerable := false
 var dashes_available := 0
 var input_enabled := true
@@ -41,12 +47,22 @@ var _iframe_time_left := 0.0
 var _dash_velocity := Vector3.ZERO
 var _recharge_progress := 0.0
 
+var _attack_queued := false
+var _attack_cooldown_left := 0.0
+var _charging := false
+var _charge_time := 0.0
+var _current_attack_damage := 0.0
+var _current_attack_abilities: Array[WeaponAbility] = []
+
 @onready var _body_shape: CollisionShape3D = $CollisionShape3D
+@onready var _hitbox: Hitbox = $Hitbox
 
 
 func _ready() -> void:
 	motion_mode = MOTION_MODE_FLOATING
 	dashes_available = max_dashes
+	_hitbox.ignore_root = self
+	_hitbox.hit_landed.connect(_on_hitbox_hit)
 
 
 func _physics_process(delta: float) -> void:
@@ -59,6 +75,15 @@ func _physics_process(delta: float) -> void:
 		_dash_queued = false
 		if input_enabled:
 			_try_dash()
+
+	if _charging:
+		_charge_time = minf(_charge_time + delta, weapon.max_charge_time)
+
+	_attack_cooldown_left = maxf(0.0, _attack_cooldown_left - delta)
+	if _attack_queued:
+		_attack_queued = false
+		if input_enabled:
+			_try_attack()
 
 	if _dashing:
 		velocity = _dash_velocity
@@ -82,9 +107,20 @@ func _physics_process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	# Event-based so presses consumed by UI (e.g. Space advancing text) never dash.
+	# Event-based so presses consumed by UI (e.g. Space advancing text) never dash/attack.
 	if input_enabled and event.is_action_pressed(&"dash"):
 		_dash_queued = true
+
+	if input_enabled and weapon and event.is_action_pressed(&"attack"):
+		if weapon.is_chargeable:
+			_charging = true
+			_charge_time = 0.0
+		else:
+			_attack_queued = true
+
+	if event.is_action_released(&"attack") and _charging:
+		_charging = false
+		_attack_queued = true
 
 
 func _process(_delta: float) -> void:
@@ -97,6 +133,10 @@ func teleport(pos: Vector3) -> void:
 		_end_dash()
 	velocity = Vector3.ZERO
 	reset_physics_interpolation()
+
+
+func heal(amount: float) -> void:
+	pass
 
 
 func _try_dash() -> void:
@@ -121,6 +161,34 @@ func _end_dash() -> void:
 	if card:
 		card.transparency = 0.0
 	dash_ended.emit()
+
+
+func _try_attack() -> void:
+	if weapon == null or _attack_cooldown_left > 0.0:
+		return
+	_attack_cooldown_left = weapon.attack_cooldown
+
+	var charge_ratio := (_charge_time / weapon.max_charge_time) if weapon.is_chargeable else 0.0
+	var is_full_charge := charge_ratio >= 1.0
+	_current_attack_damage = weapon.damage * (weapon.charged_damage_multiplier if is_full_charge else 1.0)
+	_current_attack_abilities = weapon.charged_abilities if is_full_charge else weapon.abilities
+	_charge_time = 0.0
+
+	_hitbox.position = Vector3(_facing.x, 0.0, _facing.y) * attack_reach
+	attack_started.emit()
+
+	await get_tree().create_timer(weapon.active_delay).timeout
+	_hitbox.activate()
+	await get_tree().create_timer(weapon.active_window).timeout
+	_hitbox.deactivate()
+	attack_ended.emit()
+
+
+func _on_hitbox_hit(body: Node3D) -> void:
+	if body.has_method("take_damage"):
+		body.take_damage(_current_attack_damage, _facing)
+	for ability in _current_attack_abilities:
+		ability.apply(self, body)
 
 
 func _overlaps_phase_layers() -> bool:

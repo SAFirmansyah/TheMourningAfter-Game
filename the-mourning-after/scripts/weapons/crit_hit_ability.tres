@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CritHitAbility" format=3 uid="uid://bdtdbpriyrjob"]
+
+[ext_resource type="Script" uid="uid://c8x3150ye57ch" path="res://scripts/weapons/crit_hit_ability.gd" id="1_6hu8y"]
+
+[resource]
+script = ExtResource("1_6hu8y")
+bonus_damage = 10.0
+metadata/_custom_type_script = "uid://c8x3150ye57ch"
