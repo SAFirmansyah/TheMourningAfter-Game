@@ -1,8 +1,8 @@
 extends Player
 
-
 const SPEED = 3.0
 @export var turn_speed = 4.0
+@export var stats = Stats
 
 func _ready():
 	pass

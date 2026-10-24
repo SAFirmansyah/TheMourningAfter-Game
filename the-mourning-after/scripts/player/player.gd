@@ -32,12 +32,15 @@ signal attack_ended
 
 @export_group("Combat")
 @export var weapon: WeaponData
-@export var attack_reach := 1 # TUNE: distance hitbox sits in front of player center
+@export var attack_reach := 1.0 # TUNE: distance hitbox sits in front of player center
+
+const MAX_CHARGE := 100.0
 
 var is_invulnerable := false
 var dashes_available := 0
 var input_enabled := true
 var forced_input := Vector2.ZERO # screen-space direction used while input is disabled
+var charge_points := 0.0 # 0–MAX_CHARGE; exposed (not underscored) so UI can read it for a charge bar
 
 var _facing := Vector2.DOWN
 var _dashing := false
@@ -49,8 +52,6 @@ var _recharge_progress := 0.0
 
 var _attack_queued := false
 var _attack_cooldown_left := 0.0
-var _charging := false
-var _charge_time := 0.0
 var _current_attack_damage := 0.0
 var _current_attack_abilities: Array[WeaponAbility] = []
 
@@ -75,9 +76,6 @@ func _physics_process(delta: float) -> void:
 		_dash_queued = false
 		if input_enabled:
 			_try_dash()
-
-	if _charging:
-		_charge_time = minf(_charge_time + delta, weapon.max_charge_time)
 
 	_attack_cooldown_left = maxf(0.0, _attack_cooldown_left - delta)
 	if _attack_queued:
@@ -112,14 +110,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		_dash_queued = true
 
 	if input_enabled and weapon and event.is_action_pressed(&"attack"):
-		if weapon.is_chargeable:
-			_charging = true
-			_charge_time = 0.0
-		else:
-			_attack_queued = true
-
-	if event.is_action_released(&"attack") and _charging:
-		_charging = false
 		_attack_queued = true
 
 
@@ -136,7 +126,7 @@ func teleport(pos: Vector3) -> void:
 
 
 func heal(amount: float) -> void:
-	pass
+	pass # TODO: hook into your health system
 
 
 func _try_dash() -> void:
@@ -168,20 +158,34 @@ func _try_attack() -> void:
 		return
 	_attack_cooldown_left = weapon.attack_cooldown
 
-	var charge_ratio := (_charge_time / weapon.max_charge_time) if weapon.is_chargeable else 0.0
-	var is_full_charge := charge_ratio >= 1.0
-	_current_attack_damage = weapon.damage * (weapon.charged_damage_multiplier if is_full_charge else 1.0)
-	_current_attack_abilities = weapon.charged_abilities if is_full_charge else weapon.abilities
-	_charge_time = 0.0
+	var is_charged_attack := charge_points >= MAX_CHARGE
+	_current_attack_damage = weapon.damage
+	_current_attack_abilities = weapon.charged_abilities if is_charged_attack else weapon.abilities
 
-	_hitbox.position = Vector3(_facing.x, 0.0, _facing.y) * attack_reach
+	if is_charged_attack:
+		charge_points = 0.0
+	else:
+		charge_points = minf(charge_points + weapon.charge_per_attack, MAX_CHARGE)
+
 	attack_started.emit()
-
 	await get_tree().create_timer(weapon.active_delay).timeout
-	_hitbox.activate()
-	await get_tree().create_timer(weapon.active_window).timeout
-	_hitbox.deactivate()
+	_spawn_hitbox()
 	attack_ended.emit()
+
+
+func _spawn_hitbox() -> void:
+	var shape := BoxShape3D.new()
+	shape.size = Vector3(1.0, 1.0, 1.0) # TUNE: same size for every weapon, per your spec
+
+	var atk_stat := Stats.new()
+	atk_stat.damage = _current_attack_damage
+	atk_stat.unit_type = Stats.UnitType.HERO
+
+	var hitbox := Hitbox.new(atk_stat, shape, weapon.active_window)
+	hitbox.ignore_root = self
+	hitbox.hit_landed.connect(_on_hitbox_hit)
+	hitbox.position = Vector3(_facing.x, 0.0, _facing.y) * attack_reach
+	add_child(hitbox)
 
 
 func _on_hitbox_hit(body: Node3D) -> void:
