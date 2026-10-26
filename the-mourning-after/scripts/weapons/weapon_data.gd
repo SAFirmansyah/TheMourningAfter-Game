@@ -7,6 +7,8 @@ extends Resource
 @export var active_window := 0.15 # TUNE: how long the hitbox stays on
 @export var active_delay := 0.05 # TUNE: windup before hitbox turns on
 @export var abilities: Array[WeaponAbility] = [] # on-hit effects on a normal (uncharged) attack
+@export var hitbox_radius := 0.3
+@export var hitbox_height := 1.0
 
 @export_group("Charge Ability")
 @export var charge_per_attack := 20.0 # TUNE: charge gained per swing (charge fills to 100)

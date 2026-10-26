@@ -14,6 +14,7 @@ metadata/_custom_type_script = "uid://c2tcoh261gq30"
 
 [resource]
 script = ExtResource("2_d2eom")
+weapon_name = "Wood Sword"
 damage = 10.0
 attack_cooldown = 0.25
 abilities = Array[ExtResource("1_w7k0u")]([SubResource("Resource_w7k0u")])

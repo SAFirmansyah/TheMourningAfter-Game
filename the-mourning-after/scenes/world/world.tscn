@@ -1,8 +1,9 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cywkvj6a2b6qt"]
 
-[ext_resource type="Script" path="res://scripts/world/world.gd" id="1_world"]
-[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="Script" uid="uid://crvbgui6750ee" path="res://scripts/world/world.gd" id="1_world"]
+[ext_resource type="PackedScene" uid="uid://cr0w4u33y1d57" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://scenes/camera/camera_rig.tscn" id="3_rig"]
+[ext_resource type="Resource" uid="uid://bbk5x1dnpd5ev" path="res://scripts/weapons/sword_iron.tres" id="4_1yooq"]
 [ext_resource type="PackedScene" path="res://scenes/rooms/room_a.tscn" id="4_room_a"]
 [ext_resource type="PackedScene" path="res://scenes/ui/interaction_hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="6_pause"]
@@ -13,29 +14,48 @@
 background_mode = 1
 background_color = Color(0.09, 0.1, 0.12, 1)
 
-[node name="World" type="Node3D"]
+[node name="World" type="Node3D" unique_id=2087060420]
 script = ExtResource("1_world")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1988010647]
 environment = SubResource("Environment_bg")
 
-[node name="Rooms" type="Node3D" parent="."]
+[node name="Rooms" type="Node3D" parent="." unique_id=423783645]
 
-[node name="RoomA" parent="Rooms" instance=ExtResource("4_room_a")]
+[node name="RoomA" parent="Rooms" unique_id=576080246 instance=ExtResource("4_room_a")]
 
-[node name="Player" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("2_player")]
+[node name="Player" parent="." unique_id=206997020 node_paths=PackedStringArray("camera_rig") instance=ExtResource("2_player")]
 camera_rig = NodePath("../CameraRig")
+display_name = "Player"
+base_move_speed = 5.0
+move_speed_multiplier = 1.0
+acceleration = 60.0
+deceleration = 80.0
+depth_speed_compensation = 0.0
+max_dashes = 1
+dash_distance = 3.5
+dash_duration = 0.15
+dash_recharge_time = 0.8
+dash_iframe_extra = 0.05
+dash_max_extension = 0.3
+dash_transparency = 0.45
+dash_phase_layers = 2
+weapon = ExtResource("4_1yooq")
+attack_reach = 0.5
 
-[node name="CameraRig" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("3_rig")]
+[node name="CameraRig" parent="." unique_id=216864989 node_paths=PackedStringArray("follow_target") instance=ExtResource("3_rig")]
+process_priority = -10
+process_physics_priority = 10
+transform = Transform3D(1, 0, 0, 0, 0.9063077, 0.42261824, 0, -0.42261824, 0.9063077, 0, 0.8, 0)
 follow_target = NodePath("../Player")
 
-[node name="InteractionHUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_hud")]
+[node name="InteractionHUD" parent="." unique_id=551992976 node_paths=PackedStringArray("player") instance=ExtResource("5_hud")]
 player = NodePath("../Player")
 
-[node name="Transition" type="CanvasLayer" parent="."]
+[node name="Transition" type="CanvasLayer" parent="." unique_id=402137032]
 layer = 10
 
-[node name="Fade" type="ColorRect" parent="Transition"]
+[node name="Fade" type="ColorRect" parent="Transition" unique_id=981023781]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -44,9 +64,9 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[node name="PauseMenu" parent="." node_paths=PackedStringArray("world") instance=ExtResource("6_pause")]
+[node name="PauseMenu" parent="." unique_id=166702847 node_paths=PackedStringArray("world") instance=ExtResource("6_pause")]
 world = NodePath("..")
 
-[node name="SaveIndicator" parent="." instance=ExtResource("7_saving")]
+[node name="SaveIndicator" parent="." unique_id=1111831389 instance=ExtResource("7_saving")]
 
-[node name="SkipPrompt" parent="." instance=ExtResource("8_skip")]
+[node name="SkipPrompt" parent="." unique_id=2000870685 instance=ExtResource("8_skip")]

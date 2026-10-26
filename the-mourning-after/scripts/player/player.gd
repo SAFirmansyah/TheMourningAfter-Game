@@ -31,8 +31,16 @@ signal attack_ended
 @export_flags_3d_physics var dash_phase_layers := 2 # layers passed through while dashing
 
 @export_group("Combat")
-@export var weapon: WeaponData
-@export var attack_reach := 1.0 # TUNE: distance hitbox sits in front of player center
+@export var stats: Stats # the hero's Stats resource (health, armor, etc.)
+@export var weapon: WeaponData:
+	set(value):
+		weapon = value
+		if stats:
+			stats.equip_weapon(value)
+@export var attack_reach := 0.5 # TUNE: player body radius — hitbox spawns this far forward before adding weapon reach
+@export var attack_height := 0.8 # TUNE: vertical offset — roughly chest/sword height
+@export var attack_hitbox_count := 3 # TUNE: how many hitboxes spawn per attack
+@export var attack_hitbox_spacing := 0.3 # TUNE: lateral gap between hitboxes in the arc
 
 const MAX_CHARGE := 100.0
 
@@ -56,14 +64,10 @@ var _current_attack_damage := 0.0
 var _current_attack_abilities: Array[WeaponAbility] = []
 
 @onready var _body_shape: CollisionShape3D = $CollisionShape3D
-@onready var _hitbox: Hitbox = $Hitbox
-
 
 func _ready() -> void:
 	motion_mode = MOTION_MODE_FLOATING
 	dashes_available = max_dashes
-	_hitbox.ignore_root = self
-	_hitbox.hit_landed.connect(_on_hitbox_hit)
 
 
 func _physics_process(delta: float) -> void:
@@ -174,18 +178,37 @@ func _try_attack() -> void:
 
 
 func _spawn_hitbox() -> void:
-	var shape := BoxShape3D.new()
-	shape.size = Vector3(1.0, 1.0, 1.0) # TUNE: same size for every weapon, per your spec
+	var shared_log := HitLog.new()
 
-	var atk_stat := Stats.new()
-	atk_stat.damage = _current_attack_damage
-	atk_stat.unit_type = Stats.UnitType.HERO
+	var side: Vector3 = Vector3(-_facing.y, 0.0, _facing.x)
+	var forward: Vector3 = Vector3(_facing.x, 0.0, _facing.y)
+	var base_offset: Vector3 = forward * (attack_reach + weapon.hitbox_height / 2.0)
 
-	var hitbox := Hitbox.new(atk_stat, shape, weapon.active_window)
-	hitbox.ignore_root = self
-	hitbox.hit_landed.connect(_on_hitbox_hit)
-	hitbox.position = Vector3(_facing.x, 0.0, _facing.y) * attack_reach
-	add_child(hitbox)
+	for n in attack_hitbox_count:
+		var hitbox := preload("res://scenes/weapon/weapon_hitbox.tscn").instantiate() as Hitbox
+
+		hitbox.damage = int(_current_attack_damage)
+		hitbox.unit_type = Stats.UnitType.HERO
+		hitbox.hit_log = shared_log
+		hitbox.ignore_root = self
+		hitbox.hitbox_lifetime = weapon.active_window # ← add this
+		hitbox.hit_landed.connect(_on_hitbox_hit)
+
+		var shape_node: CollisionShape3D
+		for child in hitbox.get_children():
+			if child is CollisionShape3D:
+				shape_node = child
+				break
+
+		var capsule := (shape_node.shape as CapsuleShape3D).duplicate()
+		capsule.radius = weapon.hitbox_radius
+		capsule.height = weapon.hitbox_height
+		shape_node.shape = capsule
+
+		var lateral_spread := (n - (attack_hitbox_count - 1) / 2.0) * attack_hitbox_spacing
+		hitbox.position = base_offset + side * lateral_spread + Vector3.UP * attack_height
+
+		add_child(hitbox)
 
 
 func _on_hitbox_hit(body: Node3D) -> void:

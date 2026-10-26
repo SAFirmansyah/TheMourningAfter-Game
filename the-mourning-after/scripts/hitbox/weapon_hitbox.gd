@@ -1,52 +1,46 @@
 class_name Hitbox
 extends Area3D
-## Reusable melee hitbox. Spawned fresh per attack, lives for hitbox_lifetime,
-## then frees itself. Collision side (hero vs enemy) comes from atk_stat.unit_type.
+## Reusable melee hitbox. Collision side (hero vs enemy) comes from unit_type.
+## hit_log is optional: pass a shared HitLog when multiple hitboxes from the
+## same attack should treat a target as "already hit" across all of them.
 
 signal hit_landed(body: Node3D)
 
 @export var ignore_root: Node3D # so the wielder can't hit themselves
 
-var atk_stat: Stats
-var hitbox_lifetime: float
+var damage: int = 0
+var unit_type: Stats.UnitType = Stats.UnitType.HERO
+var hit_log: HitLog
+var hitbox_lifetime: float = 0.3 # TUNE: how long this hitbox exists before auto-freeing
 
 var _active := false
-var _already_hit: Array[Node3D] = []
-
-
-func _init(_atk_stat: Stats = null, _shape: Shape3D = null, _hitbox_lifetime: float = 0.0) -> void:
-	atk_stat = _atk_stat
-	hitbox_lifetime = _hitbox_lifetime
-	if _shape:
-		var collision_shape := CollisionShape3D.new()
-		collision_shape.shape = _shape
-		add_child(collision_shape)
 
 
 func _ready() -> void:
 	monitorable = false
 	body_entered.connect(_on_body_entered)
 
+	if hit_log == null:
+		hit_log = HitLog.new()
+
 	set_collision_layer_value(5, false)
 	set_collision_mask_value(4, false)
-	match atk_stat.unit_type:
+	match unit_type:
 		Stats.UnitType.HERO:
 			set_collision_mask_value(4, true)
 		Stats.UnitType.ENEMY:
 			set_collision_mask_value(3, true)
 
-	if hitbox_lifetime > 0.0:
-		var timer := Timer.new()
-		timer.one_shot = true
-		add_child(timer)
-		timer.timeout.connect(queue_free)
-		timer.start(hitbox_lifetime)
-
 	activate()
+	
+	var timer := Timer.new()
+	timer.one_shot = true
+	add_child(timer)
+	timer.timeout.connect(queue_free)
+	timer.start(hitbox_lifetime)
 
 
 func activate() -> void:
-	_already_hit.clear()
 	_active = true
 	monitoring = true
 
@@ -59,12 +53,22 @@ func deactivate() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if not _active:
 		return
-	if body == ignore_root or body in _already_hit:
+	if body == ignore_root:
 		return
 	if ignore_root and body.is_ancestor_of(ignore_root):
 		return
+	if hit_log.has_hit(body):
+		return
 	if not body.has_method("receive_hit"):
 		return
-	_already_hit.append(body)
-	body.receive_hit(atk_stat.damage)
+		
+	var hurtbox_owner = body.owner
+	if hit_log:
+		if hit_log.has_hit(hurtbox_owner):
+			return
+		else:
+			hit_log.log_hit(hurtbox_owner)
+	
+	hit_log.log_hit(body)
+	body.receive_hit(damage)
 	hit_landed.emit(body)

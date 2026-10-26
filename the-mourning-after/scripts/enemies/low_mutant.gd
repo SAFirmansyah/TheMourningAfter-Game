@@ -7,6 +7,8 @@ const SPEED = 3.0
 func _ready():
 	pass
 
+func receive_hit(amount: int) -> void:
+	pass #stats.take_damage(amount)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
