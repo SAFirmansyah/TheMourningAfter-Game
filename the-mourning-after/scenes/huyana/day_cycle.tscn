@@ -1,0 +1,305 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/huyana/day_cycle.gd" id="1_cycle"]
+[ext_resource type="Script" path="res://scripts/huyana/clock_face.gd" id="2_clock"]
+[ext_resource type="Shader" path="res://shaders/night_overlay.gdshader" id="3_night"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_night"]
+shader = ExtResource("3_night")
+shader_parameter/amount = 0.0
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_speed"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_speed"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.08, 0.08, 0.09, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78, 0.66, 0.38, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_speed_on"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.78, 0.66, 0.38, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_modal"]
+content_margin_left = 56.0
+content_margin_top = 40.0
+content_margin_right = 56.0
+content_margin_bottom = 40.0
+bg_color = Color(0.11, 0.11, 0.12, 0.96)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.78, 0.66, 0.38, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 12
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_sep"]
+color = Color(0.78, 0.66, 0.38, 0.6)
+thickness = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
+bg_color = Color(0.05, 0.05, 0.06, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.66, 0.38, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_fill"]
+bg_color = Color(0.55, 0.75, 0.45, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
+content_margin_left = 24.0
+content_margin_top = 10.0
+content_margin_right = 24.0
+content_margin_bottom = 10.0
+bg_color = Color(0.78, 0.66, 0.38, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button"]
+content_margin_left = 24.0
+content_margin_top = 10.0
+content_margin_right = 24.0
+content_margin_bottom = 10.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.66, 0.38, 0.8)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="DayCycle" type="Node"]
+script = ExtResource("1_cycle")
+
+[node name="NightOverlay" type="CanvasLayer" parent="."]
+layer = 1
+
+[node name="Shade" type="ColorRect" parent="NightOverlay"]
+material = SubResource("ShaderMaterial_night")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Clock" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="Dial" type="Control" parent="Clock"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -196.0
+offset_top = 28.0
+offset_right = -44.0
+offset_bottom = 180.0
+grow_horizontal = 0
+mouse_filter = 2
+script = ExtResource("2_clock")
+
+[node name="DayLabel" type="Label" parent="Clock"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -196.0
+offset_top = 184.0
+offset_right = -44.0
+offset_bottom = 222.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.8)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 28
+text = "Day 1"
+horizontal_alignment = 1
+
+[node name="Speeds" type="HBoxContainer" parent="Clock"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -212.0
+offset_top = 228.0
+offset_right = -28.0
+offset_bottom = 262.0
+grow_horizontal = 0
+theme_override_constants/separation = 4
+
+[node name="1x" type="Button" parent="Clock/Speeds"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_speed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_speed")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_speed_on")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_speed_on")
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_speed")
+text = "1x"
+
+[node name="2x" type="Button" parent="Clock/Speeds"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_speed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_speed")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_speed_on")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_speed_on")
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+toggle_mode = true
+button_group = SubResource("ButtonGroup_speed")
+text = "2x"
+
+[node name="3x" type="Button" parent="Clock/Speeds"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_speed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_speed")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_speed_on")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_speed_on")
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+toggle_mode = true
+button_group = SubResource("ButtonGroup_speed")
+text = "3x"
+
+[node name="6x" type="Button" parent="Clock/Speeds"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_speed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_speed")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_speed_on")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_speed_on")
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+toggle_mode = true
+button_group = SubResource("ButtonGroup_speed")
+text = "6x"
+
+[node name="ResetSave" type="Button" parent="Clock"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -212.0
+offset_top = 268.0
+offset_right = -28.0
+offset_bottom = 300.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_speed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_speed_on")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_speed_on")
+theme_override_colors/font_hover_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+text = "Reset save"
+
+[node name="NightModal" type="CanvasLayer" parent="."]
+layer = 6
+
+[node name="Panel" type="PanelContainer" parent="NightModal"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -320.0
+offset_top = -180.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_modal")
+
+[node name="Content" type="VBoxContainer" parent="NightModal/Panel"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 14
+
+[node name="Title" type="Label" parent="NightModal/Panel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
+theme_override_font_sizes/font_size = 44
+text = "Night 1"
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="NightModal/Panel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = SubResource("StyleBoxLine_sep")
+
+[node name="HealthLabel" type="Label" parent="NightModal/Panel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_font_sizes/font_size = 28
+text = "Sanctuary Health"
+horizontal_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="NightModal/Panel/Content"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 24
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bar_fill")
+value = 100.0
+
+[node name="Proceed" type="Button" parent="NightModal/Panel/Content"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_focus")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+text = "Proceed"

@@ -1,0 +1,627 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/huyana/ui/order_menus.gd" id="1_menus"]
+[ext_resource type="Script" path="res://scripts/huyana/ui/item_badge.gd" id="2_badge"]
+[ext_resource type="Script" path="res://scripts/huyana/ui/bubble_tip.gd" id="3_tip"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 22.0
+content_margin_top = 16.0
+content_margin_right = 22.0
+content_margin_bottom = 16.0
+bg_color = Color(0.94, 0.92, 0.87, 0.97)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.12, 0.11, 0.1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_button"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
+bg_color = Color(0.78, 0.66, 0.38, 0.3)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pressed"]
+bg_color = Color(0.78, 0.66, 0.38, 0.55)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_sep"]
+color = Color(0.12, 0.11, 0.1, 0.5)
+thickness = 2
+
+[node name="OrderMenus" type="CanvasLayer"]
+layer = 7
+script = ExtResource("1_menus")
+
+[node name="Gwenith" type="Control" parent="."]
+layout_mode = 3
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 640.0
+offset_bottom = 340.0
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Gwenith"]
+layout_mode = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Content" type="VBoxContainer" parent="Gwenith/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="FoodLabel" type="Label" parent="Gwenith/Panel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.33, 0.3, 1)
+theme_override_font_sizes/font_size = 18
+text = "Food"
+
+[node name="FoodRow" type="HBoxContainer" parent="Gwenith/Panel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="infused_dew" type="Button" parent="Gwenith/Panel/Content/FoodRow"]
+custom_minimum_size = Vector2(118, 100)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="Center" type="CenterContainer" parent="Gwenith/Panel/Content/FoodRow/infused_dew"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Badge" type="Control" parent="Gwenith/Panel/Content/FoodRow/infused_dew/Center"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"infused_dew"
+diameter = 56.0
+caption = "Infused Dew"
+count = 0
+
+[node name="willow_bark" type="Button" parent="Gwenith/Panel/Content/FoodRow"]
+custom_minimum_size = Vector2(118, 100)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="Center" type="CenterContainer" parent="Gwenith/Panel/Content/FoodRow/willow_bark"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Badge" type="Control" parent="Gwenith/Panel/Content/FoodRow/willow_bark/Center"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"willow_bark"
+diameter = 56.0
+caption = "Willow Bark"
+count = 0
+
+[node name="graceroot" type="Button" parent="Gwenith/Panel/Content/FoodRow"]
+custom_minimum_size = Vector2(118, 100)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="Center" type="CenterContainer" parent="Gwenith/Panel/Content/FoodRow/graceroot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Badge" type="Control" parent="Gwenith/Panel/Content/FoodRow/graceroot/Center"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"graceroot"
+diameter = 56.0
+caption = "Graceroot"
+count = 0
+
+[node name="IngredientLabel" type="Label" parent="Gwenith/Panel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.33, 0.3, 1)
+theme_override_font_sizes/font_size = 18
+text = "Ingredients"
+
+[node name="IngredientRow" type="HBoxContainer" parent="Gwenith/Panel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="bloodflower" type="Button" parent="Gwenith/Panel/Content/IngredientRow"]
+custom_minimum_size = Vector2(118, 100)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="Center" type="CenterContainer" parent="Gwenith/Panel/Content/IngredientRow/bloodflower"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Badge" type="Control" parent="Gwenith/Panel/Content/IngredientRow/bloodflower/Center"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"bloodflower"
+diameter = 56.0
+caption = "Bloodflower"
+count = 0
+
+[node name="obsidian_grass" type="Button" parent="Gwenith/Panel/Content/IngredientRow"]
+custom_minimum_size = Vector2(118, 100)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="Center" type="CenterContainer" parent="Gwenith/Panel/Content/IngredientRow/obsidian_grass"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Badge" type="Control" parent="Gwenith/Panel/Content/IngredientRow/obsidian_grass/Center"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"obsidian_grass"
+diameter = 56.0
+caption = "Obsidian Grass"
+count = 0
+
+[node name="pearls_of_night" type="Button" parent="Gwenith/Panel/Content/IngredientRow"]
+custom_minimum_size = Vector2(118, 100)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="Center" type="CenterContainer" parent="Gwenith/Panel/Content/IngredientRow/pearls_of_night"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Badge" type="Control" parent="Gwenith/Panel/Content/IngredientRow/pearls_of_night/Center"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"pearls_of_night"
+diameter = 56.0
+caption = "Pearls of Night"
+count = 0
+
+[node name="Status" type="Label" parent="Gwenith/Panel/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.33, 0.3, 1)
+theme_override_font_sizes/font_size = 16
+text = "Idle    E to close"
+
+[node name="Tip" type="Control" parent="Gwenith"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 20.0
+mouse_filter = 2
+script = ExtResource("3_tip")
+
+[node name="Shuyi" type="Control" parent="."]
+layout_mode = 3
+offset_left = 520.0
+offset_top = 40.0
+offset_right = 1120.0
+offset_bottom = 340.0
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Shuyi"]
+layout_mode = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Content" type="VBoxContainer" parent="Shuyi/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Rows" type="VBoxContainer" parent="Shuyi/Panel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="haemoshear" type="Button" parent="Shuyi/Panel/Content/Rows"]
+custom_minimum_size = Vector2(560, 100)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="Line" type="HBoxContainer" parent="Shuyi/Panel/Content/Rows/haemoshear"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 0
+
+[node name="Medicine" type="Control" parent="Shuyi/Panel/Content/Rows/haemoshear/Line"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"haemoshear"
+diameter = 56.0
+count = 0
+
+[node name="Name" type="Label" parent="Shuyi/Panel/Content/Rows/haemoshear/Line"]
+layout_mode = 2
+custom_minimum_size = Vector2(190, 0)
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Haemoshear :"
+
+[node name="First" type="Control" parent="Shuyi/Panel/Content/Rows/haemoshear/Line"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"bloodflower"
+diameter = 52.0
+caption = "Bloodflower"
+
+[node name="And" type="Label" parent="Shuyi/Panel/Content/Rows/haemoshear/Line"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
+theme_override_font_sizes/font_size = 24
+text = "&"
+
+[node name="Second" type="Control" parent="Shuyi/Panel/Content/Rows/haemoshear/Line"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"obsidian_grass"
+diameter = 52.0
+caption = "Obsidian Grass"
+
+[node name="nacrescorch" type="Button" parent="Shuyi/Panel/Content/Rows"]
+custom_minimum_size = Vector2(560, 100)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="Line" type="HBoxContainer" parent="Shuyi/Panel/Content/Rows/nacrescorch"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 0
+
+[node name="Medicine" type="Control" parent="Shuyi/Panel/Content/Rows/nacrescorch/Line"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"nacrescorch"
+diameter = 56.0
+count = 0
+
+[node name="Name" type="Label" parent="Shuyi/Panel/Content/Rows/nacrescorch/Line"]
+layout_mode = 2
+custom_minimum_size = Vector2(190, 0)
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Nacrescorch :"
+
+[node name="First" type="Control" parent="Shuyi/Panel/Content/Rows/nacrescorch/Line"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"obsidian_grass"
+diameter = 52.0
+caption = "Obsidian Grass"
+
+[node name="And" type="Label" parent="Shuyi/Panel/Content/Rows/nacrescorch/Line"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
+theme_override_font_sizes/font_size = 24
+text = "&"
+
+[node name="Second" type="Control" parent="Shuyi/Panel/Content/Rows/nacrescorch/Line"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"pearls_of_night"
+diameter = 52.0
+caption = "Pearls of Night"
+
+[node name="capillanyx" type="Button" parent="Shuyi/Panel/Content/Rows"]
+custom_minimum_size = Vector2(560, 100)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="Line" type="HBoxContainer" parent="Shuyi/Panel/Content/Rows/capillanyx"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_right = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+alignment = 0
+
+[node name="Medicine" type="Control" parent="Shuyi/Panel/Content/Rows/capillanyx/Line"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"capillanyx"
+diameter = 56.0
+count = 0
+
+[node name="Name" type="Label" parent="Shuyi/Panel/Content/Rows/capillanyx/Line"]
+layout_mode = 2
+custom_minimum_size = Vector2(190, 0)
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
+theme_override_font_sizes/font_size = 24
+text = "Capillanyx :"
+
+[node name="First" type="Control" parent="Shuyi/Panel/Content/Rows/capillanyx/Line"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"pearls_of_night"
+diameter = 52.0
+caption = "Pearls of Night"
+
+[node name="And" type="Label" parent="Shuyi/Panel/Content/Rows/capillanyx/Line"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
+theme_override_font_sizes/font_size = 24
+text = "&"
+
+[node name="Second" type="Control" parent="Shuyi/Panel/Content/Rows/capillanyx/Line"]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+script = ExtResource("2_badge")
+item = &"bloodflower"
+diameter = 52.0
+caption = "Bloodflower"
+
+[node name="Separator" type="HSeparator" parent="Shuyi/Panel/Content"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_sep")
+
+[node name="Hint" type="Label" parent="Shuyi/Panel/Content"]
+layout_mode = 2
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
+theme_override_font_sizes/font_size = 18
+text = "Ingredients can be ordered from Gwenith (Farmer)."
+
+[node name="Status" type="Label" parent="Shuyi/Panel/Content"]
+layout_mode = 2
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.35, 0.33, 0.3, 1)
+theme_override_font_sizes/font_size = 16
+text = "Idle    E to close"
+
+[node name="Tip" type="Control" parent="Shuyi"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 20.0
+mouse_filter = 2
+script = ExtResource("3_tip")
+
+[node name="Rudrama" type="Control" parent="."]
+layout_mode = 3
+offset_left = 40.0
+offset_top = 560.0
+offset_right = 640.0
+offset_bottom = 860.0
+mouse_filter = 2
+
+[node name="Panel" type="PanelContainer" parent="Rudrama"]
+layout_mode = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Content" type="VBoxContainer" parent="Rudrama/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Bubbles" type="HBoxContainer" parent="Rudrama/Panel/Content"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="1" type="Button" parent="Rudrama/Panel/Content/Bubbles"]
+custom_minimum_size = Vector2(92, 88)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="Center" type="CenterContainer" parent="Rudrama/Panel/Content/Bubbles/1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Badge" type="Control" parent="Rudrama/Panel/Content/Bubbles/1/Center"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_badge")
+label_text = "1"
+diameter = 66.0
+
+[node name="2" type="Button" parent="Rudrama/Panel/Content/Bubbles"]
+custom_minimum_size = Vector2(92, 88)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="Center" type="CenterContainer" parent="Rudrama/Panel/Content/Bubbles/2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Badge" type="Control" parent="Rudrama/Panel/Content/Bubbles/2/Center"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_badge")
+label_text = "2"
+diameter = 66.0
+
+[node name="3" type="Button" parent="Rudrama/Panel/Content/Bubbles"]
+custom_minimum_size = Vector2(92, 88)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_button")
+
+[node name="Center" type="CenterContainer" parent="Rudrama/Panel/Content/Bubbles/3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Badge" type="Control" parent="Rudrama/Panel/Content/Bubbles/3/Center"]
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("2_badge")
+label_text = "3"
+diameter = 66.0
+
+[node name="Status" type="Label" parent="Rudrama/Panel/Content"]
+layout_mode = 2
+horizontal_alignment = 1
+theme_override_colors/font_color = Color(0.35, 0.33, 0.3, 1)
+theme_override_font_sizes/font_size = 16
+text = "Ready at the anvil    E to close"
+
+[node name="Tip" type="Control" parent="Rudrama"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 20.0
+mouse_filter = 2
+script = ExtResource("3_tip")

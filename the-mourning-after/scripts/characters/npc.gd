@@ -21,6 +21,7 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	interactable.prompt_label = "Talk"
+	interactable.enabled = not conversation.is_empty()
 	interactable.character_name = character_name
 	interactable.character_portrait = portrait if portrait else card.texture
 	interactable.character_portrait_tint = Color.WHITE if portrait else card.modulate

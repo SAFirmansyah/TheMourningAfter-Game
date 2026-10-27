@@ -8,42 +8,29 @@
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/campfire.tscn" id="6_campfire"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/med_station.tscn" id="7_med"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/planter_boxes.tscn" id="8_planters"]
-[ext_resource type="Script" path="res://scripts/dialogue/dialogue_line.gd" id="9_line"]
 [ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="10_npc"]
-
-[sub_resource type="Resource" id="DialogueLine_Rudrama"]
-script = ExtResource("9_line")
-speaker = 0
-text = "Rudrama placeholder line."
-
-[sub_resource type="Resource" id="DialogueLine_Shuyi"]
-script = ExtResource("9_line")
-speaker = 0
-text = "Shuyi placeholder line."
-
-[sub_resource type="Resource" id="DialogueLine_Gwenith"]
-script = ExtResource("9_line")
-speaker = 0
-text = "Gwenith placeholder line."
+[ext_resource type="PackedScene" path="res://scenes/huyana/order_point.tscn" id="11_order"]
+[ext_resource type="Script" path="res://scripts/huyana/worker_npc.gd" id="12_rudrama"]
+[ext_resource type="Script" path="res://scripts/huyana/work_station.gd" id="13_station"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
 material = ExtResource("2_ground")
-size = Vector2(36, 24)
+size = Vector2(30, 20)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_North"]
-size = Vector3(36.40, 2, 0.40)
+size = Vector3(30.40, 2, 0.40)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_South"]
-size = Vector3(36.40, 2, 0.40)
+size = Vector3(30.40, 2, 0.40)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_West"]
-size = Vector3(0.40, 2, 24.40)
+size = Vector3(0.40, 2, 20.40)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_EastUpper"]
-size = Vector3(0.40, 2, 9.50)
+size = Vector3(0.40, 2, 7.65)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_EastLower"]
-size = Vector3(0.40, 2, 11.30)
+size = Vector3(0.40, 2, 9.15)
 
 [node name="Sanctuary" type="Node3D"]
 script = ExtResource("1_room")
@@ -53,79 +40,160 @@ ground_tint = Color(0.45, 0.65, 0.4, 1)
 mesh = SubResource("PlaneMesh_floor")
 
 [node name="PlayerStart" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -0.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -0.75)
 
 [node name="Walls" type="StaticBody3D" parent="."]
 
 [node name="North" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -12.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
 shape = SubResource("BoxShape3D_North")
 
 [node name="South" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 12.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
 shape = SubResource("BoxShape3D_South")
 
 [node name="West" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, 0)
 shape = SubResource("BoxShape3D_West")
 
 [node name="EastUpper" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0, 1, -7.45)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, -6.375)
 shape = SubResource("BoxShape3D_EastUpper")
 
 [node name="EastLower" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0, 1, 6.55)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 5.625)
 shape = SubResource("BoxShape3D_EastLower")
 
 [node name="Containments" type="Node3D" parent="."]
 
 [node name="Containment1" parent="Containments" instance=ExtResource("4_containment")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.9, 0, -11.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.583, 0, -9.333)
+number = 1
 
 [node name="Containment2" parent="Containments" instance=ExtResource("4_containment")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4, 0, -11.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.333, 0, -9.333)
+number = 2
 
 [node name="Containment3" parent="Containments" instance=ExtResource("4_containment")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1, 0, -11.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.917, 0, -9.333)
+number = 3
 
 [node name="Stations" type="Node3D" parent="."]
 
 [node name="Anvil" parent="Stations" instance=ExtResource("5_anvil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.75, 0, -8.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0, -7)
 
 [node name="Campfire" parent="Stations" instance=ExtResource("6_campfire")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.333)
 
 [node name="MedStation" parent="Stations" instance=ExtResource("7_med")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.4, 0, 9.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, 7.5)
 
 [node name="PlanterBoxes" parent="Stations" instance=ExtResource("8_planters")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0, 0, 8.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6.875)
 
 [node name="Characters" type="Node3D" parent="."]
 
 [node name="Rudrama" parent="Characters" instance=ExtResource("10_npc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.9, 0, -8.0)
+script = ExtResource("12_rudrama")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25, 0, -6.667)
 character_name = "Rudrama"
 tint = Color(0.55, 0.62, 0.85, 1)
-conversation = Array[ExtResource("9_line")]([SubResource("DialogueLine_Rudrama")])
 
 [node name="Shuyi" parent="Characters" instance=ExtResource("10_npc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2, 0, 9.6)
+script = ExtResource("12_rudrama")
+worker = "shuyi"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7, 0, 8)
 character_name = "Shuyi"
 tint = Color(0.85, 0.85, 0.55, 1)
-conversation = Array[ExtResource("9_line")]([SubResource("DialogueLine_Shuyi")])
 
 [node name="Gwenith" parent="Characters" instance=ExtResource("10_npc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 0, 8.8)
+script = ExtResource("12_rudrama")
+worker = "gwenith"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 7.333)
 character_name = "Gwenith"
 tint = Color(0.6, 0.9, 0.5, 1)
-conversation = Array[ExtResource("9_line")]([SubResource("DialogueLine_Gwenith")])
 
 [node name="West" parent="." instance=ExtResource("3_exit")]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -18.0, 0, -0.9)
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -15, 0, -0.75)
 
 [node name="East" parent="." instance=ExtResource("3_exit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.0, 0, -0.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -0.75)
 target_room = "res://scenes/huyana/altar.tscn"
 target_entry = &"West"
+
+[node name="OrderPoint" parent="Stations/Anvil" instance=ExtResource("11_order")]
+worker = "rudrama"
+menu_height = 3.4
+interact_radius = 2.6
+
+
+
+[node name="OrderPoint" parent="Characters/Rudrama" instance=ExtResource("11_order")]
+worker = "rudrama"
+pauses_worker = true
+menu_height = 2.4
+interact_radius = 2.0
+
+[node name="OrderPoint" parent="Characters/Shuyi" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
+pauses_worker = true
+station = NodePath("../../../Stations/MedStation/WorkStation")
+worker = "shuyi"
+menu_height = 2.4
+interact_radius = 2.0
+
+[node name="OrderPoint" parent="Characters/Gwenith" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
+pauses_worker = true
+station = NodePath("../../../Stations/PlanterBoxes/WorkStation")
+worker = "gwenith"
+menu_height = 2.4
+interact_radius = 2.0
+
+[node name="WorkStation" type="Node3D" parent="Stations/PlanterBoxes"]
+script = ExtResource("13_station")
+worker = "gwenith"
+slot_depth = 0.0
+bubble_height = 5.0
+menu_height = 6.4
+
+[node name="Slot1" parent="Stations/PlanterBoxes/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, 0)
+worker = "gwenith"
+slot = 0
+station = NodePath("..")
+interact_radius = 2.6
+
+[node name="Slot2" parent="Stations/PlanterBoxes/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0, 0)
+worker = "gwenith"
+slot = 1
+station = NodePath("..")
+interact_radius = 2.6
+
+[node name="Slot3" parent="Stations/PlanterBoxes/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 0, 0)
+worker = "gwenith"
+slot = 2
+station = NodePath("..")
+interact_radius = 2.6
+
+[node name="WorkStation" type="Node3D" parent="Stations/MedStation"]
+script = ExtResource("13_station")
+worker = "shuyi"
+slot_depth = 0.0
+bubble_height = 3.6
+menu_height = 5.0
+
+[node name="Slot1" parent="Stations/MedStation/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, 0)
+worker = "shuyi"
+slot = 0
+station = NodePath("..")
+interact_radius = 1.6
+
+[node name="Slot2" parent="Stations/MedStation/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0, 0)
+worker = "shuyi"
+slot = 1
+station = NodePath("..")
+interact_radius = 1.6
