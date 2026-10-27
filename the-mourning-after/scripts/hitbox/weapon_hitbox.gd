@@ -17,28 +17,28 @@ var _active := false
 
 
 func _ready() -> void:
-	monitorable = false
-	body_entered.connect(_on_body_entered)
+	if not area_entered.is_connected(_on_area_entered):
+		area_entered.connect(_on_area_entered)
 
 	if hit_log == null:
 		hit_log = HitLog.new()
 
-	set_collision_layer_value(5, false)
-	set_collision_mask_value(4, false)
+	collision_layer = 0
+	collision_mask = 0
+	set_collision_layer_value(5, true) # this IS a hitbox
 	match unit_type:
 		Stats.UnitType.HERO:
-			set_collision_mask_value(4, true)
+			set_collision_mask_value(7, true) # hero hitbox looks for enemy_hurtbox
 		Stats.UnitType.ENEMY:
-			set_collision_mask_value(3, true)
+			set_collision_mask_value(6, true) # enemy hitbox looks for player_hurtbox
 
 	activate()
-	
+
 	var timer := Timer.new()
 	timer.one_shot = true
 	add_child(timer)
 	timer.timeout.connect(queue_free)
 	timer.start(hitbox_lifetime)
-
 
 func activate() -> void:
 	_active = true
@@ -50,25 +50,19 @@ func deactivate() -> void:
 	monitoring = false
 
 
-func _on_body_entered(body: Node3D) -> void:
+func _on_area_entered(area: Area3D) -> void:
 	if not _active:
 		return
-	if body == ignore_root:
+	if not area.has_method("receive_hit"):
 		return
-	if ignore_root and body.is_ancestor_of(ignore_root):
+
+	var target: Node3D = area.owner if area.owner else area
+	if target == ignore_root:
 		return
-	if hit_log.has_hit(body):
+	if ignore_root and target.is_ancestor_of(ignore_root):
 		return
-	if not body.has_method("receive_hit"):
+	if hit_log.has_hit(target):
 		return
-		
-	var hurtbox_owner = body.owner
-	if hit_log:
-		if hit_log.has_hit(hurtbox_owner):
-			return
-		else:
-			hit_log.log_hit(hurtbox_owner)
-	
-	hit_log.log_hit(body)
-	body.receive_hit(damage)
-	hit_landed.emit(body)
+
+	hit_log.log_hit(target)
+	hit_landed.emit(target)

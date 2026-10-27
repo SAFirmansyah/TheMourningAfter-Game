@@ -2,10 +2,18 @@
 
 [ext_resource type="Script" uid="uid://dnbf3vat68acm" path="res://scripts/player/player.gd" id="1_player"]
 [ext_resource type="Script" uid="uid://bue1mi5yjlgyn" path="res://scripts/visual/facing_card.gd" id="2_card"]
+[ext_resource type="Resource" uid="uid://26uqe6v7rx3s" path="res://scripts/stats/hero_stats.tres" id="2_p47bc"]
+[ext_resource type="Resource" uid="uid://fsd1jmnw4ict" path="res://scripts/weapons/sword_wood.tres" id="3_75vfm"]
 [ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="6_75vfm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
-height = 1.8
+radius = 0.35
+height = 1.65
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhy0a"]
+radius = 0.35
+height = 1.65
 
 [node name="Player" type="CharacterBody3D" unique_id=2125016019 node_paths=PackedStringArray("card")]
 collision_layer = 4
@@ -13,21 +21,9 @@ collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_player")
 card = NodePath("Card")
-display_name = null
-base_move_speed = null
-move_speed_multiplier = null
-acceleration = null
-deceleration = null
-depth_speed_compensation = null
-max_dashes = null
-dash_distance = null
-dash_duration = null
-dash_recharge_time = null
-dash_iframe_extra = null
-dash_max_extension = null
-dash_transparency = null
-dash_phase_layers = null
-attack_reach = null
+stats = ExtResource("2_p47bc")
+weapon = ExtResource("3_75vfm")
+attack_reach = 0.75
 
 [node name="Card" type="Sprite3D" parent="." unique_id=1692736394]
 process_physics_priority = 20
@@ -40,3 +36,10 @@ script = ExtResource("2_card")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=623702916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_body")
+
+[node name="PlayerHurtBox" type="Area3D" parent="." unique_id=585870382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+script = ExtResource("6_75vfm")
+
+[node name="CollisionHurtBox" type="CollisionShape3D" parent="PlayerHurtBox" unique_id=629519407]
+shape = SubResource("CapsuleShape3D_jhy0a")

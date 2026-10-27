@@ -31,7 +31,7 @@ signal attack_ended
 @export_flags_3d_physics var dash_phase_layers := 2 # layers passed through while dashing
 
 @export_group("Combat")
-@export var stats: Stats # the hero's Stats resource (health, armor, etc.)
+@export var stats: HeroStats # the hero's Stats resource (health, armor, etc.)
 @export var weapon: WeaponData:
 	set(value):
 		weapon = value
@@ -68,6 +68,14 @@ var _current_attack_abilities: Array[WeaponAbility] = []
 func _ready() -> void:
 	motion_mode = MOTION_MODE_FLOATING
 	dashes_available = max_dashes
+	if stats == null:
+		stats = HeroStats.new()
+	
+	print("weapon at _ready start: ", weapon.weapon_name if weapon else "null")
+	call_deferred("_print_health")
+		
+func _print_health() -> void:
+	print("player health: ", stats.health)
 
 
 func _physics_process(delta: float) -> void:
@@ -161,6 +169,7 @@ func _try_attack() -> void:
 	if weapon == null or _attack_cooldown_left > 0.0:
 		return
 	_attack_cooldown_left = weapon.attack_cooldown
+	print("attacking with: ", weapon.weapon_name, " damage: ", weapon.damage)
 
 	var is_charged_attack := charge_points >= MAX_CHARGE
 	_current_attack_damage = weapon.damage
@@ -211,12 +220,14 @@ func _spawn_hitbox() -> void:
 		add_child(hitbox)
 
 
-func _on_hitbox_hit(body: Node3D) -> void:
-	if body.has_method("take_damage"):
-		body.take_damage(_current_attack_damage, _facing)
+func _on_hitbox_hit(target: Node3D) -> void:
+	print("Player hitbox hit: ", target.name)
+	if target.has_method("receive_hit"):
+		target.receive_hit(_current_attack_damage)
+		print ("enemy hit")
 	for ability in _current_attack_abilities:
-		ability.apply(self, body)
-
+		ability.apply(self, target)
+	
 
 func _overlaps_phase_layers() -> bool:
 	var query := PhysicsShapeQueryParameters3D.new()

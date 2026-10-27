@@ -1,37 +1,12 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://inqew075ugr8"]
 
-[ext_resource type="Script" path="res://scripts/world/room.gd" id="1_room"]
+[ext_resource type="Script" uid="uid://cbyj23w5oqewd" path="res://scripts/world/room.gd" id="1_room"]
 [ext_resource type="Material" path="res://materials/ground.tres" id="2_ground"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_exit"]
 [ext_resource type="PackedScene" path="res://scenes/test/prop.tscn" id="4_prop"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="5_interact"]
-[ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="6_npc"]
-[ext_resource type="Script" path="res://scripts/dialogue/dialogue_line.gd" id="7_line"]
-
-[sub_resource type="Resource" id="DialogueLine_1"]
-script = ExtResource("7_line")
-speaker = 0
-text = "Hello, how do you do?"
-
-[sub_resource type="Resource" id="DialogueLine_2"]
-script = ExtResource("7_line")
-speaker = 1
-text = "Huh, so this is how dialog works..."
-
-[sub_resource type="Resource" id="DialogueLine_3"]
-script = ExtResource("7_line")
-speaker = 0
-text = "Yes. You haven't answered my question, though."
-
-[sub_resource type="Resource" id="DialogueLine_4"]
-script = ExtResource("7_line")
-speaker = 1
-text = "I'm fine, how about you?"
-
-[sub_resource type="Resource" id="DialogueLine_5"]
-script = ExtResource("7_line")
-speaker = 0
-text = "Fine too. Now go about your business."
+[ext_resource type="PackedScene" uid="uid://bpaeuccwaposq" path="res://scenes/characters/npc.tscn" id="6_npc"]
+[ext_resource type="Script" uid="uid://vnspgc1md51e" path="res://scripts/dialogue/dialogue_line.gd" id="7_line"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
 material = ExtResource("2_ground")
@@ -46,66 +21,104 @@ size = Vector3(0.4, 2, 16.4)
 [sub_resource type="BoxShape3D" id="BoxShape3D_gap"]
 size = Vector3(0.4, 2, 6.4)
 
-[node name="RoomA" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_jok6b"]
+size = Vector3(10.186487, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l5rmu"]
+size = Vector3(10.191406, 2, 0.4)
+
+[sub_resource type="Resource" id="DialogueLine_1"]
+script = ExtResource("7_line")
+text = "Hello, how do you do?"
+
+[sub_resource type="Resource" id="DialogueLine_2"]
+script = ExtResource("7_line")
+speaker = 1
+text = "Huh, so this is how dialog works..."
+
+[sub_resource type="Resource" id="DialogueLine_3"]
+script = ExtResource("7_line")
+text = "Yes. You haven't answered my question, though."
+
+[sub_resource type="Resource" id="DialogueLine_4"]
+script = ExtResource("7_line")
+speaker = 1
+text = "I'm fine, how about you?"
+
+[sub_resource type="Resource" id="DialogueLine_5"]
+script = ExtResource("7_line")
+text = "Fine too. Now go about your business."
+
+[node name="RoomA" type="Node3D" unique_id=1578787311]
 script = ExtResource("1_room")
 ground_tint = Color(0.45, 0.65, 0.4, 1)
 
-[node name="Floor" type="MeshInstance3D" parent="."]
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=259165535]
 mesh = SubResource("PlaneMesh_floor")
 
-[node name="PlayerStart" type="Marker3D" parent="."]
+[node name="PlayerStart" type="Marker3D" parent="." unique_id=1734752841]
 
-[node name="Walls" type="StaticBody3D" parent="."]
+[node name="Walls" type="StaticBody3D" parent="." unique_id=2117484198]
 
-[node name="North" type="CollisionShape3D" parent="Walls"]
+[node name="North" type="CollisionShape3D" parent="Walls" unique_id=1798150613]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8)
 shape = SubResource("BoxShape3D_long")
 
-[node name="South" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
-shape = SubResource("BoxShape3D_long")
-
-[node name="West" type="CollisionShape3D" parent="Walls"]
+[node name="West" type="CollisionShape3D" parent="Walls" unique_id=1375580509]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 0)
 shape = SubResource("BoxShape3D_short")
 
-[node name="EastUpper" type="CollisionShape3D" parent="Walls"]
+[node name="EastUpper" type="CollisionShape3D" parent="Walls" unique_id=1014031030]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, -5)
 shape = SubResource("BoxShape3D_gap")
 
-[node name="EastLower" type="CollisionShape3D" parent="Walls"]
+[node name="EastLower" type="CollisionShape3D" parent="Walls" unique_id=1953903933]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 5)
 shape = SubResource("BoxShape3D_gap")
 
-[node name="Props" type="Node3D" parent="."]
+[node name="SouthRight" type="CollisionShape3D" parent="Walls" unique_id=341252365]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.106756, 1, 8)
+shape = SubResource("BoxShape3D_jok6b")
 
-[node name="Prop1" parent="Props" instance=ExtResource("4_prop")]
+[node name="SouthLeft" type="CollisionShape3D" parent="Walls" unique_id=1006365884]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.092804, 1, 8)
+shape = SubResource("BoxShape3D_l5rmu")
+
+[node name="SouthExit" parent="." unique_id=1257900106 instance=ExtResource("3_exit")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 8)
+target_room = "uid://bwhmpc5ea348u"
+target_entry = &"NorthExit"
+cutscene = "res://scenes/cutscenes/test_cutscene.tscn"
+
+[node name="Props" type="Node3D" parent="." unique_id=1260245742]
+
+[node name="Prop1" parent="Props" unique_id=79103363 instance=ExtResource("4_prop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -4)
 sway = true
 
-[node name="Prop2" parent="Props" instance=ExtResource("4_prop")]
+[node name="Prop2" parent="Props" unique_id=393325916 instance=ExtResource("4_prop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 4)
 
-[node name="Prop3" parent="Props" instance=ExtResource("4_prop")]
+[node name="Interactable" parent="Props/Prop2" unique_id=1318700297 instance=ExtResource("5_interact")]
+lines = PackedStringArray("This interaction opens up a textbox!")
+
+[node name="Prop3" parent="Props" unique_id=844401113 instance=ExtResource("4_prop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
 sway = true
 
-[node name="Prop4" parent="Props" instance=ExtResource("4_prop")]
+[node name="Prop4" parent="Props" unique_id=584512927 instance=ExtResource("4_prop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
 sway = true
 
-[node name="Prop5" parent="Props" instance=ExtResource("4_prop")]
+[node name="Prop5" parent="Props" unique_id=120708564 instance=ExtResource("4_prop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 1)
 
-[node name="East" parent="." instance=ExtResource("3_exit")]
+[node name="East" parent="." unique_id=1507047681 instance=ExtResource("3_exit")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
 target_room = "res://scenes/rooms/room_b.tscn"
 target_entry = &"West"
 cutscene = "res://scenes/cutscenes/test_cutscene.tscn"
 
-[node name="Interactable" parent="Props/Prop2" instance=ExtResource("5_interact")]
-lines = PackedStringArray("This interaction opens up a textbox!")
-
-[node name="NPC" parent="." instance=ExtResource("6_npc")]
+[node name="NPC" parent="." unique_id=1826747582 instance=ExtResource("6_npc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0, -1.5)
 conversation = Array[ExtResource("7_line")]([SubResource("DialogueLine_1"), SubResource("DialogueLine_2"), SubResource("DialogueLine_3"), SubResource("DialogueLine_4"), SubResource("DialogueLine_5")])

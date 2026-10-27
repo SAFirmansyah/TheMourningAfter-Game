@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://bwhmpc5ea348u"]
+
+[ext_resource type="Material" path="res://materials/ground.tres" id="1_lcnqp"]
+[ext_resource type="Script" uid="uid://cbyj23w5oqewd" path="res://scripts/world/room.gd" id="1_w0y35"]
+[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="2_sq8gx"]
+[ext_resource type="PackedScene" path="res://scenes/test/prop.tscn" id="3_776b6"]
+[ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="4_w0y35"]
+[ext_resource type="PackedScene" uid="uid://dwl4exhk82y7p" path="res://scenes/enemies/low_mutant.tscn" id="6_kunt6"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_opd6h"]
+material = ExtResource("1_lcnqp")
+size = Vector2(24, 16)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kunt6"]
+size = Vector3(10.186487, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_utg01"]
+size = Vector3(10.191406, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t2lbt"]
+size = Vector3(24.4, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eq4vm"]
+size = Vector3(0.4, 2, 16.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qf2hm"]
+size = Vector3(0.4, 2, 16.4)
+
+[node name="BattleRoom" type="Node3D" unique_id=306969350]
+script = ExtResource("1_w0y35")
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1169288210]
+mesh = SubResource("PlaneMesh_opd6h")
+
+[node name="PlayerStart" type="Marker3D" parent="." unique_id=1967922999]
+
+[node name="Walls" type="StaticBody3D" parent="." unique_id=1872518842]
+
+[node name="NorthRight" type="CollisionShape3D" parent="Walls" unique_id=564153034]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.106756, 1, -8)
+shape = SubResource("BoxShape3D_kunt6")
+
+[node name="NorthLeft" type="CollisionShape3D" parent="Walls" unique_id=1545389200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.092804, 1, -8)
+shape = SubResource("BoxShape3D_utg01")
+
+[node name="South" type="CollisionShape3D" parent="Walls" unique_id=1321421368]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8)
+shape = SubResource("BoxShape3D_t2lbt")
+
+[node name="West" type="CollisionShape3D" parent="Walls" unique_id=699405727]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 0)
+shape = SubResource("BoxShape3D_eq4vm")
+
+[node name="East" type="CollisionShape3D" parent="Walls" unique_id=496464666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 0)
+shape = SubResource("BoxShape3D_qf2hm")
+
+[node name="NorthExit" parent="." unique_id=723421222 instance=ExtResource("2_sq8gx")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, -8)
+target_room = "uid://inqew075ugr8"
+target_entry = &"SouthExit"
+cutscene = "res://scenes/cutscenes/test_cutscene.tscn"
+
+[node name="Props" type="Node3D" parent="." unique_id=1043484022]
+
+[node name="Prop1" parent="Props" unique_id=1510734593 instance=ExtResource("3_776b6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -5)
+sway = true
+
+[node name="Prop2" parent="Props" unique_id=861469366 instance=ExtResource("3_776b6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+
+[node name="Interactable" parent="Props/Prop2" unique_id=970607249 instance=ExtResource("4_w0y35")]
+lines = PackedStringArray("This is a multi-line interaction.", "The same textbox has this line...", "...and this one too.")
+
+[node name="Prop3" parent="Props" unique_id=709274898 instance=ExtResource("3_776b6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -4)
+sway = true
+
+[node name="Prop4" parent="Props" unique_id=149947556 instance=ExtResource("3_776b6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
+
+[node name="Prop5" parent="Props" unique_id=930283616 instance=ExtResource("3_776b6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+sway = true
+
+[node name="Enemies" type="Node3D" parent="." unique_id=1428604567]
+
+[node name="Low_Mutant" parent="Enemies" unique_id=465252760 instance=ExtResource("6_kunt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5)
+
+[node name="Low_Mutant2" parent="Enemies" unique_id=1444692964 instance=ExtResource("6_kunt6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2)
