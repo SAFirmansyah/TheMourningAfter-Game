@@ -3,8 +3,12 @@ extends Node
 ## Sanctuary state: health, containment requests, stock, worker orders and Rudrama's repair rounds.
 ## Lives on the world (not the room) so everything keeps running while Constance is in the Altar.
 ## Requests, orders and the workers' walking all run during the day at the day cycle's speed.
-## When Gwenith and Shuyi have nothing in progress they sometimes wander over to the campfire.
+## When Gwenith and Shuyi have nothing in progress they sometimes wander over to the campfire, and
+## each day starts with them heading there. Their orders only progress while they're at their station.
+## Everyone walks along gently curving paths, easing in and out of each walk.
 ## Autosaves whenever a request is fulfilled or expires, and at every night.
+## Health milestones (75/50/25/0) each unlock a story event: a day's losses stop at the next milestone,
+## its event plays after that night's results, and missed requests cost more after each one.
 
 signal health_changed(health: float)
 signal request_added(request: Dictionary)
@@ -15,6 +19,9 @@ enum SlotState { EMPTY, PREPARING, READY }
 
 enum RudramaState { HOME, TO_JOB, WORKING, RETURNING }
 enum WanderState { HOME, TO_FIRE, AT_FIRE, RETURNING }
+
+const MILESTONES := [75.0, 50.0, 25.0, 0.0]
+const STORY_EVENTS: Array[StringName] = [&"gwenith", &"shuyi", &"rudrama", &"fates"] # one per milestone
 
 @export var world: World
 @export var day_cycle: DayCycle
@@ -31,7 +38,7 @@ enum WanderState { HOME, TO_FIRE, AT_FIRE, RETURNING }
 @export var food_duration := 60.0 # TUNE: seconds to fulfil a food request
 @export var medicine_duration := 120.0 # TUNE: seconds to fulfil a medicine request
 @export var repair_durations := PackedFloat32Array([20.0, 25.0, 30.0]) # TUNE: seconds to fix a repair request, by urgency
-@export var expiry_penalty := 0.5 # TUNE: sanctuary health lost per expired request (%)
+@export var expiry_penalties := PackedFloat32Array([0.4, 0.5, 0.9, 1.5]) # TUNE: sanctuary health lost per expired request (%), by story events reached (0, 1, 2, 3+)
 
 @export_group("Orders")
 @export var grow_times := { # TUNE: seconds Gwenith takes to grow each item
@@ -57,6 +64,14 @@ enum WanderState { HOME, TO_FIRE, AT_FIRE, RETURNING }
 @export var fire_stay_min := 15.0 # TUNE: shortest stay at the campfire (s)
 @export var fire_stay_max := 40.0 # TUNE: longest stay at the campfire (s)
 @export var worker_speed := 5.0 # TUNE: Gwenith's and Shuyi's walking speed at 1x (m/s); matches the player
+@export var day_start_wander_delay := 6.0 # TUNE: longest wait after dawn before each heads to the campfire (s)
+@export_group("Walking")
+@export var walk_curve := 0.35 # TUNE: largest sideways bend of a walk, as a fraction of its length
+@export var walk_curve_max := 3.0 # TUNE: largest sideways bend of a walk (m)
+@export var walk_ease_distance := 0.8 # TUNE: distance over which walkers speed up / slow down (m)
+@export var walk_ease_min := 0.3 # TUNE: walking pace at the very start and end of a walk (fraction of full speed)
+@export var walk_pace_variation := 0.12 # TUNE: random pace difference between walks (fraction of full speed)
+@export var walk_bounds := Rect2(-14.0, -8.4, 28.0, 17.4) # TUNE: floor area (x, z) paths bend within; keeps them off the containments
 @export_group("Orders")
 @export var repair_spots := PackedVector3Array([Vector3(-11.583, 0.0, -8.333), Vector3(-5.333, 0.0, -8.333), Vector3(0.917, 0.0, -8.333)]) # where Rudrama stands to repair containment 1, 2, 3
 
@@ -72,7 +87,10 @@ var stock := {}
 var orders := {&"gwenith": [], &"shuyi": []}
 var rudrama_position := Vector3.ZERO
 var rudrama_state := RudramaState.HOME
-## Not saved: Gwenith's and Shuyi's walking, {position, state, target, timer}; they start each load at home.
+## Story events reached so far (milestones crossed), and the one waiting to play after tonight's results.
+var story_events_reached := 0
+var pending_story_event: StringName = &""
+## Not saved: Gwenith's and Shuyi's walking, {position, state, target, timer, eager, route}; they start each load at home.
 var wanderers := {}
 ## Not saved: a worker stops walking while her own order menu is open.
 var paused_workers := {}
@@ -82,6 +100,7 @@ var expanded := {}
 var _spawn_timers := PackedFloat32Array()
 var _next_id := 1
 var _next_order_id := 1
+var _rudrama_route := {}
 
 
 func _enter_tree() -> void:
@@ -89,7 +108,7 @@ func _enter_tree() -> void:
 	add_to_group(&"save_state")
 	rudrama_position = rudrama_home
 	for worker in worker_homes:
-		wanderers[worker] = {"position": worker_homes[worker], "state": WanderState.HOME, "target": worker_homes[worker], "timer": randf_range(wander_check_min, wander_check_max)}
+		wanderers[worker] = {"position": worker_homes[worker], "state": WanderState.HOME, "target": worker_homes[worker], "timer": randf_range(wander_check_min, wander_check_max), "eager": false, "route": {}}
 
 
 func _ready() -> void:
@@ -98,6 +117,9 @@ func _ready() -> void:
 	for i in containment_foods.size():
 		_spawn_timers.append(randf_range(spawn_interval_min * 0.25, spawn_interval_max * 0.5))
 	day_cycle.night_started.connect(_on_night_started)
+	day_cycle.day_started.connect(_on_day_started)
+	if day_cycle.phase == DayCycle.Phase.DAY and day_cycle.elapsed == 0.0:
+		_on_day_started(day_cycle.day) # the day cycle announced the first day before this was ready
 
 
 func _process(delta: float) -> void:
@@ -256,6 +278,8 @@ func order_time(worker: StringName, item: StringName) -> float:
 
 
 func _work_orders(worker: StringName, dt: float) -> void:
+	if wanderers[worker].state != WanderState.HOME:
+		return
 	for order: Dictionary in orders[worker]:
 		if order.is_empty() or order.ready:
 			continue
@@ -290,8 +314,11 @@ func _update_rudrama(dt: float) -> bool:
 func _walk_rudrama(target: Vector3, dt: float) -> bool:
 	if paused_workers.has(&"rudrama"):
 		return false
-	rudrama_position = rudrama_position.move_toward(target, rudrama_speed * dt)
-	return rudrama_position.is_equal_approx(target)
+	var walker := {"position": rudrama_position, "route": _rudrama_route}
+	var arrived := _step_along(walker, target, rudrama_speed, dt)
+	rudrama_position = walker.position
+	_rudrama_route = walker.route
+	return arrived
 
 
 # --- Gwenith and Shuyi -----------------------------------------------------------------------------
@@ -316,7 +343,9 @@ func _update_wanderers(dt: float) -> void:
 				w.timer -= dt
 				if w.timer <= 0.0:
 					w.timer = randf_range(wander_check_min, wander_check_max)
-					if not busy and randf() < wander_chance:
+					var eager: bool = w.eager
+					w.eager = false
+					if not busy and (eager or randf() < wander_chance):
 						w.target = _fire_spot(worker)
 						w.state = WanderState.TO_FIRE
 			WanderState.TO_FIRE:
@@ -355,9 +384,40 @@ func _fire_spot(worker: StringName) -> Vector3:
 func _walk_worker(worker: StringName, target: Vector3, dt: float) -> bool:
 	if paused_workers.has(worker):
 		return false
-	var w: Dictionary = wanderers[worker]
-	w.position = w.position.move_toward(target, worker_speed * dt)
-	return w.position.is_equal_approx(target)
+	return _step_along(wanderers[worker], target, worker_speed, dt)
+
+
+## Moves a walker ({position, route}) toward a point along a gently curved path, easing in and out;
+## returns true once it's there. A new target starts a new path from wherever the walker is.
+func _step_along(walker: Dictionary, target: Vector3, speed: float, dt: float) -> bool:
+	var route: Dictionary = walker.route
+	if route.is_empty() or not route.to.is_equal_approx(target):
+		route = _plan_route(walker.position, target)
+		walker.route = route
+	if route.travelled >= route.length:
+		walker.position = target
+		walker.route = {}
+		return true
+	var edge: float = minf(route.travelled, route.length - route.travelled)
+	var pace: float = lerpf(walk_ease_min, 1.0, clampf(edge / walk_ease_distance, 0.0, 1.0)) * route.pace
+	route.travelled = minf(route.travelled + speed * pace * dt, route.length)
+	var t: float = route.travelled / route.length
+	var from: Vector3 = route.from
+	var bend: Vector3 = route.bend
+	walker.position = from.lerp(bend, t).lerp(bend.lerp(target, t), t)
+	return false
+
+
+func _plan_route(from: Vector3, to: Vector3) -> Dictionary:
+	var length := from.distance_to(to)
+	var bend := from.lerp(to, 0.5)
+	if length > 0.01:
+		var side := (to - from).normalized().cross(Vector3.UP) * (1.0 if randf() < 0.5 else -1.0)
+		bend += side * minf(randf_range(0.2, 1.0) * walk_curve * length, walk_curve_max)
+		bend.x = clampf(bend.x, walk_bounds.position.x, walk_bounds.end.x)
+		bend.z = clampf(bend.z, walk_bounds.position.y, walk_bounds.end.y)
+		length = (from.distance_to(bend) + bend.distance_to(to) + length) / 2.0 # close to the curve's length
+	return {"from": from, "to": to, "bend": bend, "length": length, "travelled": 0.0, "pace": 1.0 + randf_range(-walk_pace_variation, walk_pace_variation)}
 
 
 func _cancel_repair() -> void:
@@ -370,11 +430,16 @@ func _cancel_repair() -> void:
 
 ## Requests don't carry over: anything still open at nightfall counts as missed.
 ## Orders do: whatever is still on Gwenith's or Shuyi's station is finished and goes into stock.
-## Sanctuary Health is rounded up to a whole number for the night.
+## Sanctuary Health is rounded up to a whole number for the night, then raised back to the next
+## milestone if the day crossed it, which queues that milestone's story event.
 func _on_night_started(_day: int) -> void:
 	for request in requests.duplicate():
 		_expire(request)
 	set_health(ceilf(health))
+	if story_events_reached < MILESTONES.size() and health <= MILESTONES[story_events_reached]:
+		set_health(MILESTONES[story_events_reached])
+		pending_story_event = STORY_EVENTS[story_events_reached]
+		story_events_reached += 1
 	for worker in orders:
 		var slots: Array = orders[worker]
 		for slot in slots.size():
@@ -387,10 +452,21 @@ func _on_night_started(_day: int) -> void:
 	repair_order = {}
 	rudrama_state = RudramaState.HOME
 	rudrama_position = rudrama_home
+	_rudrama_route = {}
 	for worker: StringName in wanderers:
 		wanderers[worker].position = worker_homes[worker]
 		wanderers[worker].state = WanderState.HOME
+		wanderers[worker].route = {}
 	world.save_game()
+
+
+## Each day starts with Gwenith and Shuyi drifting over to the campfire unless they're given work first.
+func _on_day_started(_day: int) -> void:
+	for worker: StringName in wanderers:
+		var w: Dictionary = wanderers[worker]
+		if w.state == WanderState.HOME:
+			w.eager = true
+			w.timer = randf_range(0.5, day_start_wander_delay)
 
 
 func get_save_data() -> Dictionary:
@@ -405,6 +481,8 @@ func get_save_data() -> Dictionary:
 		"rudrama_state": rudrama_state,
 		"spawn_timers": Array(_spawn_timers),
 		"next_id": _next_id,
+		"story_events_reached": story_events_reached,
+		"pending_story_event": pending_story_event,
 	}
 
 
@@ -450,6 +528,8 @@ func load_save_data(data: Dictionary) -> void:
 	for i in mini(timers.size(), _spawn_timers.size()):
 		_spawn_timers[i] = timers[i]
 	_next_id = int(data.get("next_id", _next_id))
+	story_events_reached = int(data.get("story_events_reached", story_events_reached))
+	pending_story_event = StringName(data.get("pending_story_event", pending_story_event))
 
 
 # --- Internals -----------------------------------------------------------------------------------
@@ -509,7 +589,11 @@ func _expire(request: Dictionary) -> void:
 	if repair_order.get("request_id", -1) == request.id:
 		_cancel_repair()
 	_remove(request, false)
-	set_health(health - expiry_penalty)
+	set_health(health - expiry_penalty())
+
+
+func expiry_penalty() -> float:
+	return expiry_penalties[mini(story_events_reached, expiry_penalties.size() - 1)]
 
 
 func _free_slot(containment: int) -> int:

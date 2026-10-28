@@ -1,7 +1,8 @@
 class_name DayCycle
 extends Node
-## Sanctuary day/night loop. Days run on a timer and move the sun; nights darken the scene
-## and wait on the night modal's Proceed button before the next day starts.
+## Sanctuary day/night loop. Days run on a timer and move the sun; nights darken the scene and show
+## the night modal. Proceed plays any story event the night unlocked, then Constance is free to walk
+## to the campfire for the night's narrative beat, which starts the next day.
 
 signal day_started(day: int)
 signal night_started(day: int)
@@ -12,6 +13,7 @@ enum Phase { DAY, NIGHT }
 @export var day_length := 360.0 # TUNE: real seconds per day at 1x
 @export var night_fade_time := 1.5 # TUNE: seconds to darken at dusk / brighten at dawn
 @export var sanctuary: SanctuaryManager
+@export var story_event_path := "res://scenes/huyana/cutscenes/story_%s.tscn" # %s = story event name
 
 @export_group("Sun")
 @export var shadow_angle_start := 170.0 # TUNE: shadow direction at dawn (degrees; 0 = right, 90 = away from camera, 180 = left)
@@ -25,6 +27,8 @@ var day := 1
 var phase := Phase.DAY
 var speed := 1.0
 var elapsed := 0.0
+## Night after Proceed: waiting on the campfire's narrative beat before the next day.
+var awaiting_beat := false
 
 @onready var clock: ClockFace = $Clock/Dial
 @onready var day_label: Label = $Clock/DayLabel
@@ -92,6 +96,20 @@ func _start_night() -> void:
 
 func _on_proceed() -> void:
 	night_modal.hide()
+	var world := get_parent() as World
+	var event := sanctuary.pending_story_event
+	if event != &"" and world:
+		await world.play_cutscene(story_event_path % event)
+	sanctuary.pending_story_event = &""
+	awaiting_beat = true
+	player.input_enabled = true
+	if world:
+		world.save_game()
+
+
+## Called once the night's narrative beat has played.
+func start_day() -> void:
+	awaiting_beat = false
 	day += 1
 	elapsed = 0.0
 	phase = Phase.DAY
@@ -113,19 +131,21 @@ func _show_night_modal() -> void:
 
 
 func get_save_data() -> Dictionary:
-	return {"day": day, "phase": phase, "elapsed": elapsed}
+	return {"day": day, "phase": phase, "elapsed": elapsed, "awaiting_beat": awaiting_beat}
 
 
 func load_save_data(data: Dictionary) -> void:
 	day = int(data.get("day", day))
 	elapsed = float(data.get("elapsed", elapsed))
 	phase = int(data.get("phase", phase)) as Phase
+	awaiting_beat = phase == Phase.NIGHT and bool(data.get("awaiting_beat", false))
 	_update_sun()
 	_update_clock()
 	if phase == Phase.NIGHT:
-		player.input_enabled = false
 		_set_night_amount(1.0)
-		_show_night_modal()
+		player.input_enabled = awaiting_beat
+		if not awaiting_beat:
+			_show_night_modal()
 
 
 func _update_sun() -> void:

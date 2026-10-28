@@ -38,14 +38,19 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Engine.is_editor_hint() or _manager == null or worker == "rudrama":
+	if Engine.is_editor_hint() or _manager == null:
+		return
+	var is_day := _manager.day_cycle.phase == DayCycle.Phase.DAY
+	if worker == "rudrama":
+		enabled = is_day
 		return
 	var who := StringName(worker)
 	if slot >= 0:
 		var state := _manager.slot_state(who, slot)
-		enabled = state != SanctuaryManager.SlotState.PREPARING
+		enabled = is_day and state != SanctuaryManager.SlotState.PREPARING
 		prompt_label = "Collect" if state == SanctuaryManager.SlotState.READY else "Order"
 	else:
+		enabled = is_day
 		var busy := not _manager.has_free_slot(who)
 		prompt_label = "Talk" if busy else "Order"
 		conversation = _busy_conversation if busy else _no_conversation

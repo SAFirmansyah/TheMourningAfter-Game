@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" path="res://scenes/huyana/order_point.tscn" id="11_order"]
 [ext_resource type="Script" path="res://scripts/huyana/worker_npc.gd" id="12_rudrama"]
 [ext_resource type="Script" path="res://scripts/huyana/work_station.gd" id="13_station"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/narrative_beat.tscn" id="14_beat"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
 material = ExtResource("2_ground")
@@ -197,3 +198,5 @@ worker = "shuyi"
 slot = 1
 station = NodePath("..")
 interact_radius = 1.6
+
+[node name="NarrativeBeat" parent="Stations/Campfire" instance=ExtResource("14_beat")]
