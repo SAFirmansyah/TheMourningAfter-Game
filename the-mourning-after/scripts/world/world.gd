@@ -138,6 +138,11 @@ func _load_room(path: String, entry: StringName, changes := {}) -> void:
 		rooms.remove_child(current_room)
 		current_room.queue_free()
 	var room: Room = (load(path) as PackedScene).instantiate()
+
+	if room is CombatRoom:
+		var ranges: Array = CombatRunState.get_spawn_ranges_for_current_room()
+		room.configure_spawns(ranges[0], ranges[1])
+
 	rooms.add_child(room)
 	_enter_room(room, entry, changes)
 

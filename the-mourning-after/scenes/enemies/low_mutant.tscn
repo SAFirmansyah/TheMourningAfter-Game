@@ -15,7 +15,7 @@ height = 1.2
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_62q6j"]
 height = 0.5
-radius = 2.0
+radius = 1.5
 
 [node name="Low_Mutant" type="CharacterBody3D" unique_id=465252760]
 collision_layer = 8

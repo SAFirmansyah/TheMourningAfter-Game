@@ -11,6 +11,9 @@ signal player_entered
 @onready var spawn_point: Marker3D = $Spawn
 @onready var path_mesh: MeshInstance3D = $PathMesh
 
+var _real_target_room := "" # stored while blocked, restored on unblock
+var _blocked := false
+
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -20,6 +23,16 @@ func outward_direction() -> Vector3:
 	var dir := global_basis.x
 	dir.y = 0.0
 	return dir.normalized()
+	
+func set_blocked(blocked: bool) -> void:
+	if blocked == _blocked:
+		return
+	_blocked = blocked
+	if blocked:
+		_real_target_room = target_room
+		target_room = ""
+	else:
+		target_room = _real_target_room
 
 
 func _on_body_entered(body: Node3D) -> void:

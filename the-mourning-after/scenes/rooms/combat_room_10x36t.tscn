@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://bxg4ua3n0vc7y"]
+
+[ext_resource type="Material" path="res://materials/ground.tres" id="1_d3gcv"]
+[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="2_wqfc1"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ljejd"]
+material = ExtResource("1_d3gcv")
+size = Vector2(10, 36)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_x6qmk"]
+material = ExtResource("1_d3gcv")
+size = Vector2(40, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bdv1f"]
+size = Vector3(0.4, 2, 32)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bpfhe"]
+size = Vector3(0.4, 2, 36)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bkc0p"]
+size = Vector3(0.4, 2, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x4udm"]
+size = Vector3(10, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8xmcv"]
+size = Vector3(15, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j64xe"]
+size = Vector3(40, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_aofxi"]
+size = Vector3(0.4, 2, 3)
+
+[node name="CombatRoom10x36T" type="Node3D" unique_id=845727415]
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1405013826]
+mesh = SubResource("PlaneMesh_ljejd")
+
+[node name="FloorBottom" type="MeshInstance3D" parent="." unique_id=693470766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23)
+mesh = SubResource("PlaneMesh_x6qmk")
+
+[node name="PlayerStart" type="Marker3D" parent="." unique_id=1815642706]
+
+[node name="Walls" type="StaticBody3D" parent="." unique_id=1851108306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -2)
+
+[node name="EastBig" type="CollisionShape3D" parent="Walls" unique_id=141305201]
+shape = SubResource("BoxShape3D_bdv1f")
+
+[node name="West" type="CollisionShape3D" parent="Walls" unique_id=1185509555]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2)
+shape = SubResource("BoxShape3D_bpfhe")
+
+[node name="EastSmall" type="CollisionShape3D" parent="Walls" unique_id=1976219944]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0, -21)
+shape = SubResource("BoxShape3D_bkc0p")
+
+[node name="South" type="CollisionShape3D" parent="Walls" unique_id=450523647]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 20)
+shape = SubResource("BoxShape3D_x4udm")
+
+[node name="NorthBotWest" type="CollisionShape3D" parent="Walls" unique_id=790616600]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0, -16)
+shape = SubResource("BoxShape3D_8xmcv")
+
+[node name="North" type="CollisionShape3D" parent="Walls" unique_id=998389893]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -26)
+shape = SubResource("BoxShape3D_j64xe")
+
+[node name="NorthBotEast" type="CollisionShape3D" parent="Walls" unique_id=1363759730]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 0, -16)
+shape = SubResource("BoxShape3D_8xmcv")
+
+[node name="WestSmallBot" type="CollisionShape3D" parent="Walls" unique_id=862250281]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, -17.5)
+shape = SubResource("BoxShape3D_aofxi")
+
+[node name="WestSmallTop2" type="CollisionShape3D" parent="Walls" unique_id=1358010340]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, -24.5)
+shape = SubResource("BoxShape3D_aofxi")
+
+[node name="WestExit" parent="." unique_id=597944303 instance=ExtResource("2_wqfc1")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -5, 0, 16)
+
+[node name="EastExit" parent="." unique_id=713890851 instance=ExtResource("2_wqfc1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -23)
+cutscene = "res://scenes/cutscenes/test_cutscene.tscn"
+
+[node name="Enemies" type="Node3D" parent="." unique_id=904687690]
