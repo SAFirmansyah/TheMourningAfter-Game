@@ -30,9 +30,11 @@ func set_blocked(blocked: bool) -> void:
 	_blocked = blocked
 	if blocked:
 		_real_target_room = target_room
+		print("blocking exit, stored target_room=", _real_target_room)
 		target_room = ""
 	else:
 		target_room = _real_target_room
+		print("unblocking exit, restored target_room=", target_room)
 
 
 func _on_body_entered(body: Node3D) -> void:

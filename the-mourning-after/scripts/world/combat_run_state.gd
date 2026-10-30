@@ -3,12 +3,12 @@ extends Node
 ## Autoload this as a singleton so World.gd and CombatRoom.gd can both reach it.
 
 var combat_room_scenes: Array[String] = [
-	"res://scenes/rooms/combat_room_24x20.tscn",
-	#"res://scenes/rooms/combat_room_small_2.tscn",
-	#"res://scenes/rooms/combat_room_big_1.tscn",
-	#"res://scenes/rooms/combat_room_big_2.tscn",
-	#"res://scenes/rooms/combat_room_small_3.tscn",
-	#"res://scenes/rooms/combat_room_big_3.tscn",
+	"res://scenes/rooms/combat_room_40x20.tscn",
+	"res://scenes/rooms/combat_room_10x36t.tscn",
+	"res://scenes/rooms/combat_room_14x35l.tscn",
+	"res://scenes/rooms/combat_room_30x_60.tscn",
+	"res://scenes/rooms/combat_room_54x_72_lt.tscn",
+	"res://scenes/rooms/combat_room_50x70h.tscn"
 ]
 
 var _remaining_pool: Array[String] = []
@@ -26,6 +26,7 @@ func start_new_run() -> void:
 
 
 func has_more_rooms() -> bool:
+	print("has_more_rooms check: room_index=", _room_index, " total_rooms=", _total_rooms)
 	return _room_index < _total_rooms
 
 
@@ -35,8 +36,8 @@ func pick_next_room_path() -> String:
 		_remaining_pool.shuffle()
 	var path: String = _remaining_pool.pop_back()
 	_room_index += 1
+	print("picked room #", _room_index, ": ", path)
 	return path
-
 
 ## Returns (low_mutant_range, big_mutant_range) for whichever room position we're on.
 func get_spawn_ranges_for_current_room() -> Array:

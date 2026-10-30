@@ -15,6 +15,14 @@ var target = null
 @export var attack_cooldown := 0.5 # TUNE: seconds between attacks
 @export var attack_range := 1.2 # TUNE: distance at which this enemy can start an attack
 
+@export_group("Loot")
+@export var loot_pickup_scene: PackedScene = preload("res://scenes/loot/loot_pickup.tscn")
+@export var loot_drop_range := Vector2i(1, 3) # TUNE: how many pickups drop per kill
+@export var loot_ids: Array[StringName] = [&"dummy"] # TUNE: which loot_id each dropped pickup can roll
+@export var loot_scatter_radius := 0.6 # TUNE: how far drops scatter from the death position
+
+var _loot_rng := RandomNumberGenerator.new()
+
 var _is_dead := false
 var _stunned := false
 var _poison_timer: Timer
@@ -44,7 +52,30 @@ func _on_health_depleted() -> void:
 	target = null # stop chasing (redundant with physics_process off, but explicit)
 	# play death animation / drop loot below
 	# await get_tree().create_timer(1.0).timeout # TUNE: match your death anim length
+	_drop_loot()
 	queue_free()
+	
+func _drop_loot() -> void:
+	if loot_pickup_scene == null or loot_ids.is_empty():
+		return
+
+	var drop_count := _loot_rng.randi_range(loot_drop_range.x, loot_drop_range.y)
+	var parent := get_parent()
+	if parent == null:
+		return
+
+	for i in drop_count:
+		var pickup := loot_pickup_scene.instantiate() as LootPickup
+		pickup.loot_id = loot_ids[_loot_rng.randi_range(0, loot_ids.size() - 1)]
+
+		var offset := Vector3(
+			_loot_rng.randf_range(-loot_scatter_radius, loot_scatter_radius),
+			0.0,
+			_loot_rng.randf_range(-loot_scatter_radius, loot_scatter_radius)
+		)
+
+		parent.add_child(pickup)
+		pickup.global_position = global_position + offset
 
 func receive_hit(amount: int) -> void:
 	stats.take_damage(amount)
@@ -84,14 +115,16 @@ func _physics_process(delta: float) -> void:
 		_attack(delta)
 
 func _attack(delta: float) -> void:
-	var direction = (target.position - position).normalized()
+	var direction = (target.global_position - global_position).normalized()
 	_facing = Vector2(direction.x, direction.z)
 
-	var dist_to_target := position.distance_to(target.position)
+	var dist_to_target := global_position.distance_to(target.global_position)
 
 	if dist_to_target > attack_range:
-		position += direction * base_move_speed * delta
+		velocity = direction * base_move_speed
+		move_and_slide()
 	elif _attack_cooldown_left <= 0.0:
+		velocity = Vector3.ZERO
 		_spawn_hitbox()
 
 	
@@ -123,7 +156,6 @@ func _spawn_hitbox() -> void:
 	add_child(hitbox)
 
 func _on_hitbox_hit(target_body: Node3D) -> void:
-	print("Enemy hitbox hit: ", target_body.name)
 	if target_body.has_method("receive_hit"):
 		target_body.receive_hit(stats.get_damage())
 

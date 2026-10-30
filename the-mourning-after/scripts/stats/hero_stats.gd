@@ -12,8 +12,9 @@ func _init() -> void:
 	super._init()
 
 func setup_stats() -> void:
-	current_max_health = max_health
-	health = randi_range(50, max_health) # hero-only: random starting health
+	current_max_health = randi_range(50, max_health)
+	health = current_max_health
+	health_change.emit(health, current_max_health)
 
 func get_damage() -> int:
 	if equipped_weapon and "damage" in equipped_weapon:

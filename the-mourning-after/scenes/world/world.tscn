@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://crvbgui6750ee" path="res://scripts/world/world.gd" id="1_world"]
 [ext_resource type="PackedScene" uid="uid://cr0w4u33y1d57" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://scenes/camera/camera_rig.tscn" id="3_rig"]
-[ext_resource type="Resource" uid="uid://v2yujm0adh2x" path="res://scripts/weapons/sword_bone.tres" id="4_1yooq"]
 [ext_resource type="PackedScene" uid="uid://inqew075ugr8" path="res://scenes/rooms/room_a.tscn" id="4_room_a"]
 [ext_resource type="PackedScene" path="res://scenes/ui/interaction_hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="6_pause"]
 [ext_resource type="PackedScene" path="res://scenes/ui/save_indicator.tscn" id="7_saving"]
 [ext_resource type="PackedScene" path="res://scenes/ui/skip_prompt.tscn" id="8_skip"]
+[ext_resource type="PackedScene" uid="uid://cyoq8xehvpyji" path="res://scenes/ui/player_hud.tscn" id="9_1yooq"]
 
 [sub_resource type="Environment" id="Environment_bg"]
 background_mode = 1
@@ -16,6 +16,7 @@ background_color = Color(0.09, 0.1, 0.12, 1)
 
 [node name="World" type="Node3D" unique_id=2087060420]
 script = ExtResource("1_world")
+load_save_on_start = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1988010647]
 environment = SubResource("Environment_bg")
@@ -26,7 +27,6 @@ environment = SubResource("Environment_bg")
 
 [node name="Player" parent="." unique_id=206997020 node_paths=PackedStringArray("camera_rig") instance=ExtResource("2_player")]
 camera_rig = NodePath("../CameraRig")
-weapon = ExtResource("4_1yooq")
 attack_reach = 0.5
 
 [node name="CameraRig" parent="." unique_id=216864989 node_paths=PackedStringArray("follow_target") instance=ExtResource("3_rig")]
@@ -56,3 +56,5 @@ world = NodePath("..")
 [node name="SaveIndicator" parent="." unique_id=1111831389 instance=ExtResource("7_saving")]
 
 [node name="SkipPrompt" parent="." unique_id=2000870685 instance=ExtResource("8_skip")]
+
+[node name="PlayerHUD" parent="." unique_id=1921822603 instance=ExtResource("9_1yooq")]

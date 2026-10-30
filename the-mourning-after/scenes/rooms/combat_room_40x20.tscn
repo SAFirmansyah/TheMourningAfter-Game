@@ -8,6 +8,9 @@
 material = ExtResource("2_yfm18")
 size = Vector2(40, 20)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_02tjn"]
+size = Vector3(40, 0.1, 20)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_i4pyq"]
 size = Vector3(40, 2, 0.4)
 
@@ -22,12 +25,21 @@ size = Vector3(40, 2, 0.4)
 
 [node name="CombatRoom40x20" type="Node3D" unique_id=844543870]
 script = ExtResource("1_02tjn")
+spawn_area_min = Vector3(-18, 0, -8)
+spawn_area_max = Vector3(18, 0, 8)
+spawn_raycast_height = 1.0
 ground_tint = Color(0, 0, 0, 1)
 
-[node name="Floor" type="MeshInstance3D" parent="." unique_id=1761784156]
+[node name="FloorStatic" type="StaticBody3D" parent="." unique_id=1633995675]
+
+[node name="Floor" type="MeshInstance3D" parent="FloorStatic" unique_id=1761784156]
 mesh = SubResource("PlaneMesh_yrvbk")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="FloorStatic" unique_id=1741732368]
+shape = SubResource("BoxShape3D_02tjn")
+
 [node name="PlayerStart" type="Marker3D" parent="." unique_id=1982221204]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 0)
 
 [node name="Walls" type="StaticBody3D" parent="." unique_id=1554732053]
 
@@ -60,6 +72,6 @@ transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -20, 0, 0)
 
 [node name="EastExit" parent="." unique_id=2131275261 instance=ExtResource("3_sxs3r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
-cutscene = "res://scenes/cutscenes/test_cutscene.tscn"
+target_entry = &"WestExit"
 
 [node name="Enemies" type="Node3D" parent="." unique_id=885479377]

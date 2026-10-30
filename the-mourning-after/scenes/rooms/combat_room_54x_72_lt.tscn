@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dpgsial1g3ty4"]
 
 [ext_resource type="Material" path="res://materials/ground.tres" id="1_0lm4t"]
+[ext_resource type="Script" uid="uid://chm8scfmsnvei" path="res://scripts/world/combat_room.gd" id="1_nmxxs"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="2_nmxxs"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a5yan"]
@@ -19,8 +20,20 @@ size = Vector2(12, 50)
 material = ExtResource("1_0lm4t")
 size = Vector2(60, 20)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_nmxxs"]
+size = Vector3(24, 0.1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_a5yan"]
+size = Vector3(19, 0.1, 24)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qrs1r"]
+size = Vector3(36, 0.1, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r54mt"]
+size = Vector3(12, 0.1, 50)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_q6yux"]
-size = Vector3(40, 2, 0.4)
+size = Vector3(60, 2, 0.4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_hh04t"]
 size = Vector3(20, 2, 0.4)
@@ -29,7 +42,7 @@ size = Vector3(20, 2, 0.4)
 size = Vector3(0.4, 2, 25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dr13m"]
-size = Vector3(0.4, 2, 38)
+size = Vector3(0.4, 2, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_25nv6"]
 size = Vector3(12, 2, 0.4)
@@ -56,23 +69,51 @@ size = Vector3(20, 2, 0.4)
 size = Vector3(0.4, 2, 14)
 
 [node name="CombatRoom54x72lt" type="Node3D" unique_id=1448979249]
+script = ExtResource("1_nmxxs")
+spawn_area_min = Vector3(-32, 0, 30)
+spawn_area_max = Vector3(32, 0, 30)
+spawn_raycast_height = 1.0
+ground_tint = Color(0.039215688, 0.13725491, 0.7058824, 1)
 
-[node name="FloorSouth" type="MeshInstance3D" parent="." unique_id=312615751]
+[node name="FloorStatic" type="StaticBody3D" parent="." unique_id=1307239526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 19)
+
+[node name="FloorSouth" type="MeshInstance3D" parent="FloorStatic" unique_id=312615751]
 mesh = SubResource("PlaneMesh_a5yan")
 
-[node name="FloorNotch" type="MeshInstance3D" parent="." unique_id=810285897]
+[node name="FloorNotch" type="MeshInstance3D" parent="FloorStatic" unique_id=810285897]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -12)
 mesh = SubResource("PlaneMesh_qrs1r")
 
-[node name="FloorEnd" type="MeshInstance3D" parent="." unique_id=1075999354]
+[node name="FloorEnd" type="MeshInstance3D" parent="FloorStatic" unique_id=1075999354]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, -26)
 mesh = SubResource("PlaneMesh_r54mt")
 
-[node name="FloorNorth" type="MeshInstance3D" parent="." unique_id=1473457307]
+[node name="FloorNorth" type="MeshInstance3D" parent="FloorStatic" unique_id=1473457307]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -27)
 mesh = SubResource("PlaneMesh_ub60y")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="FloorStatic" unique_id=1976437762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -27)
+shape = SubResource("BoxShape3D_nmxxs")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="FloorStatic" unique_id=848255987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+shape = SubResource("BoxShape3D_a5yan")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="FloorStatic" unique_id=21036988]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -22)
+shape = SubResource("BoxShape3D_qrs1r")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="FloorStatic" unique_id=1242429714]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, -26)
+shape = SubResource("BoxShape3D_r54mt")
+
+[node name="PlayerStart" type="Marker3D" parent="." unique_id=1632845410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 34)
+
 [node name="Walls" type="StaticBody3D" parent="." unique_id=1141935596]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 19)
 
 [node name="NorthBig" type="CollisionShape3D" parent="Walls" unique_id=1191569244]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, -37)
@@ -127,10 +168,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 1, -44)
 shape = SubResource("BoxShape3D_q52cp")
 
 [node name="WestExit" parent="." unique_id=939303187 instance=ExtResource("2_nmxxs")]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -10, 0, 15)
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -34, 0, 34)
 
 [node name="EastExit" parent="." unique_id=987339231 instance=ExtResource("2_nmxxs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 0, -27)
-cutscene = "res://scenes/cutscenes/test_cutscene.tscn"
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 0, -8)
+target_entry = &"WestExit"
 
 [node name="Enemies" type="Node3D" parent="." unique_id=745464890]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0, 19)

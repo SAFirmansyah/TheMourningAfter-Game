@@ -7,6 +7,8 @@ class_name MutantStats
 @export var max_mutant_health: int = 80 # TUNE - Mutants maximum health
 @export var hitbox_radius: float = 0.3 # TUNE - Enemy attack lateral range
 @export var hitbox_height: float = 0.6 # TUNE - Enemy attack height range
+@export var spawn_vertical_offset: float = 0.5 # TUNE: distance from floor to this mutant's origin (usually ~half its height)
+
 
 var rng := RandomNumberGenerator.new()
 var _damage: int = 0
@@ -22,6 +24,10 @@ func setup_stats() -> void:
 	health = rng.randi_range(min_mutant_health, max_mutant_health)
 	_damage = rng.randi_range(min_damage, max_damage)
 
+
+func get_spawn_vertical_offset() -> float:
+	return spawn_vertical_offset
+	
 
 func get_damage() -> int:
 	return _damage

@@ -6,8 +6,10 @@ extends Node3D
 
 @export var fade_time := 0.35 # TUNE: fade to/from black per room change (s)
 @export var load_save_on_start := true # off: always start fresh in the placed room
+@export var base_room_path := "res://scenes/rooms/room_a.tscn"
 
 @onready var player: Player = $Player
+@onready var player_hud: PlayerHUD = $PlayerHUD
 @onready var camera_rig: CameraRig = $CameraRig
 @onready var rooms: Node3D = $Rooms
 @onready var fade: ColorRect = $Transition/Fade
@@ -33,6 +35,10 @@ func _ready() -> void:
 		if child is Room:
 			placed = child
 			break
+			
+	player.died.connect(_on_player_died)
+	player_hud.bind_stats(player.stats)
+	
 	var data := SaveSystem.load_data() if load_save_on_start else {}
 	var saved_room: String = data.get("room", "")
 	if saved_room != "" and ResourceLoader.exists(saved_room):
@@ -181,3 +187,22 @@ func _fade_to(alpha: float) -> void:
 	_fade_tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	_fade_tween.tween_property(fade, "color:a", alpha, fade_time)
 	await _fade_tween.finished
+
+
+func _on_player_died() -> void:
+	if _transitioning or _in_cutscene:
+		return
+	_transitioning = true
+	player.input_enabled = false
+
+	await _fade_to(1.0)
+
+	CombatRunState.start_new_run() # or a dedicated reset, see note below
+	_load_room(base_room_path, &"")
+	player.stats.setup_stats() # re-rolls health back to full/starting range
+	print("post-death health: ", player.stats.health)
+	save_game()
+
+	await _fade_to(0.0)
+	player.input_enabled = true
+	_transitioning = false

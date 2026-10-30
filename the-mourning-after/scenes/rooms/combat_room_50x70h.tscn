@@ -1,0 +1,137 @@
+[gd_scene format=3 uid="uid://4jbrpamw0aaf"]
+
+[ext_resource type="Script" uid="uid://chm8scfmsnvei" path="res://scripts/world/combat_room.gd" id="1_q4ucf"]
+[ext_resource type="Material" path="res://materials/ground.tres" id="2_j20vc"]
+[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_7e8ke"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_1x2ak"]
+material = ExtResource("2_j20vc")
+size = Vector2(20, 50)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_my5kp"]
+material = ExtResource("2_j20vc")
+size = Vector2(30, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oea4s"]
+size = Vector3(20, 0.1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1x2ak"]
+size = Vector3(40, 0.1, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_q6yux"]
+size = Vector3(30, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5cfhk"]
+size = Vector3(0.4, 2, 15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dr13m"]
+size = Vector3(0.4, 2, 23)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wxci6"]
+size = Vector3(20, 2, 0.4)
+
+[node name="CombatRoom50x70h" type="Node3D" unique_id=965376933]
+script = ExtResource("1_q4ucf")
+spawn_area_min = Vector3(-23, 0, -23)
+spawn_area_max = Vector3(23, 0, 23)
+spawn_raycast_height = 1.0
+ground_tint = Color(0.03137255, 0.27058825, 0.8392157, 1)
+
+[node name="FloorStatic" type="StaticBody3D" parent="." unique_id=1305831853]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, 0)
+
+[node name="FloorEast" type="MeshInstance3D" parent="FloorStatic" unique_id=1123252264]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+mesh = SubResource("PlaneMesh_1x2ak")
+
+[node name="FloorMid" type="MeshInstance3D" parent="FloorStatic" unique_id=1308384518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 0, 0)
+mesh = SubResource("PlaneMesh_my5kp")
+
+[node name="FloorWest" type="MeshInstance3D" parent="FloorStatic" unique_id=180816779]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 0, 0)
+mesh = SubResource("PlaneMesh_1x2ak")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="FloorStatic" unique_id=1856617693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+shape = SubResource("BoxShape3D_oea4s")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="FloorStatic" unique_id=347884466]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29, 0, 0)
+shape = SubResource("BoxShape3D_1x2ak")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="FloorStatic" unique_id=590118528]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 0, 0)
+shape = SubResource("BoxShape3D_oea4s")
+
+[node name="Walls" type="StaticBody3D" parent="." unique_id=1474404266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, 0)
+
+[node name="NorthMid" type="CollisionShape3D" parent="Walls" unique_id=1899650054]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 1, -10)
+shape = SubResource("BoxShape3D_q6yux")
+
+[node name="WestInnerTop" type="CollisionShape3D" parent="Walls" unique_id=1614539665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, -17.5)
+shape = SubResource("BoxShape3D_5cfhk")
+
+[node name="WestOuterTop" type="CollisionShape3D" parent="Walls" unique_id=2139901476]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -13.5)
+shape = SubResource("BoxShape3D_dr13m")
+
+[node name="NorthWester" type="CollisionShape3D" parent="Walls" unique_id=2053096161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -25)
+shape = SubResource("BoxShape3D_wxci6")
+
+[node name="WestOuterBot" type="CollisionShape3D" parent="Walls" unique_id=741642097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 13.5)
+shape = SubResource("BoxShape3D_dr13m")
+
+[node name="SouthWestern" type="CollisionShape3D" parent="Walls" unique_id=551611875]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 25)
+shape = SubResource("BoxShape3D_wxci6")
+
+[node name="SouthMid" type="CollisionShape3D" parent="Walls" unique_id=434922560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, 1, 10)
+shape = SubResource("BoxShape3D_q6yux")
+
+[node name="WestInnerBot" type="CollisionShape3D" parent="Walls" unique_id=1074640635]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 17.5)
+shape = SubResource("BoxShape3D_5cfhk")
+
+[node name="EastInnerTop" type="CollisionShape3D" parent="Walls" unique_id=1160794239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 1, -17.5)
+shape = SubResource("BoxShape3D_5cfhk")
+
+[node name="EastOuterTop" type="CollisionShape3D" parent="Walls" unique_id=1008113329]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 1, -13.5)
+shape = SubResource("BoxShape3D_dr13m")
+
+[node name="NorthEastern" type="CollisionShape3D" parent="Walls" unique_id=1547368085]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 1, -25)
+shape = SubResource("BoxShape3D_wxci6")
+
+[node name="EastOuterBot" type="CollisionShape3D" parent="Walls" unique_id=862597135]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 1, 13.5)
+shape = SubResource("BoxShape3D_dr13m")
+
+[node name="SouthEastern" type="CollisionShape3D" parent="Walls" unique_id=1094508969]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 1, 25)
+shape = SubResource("BoxShape3D_wxci6")
+
+[node name="EastInnerBot" type="CollisionShape3D" parent="Walls" unique_id=2005435641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 1, 17.5)
+shape = SubResource("BoxShape3D_5cfhk")
+
+[node name="WestExit" parent="." unique_id=912628752 instance=ExtResource("3_7e8ke")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -35, 0, 0)
+
+[node name="EastExit" parent="." unique_id=143478636 instance=ExtResource("3_7e8ke")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35, 0, 0)
+target_entry = &"WestExit"
+
+[node name="Enemies" type="Node3D" parent="." unique_id=183968715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30, 0, 0)
+
+[node name="PlayerStart" type="Marker3D" parent="." unique_id=2016170330]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 0, 0)

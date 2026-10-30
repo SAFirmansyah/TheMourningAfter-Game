@@ -7,6 +7,7 @@ signal dash_started
 signal dash_ended
 signal attack_started
 signal attack_ended
+signal died
 
 @export var card: Sprite3D
 @export var camera_rig: CameraRig
@@ -73,6 +74,8 @@ func _ready() -> void:
 	
 	print("weapon at _ready start: ", weapon.weapon_name if weapon else "null")
 	call_deferred("_print_health")
+	
+	stats.health_depleted.connect(_on_health_depleted)
 		
 func _print_health() -> void:
 	print("player health: ", stats.health)
@@ -137,9 +140,11 @@ func teleport(pos: Vector3) -> void:
 	reset_physics_interpolation()
 
 
-func heal(amount: float) -> void:
-	pass # TODO: hook into your health system
+func heal(amount: int) -> void:
+	stats.on_health_set(stats.health + amount)
 
+func receive_hit(amount: int) -> void:
+	stats.take_damage(amount)
 
 func _try_dash() -> void:
 	if dashes_available <= 0 or _dashing:
@@ -169,7 +174,6 @@ func _try_attack() -> void:
 	if weapon == null or _attack_cooldown_left > 0.0:
 		return
 	_attack_cooldown_left = weapon.attack_cooldown
-	print("attacking with: ", weapon.weapon_name, " damage: ", weapon.damage)
 
 	var is_charged_attack := charge_points >= MAX_CHARGE
 	_current_attack_damage = weapon.damage
@@ -221,7 +225,6 @@ func _spawn_hitbox() -> void:
 
 
 func _on_hitbox_hit(target: Node3D) -> void:
-	print("Player hitbox hit: ", target.name)
 	if target.has_method("receive_hit"):
 		target.receive_hit(_current_attack_damage)
 		print ("enemy hit")
@@ -257,3 +260,6 @@ func _depth_scale() -> float:
 		return 1.0
 	var full := 1.0 / sin(deg_to_rad(camera_rig.pitch_deg))
 	return lerpf(1.0, full, depth_speed_compensation)
+
+func _on_health_depleted() -> void:
+	died.emit()

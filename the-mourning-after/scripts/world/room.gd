@@ -8,7 +8,9 @@ signal exit_requested(target_room: String, target_entry: StringName, exit_direct
 
 
 func _ready() -> void:
-	$Floor.set_instance_shader_parameter("tint", ground_tint)
+	var floor_mesh := find_child("Floor", true, false) as MeshInstance3D
+	if floor_mesh:
+		floor_mesh.set_instance_shader_parameter("tint", ground_tint)
 	for exit in get_exits():
 		exit.path_mesh.set_instance_shader_parameter("tint", ground_tint)
 		exit.player_entered.connect(func() -> void:

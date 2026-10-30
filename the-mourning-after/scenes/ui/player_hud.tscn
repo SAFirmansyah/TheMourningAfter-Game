@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cyoq8xehvpyji"]
+
+[ext_resource type="Script" uid="uid://druygkaqa6nmn" path="res://scripts/ui/player_hud.gd" id="1_e6e0b"]
+
+[node name="PlayerHUD" type="CanvasLayer" unique_id=1921822603]
+script = ExtResource("1_e6e0b")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=376333451]
+offset_left = 114.0
+offset_top = 65.0
+offset_right = 488.0
+offset_bottom = 92.0
+max_value = 200.0
+show_percentage = false
+
+[node name="HealthLabel" type="Label" parent="HealthBar" unique_id=859944961]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
