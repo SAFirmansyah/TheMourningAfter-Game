@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bemo8fs2seh6f"]
 
+[ext_resource type="Script" uid="uid://cbyj23w5oqewd" path="res://scripts/world/room.gd" id="1_h2p12"]
 [ext_resource type="Material" path="res://materials/ground.tres" id="1_hqskh"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="2_h2p12"]
 
@@ -14,6 +15,7 @@ size = Vector3(30, 2, 0.4)
 size = Vector3(0.4, 2, 8)
 
 [node name="Boss Sandbox 2" type="Node3D" unique_id=1359824026]
+script = ExtResource("1_h2p12")
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=1514557725]
 mesh = SubResource("PlaneMesh_gip0k")

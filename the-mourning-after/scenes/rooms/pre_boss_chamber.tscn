@@ -18,6 +18,7 @@ size = Vector3(0.4, 2, 3)
 
 [node name="PreBossChamber" type="Node3D" unique_id=56238907]
 script = ExtResource("1_hfug0")
+boss_exit_name = &"EastExit"
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=1805978798]
 mesh = SubResource("PlaneMesh_ot1id")
@@ -55,6 +56,7 @@ transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -10, 0, 0)
 
 [node name="EastExit" parent="." unique_id=2058812639 instance=ExtResource("3_m20so")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+target_entry = &"BossEntry"
 
 [node name="Bargain Spot" parent="." unique_id=844313245 instance=ExtResource("4_0pgl6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

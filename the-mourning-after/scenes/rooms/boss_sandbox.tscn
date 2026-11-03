@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bbhtw0mqjeb8"]
 
 [ext_resource type="Material" path="res://materials/ground.tres" id="1_e1jt7"]
+[ext_resource type="Script" uid="uid://cbyj23w5oqewd" path="res://scripts/world/room.gd" id="1_gjllv"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="2_gjllv"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_078kr"]
@@ -24,6 +25,7 @@ size = Vector3(0.4, 2, 6)
 size = Vector3(0.4, 2, 8)
 
 [node name="Boss Sandbox" type="Node3D" unique_id=2124419479]
+script = ExtResource("1_gjllv")
 
 [node name="Floor2" type="MeshInstance3D" parent="." unique_id=2145500498]
 transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)

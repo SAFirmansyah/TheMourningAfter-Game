@@ -18,7 +18,9 @@ func _on_boss_changed() -> void:
 
 
 func _configure_boss_exit() -> void:
+	var all_exits := get_exits()
 	var exit := get_exit(boss_exit_name)
+	print("PreBossChamber found exits: ", all_exits.map(func(e): return e.name))
 	if exit == null:
 		push_warning("PreBossChamber: exit '", boss_exit_name, "' not found")
 		return
