@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="LootData" format=3 uid="uid://da1rcp5236rtr"]
+
+[ext_resource type="Script" uid="uid://boygl2hxayimj" path="res://scripts/loot/loot_data.gd" id="1_f4ag2"]
+
+[resource]
+script = ExtResource("1_f4ag2")
+loot_id = &"2x_dash"
+display_name = "Double Dash"
+effect = 4
+metadata/_custom_type_script = "uid://boygl2hxayimj"

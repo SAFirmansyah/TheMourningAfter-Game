@@ -20,4 +20,5 @@ attack_cooldown = 0.25
 abilities = Array[ExtResource("1_w7k0u")]([SubResource("Resource_w7k0u")])
 charge_per_attack = 27.0
 charged_abilities = Array[ExtResource("1_w7k0u")]([SubResource("Resource_d2eom")])
+charge_instant_use = true
 metadata/_custom_type_script = "uid://dver5jfnn77l2"

@@ -69,6 +69,7 @@ size = Vector3(20, 2, 0.4)
 size = Vector3(0.4, 2, 14)
 
 [node name="CombatRoom54x72lt" type="Node3D" unique_id=1448979249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 script = ExtResource("1_nmxxs")
 spawn_area_min = Vector3(-32, 0, 30)
 spawn_area_max = Vector3(32, 0, 30)

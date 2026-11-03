@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LootData" format=3 uid="uid://ccmhq5rc8u5g7"]
+
+[ext_resource type="Script" uid="uid://boygl2hxayimj" path="res://scripts/loot/loot_data.gd" id="1_aha71"]
+
+[resource]
+script = ExtResource("1_aha71")
+loot_id = &"residue"
+display_name = "Magic Residue"
+effect = 6
+value = 1.0
+metadata/_custom_type_script = "uid://boygl2hxayimj"

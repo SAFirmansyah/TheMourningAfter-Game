@@ -8,6 +8,6 @@ min_damage = 10
 min_mutant_health = 50
 hitbox_radius = 1.0
 hitbox_height = 1.0
-spawn_vertical_offset = 1.2
+spawn_vertical_offset = 1.0
 unit_type = 1
 metadata/_custom_type_script = "uid://bjkrpp4lr4m5f"

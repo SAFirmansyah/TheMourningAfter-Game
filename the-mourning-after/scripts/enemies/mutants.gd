@@ -17,9 +17,9 @@ var target = null
 
 @export_group("Loot")
 @export var loot_pickup_scene: PackedScene = preload("res://scenes/loot/loot_pickup.tscn")
-@export var loot_drop_range := Vector2i(1, 3) # TUNE: how many pickups drop per kill
-@export var loot_ids: Array[StringName] = [&"dummy"] # TUNE: which loot_id each dropped pickup can roll
-@export var loot_scatter_radius := 0.6 # TUNE: how far drops scatter from the death position
+@export var loot_drop_range := Vector2i(1, 3)
+@export var loot_pool: Array[LootData] = [] # drag the relevant .tres files per mutant scene
+@export var loot_scatter_radius := 0.6
 
 var _loot_rng := RandomNumberGenerator.new()
 
@@ -56,7 +56,7 @@ func _on_health_depleted() -> void:
 	queue_free()
 	
 func _drop_loot() -> void:
-	if loot_pickup_scene == null or loot_ids.is_empty():
+	if loot_pickup_scene == null or loot_pool.is_empty():
 		return
 
 	var drop_count := _loot_rng.randi_range(loot_drop_range.x, loot_drop_range.y)
@@ -65,8 +65,14 @@ func _drop_loot() -> void:
 		return
 
 	for i in drop_count:
+		var candidates := loot_pool.filter(func(l): return l.effect != LootData.EffectType.MAGIC_RESIDUE or RunInventory.can_drop_residue())
+		if candidates.is_empty():
+			continue
+		var loot: LootData = candidates[_loot_rng.randi_range(0, candidates.size() - 1)]
+
 		var pickup := loot_pickup_scene.instantiate() as LootPickup
-		pickup.loot_id = loot_ids[_loot_rng.randi_range(0, loot_ids.size() - 1)]
+		pickup.loot_id = loot.loot_id
+		pickup.loot_data = loot
 
 		var offset := Vector3(
 			_loot_rng.randf_range(-loot_scatter_radius, loot_scatter_radius),
@@ -81,6 +87,7 @@ func receive_hit(amount: int) -> void:
 	stats.take_damage(amount)
 
 func apply_stun(duration: float) -> void:
+	print(name, " stunned for ", duration, "s")
 	_stunned = true
 	var timer := get_tree().create_timer(duration)
 	timer.timeout.connect(func(): _stunned = false)
@@ -154,6 +161,7 @@ func _spawn_hitbox() -> void:
 	hitbox.position = forward * (attack_reach + stats.get_hitbox_height() / 2.0)
 
 	add_child(hitbox)
+	hitbox.global_position = global_position + forward * (attack_reach + stats.get_hitbox_height() / 2.0)
 
 func _on_hitbox_hit(target_body: Node3D) -> void:
 	if target_body.has_method("receive_hit"):

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LootData" format=3 uid="uid://s2rdu7hidhdr"]
+
+[ext_resource type="Script" uid="uid://boygl2hxayimj" path="res://scripts/loot/loot_data.gd" id="1_sp048"]
+
+[resource]
+script = ExtResource("1_sp048")
+loot_id = &"mov_spd_up"
+display_name = "Movemen Speed Up"
+effect = 3
+value = 0.2
+metadata/_custom_type_script = "uid://boygl2hxayimj"

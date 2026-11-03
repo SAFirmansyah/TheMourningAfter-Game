@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://crvbgui6750ee" path="res://scripts/world/world.gd" id="1_world"]
 [ext_resource type="PackedScene" uid="uid://cr0w4u33y1d57" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://scenes/camera/camera_rig.tscn" id="3_rig"]
+[ext_resource type="Resource" uid="uid://ddlls2y8j6s18" path="res://scripts/weapons/sword_bronze.tres" id="4_gb53w"]
 [ext_resource type="PackedScene" uid="uid://inqew075ugr8" path="res://scenes/rooms/room_a.tscn" id="4_room_a"]
 [ext_resource type="PackedScene" path="res://scenes/ui/interaction_hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="6_pause"]
@@ -27,6 +28,7 @@ environment = SubResource("Environment_bg")
 
 [node name="Player" parent="." unique_id=206997020 node_paths=PackedStringArray("camera_rig") instance=ExtResource("2_player")]
 camera_rig = NodePath("../CameraRig")
+weapon = ExtResource("4_gb53w")
 attack_reach = 0.5
 
 [node name="CameraRig" parent="." unique_id=216864989 node_paths=PackedStringArray("follow_target") instance=ExtResource("3_rig")]

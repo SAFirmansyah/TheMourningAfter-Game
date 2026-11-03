@@ -6,6 +6,7 @@ extends Node3D
 
 signal collected(loot_id: StringName)
 
+@export var loot_data: LootData
 @export var loot_id: StringName = &"dummy"
 @export var auto_collect := false
 @export var auto_collect_radius := 1.2 # TUNE: distance at which auto-collect pickups fly in (m)
@@ -90,5 +91,7 @@ func _step_collect(delta: float) -> void:
 	card.global_position = _collect_from.lerp(target, k)
 	card.scale = Vector3.ONE * lerpf(1.0, collect_end_scale, k)
 	if _collect_t >= 1.0:
+		if loot_data:
+			RunInventory.collect(loot_data)
 		collected.emit(loot_id)
 		queue_free()

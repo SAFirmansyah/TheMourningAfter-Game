@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LootData" format=3 uid="uid://c3vnvs1am64e2"]
+
+[ext_resource type="Script" uid="uid://boygl2hxayimj" path="res://scripts/loot/loot_data.gd" id="1_076ea"]
+
+[resource]
+script = ExtResource("1_076ea")
+loot_id = &"dmg_reduction"
+display_name = "Damage Reduction"
+effect = 5
+value = 3.0
+metadata/_custom_type_script = "uid://boygl2hxayimj"

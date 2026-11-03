@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 SaveSystem="*res://scripts/save/save_system.gd"
 CombatRunState="*uid://cwloejr0p1o4"
+RunInventory="*uid://cj3r4eja284h7"
+CampaignState="*uid://kdrh8ll6k5xk"
 
 [display]
 

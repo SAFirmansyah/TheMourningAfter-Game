@@ -38,8 +38,12 @@ func _ready() -> void:
 			
 	player.died.connect(_on_player_died)
 	player_hud.bind_stats(player.stats)
+	player_hud.bind_player(player)
+	RunInventory.bind_player(player)
+	CampaignState.reset_campaign()
 	
 	var data := SaveSystem.load_data() if load_save_on_start else {}
+	RunInventory.magic_residue = data.get("magic_residue", 0)
 	var saved_room: String = data.get("room", "")
 	if saved_room != "" and ResourceLoader.exists(saved_room):
 		if placed:
@@ -117,6 +121,7 @@ func save_game(show_indicator := true) -> void:
 		"room": current_room.scene_file_path,
 		"player_position": [pos.x, pos.y, pos.z],
 		"room_changes": _room_changes,
+		"magic_residue": RunInventory.magic_residue,
 	})
 	if show_indicator:
 		save_indicator.flash()
@@ -198,8 +203,11 @@ func _on_player_died() -> void:
 	await _fade_to(1.0)
 
 	CombatRunState.start_new_run() # or a dedicated reset, see note below
+	RunInventory.reset_on_death()
+	CampaignState.reset_campaign()
 	_load_room(base_room_path, &"")
 	player.stats.setup_stats() # re-rolls health back to full/starting range
+	RunInventory.start_new_run_loadout()
 	print("post-death health: ", player.stats.health)
 	save_game()
 

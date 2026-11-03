@@ -5,6 +5,8 @@ class_name HeroStats
 @export var equipped_weapon: WeaponData
 @export var equipped_armor: Armor
 
+var move_speed_multiplier := 1.0
+
 var rng = RandomNumberGenerator.new()
 
 func _init() -> void:
@@ -14,6 +16,14 @@ func _init() -> void:
 func setup_stats() -> void:
 	current_max_health = randi_range(50, max_health)
 	health = current_max_health
+	move_speed_multiplier = randf_range(0.5, 2.0)
+	print("rolled move_speed_multiplier: ", move_speed_multiplier)
+	health_change.emit(health, current_max_health)
+
+func setup_first_run_stats() -> void:
+	current_max_health = 50
+	health = 50
+	move_speed_multiplier = 0.5
 	health_change.emit(health, current_max_health)
 
 func get_damage() -> int:

@@ -8,6 +8,7 @@ signal dash_ended
 signal attack_started
 signal attack_ended
 signal died
+signal weapon_changed(weapon: WeaponData)
 
 @export var card: Sprite3D
 @export var camera_rig: CameraRig
@@ -16,7 +17,6 @@ signal died
 
 @export_group("Movement")
 @export var base_move_speed := 5.0 # TUNE: walk speed at 1x (m/s)
-@export_range(0.5, 2.0, 0.05) var move_speed_multiplier := 1.0 # move speed stat (0.5x–2x)
 @export var acceleration := 60.0 # TUNE: speed-up rate (m/s²)
 @export var deceleration := 80.0 # TUNE: slow-down rate (m/s²)
 @export_range(0.0, 1.0) var depth_speed_compensation := 0.0 # TUNE: 0 = raw world speed, 1 = equal on-screen speed in all directions
@@ -42,6 +42,10 @@ signal died
 @export var attack_height := 0.8 # TUNE: vertical offset — roughly chest/sword height
 @export var attack_hitbox_count := 3 # TUNE: how many hitboxes spawn per attack
 @export var attack_hitbox_spacing := 0.3 # TUNE: lateral gap between hitboxes in the arc
+@export var ability_armed_duration := 5.0 # TUNE: seconds the armed ability waits before expiring
+var bonus_weapon_damage := 0.0
+var bonus_cooldown_reduction := 0.0 # 0.0–1.0, fraction off attack_cooldown
+var damage_reduction := 0.0 # 0.0–1.0, fraction off incoming damage
 
 const MAX_CHARGE := 100.0
 
@@ -63,6 +67,8 @@ var _attack_queued := false
 var _attack_cooldown_left := 0.0
 var _current_attack_damage := 0.0
 var _current_attack_abilities: Array[WeaponAbility] = []
+var _ability_armed := false
+var _ability_armed_time_left := 0.0
 
 @onready var _body_shape: CollisionShape3D = $CollisionShape3D
 
@@ -79,7 +85,7 @@ func _ready() -> void:
 		
 func _print_health() -> void:
 	print("player health: ", stats.health)
-
+	
 
 func _physics_process(delta: float) -> void:
 	var input := Input.get_vector("move_left", "move_right", "move_up", "move_down") if input_enabled else forced_input
@@ -98,6 +104,12 @@ func _physics_process(delta: float) -> void:
 		if input_enabled:
 			_try_attack()
 
+	if _ability_armed:
+		_ability_armed_time_left -= delta
+		if _ability_armed_time_left <= 0.0:
+			_ability_armed = false
+			charge_points = 0.0 # expired — lose the charge, matches "use it or lose it"
+
 	if _dashing:
 		velocity = _dash_velocity
 		_dash_time_left -= delta
@@ -105,7 +117,7 @@ func _physics_process(delta: float) -> void:
 		if _dash_time_left <= 0.0 and not still_inside:
 			_end_dash()
 	else:
-		var target := _to_world(input) * base_move_speed * move_speed_multiplier
+		var target := _to_world(input) * base_move_speed * stats.move_speed_multiplier
 		var rate := acceleration if input != Vector2.ZERO else deceleration
 		velocity = velocity.move_toward(target, rate * delta)
 
@@ -126,6 +138,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if input_enabled and weapon and event.is_action_pressed(&"attack"):
 		_attack_queued = true
+		
+	if input_enabled and weapon and event.is_action_pressed(&"weapon_ability"):
+		_try_activate_ability()
 
 
 func _process(_delta: float) -> void:
@@ -144,7 +159,8 @@ func heal(amount: int) -> void:
 	stats.on_health_set(stats.health + amount)
 
 func receive_hit(amount: int) -> void:
-	stats.take_damage(amount)
+	var reduced := int(amount * (1.0 - damage_reduction))
+	stats.take_damage(reduced)
 
 func _try_dash() -> void:
 	if dashes_available <= 0 or _dashing:
@@ -163,7 +179,7 @@ func _end_dash() -> void:
 	_dashing = false
 	_dash_time_left = 0.0
 	collision_mask |= dash_phase_layers
-	velocity = velocity.limit_length(base_move_speed * move_speed_multiplier)
+	velocity = velocity.limit_length(base_move_speed * stats.move_speed_multiplier)
 	_iframe_time_left = dash_iframe_extra
 	if card:
 		card.transparency = 0.0
@@ -173,17 +189,16 @@ func _end_dash() -> void:
 func _try_attack() -> void:
 	if weapon == null or _attack_cooldown_left > 0.0:
 		return
-	_attack_cooldown_left = weapon.attack_cooldown
+	_attack_cooldown_left = weapon.attack_cooldown * (1.0 - bonus_cooldown_reduction)
 
-	var is_charged_attack := charge_points >= MAX_CHARGE
-	_current_attack_damage = weapon.damage
+	var is_charged_attack := _ability_armed
+	_current_attack_damage = weapon.damage + bonus_weapon_damage
 	_current_attack_abilities = weapon.charged_abilities if is_charged_attack else weapon.abilities
 
 	if is_charged_attack:
+		_ability_armed = false
 		charge_points = 0.0
-	else:
-		charge_points = minf(charge_points + weapon.charge_per_attack, MAX_CHARGE)
-
+	
 	attack_started.emit()
 	await get_tree().create_timer(weapon.active_delay).timeout
 	_spawn_hitbox()
@@ -227,10 +242,11 @@ func _spawn_hitbox() -> void:
 func _on_hitbox_hit(target: Node3D) -> void:
 	if target.has_method("receive_hit"):
 		target.receive_hit(_current_attack_damage)
-		print ("enemy hit")
+		print("dealt ", _current_attack_damage, " damage to ", target.name)
 	for ability in _current_attack_abilities:
 		ability.apply(self, target)
-	
+	if weapon:
+		charge_points = minf(charge_points + weapon.charge_per_attack, MAX_CHARGE)
 
 func _overlaps_phase_layers() -> bool:
 	var query := PhysicsShapeQueryParameters3D.new()
@@ -263,3 +279,22 @@ func _depth_scale() -> float:
 
 func _on_health_depleted() -> void:
 	died.emit()
+
+func reset_run_modifiers() -> void:
+	bonus_weapon_damage = 0.0
+	bonus_cooldown_reduction = 0.0
+	damage_reduction = 0.0
+	max_dashes = 1
+
+
+func _try_activate_ability() -> void:
+	if weapon == null or charge_points < MAX_CHARGE:
+		return
+
+	if weapon.charge_instant_use:
+		for ability in weapon.charged_abilities:
+			ability.apply(self, self)
+		charge_points = 0.0
+	else:
+		_ability_armed = true
+		_ability_armed_time_left = ability_armed_duration

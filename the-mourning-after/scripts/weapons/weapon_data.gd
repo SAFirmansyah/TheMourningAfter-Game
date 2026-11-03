@@ -13,3 +13,4 @@ extends Resource
 @export_group("Charge Ability")
 @export var charge_per_attack := 20.0 # TUNE: charge gained per swing (charge fills to 100)
 @export var charged_abilities: Array[WeaponAbility] = [] # effects triggered on the attack that consumes a full charge
+@export var charge_instant_use := false # true = Q applies ability immediately (self-targeted, e.g. heal); false = Q arms it for the next attack

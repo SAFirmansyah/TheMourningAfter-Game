@@ -9,7 +9,7 @@ signal all_enemies_defeated
 
 # TUNE: sensible defaults if configure_spawns() is never called (e.g. testing this room standalone)
 @export var low_mutant_count_range := Vector2i(2, 4)
-@export var big_mutant_count_range := Vector2i(0, 0)
+@export var def_humans_count_range := Vector2i(0, 0)
 
 @export_group("Spawn Area")
 @export var spawn_area_min := Vector3(-5, 0, -5) # TUNE: per-room, covers the playable floor
@@ -18,7 +18,7 @@ signal all_enemies_defeated
 @export var spawn_max_attempts := 10 # TUNE: how many random tries before giving up on one spawn
 
 var low_enemy_scn: PackedScene = load("res://scenes/enemies/low_mutant.tscn")
-var big_enemy_scn: PackedScene = load("res://scenes/enemies/big_mutant.tscn")
+var big_enemy_scn: PackedScene = load("res://scenes/enemies/deformed_humans.tscn")
 
 var _rng := RandomNumberGenerator.new()
 var _alive_enemies: Array[Node] = []
@@ -46,19 +46,19 @@ func _configure_next_exit() -> void:
 	if CombatRunState.has_more_rooms():
 		exit.target_room = CombatRunState.pick_next_room_path()
 	else:
-		exit.target_room = "res://scenes/rooms/cooldown_nc.tscn" # adjust to your actual cooldown room path
+		exit.target_room = CampaignState.get_post_gauntlet_room_path()	 # adjust to your actual cooldown room path
 
 
 ## Called by whatever sequences the run, right after instancing this room,
 ## before add_child()-ing it into the tree (since _ready() spawns immediately).
 func configure_spawns(low_range: Vector2i, big_range: Vector2i) -> void:
 	low_mutant_count_range = low_range
-	big_mutant_count_range = big_range
+	def_humans_count_range = big_range
 
 
 func spawn_enemies() -> void:
 	var low_count := _rng.randi_range(low_mutant_count_range.x, low_mutant_count_range.y)
-	var big_count := _rng.randi_range(big_mutant_count_range.x, big_mutant_count_range.y)
+	var big_count := _rng.randi_range(def_humans_count_range.x, def_humans_count_range.y)
 
 	for i in low_count:
 		_spawn_one(low_enemy_scn)

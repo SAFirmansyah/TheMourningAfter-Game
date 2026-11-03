@@ -43,5 +43,6 @@ func take_damage(incoming_damage: int) -> int:
 	var mitigated := incoming_damage - get_defense()
 	var actual_damage: int = max(mitigated, 0)
 	var who := "HERO" if unit_type == UnitType.HERO else "ENEMY"
+	print("[", who, "] took ", actual_damage, " damage (incoming ", incoming_damage, "), health ", health, " -> ", clampi(health - actual_damage, 0, current_max_health))
 	on_health_set(health - actual_damage)
 	return actual_damage

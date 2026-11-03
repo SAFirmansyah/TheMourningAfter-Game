@@ -3,11 +3,15 @@
 [ext_resource type="Script" uid="uid://dsabkrdimbjiq" path="res://scripts/enemies/mutants.gd" id="1_w71w8"]
 [ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="2_m2su8"]
 [ext_resource type="Resource" uid="uid://d3ilrgaxx0fve" path="res://scripts/stats/low_mutant_stats.tres" id="2_mxl8y"]
+[ext_resource type="Script" uid="uid://boygl2hxayimj" path="res://scripts/loot/loot_data.gd" id="3_lh2w7"]
+[ext_resource type="Resource" uid="uid://da1rcp5236rtr" path="res://scripts/loot/loot_2x_dash.tres" id="4_40sm3"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="4_mxl8y"]
+[ext_resource type="Resource" uid="uid://c3vnvs1am64e2" path="res://scripts/loot/loot_dmg_reduction.tres" id="5_8gpck"]
+[ext_resource type="Resource" uid="uid://ccmhq5rc8u5g7" path="res://scripts/loot/loot_residue.tres" id="6_7jj0p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vlovs"]
 radius = 0.35
-height = 1.2
+height = 1.8
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhy0a"]
 radius = 0.35
@@ -24,7 +28,10 @@ motion_mode = 1
 script = ExtResource("1_w71w8")
 stats = ExtResource("2_mxl8y")
 base_move_speed = 3
-attack_cooldown = 1.0
+attack_reach = 0.5
+attack_cooldown = 1.2
+attack_range = 1.5
+loot_pool = Array[ExtResource("3_lh2w7")]([ExtResource("4_40sm3"), ExtResource("5_8gpck"), ExtResource("6_7jj0p")])
 metadata/_custom_type_script = "uid://dnbf3vat68acm"
 
 [node name="Card" type="Sprite3D" parent="." unique_id=1358649332]
