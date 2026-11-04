@@ -96,6 +96,13 @@ var wanderers := {}
 var paused_workers := {}
 ## UI only, not saved: ids of requests shown expanded.
 var expanded := {}
+## Tutorial controls, not saved (the tutorial re-applies them on load): frozen stops everything,
+## spawning off means only scripted requests appear, requests_paused stops their timers,
+## health_locked makes expired requests cost nothing.
+var frozen := false
+var spawning := true
+var requests_paused := false
+var health_locked := false
 
 var _spawn_timers := PackedFloat32Array()
 var _next_id := 1
@@ -123,12 +130,14 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if day_cycle.phase != DayCycle.Phase.DAY:
+	if day_cycle.phase != DayCycle.Phase.DAY or frozen:
 		return
 	var dt := delta * day_cycle.speed
 	var changed := false
 
 	for i in _spawn_timers.size():
+		if not spawning:
+			break
 		_spawn_timers[i] -= dt
 		if _spawn_timers[i] <= 0.0:
 			_spawn_timers[i] = randf_range(spawn_interval_min, spawn_interval_max)
@@ -141,6 +150,8 @@ func _process(delta: float) -> void:
 		changed = true
 
 	for request in requests.duplicate():
+		if requests_paused:
+			break
 		request.time_left -= dt
 		if request.time_left <= 0.0:
 			_expire(request)
@@ -565,6 +576,10 @@ func _try_spawn(containment: int) -> void:
 		_:
 			item = RequestCatalog.REPAIR
 			duration = repair_fits.pick_random()
+	add_request(containment, slot, item, duration)
+
+
+func add_request(containment: int, slot: int, item: StringName, duration: float) -> Dictionary:
 	var request := {
 		"id": _next_id,
 		"containment": containment,
@@ -576,6 +591,7 @@ func _try_spawn(containment: int) -> void:
 	requests.append(request)
 	_next_id += 1
 	request_added.emit(request)
+	return request
 
 
 func _empty_slots(worker: StringName) -> Array:
@@ -589,11 +605,16 @@ func _expire(request: Dictionary) -> void:
 	if repair_order.get("request_id", -1) == request.id:
 		_cancel_repair()
 	_remove(request, false)
-	set_health(health - expiry_penalty())
+	if not health_locked:
+		set_health(health - expiry_penalty())
 
 
 func expiry_penalty() -> float:
 	return expiry_penalties[mini(story_events_reached, expiry_penalties.size() - 1)]
+
+
+func free_request_slot(containment: int) -> int:
+	return _free_slot(containment)
 
 
 func _free_slot(containment: int) -> int:

@@ -13,6 +13,7 @@ enum Phase { DAY, NIGHT }
 @export var day_length := 360.0 # TUNE: real seconds per day at 1x
 @export var night_fade_time := 1.5 # TUNE: seconds to darken at dusk / brighten at dawn
 @export var sanctuary: SanctuaryManager
+@export_multiline var first_night_note := "This is the Sanctuary's health. Every request left unfulfilled during the day lowers it, and it never comes back up." # shown on Night 1's modal
 @export var story_event_path := "res://scenes/huyana/cutscenes/story_%s.tscn" # %s = story event name
 
 @export_group("Sun")
@@ -29,6 +30,8 @@ var speed := 1.0
 var elapsed := 0.0
 ## Night after Proceed: waiting on the campfire's narrative beat before the next day.
 var awaiting_beat := false
+## Tutorial: the clock stands still (the Sanctuary keeps working).
+var clock_paused := false
 
 @onready var clock: ClockFace = $Clock/Dial
 @onready var day_label: Label = $Clock/DayLabel
@@ -38,6 +41,7 @@ var awaiting_beat := false
 @onready var night_modal: Control = $NightModal/Panel
 @onready var night_title: Label = $NightModal/Panel/Content/Title
 @onready var health_bar: ProgressBar = $NightModal/Panel/Content/HealthBar
+@onready var night_note: Label = $NightModal/Panel/Content/Note
 @onready var proceed_button: Button = $NightModal/Panel/Content/Proceed
 
 var _shade_tween: Tween
@@ -57,7 +61,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if phase != Phase.DAY:
+	if phase != Phase.DAY or clock_paused:
 		return
 	elapsed = minf(elapsed + delta * speed, day_length)
 	_update_sun()
@@ -126,6 +130,8 @@ func start_day() -> void:
 func _show_night_modal() -> void:
 	night_title.text = "Night %d" % day
 	health_bar.value = sanctuary.health
+	night_note.text = first_night_note
+	night_note.visible = day == 1 and first_night_note != ""
 	night_modal.show()
 	proceed_button.grab_focus()
 
@@ -161,6 +167,16 @@ func _update_clock() -> void:
 	var night_share := clock.night_fraction
 	clock.pointer_turn = (1.0 - night_share / 2.0) if phase == Phase.NIGHT else progress() * (1.0 - night_share)
 	day_label.text = "Day %d" % day
+
+
+## Night darkness outside the normal cycle (the tutorial's Night 0).
+func set_darkness(value: float, fade := false) -> void:
+	if fade:
+		_fade_shade(value)
+	else:
+		if _shade_tween:
+			_shade_tween.kill()
+		_set_night_amount(value)
 
 
 func _fade_shade(target: float) -> void:

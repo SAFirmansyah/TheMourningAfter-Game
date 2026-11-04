@@ -238,6 +238,25 @@ theme_override_colors/font_hover_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
 text = "Reset save"
 
+[node name="SkipTutorial" type="Button" parent="Clock"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -212.0
+offset_top = 306.0
+offset_right = -28.0
+offset_bottom = 338.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_speed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_speed_on")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_speed_on")
+theme_override_colors/font_hover_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+text = "Skip tutorial"
+
 [node name="NightModal" type="CanvasLayer" parent="."]
 layer = 6
 
@@ -289,6 +308,16 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_bar_fill")
 value = 100.0
+
+[node name="Note" type="Label" parent="NightModal/Panel/Content"]
+visible = false
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_font_sizes/font_size = 22
+text = "This is the Sanctuary's health."
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Proceed" type="Button" parent="NightModal/Panel/Content"]
 layout_mode = 2

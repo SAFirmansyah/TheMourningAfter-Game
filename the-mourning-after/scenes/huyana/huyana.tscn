@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scripts/huyana/sanctuary_manager.gd" id="10_sanctuary"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/ui/request_bubbles.tscn" id="11_bubbles"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/ui/order_menus.tscn" id="12_orders"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/tutorial.tscn" id="14_tutorial"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/ui/order_bubbles.tscn" id="13_order_bubbles"]
 
 [sub_resource type="Environment" id="Environment_bg"]
@@ -77,3 +78,10 @@ manager = NodePath("../SanctuaryManager")
 manager = NodePath("../SanctuaryManager")
 player = NodePath("../Player")
 day_cycle = NodePath("../DayCycle")
+
+[node name="Tutorial" parent="." node_paths=PackedStringArray("manager", "day_cycle", "player", "skip_button", "hud") instance=ExtResource("14_tutorial")]
+manager = NodePath("../SanctuaryManager")
+day_cycle = NodePath("../DayCycle")
+player = NodePath("../Player")
+skip_button = NodePath("../DayCycle/Clock/SkipTutorial")
+hud = NodePath("../InteractionHUD")
