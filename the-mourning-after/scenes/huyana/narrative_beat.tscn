@@ -1,0 +1,32 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/huyana/narrative_beat.gd" id="1_beat"]
+[ext_resource type="Script" path="res://scripts/huyana/ui/beat_bubble.gd" id="2_bubble"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_range"]
+resource_local_to_scene = true
+height = 2.0
+radius = 3.0
+
+[node name="NarrativeBeat" type="Area3D"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+script = ExtResource("1_beat")
+interact_radius = 3.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_range")
+
+[node name="Bubble" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="View" type="Control" parent="Bubble"]
+custom_minimum_size = Vector2(84, 104)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 84.0
+offset_bottom = 104.0
+mouse_filter = 2
+script = ExtResource("2_bubble")

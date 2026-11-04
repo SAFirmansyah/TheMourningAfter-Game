@@ -1,0 +1,9 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/huyana/request_view.gd" id="1_view"]
+
+[node name="RequestView" type="Control"]
+custom_minimum_size = Vector2(84, 96)
+layout_mode = 3
+mouse_filter = 2
+script = ExtResource("1_view")

@@ -4,6 +4,7 @@ extends CanvasLayer
 
 @export var show_time := 1.2 # TUNE: seconds the note stays fully visible
 @export var fade_time := 0.25 # TUNE: note fade in/out (s)
+@export var top_offset := 40.0 # TUNE: distance from the top of the screen (px)
 
 @onready var label: Label = $Label
 
@@ -13,6 +14,8 @@ var _tween: Tween
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	label.modulate.a = 0.0
+	label.offset_bottom += top_offset - label.offset_top
+	label.offset_top = top_offset
 
 
 func flash() -> void:

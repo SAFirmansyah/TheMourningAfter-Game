@@ -8,6 +8,12 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="6_pause"]
 [ext_resource type="PackedScene" path="res://scenes/ui/save_indicator.tscn" id="7_saving"]
 [ext_resource type="PackedScene" path="res://scenes/ui/skip_prompt.tscn" id="8_skip"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/day_cycle.tscn" id="9_day"]
+[ext_resource type="Script" path="res://scripts/huyana/sanctuary_manager.gd" id="10_sanctuary"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/ui/request_bubbles.tscn" id="11_bubbles"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/ui/order_menus.tscn" id="12_orders"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/tutorial.tscn" id="14_tutorial"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/ui/order_bubbles.tscn" id="13_order_bubbles"]
 
 [sub_resource type="Environment" id="Environment_bg"]
 background_mode = 1
@@ -15,7 +21,7 @@ background_color = Color(0.09, 0.1, 0.12, 1)
 
 [node name="Huyana" type="Node3D"]
 script = ExtResource("1_world")
-load_save_on_start = false
+save_slot = "huyana"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bg")
@@ -49,5 +55,33 @@ color = Color(0, 0, 0, 0)
 world = NodePath("..")
 
 [node name="SaveIndicator" parent="." instance=ExtResource("7_saving")]
+top_offset = 312.0
 
 [node name="SkipPrompt" parent="." instance=ExtResource("8_skip")]
+
+[node name="DayCycle" parent="." node_paths=PackedStringArray("player", "sanctuary") instance=ExtResource("9_day")]
+player = NodePath("../Player")
+sanctuary = NodePath("../SanctuaryManager")
+
+[node name="SanctuaryManager" type="Node" parent="." node_paths=PackedStringArray("world", "day_cycle")]
+script = ExtResource("10_sanctuary")
+world = NodePath("..")
+day_cycle = NodePath("../DayCycle")
+
+[node name="RequestBubbles" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("11_bubbles")]
+manager = NodePath("../SanctuaryManager")
+
+[node name="OrderBubbles" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("13_order_bubbles")]
+manager = NodePath("../SanctuaryManager")
+
+[node name="OrderMenus" parent="." node_paths=PackedStringArray("manager", "player", "day_cycle") instance=ExtResource("12_orders")]
+manager = NodePath("../SanctuaryManager")
+player = NodePath("../Player")
+day_cycle = NodePath("../DayCycle")
+
+[node name="Tutorial" parent="." node_paths=PackedStringArray("manager", "day_cycle", "player", "skip_button", "hud") instance=ExtResource("14_tutorial")]
+manager = NodePath("../SanctuaryManager")
+day_cycle = NodePath("../DayCycle")
+player = NodePath("../Player")
+skip_button = NodePath("../DayCycle/Clock/SkipTutorial")
+hud = NodePath("../InteractionHUD")

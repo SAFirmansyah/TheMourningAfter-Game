@@ -3,9 +3,11 @@ extends Node3D
 ## Holds the player and camera; swaps rooms when a path exit is entered; plays cutscenes.
 ## Starts from the save file if there is one, otherwise in whichever room is placed under Rooms.
 ## Autosaves on every room change. Room changes (e.g. collected loot) only persist for the current room.
+## Nodes in the "save_state" group add their own data via get_save_data() / load_save_data(data).
 
 @export var fade_time := 0.35 # TUNE: fade to/from black per room change (s)
 @export var load_save_on_start := true # off: always start fresh in the placed room
+@export var save_slot := "savegame" # save file name; one per game half
 
 @onready var player: Player = $Player
 @onready var camera_rig: CameraRig = $CameraRig
@@ -22,6 +24,11 @@ var _fade_tween: Tween
 var _menu_paused := false
 var _tree_was_paused := false
 var _room_changes := {}
+var _unsaved := false
+
+
+func _enter_tree() -> void:
+	add_to_group(&"world")
 
 
 func _ready() -> void:
@@ -33,7 +40,7 @@ func _ready() -> void:
 		if child is Room:
 			placed = child
 			break
-	var data := SaveSystem.load_data() if load_save_on_start else {}
+	var data := SaveSystem.load_data(save_slot) if load_save_on_start else {}
 	var saved_room: String = data.get("room", "")
 	if saved_room != "" and ResourceLoader.exists(saved_room):
 		if placed:
@@ -46,6 +53,10 @@ func _ready() -> void:
 			camera_rig.snap_to_target()
 	elif placed:
 		_enter_room(placed, &"")
+	var states: Dictionary = data.get("state", {})
+	for node in get_tree().get_nodes_in_group(&"save_state"):
+		if states.has(String(node.name)):
+			node.load_save_data(states[String(node.name)])
 
 
 ## Plays a cutscene scene (a Cutscene root) over everything, pausing gameplay.
@@ -104,14 +115,28 @@ func can_view_stats() -> bool:
 	return false # per game half; false during cutscenes
 
 
+## Something worth saving happened since the last save (interaction, pickup, dialogue, order...).
+func mark_unsaved() -> void:
+	_unsaved = true
+
+
+func has_unsaved_changes() -> bool:
+	return _unsaved
+
+
 func save_game(show_indicator := true) -> void:
+	_unsaved = false
 	var pos := player.global_position
+	var states := {}
+	for node in get_tree().get_nodes_in_group(&"save_state"):
+		states[String(node.name)] = node.get_save_data()
 	SaveSystem.save_data({
 		"version": 1,
 		"room": current_room.scene_file_path,
 		"player_position": [pos.x, pos.y, pos.z],
 		"room_changes": _room_changes,
-	})
+		"state": states,
+	}, save_slot)
 	if show_indicator:
 		save_indicator.flash()
 
