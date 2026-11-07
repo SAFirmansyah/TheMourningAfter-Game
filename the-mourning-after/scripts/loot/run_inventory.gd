@@ -27,7 +27,7 @@ var has_bargained_this_run := false # resets each new run; set by the first Fate
 var magic_residue := 0
 var residue_gained_this_run := 0
 
-const MAX_RESIDUE_PER_RUN := 3
+const MAX_RESIDUE_PER_RUN := 5 # TUNE: residue that can drop in one run
 
 var _player: Player
 

@@ -2,9 +2,9 @@ extends Stats
 class_name HeroStats
 
 @export var max_health: int = 200
-@export var min_health: int = 100
+@export var min_health: int = 50
 @export var health_step: int = 25 # TUNE: rolled max HP lands on multiples of this
-@export var min_move_speed := 1.0
+@export var min_move_speed := 0.5
 @export var max_move_speed := 2.0
 @export var move_speed_step := 0.25 # TUNE: rolled move speed lands on multiples of this
 @export var equipped_weapon: WeaponData
