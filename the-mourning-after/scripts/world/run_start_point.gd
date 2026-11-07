@@ -2,7 +2,7 @@
 class_name RunStartPoint
 extends Interactable
 ## Starting-room spots: the sword stand hands out this run's starting stats and weapon; the prayer
-## spot is Fate 1's bargain (1 residue, once per run) that re-seeds them. Results show on the HUD.
+## spot is Fate 1's bargain (residue, any number of times) that re-seeds them. Results show on the HUD.
 ## On a fresh save the first run's loadout is fixed and the bargain is forced.
 
 enum Kind { LOADOUT, RESEED }
@@ -25,7 +25,7 @@ func _process(_delta: float) -> void:
 			prompt_label = "Take up arms"
 			enabled = not RunInventory.loadout_taken
 		Kind.RESEED:
-			prompt_label = RunInventory.bargain_prompt()
+			prompt_label = RunInventory.bargain_prompt(RunInventory.reseed_cost)
 			enabled = RunInventory.can_bargain()
 
 

@@ -20,6 +20,7 @@ const LOOT_PICKUP_SCENE := preload("res://scenes/loot/loot_pickup.tscn")
 @onready var fade: ColorRect = $Transition/Fade
 @onready var save_indicator: SaveIndicator = $SaveIndicator
 @onready var skip_prompt: SkipPrompt = $SkipPrompt
+@onready var fate_bargain: FateBargain = $FateBargain
 
 var current_room: Room
 var _transitioning := false
@@ -42,6 +43,8 @@ func _ready() -> void:
 			break
 			
 	player.died.connect(_on_player_died)
+	fate_bargain.revive_chosen.connect(_on_revive_chosen)
+	fate_bargain.death_chosen.connect(_on_death_chosen)
 	player_hud.bind_stats(player.stats)
 	player_hud.bind_player(player)
 	RunInventory.bind_player(player)
@@ -261,8 +264,28 @@ func _fade_to(alpha: float) -> void:
 	await _fade_tween.finished
 
 
+## Fate 3: pause and offer a paid revive if Perrin can afford one; otherwise straight back to base.
 func _on_player_died() -> void:
-	_end_run_at_base() # Fate 3
+	if _transitioning or fate_bargain.is_open:
+		return
+	if not RunInventory.can_revive():
+		_end_run_at_base()
+		return
+	set_menu_paused(true)
+	fate_bargain.open()
+
+
+## Bargain taken: full health now, the fight resumes once the countdown ends.
+func _on_revive_chosen() -> void:
+	RunInventory.buy_revive()
+	player.stats.on_health_set(player.stats.current_max_health)
+	await fate_bargain.countdown_finished
+	set_menu_paused(false)
+
+
+func _on_death_chosen() -> void:
+	set_menu_paused(false)
+	_end_run_at_base()
 
 
 ## Sanctuary stand-in: the run ends and Perrin heads home, progress saved.

@@ -179,6 +179,8 @@ func _get_spawn_points() -> Array[Node3D]:
 
 
 func _on_enemy_removed(enemy: Node) -> void:
+	if is_queued_for_deletion() or not is_inside_tree() or not enemy.get(&"_is_dead"):
+		return # the room unloading or the game quitting doesn't count as a clear
 	_alive_enemies.erase(enemy)
 	print("enemy removed, remaining: ", _alive_enemies.size())
 	if _alive_enemies.is_empty():

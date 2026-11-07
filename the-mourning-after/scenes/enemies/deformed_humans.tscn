@@ -26,7 +26,7 @@ height = 10
 
 [node name="Deformed_Humans" type="CharacterBody3D" unique_id=855131327]
 collision_layer = 8
-collision_mask = 23
+collision_mask = 151
 script = ExtResource("1_j5pes")
 stats = ExtResource("2_816dq")
 base_move_speed = 1.5

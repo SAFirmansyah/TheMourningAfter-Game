@@ -1,5 +1,5 @@
 extends Node3D
-## Fate 2's bargain: 1 residue re-rolls the boss chamber, once per run (forced on a fresh save's first visit).
+## Fate 2's bargain: residue re-rolls the boss chamber, once per run (forced on a fresh save's first visit).
 
 @onready var interactable: Interactable = $Interactable
 
@@ -22,5 +22,5 @@ func _on_interacted() -> void:
 
 
 func _refresh_prompt() -> void:
-	interactable.prompt_label = RunInventory.bargain_prompt()
+	interactable.prompt_label = RunInventory.bargain_prompt(CampaignState.boss_bargain_cost)
 	interactable.enabled = CampaignState.can_bargain_boss()

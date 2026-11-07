@@ -25,6 +25,7 @@ var target = null
 @export var attack_cooldown := 0.5 # TUNE: seconds between attacks
 @export var attack_range := 1.2 # TUNE: distance at which this enemy can start an attack
 @export var knockback_multiplier := 1.0 # TUNE: scales how far hits push this mob
+@export var fall_limit := -3.0 # TUNE: below this height a mob is put back where it last stood
 
 @export_group("Loot")
 @export var loot_pickup_scene: PackedScene = preload("res://scenes/loot/loot_pickup.tscn")
@@ -42,6 +43,7 @@ var _attack_cooldown_left := 0.0
 var _facing := Vector2.DOWN
 var _knockback_velocity := Vector3.ZERO
 var _knockback_time_left := 0.0
+var _last_floor_position := Vector3.ZERO
 var _sense_time_left := -1.0 # < 0: hasn't spotted the player yet
 var _lean := 0.0
 var _replan_left := 0.0
@@ -148,7 +150,7 @@ func is_pinned(direction: Vector3, gap: float) -> bool:
 	query.shape = shape_node.shape
 	query.transform = shape_node.global_transform
 	query.motion = direction.normalized() * gap
-	query.collision_mask = 3 # world_bounds + environment
+	query.collision_mask = 131 # world_bounds + environment + mob_barrier
 	query.exclude = [get_rid()]
 	var result := get_world_3d().direct_space_state.cast_motion(query)
 	return result[0] < 1.0
@@ -181,8 +183,14 @@ func apply_poison(damage_per_tick: int, tick_count: int, tick_interval: float) -
 	_poison_timer.start()
 
 func _physics_process(delta: float) -> void:
+	if _last_floor_position == Vector3.ZERO:
+		_last_floor_position = global_position # spawn point: always on the floor
+	if is_on_floor() and global_position.y > fall_limit + 2.0:
+		_last_floor_position = global_position
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		if global_position.y < fall_limit:
+			_recover_from_fall()
 		
 	_attack_cooldown_left = maxf(0.0, _attack_cooldown_left - delta)
 	if _stun_time_left > 0.0:
@@ -206,6 +214,14 @@ func _physics_process(delta: float) -> void:
 		_sense_time_left -= delta # "!" shown; waiting before moving
 	else:
 		_attack(delta)
+
+
+## Safety net: a mob that dropped off the floor goes back where it last stood.
+func _recover_from_fall() -> void:
+	push_warning(name, " fell out of the room; putting it back")
+	global_position = _last_floor_position
+	velocity = Vector3.ZERO
+	_knockback_time_left = 0.0
 
 
 ## Spots the player as soon as this mob is on screen, however far away.

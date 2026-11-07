@@ -7,6 +7,8 @@ signal bargained # any Fate bargain went through; the world autosaves
 var applied_effects: Array[LootData] = [] # kept only so we know what to undo on death
 
 @export var first_run_residue_grant := 2 # TUNE: residue given on the very first ever run
+@export var reseed_cost := 1 # TUNE: Fate 1 re-seed of starting stats (no limit per run)
+@export var revive_costs: Array[int] = [2, 3] # TUNE: Fate 3 cost of each revive in a run; its length is the revive limit
 @export var _wood_sword: WeaponData = preload("res://scripts/weapons/sword_wood.tres")
 @export var _bone_sword: WeaponData = preload("res://scripts/weapons/sword_bone.tres") # first run's Fate 1 bargain
 @export var _starting_weapon_pool: Array[WeaponData] = [
@@ -20,7 +22,8 @@ var has_reached_boss := false # the forced Fate 2 bargain has happened; saved
 var final_snapshot := {} # GDD: Perrin's loadout and the boss killed on the run that reached the Sanctuary; saved
 var loadout_taken := false # this run's starting stats + weapon have been handed out (starting room)
 var _first_run_active := false
-var has_bargained_this_run := false # resets each new run; caps bargain to once per run
+var revives_used := 0 # Fate 3 revives bought this run; saved with the run
+var has_bargained_this_run := false # resets each new run; set by the first Fate 1 bargain
 var magic_residue := 0
 var residue_gained_this_run := 0
 
@@ -62,7 +65,7 @@ func collect(loot: LootData) -> void:
 	
 func roll_starting_loadout() -> void:
 	print("roll_starting_loadout called, has_completed_first_run=", has_completed_first_run)
-	if _first_run_active:
+	if _first_run_active and not has_bargained_this_run:
 		_player.stats.setup_first_run_stats()
 		_player.weapon = _wood_sword
 	else:
@@ -94,13 +97,33 @@ func take_loadout() -> bool:
 	return true
 
 
+## Fate 3: residue the next revive costs.
+func revive_cost() -> int:
+	return revive_costs[revives_used] if revives_used < revive_costs.size() else 0
+
+
+func can_revive() -> bool:
+	return loadout_taken and revives_used < revive_costs.size() and magic_residue >= revive_cost()
+
+
+## Spends the residue for a Fate 3 revive.
+func buy_revive() -> bool:
+	if not can_revive():
+		return false
+	magic_residue -= revive_cost()
+	revives_used += 1
+	effects_changed.emit()
+	bargained.emit()
+	return true
+
+
 ## Interact prompt for any Fate bargain.
-func bargain_prompt() -> String:
-	return "Bargain (-1)"
+func bargain_prompt(cost: int) -> String:
+	return "Bargain (-%d)" % cost
 
 
 func can_bargain() -> bool:
-	return loadout_taken and not has_bargained_this_run and magic_residue > 0
+	return loadout_taken and magic_residue >= reseed_cost
 
 
 ## Fresh save only: the first run can't leave the starting room until Fate 1 is bargained with.
@@ -112,6 +135,7 @@ func start_new_run_loadout() -> void:
 	mark_first_run_if_needed()
 	has_bargained_this_run = false
 	residue_gained_this_run = 0
+	revives_used = 0
 	roll_starting_loadout()
 	effects_changed.emit()
 
@@ -140,9 +164,10 @@ func _apply(loot: LootData) -> void:
 func try_bargain() -> bool:
 	if not can_bargain():
 		return false
-	magic_residue -= 1
+	magic_residue -= reseed_cost
+	var forced := fate1_forced_pending()
 	has_bargained_this_run = true
-	if _first_run_active:
+	if forced:
 		_player.stats.setup_fixed_stats(100, 1.0)
 		_player.weapon = _bone_sword
 	else:
@@ -167,6 +192,7 @@ func save_run() -> Dictionary:
 		"first_run_active": _first_run_active,
 		"has_bargained": has_bargained_this_run,
 		"residue_gained": residue_gained_this_run,
+		"revives_used": revives_used,
 		"effects": applied_effects.map(func(l: LootData) -> String: return l.resource_path),
 		"weapon": p.weapon.resource_path if p.weapon else "",
 		"charge": p.charge_points,
@@ -190,6 +216,7 @@ func load_run(run: Dictionary) -> void:
 	_first_run_active = run.get("first_run_active", false)
 	has_bargained_this_run = run.get("has_bargained", false)
 	residue_gained_this_run = run.get("residue_gained", 0)
+	revives_used = int(run.get("revives_used", 0))
 	applied_effects.clear()
 	for path: String in run.get("effects", []):
 		if ResourceLoader.exists(path):

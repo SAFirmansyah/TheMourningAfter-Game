@@ -16,6 +16,7 @@ signal boss_changed
 	"RUDRAMA": "res://scenes/rooms/huyana/forge.tscn",
 }
 @export var sanctuary_path := "res://scenes/rooms/huyana/sanctuary_gate.tscn" # stand-in for reaching the Sanctuary
+@export var boss_bargain_cost := 2 # TUNE: Fate 2 re-roll of the boss (once per run)
 @export var first_boss_shown := "RUDRAMA" # forced Fate 2: the boss first glimpsed on a fresh save
 @export var first_boss_fought := "SHUYI" # ...and the one the forced bargain swaps in
 
@@ -71,14 +72,14 @@ func fate2_forced_pending() -> bool:
 
 
 func can_bargain_boss() -> bool:
-	return chosen_boss != "" and not has_boss_bargained and (RunInventory.magic_residue > 0 or fate2_forced_pending())
+	return chosen_boss != "" and not has_boss_bargained and (RunInventory.magic_residue >= boss_bargain_cost or fate2_forced_pending())
 
 
 func bargain_boss() -> bool:
 	if not can_bargain_boss():
 		return false
 	var forced := fate2_forced_pending()
-	RunInventory.magic_residue = maxi(RunInventory.magic_residue - 1, 0) # the forced bargain never strands Perrin
+	RunInventory.magic_residue = maxi(RunInventory.magic_residue - boss_bargain_cost, 0) # the forced bargain never strands Perrin
 	has_boss_bargained = true
 	if forced:
 		RunInventory.has_reached_boss = true
