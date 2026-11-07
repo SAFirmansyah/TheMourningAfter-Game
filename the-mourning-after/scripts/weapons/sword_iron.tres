@@ -2,22 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bfhfm0g7hqbui" path="res://scripts/weapons/weapon_ability.gd" id="1_rw26r"]
 [ext_resource type="Script" uid="uid://dver5jfnn77l2" path="res://scripts/weapons/weapon_data.gd" id="2_1yvii"]
-[ext_resource type="Script" uid="uid://c8x3150ye57ch" path="res://scripts/weapons/crit_hit_ability.gd" id="2_ef2xp"]
-
-[sub_resource type="Resource" id="Resource_ef2xp"]
-script = ExtResource("2_ef2xp")
-metadata/_custom_type_script = "uid://c8x3150ye57ch"
-
-[sub_resource type="Resource" id="Resource_k0e6o"]
-script = ExtResource("2_ef2xp")
-metadata/_custom_type_script = "uid://c8x3150ye57ch"
+[ext_resource type="Resource" uid="uid://bdtdbpriyrjob" path="res://scripts/weapons/crit_hit_ability.tres" id="3_ability"]
 
 [resource]
 script = ExtResource("2_1yvii")
 weapon_name = "Iron Sword"
 damage = 32.0
-attack_cooldown = 0.7
-abilities = Array[ExtResource("1_rw26r")]([SubResource("Resource_ef2xp")])
-charge_per_attack = 15.0
-charged_abilities = Array[ExtResource("1_rw26r")]([SubResource("Resource_k0e6o")])
+attack_cooldown = 1.0
+hits_to_charge = 10
+charged_abilities = Array[ExtResource("1_rw26r")]([ExtResource("3_ability")])
 metadata/_custom_type_script = "uid://dver5jfnn77l2"

@@ -2,7 +2,12 @@ class_name World
 extends Node3D
 ## Holds the player and camera; swaps rooms when a path exit is entered; plays cutscenes.
 ## Starts from the save file if there is one, otherwise in whichever room is placed under Rooms.
-## Autosaves on every room change. Room changes (e.g. collected loot) only persist for the current room.
+## Autosaves on every room change, combat room clear and Fate bargain. Entering an uncleared combat
+## room saves a wiped run instead (GDD: quitting mid-room loses the run); saving is off until it's cleared.
+## Room changes (e.g. collected loot) only persist for the current room.
+
+const SAVE_VERSION := 2
+const LOOT_PICKUP_SCENE := preload("res://scenes/loot/loot_pickup.tscn")
 
 @export var fade_time := 0.35 # TUNE: fade to/from black per room change (s)
 @export var load_save_on_start := true # off: always start fresh in the placed room
@@ -41,17 +46,29 @@ func _ready() -> void:
 	player_hud.bind_player(player)
 	RunInventory.bind_player(player)
 	CampaignState.reset_campaign()
-	
+	RunInventory.bargained.connect(func() -> void: save_game())
+
 	var data := SaveSystem.load_data() if load_save_on_start else {}
 	RunInventory.magic_residue = data.get("magic_residue", 0)
+	RunInventory.has_completed_first_run = data.get("has_completed_first_run", false)
+	RunInventory.has_reached_boss = data.get("has_reached_boss", false)
+	RunInventory.final_snapshot = data.get("final_snapshot", {})
+	var run: Dictionary = data.get("run", {}) if int(data.get("version", 0)) >= SAVE_VERSION else {}
 	var saved_room: String = data.get("room", "")
+	if saved_room != "" and run.is_empty():
+		saved_room = base_room_path # no run in progress (or an old save): start at base
 	if saved_room != "" and ResourceLoader.exists(saved_room):
 		if placed:
 			rooms.remove_child(placed)
 			placed.queue_free()
-		_load_room(saved_room, &"", data.get("room_changes", {}))
+		if not run.is_empty():
+			RunInventory.load_run(run.get("inventory", {}))
+			CombatRunState.load_state(run.get("combat", {}))
+			CampaignState.load_state(run.get("campaign", {}))
+		_load_room(saved_room, &"", data.get("room_changes", {}), true)
+		_restore_room_state(data)
 		var pos: Variant = data.get("player_position")
-		if pos is Array and pos.size() == 3:
+		if pos is Array and pos.size() == 3 and not run.is_empty():
 			player.teleport(Vector3(pos[0], pos[1], pos[2]))
 			camera_rig.snap_to_target()
 	elif placed:
@@ -107,24 +124,72 @@ func set_menu_paused(on: bool) -> void:
 
 
 func can_save() -> bool:
-	return not _transitioning and not _in_cutscene # hero side: also false inside combat rooms until cleared
+	return not _transitioning and not _in_cutscene and current_room != null and current_room.allows_saving()
 
 
 func can_view_stats() -> bool:
-	return false # per game half; false during cutscenes
+	return not _in_cutscene # hero side only, once the villain half exists
 
 
+## Writes the save. Inside an uncleared combat room this quietly writes a wiped run instead.
 func save_game(show_indicator := true) -> void:
+	if current_room and not current_room.allows_saving():
+		SaveSystem.save_data(_meta_save_data(base_room_path))
+		return
+	var data := _meta_save_data(current_room.scene_file_path)
 	var pos := player.global_position
-	SaveSystem.save_data({
-		"version": 1,
-		"room": current_room.scene_file_path,
-		"player_position": [pos.x, pos.y, pos.z],
-		"room_changes": _room_changes,
-		"magic_residue": RunInventory.magic_residue,
-	})
+	data.player_position = [pos.x, pos.y, pos.z]
+	data.room_changes = _room_changes
+	data.exits = {}
+	for exit in current_room.get_exits():
+		data.exits[String(exit.name)] = exit.target_room
+	data.drops = []
+	for pickup: LootPickup in get_tree().get_nodes_in_group(&"loot_pickups"):
+		if pickup.has_meta(&"dropped") and pickup.loot_data and current_room.is_ancestor_of(pickup):
+			var p := pickup.global_position
+			data.drops.append({"loot": pickup.loot_data.resource_path, "pos": [p.x, p.y, p.z]})
+	if RunInventory.loadout_taken:
+		data.run = {
+			"inventory": RunInventory.save_run(),
+			"combat": CombatRunState.save_state(),
+			"campaign": CampaignState.save_state(),
+		}
+	SaveSystem.save_data(data)
 	if show_indicator:
 		save_indicator.flash()
+
+
+## What survives between runs: residue and the fresh-save flags.
+func _meta_save_data(room_path: String) -> Dictionary:
+	return {
+		"version": SAVE_VERSION,
+		"room": room_path,
+		"magic_residue": RunInventory.magic_residue,
+		"has_completed_first_run": RunInventory.has_completed_first_run,
+		"has_reached_boss": RunInventory.has_reached_boss,
+		"final_snapshot": RunInventory.final_snapshot,
+	}
+
+
+## Saved exit targets and uncollected mob drops go back into the room just loaded.
+func _restore_room_state(data: Dictionary) -> void:
+	var exits: Dictionary = data.get("exits", {})
+	for exit in current_room.get_exits():
+		if exits.has(String(exit.name)):
+			exit.target_room = exits[String(exit.name)]
+	for drop: Dictionary in data.get("drops", []):
+		var path: String = drop.get("loot", "")
+		var pos: Array = drop.get("pos", [])
+		if not ResourceLoader.exists(path) or pos.size() != 3:
+			continue
+		var pickup := LOOT_PICKUP_SCENE.instantiate() as LootPickup
+		pickup.loot_data = load(path)
+		pickup.loot_id = pickup.loot_data.loot_id
+		pickup.tint = pickup.loot_data.tint
+		pickup.auto_collect = true
+		pickup.set_meta(&"dropped", true)
+		current_room.add_child(pickup)
+		pickup.global_position = Vector3(pos[0], pos[1], pos[2])
 
 
 func _on_exit_requested(target_room: String, target_entry: StringName, exit_direction: Vector3, cutscene: String) -> void:
@@ -144,15 +209,12 @@ func _on_exit_requested(target_room: String, target_entry: StringName, exit_dire
 	_transitioning = false
 
 
-func _load_room(path: String, entry: StringName, changes := {}) -> void:
+func _load_room(path: String, entry: StringName, changes := {}, restoring := false) -> void:
 	if current_room:
 		rooms.remove_child(current_room)
 		current_room.queue_free()
 	var room: Room = (load(path) as PackedScene).instantiate()
-
-	if room is CombatRoom:
-		var ranges: Array = CombatRunState.get_spawn_ranges_for_current_room()
-		room.configure_spawns(ranges[0], ranges[1])
+	room.restoring = restoring
 
 	rooms.add_child(room)
 	_enter_room(room, entry, changes)
@@ -161,6 +223,11 @@ func _load_room(path: String, entry: StringName, changes := {}) -> void:
 func _enter_room(room: Room, entry: StringName, changes := {}) -> void:
 	current_room = room
 	current_room.exit_requested.connect(_on_exit_requested)
+	player_hud.in_base_room = room is BaseRoom
+	if room is CombatRoom and not room.is_cleared:
+		room.all_enemies_defeated.connect(func() -> void: save_game())
+	if room is BossRoom:
+		room.boss_defeated.connect(func() -> void: save_game())
 	_apply_room_changes(changes)
 
 	var exit := current_room.get_exit(entry)
@@ -195,6 +262,16 @@ func _fade_to(alpha: float) -> void:
 
 
 func _on_player_died() -> void:
+	_end_run_at_base() # Fate 3
+
+
+## Sanctuary stand-in: the run ends and Perrin heads home, progress saved.
+func return_to_base() -> void:
+	_end_run_at_base()
+
+
+## Back to the starting room; the next run starts at the sword stand. Residue and flags are kept.
+func _end_run_at_base() -> void:
 	if _transitioning or _in_cutscene:
 		return
 	_transitioning = true
@@ -202,13 +279,10 @@ func _on_player_died() -> void:
 
 	await _fade_to(1.0)
 
-	CombatRunState.start_new_run() # or a dedicated reset, see note below
 	RunInventory.reset_on_death()
 	CampaignState.reset_campaign()
+	player.stats.on_health_set(player.stats.current_max_health)
 	_load_room(base_room_path, &"")
-	player.stats.setup_stats() # re-rolls health back to full/starting range
-	RunInventory.start_new_run_loadout()
-	print("post-death health: ", player.stats.health)
 	save_game()
 
 	await _fade_to(0.0)

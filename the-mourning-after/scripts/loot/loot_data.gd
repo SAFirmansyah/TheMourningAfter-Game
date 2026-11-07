@@ -17,3 +17,4 @@ enum EffectType {
 @export var effect: EffectType = EffectType.WEAPON_DAMAGE_UP
 @export var value := 0.0 # TUNE: meaning depends on effect: flat damage, % cooldown reduction, flat HP, etc.
 @export var icon: Texture2D
+@export var tint := Color(1, 0.85, 0.35) # pickup colour

@@ -1,0 +1,70 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/sanctuary_gate.gd" id="1_3fhjk"]
+[ext_resource type="Material" path="res://materials/ground.tres" id="1_q8h2i"]
+[ext_resource type="PackedScene" path="res://scenes/test/prop.tscn" id="2_3fhjk"]
+[ext_resource type="PackedScene" path="res://scenes/world/return_point.tscn" id="3_ih58b"]
+[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="4_krrcy"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_l5q7s"]
+material = ExtResource("1_q8h2i")
+size = Vector2(30, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oef4u"]
+size = Vector3(30, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nccns"]
+size = Vector3(0.4, 2, 13)
+
+[node name="SanctuaryGate" type="Node3D" unique_id=2084714350]
+script = ExtResource("1_3fhjk")
+ground_tint = Color(0.6, 0.55, 0.62, 1)
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1003235353]
+mesh = SubResource("PlaneMesh_l5q7s")
+
+[node name="PlayerStart" type="Marker3D" parent="." unique_id=926126704]
+
+[node name="Walls" type="StaticBody3D" parent="." unique_id=1157389697]
+
+[node name="North" type="CollisionShape3D" parent="Walls" unique_id=1871679119]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -15)
+shape = SubResource("BoxShape3D_oef4u")
+
+[node name="South" type="CollisionShape3D" parent="Walls" unique_id=1365199010]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
+shape = SubResource("BoxShape3D_oef4u")
+
+[node name="WestUpper" type="CollisionShape3D" parent="Walls" unique_id=635452362]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, -8.5)
+shape = SubResource("BoxShape3D_nccns")
+
+[node name="WestLower" type="CollisionShape3D" parent="Walls" unique_id=1462916993]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, 8.5)
+shape = SubResource("BoxShape3D_nccns")
+
+[node name="EastUpper" type="CollisionShape3D" parent="Walls" unique_id=493019717]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, -8.5)
+shape = SubResource("BoxShape3D_nccns")
+
+[node name="EastLower" type="CollisionShape3D" parent="Walls" unique_id=495437112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 8.5)
+shape = SubResource("BoxShape3D_nccns")
+
+[node name="EastGap" type="CollisionShape3D" parent="Walls" unique_id=495437113]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 0)
+shape = SubResource("BoxShape3D_nccns")
+
+[node name="Props" type="Node3D" parent="." unique_id=983368489]
+
+[node name="ReturnSpot" parent="Props" unique_id=1471819551 instance=ExtResource("2_3fhjk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+
+[node name="Card" parent="Props/ReturnSpot" index="0"]
+modulate = Color(0.95, 0.8, 0.45, 1)
+
+[node name="ReturnPoint" parent="Props/ReturnSpot" unique_id=1107182048 instance=ExtResource("3_ih58b")]
+
+[node name="WestExit" parent="." unique_id=1856596219 instance=ExtResource("4_krrcy")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -15, 0, 0)
+target_entry = &"East"

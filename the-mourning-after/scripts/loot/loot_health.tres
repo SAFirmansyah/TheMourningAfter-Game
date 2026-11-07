@@ -8,4 +8,5 @@ loot_id = &"health_up"
 display_name = "Health Up"
 effect = 2
 value = 5.0
+tint = Color(0.3, 0.95, 0.35, 1)
 metadata/_custom_type_script = "uid://boygl2hxayimj"

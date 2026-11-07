@@ -2,23 +2,14 @@
 
 [ext_resource type="Script" uid="uid://bfhfm0g7hqbui" path="res://scripts/weapons/weapon_ability.gd" id="1_w7k0u"]
 [ext_resource type="Script" uid="uid://dver5jfnn77l2" path="res://scripts/weapons/weapon_data.gd" id="2_d2eom"]
-[ext_resource type="Script" uid="uid://c2tcoh261gq30" path="res://scripts/weapons/self_heal_ability.gd" id="2_jlps3"]
-
-[sub_resource type="Resource" id="Resource_w7k0u"]
-script = ExtResource("2_jlps3")
-metadata/_custom_type_script = "uid://c2tcoh261gq30"
-
-[sub_resource type="Resource" id="Resource_d2eom"]
-script = ExtResource("2_jlps3")
-metadata/_custom_type_script = "uid://c2tcoh261gq30"
+[ext_resource type="Resource" uid="uid://bvc3p2aosce47" path="res://scripts/weapons/self_heal_ability.tres" id="3_ability"]
 
 [resource]
 script = ExtResource("2_d2eom")
 weapon_name = "Wood Sword"
-damage = 10.0
+damage = 8.0
 attack_cooldown = 0.25
-abilities = Array[ExtResource("1_w7k0u")]([SubResource("Resource_w7k0u")])
-charge_per_attack = 27.0
-charged_abilities = Array[ExtResource("1_w7k0u")]([SubResource("Resource_d2eom")])
+hits_to_charge = 4
+charged_abilities = Array[ExtResource("1_w7k0u")]([ExtResource("3_ability")])
 charge_instant_use = true
 metadata/_custom_type_script = "uid://dver5jfnn77l2"

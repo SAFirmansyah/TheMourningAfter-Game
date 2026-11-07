@@ -38,6 +38,7 @@ func _ready() -> void:
 	_phase = fposmod(position.x * 1.7 + position.z * 2.3, TAU)
 	if Engine.is_editor_hint():
 		return
+	add_to_group(&"loot_pickups")
 	card.position.y = _hover_y()
 	card.reset_physics_interpolation()
 	interactable.prompt_label = "Collect"

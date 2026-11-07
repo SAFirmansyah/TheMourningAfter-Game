@@ -20,8 +20,8 @@ func _init() -> void:
 
 
 func setup_stats() -> void:
-	current_max_health = max_mutant_health
-	health = rng.randi_range(min_mutant_health, max_mutant_health)
+	current_max_health = rng.randi_range(min_mutant_health, max_mutant_health)
+	health = current_max_health
 	_damage = rng.randi_range(min_damage, max_damage)
 
 
