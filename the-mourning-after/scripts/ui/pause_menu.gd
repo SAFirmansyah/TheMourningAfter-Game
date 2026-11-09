@@ -93,8 +93,12 @@ func close() -> void:
 	get_viewport().gui_release_focus()
 
 
+## Only asks about saving when something happened since the last save.
 func _open_quit_box() -> void:
 	stats_box.hide()
+	if not world.has_unsaved_changes():
+		get_tree().quit()
+		return
 	_set_enabled(save_quit_button, world.can_save())
 	quit_box.show()
 	quit_box.modulate.a = 0.0

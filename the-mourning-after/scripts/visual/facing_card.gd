@@ -4,8 +4,10 @@ extends Sprite3D
 ## 2D card that turns to face the active camera's position, pivoting at its feet.
 
 const CARD_MATERIAL := preload("res://materials/card.tres")
+const SHADOW_MATERIAL := preload("res://materials/card_shadow.tres")
 
 @export var pivot_at_feet := true
+@export var turn_sideways := true # off: only tilts toward the camera, never turns left/right (wall facades)
 @export var see_through_over_player := false: # environment props: turn see-through where they cover the player
 	set(value):
 		see_through_over_player = value
@@ -14,10 +16,15 @@ const CARD_MATERIAL := preload("res://materials/card.tres")
 	set(value):
 		sway = value
 		_setup_material()
+@export var casts_shadow := true: # sun shadow on the ground, driven by the day cycle
+	set(value):
+		casts_shadow = value
+		_setup_shadow()
 
 var visual_offset := Vector3.ZERO # editor preview only: extra offset for animated cards
 
 var _card_material: ShaderMaterial
+var _shadow: MeshInstance3D
 
 
 func _ready() -> void:
@@ -26,6 +33,7 @@ func _ready() -> void:
 	texture_changed.connect(_on_texture_changed)
 	_apply_pivot()
 	_setup_material()
+	_setup_shadow()
 
 
 func _physics_process(_delta: float) -> void:
@@ -47,6 +55,9 @@ func _process(_delta: float) -> void:
 
 func _facing_basis(cam: Camera3D) -> Basis:
 	var away := global_position - cam.global_position
+	if not turn_sideways:
+		var right := get_parent_node_3d().global_basis.x.normalized() if get_parent_node_3d() else Vector3.RIGHT
+		away -= right * away.dot(right)
 	if away.length_squared() < 0.0001:
 		return global_basis
 	return Basis.looking_at(away, cam.global_basis.y).scaled(global_basis.get_scale())
@@ -65,6 +76,29 @@ func _editor_camera() -> Camera3D:
 func _on_texture_changed() -> void:
 	_apply_pivot()
 	_sync_card_material()
+	_setup_shadow()
+
+
+## Internal child (never saved into scenes), so it also previews in the editor.
+func _setup_shadow() -> void:
+	if not is_node_ready():
+		return
+	if not casts_shadow or texture == null:
+		if _shadow:
+			_shadow.queue_free()
+			_shadow = null
+		return
+	if _shadow == null:
+		_shadow = MeshInstance3D.new()
+		_shadow.mesh = QuadMesh.new()
+		_shadow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		_shadow.extra_cull_margin = 16.0
+		_shadow.material_override = SHADOW_MATERIAL.duplicate()
+		add_child(_shadow, false, Node.INTERNAL_MODE_FRONT)
+	var frame := region_rect.size if region_enabled else Vector2(texture.get_width() / float(hframes), texture.get_height() / float(vframes))
+	var material := _shadow.material_override as ShaderMaterial
+	material.set_shader_parameter("card_texture", texture)
+	material.set_shader_parameter("card_size", frame * pixel_size * Vector2(absf(scale.x), absf(scale.y)))
 
 
 ## Custom card material only when a feature needs it. In the editor it's applied through the

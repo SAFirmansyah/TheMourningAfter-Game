@@ -1,0 +1,29 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/obstacle.gd" id="1_obstacle"]
+[ext_resource type="Script" path="res://scripts/visual/facing_card.gd" id="2_card"]
+[ext_resource type="Texture2D" path="res://textures/huyana/anvil.png" id="3_tex"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_footprint"]
+size = Vector3(3.878, 2, 1.8)
+
+[node name="Anvil" type="StaticBody3D" node_paths=PackedStringArray("card")]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_obstacle")
+card = NodePath("Card")
+footprint_depth = 1.8
+footprint_width_scale = 0.682
+
+[node name="Card" type="Sprite3D" parent="."]
+transform = Transform3D(1.0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+offset = Vector2(0, 1032)
+pixel_size = 0.002067
+alpha_cut = 1
+texture = ExtResource("3_tex")
+script = ExtResource("2_card")
+see_through_over_player = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_footprint")

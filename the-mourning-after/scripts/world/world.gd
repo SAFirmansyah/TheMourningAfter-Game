@@ -5,6 +5,7 @@ extends Node3D
 ## Autosaves on every room change, combat room clear and Fate bargain. Entering an uncleared combat
 ## room saves a wiped run instead (GDD: quitting mid-room loses the run); saving is off until it's cleared.
 ## Room changes (e.g. collected loot) only persist for the current room.
+## Nodes in the "save_state" group add their own data via get_save_data() / load_save_data(data).
 
 const SAVE_VERSION := 2
 const LOOT_PICKUP_SCENE := preload("res://scenes/loot/loot_pickup.tscn")
@@ -12,6 +13,7 @@ const LOOT_PICKUP_SCENE := preload("res://scenes/loot/loot_pickup.tscn")
 @export var fade_time := 0.35 # TUNE: fade to/from black per room change (s)
 @export var load_save_on_start := true # off: always start fresh in the placed room
 @export var base_room_path := "res://scenes/rooms/room_a.tscn"
+@export var save_slot := "savegame" # save file name; one per game half
 
 @onready var player: Player = $Player
 @onready var player_hud: PlayerHUD = $PlayerHUD
@@ -30,6 +32,11 @@ var _fade_tween: Tween
 var _menu_paused := false
 var _tree_was_paused := false
 var _room_changes := {}
+var _unsaved := false
+
+
+func _enter_tree() -> void:
+	add_to_group(&"world")
 
 
 func _ready() -> void:
@@ -41,22 +48,24 @@ func _ready() -> void:
 		if child is Room:
 			placed = child
 			break
-			
-	player.died.connect(_on_player_died)
-	fate_bargain.revive_chosen.connect(_on_revive_chosen)
-	fate_bargain.death_chosen.connect(_on_death_chosen)
-	player_hud.bind_stats(player.stats)
-	player_hud.bind_player(player)
-	RunInventory.bind_player(player)
-	CampaignState.reset_campaign()
-	RunInventory.bargained.connect(func() -> void: save_game())
 
-	var data := SaveSystem.load_data() if load_save_on_start else {}
-	RunInventory.magic_residue = data.get("magic_residue", 0)
-	RunInventory.has_completed_first_run = data.get("has_completed_first_run", false)
-	RunInventory.has_reached_boss = data.get("has_reached_boss", false)
-	RunInventory.final_snapshot = data.get("final_snapshot", {})
-	var run: Dictionary = data.get("run", {}) if int(data.get("version", 0)) >= SAVE_VERSION else {}
+	var data := SaveSystem.load_data(save_slot) if load_save_on_start else {}
+	var run: Dictionary = {}
+	if is_hero_side():
+		player.died.connect(_on_player_died)
+		fate_bargain.revive_chosen.connect(_on_revive_chosen)
+		fate_bargain.death_chosen.connect(_on_death_chosen)
+		player_hud.bind_stats(player.stats)
+		player_hud.bind_player(player)
+		RunInventory.bind_player(player)
+		CampaignState.reset_campaign()
+		RunInventory.bargained.connect(func() -> void: save_game())
+		RunInventory.magic_residue = data.get("magic_residue", 0)
+		RunInventory.has_completed_first_run = data.get("has_completed_first_run", false)
+		RunInventory.has_reached_boss = data.get("has_reached_boss", false)
+		RunInventory.final_snapshot = data.get("final_snapshot", {})
+		if int(data.get("version", 0)) >= SAVE_VERSION:
+			run = data.get("run", {})
 	var saved_room: String = data.get("room", "")
 	if saved_room != "" and run.is_empty():
 		saved_room = base_room_path # no run in progress (or an old save): start at base
@@ -76,6 +85,10 @@ func _ready() -> void:
 			camera_rig.snap_to_target()
 	elif placed:
 		_enter_room(placed, &"")
+	var states: Dictionary = data.get("state", {})
+	for node in get_tree().get_nodes_in_group(&"save_state"):
+		if states.has(String(node.name)):
+			node.load_save_data(states[String(node.name)])
 
 
 ## Plays a cutscene scene (a Cutscene root) over everything, pausing gameplay.
@@ -134,10 +147,20 @@ func can_view_stats() -> bool:
 	return not _in_cutscene # hero side only, once the villain half exists
 
 
+## Something worth saving happened since the last save (interaction, pickup, dialogue, order...).
+func mark_unsaved() -> void:
+	_unsaved = true
+
+
+func has_unsaved_changes() -> bool:
+	return _unsaved
+
+
 ## Writes the save. Inside an uncleared combat room this quietly writes a wiped run instead.
 func save_game(show_indicator := true) -> void:
+	_unsaved = false
 	if current_room and not current_room.allows_saving():
-		SaveSystem.save_data(_meta_save_data(base_room_path))
+		SaveSystem.save_data(_meta_save_data(base_room_path), save_slot)
 		return
 	var data := _meta_save_data(current_room.scene_file_path)
 	var pos := player.global_position
@@ -157,7 +180,11 @@ func save_game(show_indicator := true) -> void:
 			"combat": CombatRunState.save_state(),
 			"campaign": CampaignState.save_state(),
 		}
-	SaveSystem.save_data(data)
+	var states := {}
+	for node in get_tree().get_nodes_in_group(&"save_state"):
+		states[String(node.name)] = node.get_save_data()
+	data.state = states
+	SaveSystem.save_data(data, save_slot)
 	if show_indicator:
 		save_indicator.flash()
 

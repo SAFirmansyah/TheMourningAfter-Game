@@ -81,6 +81,7 @@ func _start_collect(player: Node3D) -> void:
 		return
 	_player = player
 	interactable.enabled = false
+	get_tree().call_group(&"world", &"mark_unsaved")
 	_collecting = true
 	_collect_from = card.global_position
 

@@ -26,7 +26,7 @@ CampaignState="*uid://kdrh8ll6k5xk"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=2
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -115,4 +115,16 @@ rendering_device/driver.windows="d3d12"
 occlusion_target={
 "type": "vec3",
 "value": Vector3(0, 0, 0)
+}
+sun_shadow_dir={
+"type": "vec2",
+"value": Vector2(-0.707, -0.707)
+}
+sun_shadow_length={
+"type": "float",
+"value": 1.0
+}
+sun_shadow_alpha={
+"type": "float",
+"value": 0.3
 }
