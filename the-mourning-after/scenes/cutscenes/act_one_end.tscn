@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/cutscenes/cutscene.gd" id="1_cutscene"]
+[ext_resource type="PackedScene" path="res://scenes/cutscenes/cutscene_caption.tscn" id="2_caption"]
+[ext_resource type="Script" path="res://scripts/cutscenes/caption_line.gd" id="3_line"]
+
+[sub_resource type="Resource" id="CaptionLine_1"]
+script = ExtResource("3_line")
+text = "Cutscene: Denied glory"
+hold_time = 2.5
+
+[sub_resource type="Resource" id="CaptionLine_2"]
+script = ExtResource("3_line")
+text = "Cutscene: False credits"
+hold_time = 2.5
+
+[sub_resource type="Resource" id="CaptionLine_3"]
+script = ExtResource("3_line")
+text = "Cutscene: The plague"
+hold_time = 2.5
+
+[node name="ActOneEnd" type="CanvasLayer"]
+layer = 8
+script = ExtResource("1_cutscene")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.05, 0.05, 0.06, 1)
+
+[node name="Caption" parent="." instance=ExtResource("2_caption")]
+start_delay = 1.0
+lines = Array[ExtResource("3_line")]([SubResource("CaptionLine_1"), SubResource("CaptionLine_2"), SubResource("CaptionLine_3")])

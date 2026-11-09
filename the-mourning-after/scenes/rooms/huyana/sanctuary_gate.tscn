@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" path="res://scenes/test/prop.tscn" id="2_3fhjk"]
 [ext_resource type="PackedScene" path="res://scenes/world/return_point.tscn" id="3_ih58b"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="4_krrcy"]
+[ext_resource type="PackedScene" path="res://scenes/world/act_two_point.tscn" id="5_acttwo"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_l5q7s"]
 material = ExtResource("1_q8h2i")
@@ -64,6 +65,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 modulate = Color(0.95, 0.8, 0.45, 1)
 
 [node name="ReturnPoint" parent="Props/ReturnSpot" unique_id=1107182048 instance=ExtResource("3_ih58b")]
+
+[node name="ConstanceSpot" parent="Props" unique_id=1107182049 instance=ExtResource("2_3fhjk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -4)
+
+[node name="Card" parent="Props/ConstanceSpot" index="0"]
+modulate = Color(0.72, 0.5, 0.95, 1)
+
+[node name="ActTwoPoint" parent="Props/ConstanceSpot" unique_id=1107182050 instance=ExtResource("5_acttwo")]
 
 [node name="WestExit" parent="." unique_id=1856596219 instance=ExtResource("4_krrcy")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -15, 0, 0)

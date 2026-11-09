@@ -1,6 +1,6 @@
 class_name Tutorial
 extends Node
-## First-run tutorial, per the GDD:
+## First-run tutorial, per the GDD. The Sanctuary sits idle until Constance first leaves the Altar:
 ## - Night 0: paged instructions over the dark Sanctuary on what each station needs and makes, and how to order.
 ## - Day 1: a guided run through fixed requests (food, then a repair, then medicine), with a caption and an
 ##   arrow at each step. The clock waits and nothing expires until the guide is done; then the rest of a
@@ -8,7 +8,7 @@ extends Node
 ## - Night 1: the night modal introduces Sanctuary Health (DayCycle.first_night_note).
 ## The Skip tutorial test button jumps straight to a normal day.
 
-enum Stage { NIGHT_0, GUIDE, FREE_DAY, DONE }
+enum Stage { NIGHT_0, GUIDE, FREE_DAY, DONE, AT_ALTAR } # new stages go last: saves store the number
 
 const PAGES := [
 	["Night 0", "The Sanctuary keeps the mutants alive. Each day the three containments ask for food, medicine or repairs, and Gwenith, Shuyi and Rudrama make what they need. You carry the orders and the items between them.\n\nRead on to learn what each station does."],
@@ -22,11 +22,13 @@ const REPAIR_CONTAINMENT := 1
 const MEDICINE_CONTAINMENT := 2
 const MEDICINE := &"haemoshear"
 
+@export var world: World
 @export var manager: SanctuaryManager
 @export var day_cycle: DayCycle
 @export var player: Player
 @export var skip_button: Button
 @export var hud: InteractionHUD
+@export_file("*.tscn") var altar_room := "res://scenes/huyana/altar.tscn"
 @export var day_1_length := 180.0 # TUNE: length of Day 1 (s at 1x); the clock only starts once the guide is done
 @export var done_caption_time := 6.0 # TUNE: how long the closing caption stays up (s)
 @export var character_arrow_height := 2.9 # TUNE: height of the arrow's tip over Gwenith, Shuyi or Rudrama (m)
@@ -45,7 +47,7 @@ const MEDICINE := &"haemoshear"
 @onready var caption_label: Label = $Guide/Caption/Label
 @onready var arrow: GuideArrow = $Guide/Arrow
 
-var stage := Stage.NIGHT_0
+var stage := Stage.AT_ALTAR
 var step := 0
 
 var _page := 0
@@ -75,13 +77,18 @@ func _ready() -> void:
 
 func _begin() -> void:
 	# Saves from before the tutorial existed are already past it.
-	if stage == Stage.NIGHT_0 and (day_cycle.day > 1 or day_cycle.elapsed > 0.0 or day_cycle.phase == DayCycle.Phase.NIGHT):
+	if stage in [Stage.NIGHT_0, Stage.AT_ALTAR] and (day_cycle.day > 1 or day_cycle.elapsed > 0.0 or day_cycle.phase == DayCycle.Phase.NIGHT):
 		stage = Stage.DONE
+	elif stage == Stage.AT_ALTAR and not _in_altar():
+		stage = Stage.NIGHT_0
 	_apply_stage()
+	world.room_entered.connect(_on_room_entered)
 
 
 func _process(delta: float) -> void:
 	_time += delta
+	if stage == Stage.NIGHT_0:
+		player.input_enabled = false # the room change hands control back as it fades in
 	if stage == Stage.GUIDE:
 		_update_guide()
 	elif _caption_timer > 0.0:
@@ -95,13 +102,13 @@ func _process(delta: float) -> void:
 # --- Stages --------------------------------------------------------------------------------------
 
 func _apply_stage() -> void:
-	var in_tutorial := stage != Stage.DONE
-	skip_button.visible = in_tutorial
-	manager.frozen = stage == Stage.NIGHT_0
+	skip_button.visible = stage not in [Stage.DONE, Stage.AT_ALTAR]
+	day_cycle.clock_layer.visible = stage != Stage.AT_ALTAR
+	manager.frozen = stage in [Stage.NIGHT_0, Stage.AT_ALTAR]
 	manager.spawning = stage != Stage.GUIDE
 	manager.requests_paused = stage == Stage.GUIDE
 	manager.health_locked = stage in [Stage.GUIDE, Stage.FREE_DAY]
-	day_cycle.clock_paused = stage in [Stage.NIGHT_0, Stage.GUIDE]
+	day_cycle.clock_paused = stage in [Stage.NIGHT_0, Stage.GUIDE, Stage.AT_ALTAR]
 	day_cycle.day_length = _normal_day_length if stage == Stage.DONE else day_1_length
 	night_panel.visible = stage == Stage.NIGHT_0
 	match stage:
@@ -115,6 +122,16 @@ func _apply_stage() -> void:
 		_:
 			if _caption_timer <= 0.0:
 				_caption_wanted = false
+
+
+func _in_altar() -> bool:
+	return world.current_room != null and world.current_room.scene_file_path == altar_room
+
+
+func _on_room_entered(_room: Room) -> void:
+	if stage == Stage.AT_ALTAR and not _in_altar():
+		stage = Stage.NIGHT_0
+		_apply_stage()
 
 
 func _on_next() -> void:
