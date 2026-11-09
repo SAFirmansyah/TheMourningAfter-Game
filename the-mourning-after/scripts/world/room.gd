@@ -6,10 +6,11 @@ signal exit_requested(target_room: String, target_entry: StringName, exit_direct
 
 @export var ground_tint := Color.WHITE
 
+var restoring := false # set by the world before adding a room loaded from the save file
+
 
 func _ready() -> void:
-	var floor_mesh := find_child("Floor", true, false) as MeshInstance3D
-	if floor_mesh:
+	for floor_mesh: MeshInstance3D in find_children("Floor*", "MeshInstance3D", true, false):
 		floor_mesh.set_instance_shader_parameter("tint", ground_tint)
 	for exit in get_exits():
 		exit.path_mesh.set_instance_shader_parameter("tint", ground_tint)
@@ -30,6 +31,11 @@ func get_exit(exit_name: StringName) -> PathExit:
 		if exit.name == exit_name:
 			return exit
 	return null
+
+
+## Saving (manual or quit) is allowed here; combat rooms say no until cleared.
+func allows_saving() -> bool:
+	return true
 
 
 func get_start_position() -> Vector3:

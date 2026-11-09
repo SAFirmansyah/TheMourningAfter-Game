@@ -5,6 +5,7 @@ enum UnitType { HERO, ENEMY }
 
 signal health_depleted
 signal health_change(cur_health: int, max_health: int)
+signal damaged(amount: int)
 
 @export var unit_type: UnitType = UnitType.HERO
 
@@ -45,4 +46,6 @@ func take_damage(incoming_damage: int) -> int:
 	var who := "HERO" if unit_type == UnitType.HERO else "ENEMY"
 	print("[", who, "] took ", actual_damage, " damage (incoming ", incoming_damage, "), health ", health, " -> ", clampi(health - actual_damage, 0, current_max_health))
 	on_health_set(health - actual_damage)
+	if actual_damage > 0:
+		damaged.emit(actual_damage)
 	return actual_damage

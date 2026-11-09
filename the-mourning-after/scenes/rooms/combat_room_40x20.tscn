@@ -6,29 +6,38 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yrvbk"]
 material = ExtResource("2_yfm18")
-size = Vector2(40, 20)
+size = Vector2(27.7128, 13.8564)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_02tjn"]
-size = Vector3(40, 0.1, 20)
+size = Vector3(27.7128, 0.1, 13.8564)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i4pyq"]
-size = Vector3(40, 2, 0.4)
+size = Vector3(27.7128, 2, 0.4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_srfin"]
-size = Vector3(0.4, 2, 8)
+size = Vector3(0.4, 2, 5.5426)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mbqro"]
-size = Vector3(0.4, 2, 8)
+size = Vector3(0.4, 2, 5.5426)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_s41p5"]
-size = Vector3(40, 2, 0.4)
+size = Vector3(27.7128, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_westupper_trim"]
+size = Vector3(0.4, 2, 4.9282)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_westlower_trim"]
+size = Vector3(0.4, 2, 4.9282)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eastupper_trim"]
+size = Vector3(0.4, 2, 4.8402)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eastlower_trim"]
+size = Vector3(0.4, 2, 4.9282)
 
 [node name="CombatRoom40x20" type="Node3D" unique_id=844543870]
 script = ExtResource("1_02tjn")
-spawn_area_min = Vector3(-18, 0, -8)
-spawn_area_max = Vector3(18, 0, 8)
-spawn_raycast_height = 1.0
-ground_tint = Color(0, 0, 0, 1)
+ground_tint = Color(0.32, 0.5, 0.28, 1)
 
 [node name="FloorStatic" type="StaticBody3D" parent="." unique_id=1633995675]
 
@@ -39,39 +48,39 @@ mesh = SubResource("PlaneMesh_yrvbk")
 shape = SubResource("BoxShape3D_02tjn")
 
 [node name="PlayerStart" type="Marker3D" parent="." unique_id=1982221204]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4708, 0, 0)
 
 [node name="Walls" type="StaticBody3D" parent="." unique_id=1554732053]
 
 [node name="North" type="CollisionShape3D" parent="Walls" unique_id=2150888]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -6.9282)
 shape = SubResource("BoxShape3D_i4pyq")
 
 [node name="EastUpper" type="CollisionShape3D" parent="Walls" unique_id=1529931293]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, -5.873)
-shape = SubResource("BoxShape3D_srfin")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8564, 1, -4.4201)
+shape = SubResource("BoxShape3D_eastupper_trim")
 
 [node name="EastLower" type="CollisionShape3D" parent="Walls" unique_id=435746070]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, 6)
-shape = SubResource("BoxShape3D_srfin")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8564, 1, 4.4641)
+shape = SubResource("BoxShape3D_eastlower_trim")
 
 [node name="WestUpper" type="CollisionShape3D" parent="Walls" unique_id=218045190]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, -6)
-shape = SubResource("BoxShape3D_mbqro")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8564, 1, -4.4641)
+shape = SubResource("BoxShape3D_westupper_trim")
 
 [node name="WestLower" type="CollisionShape3D" parent="Walls" unique_id=1824710693]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, 6)
-shape = SubResource("BoxShape3D_mbqro")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.8564, 1, 4.4641)
+shape = SubResource("BoxShape3D_westlower_trim")
 
 [node name="South" type="CollisionShape3D" parent="Walls" unique_id=1500277203]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6.9282)
 shape = SubResource("BoxShape3D_s41p5")
 
 [node name="WestExit" parent="." unique_id=681878007 instance=ExtResource("3_sxs3r")]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -20, 0, 0)
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -13.8564, 0, 0)
 
 [node name="EastExit" parent="." unique_id=2131275261 instance=ExtResource("3_sxs3r")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8564, 0, 0)
 target_entry = &"WestExit"
 
 [node name="Enemies" type="Node3D" parent="." unique_id=885479377]

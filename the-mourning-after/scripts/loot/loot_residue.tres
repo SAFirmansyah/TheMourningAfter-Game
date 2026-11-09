@@ -8,4 +8,5 @@ loot_id = &"residue"
 display_name = "Magic Residue"
 effect = 6
 value = 1.0
+tint = Color(0.75, 0.35, 1, 1)
 metadata/_custom_type_script = "uid://boygl2hxayimj"

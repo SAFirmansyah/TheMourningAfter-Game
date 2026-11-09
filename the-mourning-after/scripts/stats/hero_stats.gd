@@ -2,6 +2,11 @@ extends Stats
 class_name HeroStats
 
 @export var max_health: int = 200
+@export var min_health: int = 50
+@export var health_step: int = 25 # TUNE: rolled max HP lands on multiples of this
+@export var min_move_speed := 0.5
+@export var max_move_speed := 2.0
+@export var move_speed_step := 0.25 # TUNE: rolled move speed lands on multiples of this
 @export var equipped_weapon: WeaponData
 @export var equipped_armor: Armor
 
@@ -14,11 +19,17 @@ func _init() -> void:
 	super._init()
 
 func setup_stats() -> void:
-	current_max_health = randi_range(50, max_health)
+	current_max_health = min_health + health_step * randi_range(0, (max_health - min_health) / health_step)
 	health = current_max_health
-	move_speed_multiplier = randf_range(0.5, 2.0)
-	print("rolled move_speed_multiplier: ", move_speed_multiplier)
+	move_speed_multiplier = min_move_speed + move_speed_step * randi_range(0, roundi((max_move_speed - min_move_speed) / move_speed_step))
 	health_change.emit(health, current_max_health)
+
+func setup_fixed_stats(max_hp: int, speed: float) -> void:
+	current_max_health = max_hp
+	health = max_hp
+	move_speed_multiplier = speed
+	health_change.emit(health, current_max_health)
+
 
 func setup_first_run_stats() -> void:
 	current_max_health = 50

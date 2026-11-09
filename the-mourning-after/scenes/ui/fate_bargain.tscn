@@ -1,0 +1,165 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/fate_bargain.gd" id="1_fate"]
+[ext_resource type="Shader" path="res://shaders/grayscale_overlay.gdshader" id="2_gray"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gray"]
+shader = ExtResource("2_gray")
+shader_parameter/amount = 0.0
+shader_parameter/darken = 0.55
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 70.0
+content_margin_right = 70.0
+bg_color = Color(0.06, 0.06, 0.07, 0.96)
+border_width_right = 4
+border_color = Color(0.78, 0.66, 0.38, 1)
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_box"]
+content_margin_left = 56.0
+content_margin_top = 44.0
+content_margin_right = 56.0
+content_margin_bottom = 44.0
+bg_color = Color(0.11, 0.11, 0.12, 0.96)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.78, 0.66, 0.38, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
+content_margin_left = 24.0
+content_margin_top = 10.0
+content_margin_right = 24.0
+content_margin_bottom = 10.0
+bg_color = Color(0.78, 0.66, 0.38, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_button"]
+content_margin_left = 24.0
+content_margin_top = 10.0
+content_margin_right = 24.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_sep"]
+color = Color(0.78, 0.66, 0.38, 0.6)
+thickness = 2
+
+[node name="FateBargain" type="CanvasLayer"]
+process_mode = 3
+layer = 25
+script = ExtResource("1_fate")
+
+[node name="Grayscale" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_gray")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Box" type="PanelContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -220.0
+offset_right = 360.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_box")
+
+[node name="Content" type="VBoxContainer" parent="Box"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 10
+
+[node name="Heading" type="Label" parent="Box/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
+theme_override_font_sizes/font_size = 40
+text = "Fate 3"
+horizontal_alignment = 1
+
+[node name="Message" type="Label" parent="Box/Content"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_font_sizes/font_size = 28
+text = "Perrin has fallen. Offer 1 residue to Fate to rise and fight on?"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Residue" type="Label" parent="Box/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.67, 0.6, 1)
+theme_override_font_sizes/font_size = 24
+text = "Residue: 1"
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="Box/Content"]
+layout_mode = 2
+theme_override_constants/separation = 36
+theme_override_styles/separator = SubResource("StyleBoxLine_sep")
+
+[node name="Bargain" type="Button" parent="Box/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+text = "Bargain (-1)"
+
+[node name="Die" type="Button" parent="Box/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_disabled_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_button")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+text = "Die and return to base"
+
+[node name="Countdown" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
+theme_override_font_sizes/font_size = 160
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1

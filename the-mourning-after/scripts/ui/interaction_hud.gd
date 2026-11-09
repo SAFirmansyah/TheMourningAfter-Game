@@ -72,6 +72,7 @@ func _find_target() -> Interactable:
 
 
 func _open(it: Interactable) -> void:
+	get_tree().call_group(&"world", &"mark_unsaved")
 	it.interacted.emit()
 	if it.page_count() == 0:
 		return

@@ -6,5 +6,6 @@
 script = ExtResource("1_w0nve")
 loot_id = &"dmg_up"
 display_name = "Damage Increase"
-value = 5.0
+value = 1.0
+tint = Color(1, 0.25, 0.2, 1)
 metadata/_custom_type_script = "uid://boygl2hxayimj"

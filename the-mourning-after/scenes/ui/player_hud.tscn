@@ -2,60 +2,105 @@
 
 [ext_resource type="Script" uid="uid://druygkaqa6nmn" path="res://scripts/ui/player_hud.gd" id="1_e6e0b"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 20.0
+content_margin_top = 16.0
+content_margin_right = 20.0
+content_margin_bottom = 16.0
+bg_color = Color(0.08, 0.08, 0.09, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.66, 0.38, 0.9)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
+bg_color = Color(0.05, 0.05, 0.06, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.66, 0.38, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health_fill"]
+bg_color = Color(0.55, 0.75, 0.45, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_charge_fill"]
+resource_local_to_scene = true
+bg_color = Color(0.78, 0.66, 0.38, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
 [node name="PlayerHUD" type="CanvasLayer" unique_id=1921822603]
 script = ExtResource("1_e6e0b")
 
-[node name="HealthBar" type="ProgressBar" parent="." unique_id=376333451]
-offset_left = 114.0
-offset_top = 65.0
-offset_right = 488.0
-offset_bottom = 92.0
+[node name="Panel" type="PanelContainer" parent="."]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 404.0
+offset_bottom = 120.0
+custom_minimum_size = Vector2(380, 0)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Content" type="VBoxContainer" parent="Panel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 10
+
+[node name="HealthBar" type="ProgressBar" parent="Panel/Content" unique_id=376333451]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_health_fill")
 max_value = 200.0
+value = 120.0
 show_percentage = false
 
-[node name="HealthLabel" type="Label" parent="HealthBar" unique_id=859944961]
+[node name="HealthLabel" type="Label" parent="Panel/Content/HealthBar" unique_id=859944961]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 20
+text = "120 / 200"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="AbilityChargeBar" type="ProgressBar" parent="." unique_id=1760903485]
-offset_left = 122.0
-offset_top = 113.0
-offset_right = 376.0
-offset_bottom = 140.0
+[node name="ChargeBar" type="ProgressBar" parent="Panel/Content" unique_id=1760903485]
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_charge_fill")
+value = 60.0
+show_percentage = false
 
-[node name="AbilityChargeLabel" type="Label" parent="AbilityChargeBar" unique_id=581914468]
-layout_mode = 0
-offset_left = 110.0
-offset_top = 3.0
-offset_right = 150.0
-offset_bottom = 26.0
-
-[node name="ResidueLabel" type="Label" parent="." unique_id=1875521134]
-offset_left = 124.0
-offset_top = 154.0
-offset_right = 220.0
-offset_bottom = 177.0
-
-[node name="WeaponLabel" type="Label" parent="." unique_id=1009625706]
-offset_left = 1494.0
-offset_top = 61.0
-offset_right = 1878.0
-offset_bottom = 84.0
-text = "Equipped Sword:"
-
-[node name="AbilityLabel" type="Label" parent="." unique_id=2109579727]
-offset_left = 403.0
-offset_top = 116.0
-offset_right = 501.0
-offset_bottom = 139.0
-text = "ability ready"
+[node name="InfoLabel" type="Label" parent="Panel/Content" unique_id=1875521134]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
+theme_override_font_sizes/font_size = 24
+text = "Max HP: 100
+Move Speed: 1x
+Residue: 1"

@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_ppyev")
-heal_amount = 20.0
+heal_amount = 10.0
 metadata/_custom_type_script = "uid://c2tcoh261gq30"

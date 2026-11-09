@@ -7,4 +7,5 @@ script = ExtResource("1_f4ag2")
 loot_id = &"2x_dash"
 display_name = "Double Dash"
 effect = 4
+tint = Color(0.95, 0.95, 1, 1)
 metadata/_custom_type_script = "uid://boygl2hxayimj"

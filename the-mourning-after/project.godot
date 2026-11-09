@@ -99,6 +99,7 @@ skip_cutscene={
 3d_physics/layer_5="hitbox"
 3d_physics/layer_6="player_hurtbox"
 3d_physics/layer_7="enemy_hurtbox"
+3d_physics/layer_8="mob_barrier"
 
 [physics]
 

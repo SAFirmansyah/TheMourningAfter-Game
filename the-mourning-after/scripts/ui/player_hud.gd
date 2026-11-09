@@ -1,20 +1,28 @@
 class_name PlayerHUD
 extends CanvasLayer
+## Top-left run panel; hidden until the starting loadout is taken.
+## Starting room: the rolled loadout as text. Once combat starts: health and ability charge bars.
+## Next to a Fate 2 bargain spot: just the residue held. Everything else lives in the pause menu's stats.
 
-@onready var health_bar: ProgressBar = $HealthBar
-@onready var health_label: Label = $HealthBar/HealthLabel
-@onready var charge_bar: ProgressBar = $AbilityChargeBar
-@onready var residue_label: Label = $ResidueLabel
-@onready var weapon_label: Label = $WeaponLabel
-@onready var ability_label: Label = $AbilityLabel
+@onready var panel: PanelContainer = $Panel
+@onready var health_bar: ProgressBar = $Panel/Content/HealthBar
+@onready var health_label: Label = $Panel/Content/HealthBar/HealthLabel
+@onready var charge_bar: ProgressBar = $Panel/Content/ChargeBar
+@onready var info_label: Label = $Panel/Content/InfoLabel
+
+@export var charge_color := Color(0.78, 0.66, 0.38) # TUNE: charge bar fill while charging
+@export var charge_ready_color := Color(1.0, 0.9, 0.45) # TUNE: charge bar fill when the ability is ready
+
+var in_base_room := false # set by the world on every room change
 
 var _stats: HeroStats
 var _player: Player
+var _info_text := ""
 
 
 func _ready() -> void:
-	RunInventory.effects_changed.connect(_on_effects_changed)
-	_on_effects_changed() # sync immediately on load
+	RunInventory.effects_changed.connect(_refresh)
+	_refresh()
 
 func bind_stats(stats: HeroStats) -> void:
 	if _stats:
@@ -22,56 +30,46 @@ func bind_stats(stats: HeroStats) -> void:
 	_stats = stats
 	_stats.health_change.connect(_on_health_change)
 	_on_health_change(_stats.health, _stats.current_max_health)
-	
+
 func bind_player(player: Player) -> void:
 	_player = player
 	charge_bar.max_value = Player.MAX_CHARGE
-	player.weapon_changed.connect(_on_weapon_changed)
-	_on_weapon_changed(player.weapon) # sync immediately on bind
+	_refresh()
 
 
 func _on_health_change(cur_health: int, max_health: int) -> void:
 	health_bar.max_value = max_health
 	health_bar.value = cur_health
 	health_label.text = "%d / %d" % [cur_health, max_health]
-	
-func _on_effects_changed() -> void:
-	residue_label.text = "Residue: %d / %d" % [RunInventory.magic_residue, RunInventory.MAX_RESIDUE_PER_RUN]
-	
+
+
 func _process(_delta: float) -> void:
-	if _player:
-		charge_bar.value = _player.charge_points
-		_update_ability_ready_label()
-		
-func _on_weapon_changed(weapon: WeaponData) -> void:
-	weapon_label.text = weapon.weapon_name if weapon else "No Weapon"
-	
-func _update_ability_ready_label() -> void:
-	if _player.weapon == null:
-		ability_label.visible = false
+	_refresh()
+
+
+func _refresh() -> void:
+	panel.visible = RunInventory.loadout_taken and _player != null
+	if not panel.visible:
 		return
+	var text := ""
+	if _near_bargain_spot():
+		text = "Residue: %d" % RunInventory.magic_residue
+	elif in_base_room:
+		text = "Max HP: %d\nMove Speed: %sx\nResidue: %d" % [
+			_player.stats.current_max_health, snappedf(_player.move_speed_multiplier(), 0.01), RunInventory.magic_residue]
+	var bars := text == ""
+	health_bar.visible = bars
+	charge_bar.visible = bars
+	info_label.visible = not bars
+	if bars:
+		charge_bar.value = _player.charge_points
+		var fill := charge_bar.get_theme_stylebox(&"fill") as StyleBoxFlat
+		fill.bg_color = charge_ready_color if _player.is_ability_ready() else charge_color
+	if text != _info_text:
+		_info_text = text
+		info_label.text = text
+		panel.reset_size()
 
-	var name := _ability_name_for(_player.weapon)
 
-	if _player._ability_armed:
-		ability_label.visible = true
-		ability_label.text = "%s Ready! (%.1fs)" % [name, _player._ability_armed_time_left]
-	elif _player.charge_points >= Player.MAX_CHARGE:
-		ability_label.visible = true
-		ability_label.text = "%s Available" % name
-	else:
-		ability_label.visible = false
-
-func _ability_name_for(weapon: WeaponData) -> String:
-	if weapon.charged_abilities.is_empty():
-		return "Ability"
-	var ability := weapon.charged_abilities[0]
-	if ability is PoisonDamageAbility:
-		return "Poison"
-	elif ability is StunAbility:
-		return "Stun"
-	elif ability is CritHitAbility:
-		return "Critical Hit"
-	elif ability is SelfHealAbility:
-		return "Heal"
-	return "Ability"
+func _near_bargain_spot() -> bool:
+	return get_tree().get_nodes_in_group(&"bargain_spots").any(func(spot: Node) -> bool: return spot.is_player_near())

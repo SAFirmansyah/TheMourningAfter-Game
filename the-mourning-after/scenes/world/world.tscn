@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/save_indicator.tscn" id="7_saving"]
 [ext_resource type="PackedScene" path="res://scenes/ui/skip_prompt.tscn" id="8_skip"]
 [ext_resource type="PackedScene" uid="uid://cyoq8xehvpyji" path="res://scenes/ui/player_hud.tscn" id="9_1yooq"]
+[ext_resource type="PackedScene" path="res://scenes/ui/fate_bargain.tscn" id="10_fate"]
 
 [sub_resource type="Environment" id="Environment_bg"]
 background_mode = 1
@@ -17,7 +18,7 @@ background_color = Color(0.09, 0.1, 0.12, 1)
 
 [node name="World" type="Node3D" unique_id=2087060420]
 script = ExtResource("1_world")
-load_save_on_start = false
+load_save_on_start = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1988010647]
 environment = SubResource("Environment_bg")
@@ -60,3 +61,5 @@ world = NodePath("..")
 [node name="SkipPrompt" parent="." unique_id=2000870685 instance=ExtResource("8_skip")]
 
 [node name="PlayerHUD" parent="." unique_id=1921822603 instance=ExtResource("9_1yooq")]
+
+[node name="FateBargain" parent="." instance=ExtResource("10_fate")]
