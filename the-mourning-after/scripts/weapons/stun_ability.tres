@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StunAbility" format=3 uid="uid://df14rhjqbax1"]
+
+[ext_resource type="Script" uid="uid://nc11m5j3xlvb" path="res://scripts/weapons/stun_ability.gd" id="1_gp5qb"]
+
+[resource]
+script = ExtResource("1_gp5qb")
+stun_duration = 2.0
+metadata/_custom_type_script = "uid://nc11m5j3xlvb"

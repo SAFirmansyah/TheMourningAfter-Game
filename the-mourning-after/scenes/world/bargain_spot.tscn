@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://cjdp2l5i2b8uj"]
+
+[ext_resource type="Script" uid="uid://cdwodtwrw1w2m" path="res://scripts/ui/bargain_spot.gd" id="1_qvy10"]
+[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="2_ns34g"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rmnuq"]
+size = Vector3(2.816, 2, 0.6)
+
+[node name="Bargain Spot" type="StaticBody3D" unique_id=238560751]
+script = ExtResource("1_qvy10")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=567508897]
+texture = ExtResource("2_ns34g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2091209275]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_rmnuq")

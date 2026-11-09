@@ -165,3 +165,24 @@ Pacing: plays like a restaurant sim, but less fast-paced. GWENITH, SHUYI and RUD
 - If PERRIN wins:
   - **CUTSCENE – losing a lost cause**
     Specifics TBD
+
+## DESIGN CHANGES
+
+These changes were made after the original design. The sections above are left as originally written; where they disagree, the notes below take priority.
+
+- **FATE 3 BARGAIN (changed)**
+  *Originally:* when PERRIN reaches 0 HP, FATE 3 BARGAIN kicks in automatically, and PERRIN is resurrected and taken back to BASE to PREPARE FOR RUN again.
+  *Now:* when PERRIN reaches 0 HP, combat pauses and FATE 3 offers a bargain on screen to revive PERRIN where he fell and continue the run.
+  - The cost rises each time within a run: the 1st revive costs 2 RESIDUE and the 2nd costs 3. There is no 3rd revive.
+  - If PERRIN doesn't have enough RESIDUE for the next revive (or has used both), there is no offer, and he dies as before: resurrected and taken back to BASE.
+  - If he can afford it, the player chooses between:
+    - **Bargain:** spend the RESIDUE and resume the fight after a 3-second countdown.
+    - **Die:** turn the offer down, and go back to BASE to start over.
+
+- **BARGAIN COSTS (changed)**
+  *Originally:* every FATE bargain cost 1 RESIDUE, and the optional FATE 1 and FATE 2 bargains were limited to 1 per run.
+  *Now:*
+  - **FATE 1 (re-seed starting stats & weapon):** 1 RESIDUE, no limit on how many times per run.
+  - **FATE 2 (re-roll the BOSS CHAMBER):** 2 RESIDUE, once per run.
+  - **FATE 3 (revive):** 2 RESIDUE the first time and 3 the second; no third time.
+  - The forced bargains on a fresh save still play out as written: FATE 1 takes RESIDUE from 2 → 1 and FATE 2 from 1 → 0.

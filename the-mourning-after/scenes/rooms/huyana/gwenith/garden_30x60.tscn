@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/rooms/combat_room_30x_60.tscn" id="1_layout"]
+
+[node name="GwenithGarden30x60" instance=ExtResource("1_layout")]
+ground_tint = Color(0.35, 0.68, 0.22, 1)

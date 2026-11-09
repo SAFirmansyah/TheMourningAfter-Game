@@ -1,27 +1,104 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://cr0w4u33y1d57"]
 
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_player"]
-[ext_resource type="Script" path="res://scripts/visual/facing_card.gd" id="2_card"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Script" uid="uid://dnbf3vat68acm" path="res://scripts/player/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://bue1mi5yjlgyn" path="res://scripts/visual/facing_card.gd" id="2_card"]
+[ext_resource type="Resource" uid="uid://26uqe6v7rx3s" path="res://scripts/stats/hero_stats.tres" id="2_p47bc"]
+[ext_resource type="Resource" uid="uid://fsd1jmnw4ict" path="res://scripts/weapons/sword_wood.tres" id="3_75vfm"]
+[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="6_75vfm"]
+[ext_resource type="Script" path="res://scripts/player/sword_visual.gd" id="7_sword"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
 radius = 0.35
-height = 1.8
+height = 1.65
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("card")]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhy0a"]
+radius = 0.35
+height = 1.65
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blade"]
+shading_mode = 0
+albedo_color = Color(0.9, 0.87, 0.78, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_blade"]
+material = SubResource("StandardMaterial3D_blade")
+size = Vector3(0.9, 0.12, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_guard"]
+material = SubResource("StandardMaterial3D_blade")
+size = Vector3(0.08, 0.2, 0.36)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sparkle"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_sparkle"]
+material = SubResource("StandardMaterial3D_sparkle")
+size = Vector2(0.12, 0.12)
+
+[sub_resource type="Gradient" id="Gradient_sparkle"]
+offsets = PackedFloat32Array(0, 0.25, 1)
+colors = PackedColorArray(1, 0.95, 0.6, 0, 1, 0.9, 0.45, 1, 1, 0.8, 0.3, 0)
+
+[node name="Player" type="CharacterBody3D" unique_id=2125016019 node_paths=PackedStringArray("card")]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 11
 motion_mode = 1
 script = ExtResource("1_player")
 card = NodePath("Card")
+stats = ExtResource("2_p47bc")
+weapon = ExtResource("3_75vfm")
+attack_reach = 0.75
 
-[node name="Card" type="Sprite3D" parent="."]
+[node name="Card" type="Sprite3D" parent="." unique_id=1692736394]
+process_physics_priority = 20
 offset = Vector2(0, 64)
 pixel_size = 0.014
 alpha_cut = 1
 texture = ExtResource("3_icon")
 script = ExtResource("2_card")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=623702916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_body")
+
+[node name="PlayerHurtBox" type="Area3D" parent="." unique_id=585870382]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+script = ExtResource("6_75vfm")
+
+[node name="CollisionHurtBox" type="CollisionShape3D" parent="PlayerHurtBox" unique_id=629519407]
+shape = SubResource("CapsuleShape3D_jhy0a")
+
+[node name="Sword" type="Node3D" parent="." unique_id=1440021001]
+transform = Transform3D(0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, 0.819152, 0, 0.8, 0)
+script = ExtResource("7_sword")
+
+[node name="Blade" type="MeshInstance3D" parent="Sword" unique_id=1440021002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, 0, 0)
+mesh = SubResource("BoxMesh_blade")
+
+[node name="Guard" type="MeshInstance3D" parent="Sword" unique_id=1440021003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+mesh = SubResource("BoxMesh_guard")
+
+[node name="ReadySparkle" type="CPUParticles3D" parent="." unique_id=1440021004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+emitting = false
+amount = 10
+lifetime = 0.9
+mesh = SubResource("QuadMesh_sparkle")
+emission_shape = 1
+emission_sphere_radius = 0.35
+direction = Vector3(0, 1, 0)
+spread = 30.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.2
+initial_velocity_max = 0.5
+scale_amount_min = 0.5
+scale_amount_max = 1.2
+color_ramp = SubResource("Gradient_sparkle")

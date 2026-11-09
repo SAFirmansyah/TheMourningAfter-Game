@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://dwl4exhk82y7p"]
+
+[ext_resource type="Script" uid="uid://dsabkrdimbjiq" path="res://scripts/enemies/mutants.gd" id="1_w71w8"]
+[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="2_m2su8"]
+[ext_resource type="Resource" uid="uid://d3ilrgaxx0fve" path="res://scripts/stats/low_mutant_stats.tres" id="2_mxl8y"]
+[ext_resource type="Script" uid="uid://boygl2hxayimj" path="res://scripts/loot/loot_data.gd" id="3_lh2w7"]
+[ext_resource type="Resource" uid="uid://da1rcp5236rtr" path="res://scripts/loot/loot_2x_dash.tres" id="4_40sm3"]
+[ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="4_mxl8y"]
+[ext_resource type="Resource" uid="uid://c3vnvs1am64e2" path="res://scripts/loot/loot_dmg_reduction.tres" id="5_8gpck"]
+[ext_resource type="Resource" uid="uid://ccmhq5rc8u5g7" path="res://scripts/loot/loot_residue.tres" id="6_7jj0p"]
+[ext_resource type="Resource" uid="uid://dcob8m1oig70a" path="res://scripts/loot/loot_health.tres" id="7_hp"]
+[ext_resource type="Script" path="res://scripts/ui/mob_health_bar.gd" id="9_hpbar"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vlovs"]
+radius = 0.55
+height = 2.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhy0a"]
+radius = 0.55
+height = 2.0
+
+[sub_resource type="Gradient" id="Gradient_bar"]
+offsets = PackedFloat32Array(0, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bar"]
+gradient = SubResource("Gradient_bar")
+width = 68
+height = 10
+
+[node name="Low_Mutant" type="CharacterBody3D" unique_id=465252760]
+collision_layer = 8
+collision_mask = 151
+motion_mode = 1
+script = ExtResource("1_w71w8")
+stats = ExtResource("2_mxl8y")
+base_move_speed = 1.0
+attack_reach = 0.7
+attack_cooldown = 1.5
+attack_range = 1.5
+loot_pool = Array[ExtResource("3_lh2w7")]([ExtResource("4_40sm3"), ExtResource("6_7jj0p"), ExtResource("5_8gpck"), ExtResource("7_hp")])
+metadata/_custom_type_script = "uid://dnbf3vat68acm"
+
+[node name="Card" type="Sprite3D" parent="." unique_id=1358649332]
+modulate = Color(0.75, 0.45, 0.95, 1)
+pixel_size = 0.02
+offset = Vector2(0, 64)
+texture = ExtResource("2_m2su8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=936884657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+shape = SubResource("CapsuleShape3D_vlovs")
+
+[node name="LowMutantHurtBox" type="Area3D" parent="." unique_id=963939070]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+script = ExtResource("4_mxl8y")
+
+[node name="CollisionHurtBox" type="CollisionShape3D" parent="LowMutantHurtBox" unique_id=1732531385]
+shape = SubResource("CapsuleShape3D_jhy0a")
+
+[node name="HealthBar" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)
+script = ExtResource("9_hpbar")
+
+[node name="Back" type="Sprite3D" parent="HealthBar"]
+modulate = Color(0.08, 0.08, 0.09, 0.85)
+pixel_size = 0.016
+billboard = 1
+no_depth_test = true
+centered = false
+offset = Vector2(-34, -5)
+region_enabled = true
+region_rect = Rect2(0, 0, 68, 10)
+texture = SubResource("GradientTexture2D_bar")
+
+[node name="Fill" type="Sprite3D" parent="HealthBar"]
+modulate = Color(0.85, 0.25, 0.22, 1)
+render_priority = 1
+pixel_size = 0.016
+billboard = 1
+no_depth_test = true
+centered = false
+offset = Vector2(-32, -3)
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 6)
+texture = SubResource("GradientTexture2D_bar")
+
+[node name="Alert" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.30, 0)
+billboard = 1
+no_depth_test = true
+render_priority = 2
+modulate = Color(1, 0.85, 0.3, 1)
+outline_modulate = Color(0.1, 0.05, 0, 1)
+text = "!"
+font_size = 96
+outline_size = 18

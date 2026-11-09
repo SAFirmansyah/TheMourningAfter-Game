@@ -1,0 +1,12 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/rooms/cooldown_nc.tscn" id="1_rest"]
+
+[node name="MedicalBay" instance=ExtResource("1_rest")]
+ground_tint = Color(0.5, 0.68, 0.9, 1)
+
+[node name="Card" parent="Props/RestSpot" index="0"]
+modulate = Color(0.9, 0.95, 1, 1)
+
+[node name="HealSpot" parent="Props/RestSpot"]
+action_label = "Use supplies"

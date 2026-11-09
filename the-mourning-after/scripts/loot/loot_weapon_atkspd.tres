@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LootData" format=3 uid="uid://bhf4s4vndjrqk"]
+
+[ext_resource type="Script" uid="uid://boygl2hxayimj" path="res://scripts/loot/loot_data.gd" id="1_fb2bb"]
+
+[resource]
+script = ExtResource("1_fb2bb")
+loot_id = &"atkspd_up"
+display_name = "Attack Speed Increase"
+effect = 1
+value = 0.005
+tint = Color(1, 0.9, 0.2, 1)
+metadata/_custom_type_script = "uid://boygl2hxayimj"

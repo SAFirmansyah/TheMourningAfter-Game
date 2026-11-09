@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://bemo8fs2seh6f"]
+
+[ext_resource type="Script" path="res://scripts/world/boss_room.gd" id="1_h2p12"]
+[ext_resource type="Material" path="res://materials/ground.tres" id="1_hqskh"]
+[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="2_h2p12"]
+[ext_resource type="PackedScene" path="res://scenes/test/prop.tscn" id="9_prop"]
+[ext_resource type="PackedScene" path="res://scenes/world/boss_clear_point.tscn" id="9_return"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_gip0k"]
+material = ExtResource("1_hqskh")
+size = Vector2(30, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yc2lc"]
+size = Vector3(30, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2fdfj"]
+size = Vector3(0.4, 2, 8)
+
+[node name="Boss Sandbox 2" type="Node3D" unique_id=1359824026]
+script = ExtResource("1_h2p12")
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=1514557725]
+mesh = SubResource("PlaneMesh_gip0k")
+
+[node name="PlayerStart" type="Marker3D" parent="." unique_id=2084446842]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0)
+
+[node name="Walls" type="StaticBody3D" parent="." unique_id=267476110]
+
+[node name="North" type="CollisionShape3D" parent="Walls" unique_id=1126435396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+shape = SubResource("BoxShape3D_yc2lc")
+
+[node name="South" type="CollisionShape3D" parent="Walls" unique_id=998506505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
+shape = SubResource("BoxShape3D_yc2lc")
+
+[node name="WestUpper" type="CollisionShape3D" parent="Walls" unique_id=1463533192]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, -6)
+shape = SubResource("BoxShape3D_2fdfj")
+
+[node name="WestLower" type="CollisionShape3D" parent="Walls" unique_id=1243914616]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, 6)
+shape = SubResource("BoxShape3D_2fdfj")
+
+[node name="EastUpper" type="CollisionShape3D" parent="Walls" unique_id=1241729137]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, -6)
+shape = SubResource("BoxShape3D_2fdfj")
+
+[node name="EastLower" type="CollisionShape3D" parent="Walls" unique_id=1469356435]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 6)
+shape = SubResource("BoxShape3D_2fdfj")
+
+[node name="BossEntry" parent="." unique_id=1793029507 instance=ExtResource("2_h2p12")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -15, 0, 0)
+target_entry = &"East"
+
+[node name="BossExit" parent="." unique_id=228642142 instance=ExtResource("2_h2p12")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+target_entry = &"WestExit"
+
+[node name="BossStandIn" parent="." unique_id=1902000001 instance=ExtResource("9_prop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
+
+[node name="Card" parent="BossStandIn" index="0"]
+modulate = Color(0.95, 0.8, 0.45, 1)
+
+[node name="BossClearPoint" parent="BossStandIn" unique_id=1902000002 instance=ExtResource("9_return")]

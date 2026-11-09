@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LootData" format=3 uid="uid://bu44wyr0tlhxn"]
+
+[ext_resource type="Script" uid="uid://boygl2hxayimj" path="res://scripts/loot/loot_data.gd" id="1_w0nve"]
+
+[resource]
+script = ExtResource("1_w0nve")
+loot_id = &"dmg_up"
+display_name = "Damage Increase"
+value = 1.0
+tint = Color(1, 0.25, 0.2, 1)
+metadata/_custom_type_script = "uid://boygl2hxayimj"

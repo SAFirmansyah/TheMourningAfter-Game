@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://ddlls2y8j6s18"]
+
+[ext_resource type="Script" uid="uid://bfhfm0g7hqbui" path="res://scripts/weapons/weapon_ability.gd" id="1_a2jmu"]
+[ext_resource type="Script" uid="uid://dver5jfnn77l2" path="res://scripts/weapons/weapon_data.gd" id="2_whnhx"]
+[ext_resource type="Resource" uid="uid://df14rhjqbax1" path="res://scripts/weapons/stun_ability.tres" id="3_ability"]
+
+[resource]
+script = ExtResource("2_whnhx")
+weapon_name = "Bronze Sword"
+damage = 24.0
+attack_cooldown = 0.75
+hits_to_charge = 8
+charged_abilities = Array[ExtResource("1_a2jmu")]([ExtResource("3_ability")])
+metadata/_custom_type_script = "uid://dver5jfnn77l2"

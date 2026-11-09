@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://cqggnj0swrig5"]
+
+[ext_resource type="Script" uid="uid://chm8scfmsnvei" path="res://scripts/world/combat_room.gd" id="1_ch7nr"]
+[ext_resource type="Material" path="res://materials/ground.tres" id="2_6i74s"]
+[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_nlg7s"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8fro4"]
+material = ExtResource("2_6i74s")
+size = Vector2(13.8564, 27.7128)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3oq2g"]
+size = Vector3(13.8564, 0.1, 27.7128)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w0rgk"]
+size = Vector3(0.4, 2, 12.9326)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d2hbn"]
+size = Vector3(13.8564, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_westtop_trim"]
+size = Vector3(0.4, 2, 11.8564)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_westbot_trim"]
+size = Vector3(0.4, 2, 11.8564)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_easttop_trim"]
+size = Vector3(0.4, 2, 11.8564)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eastbot_trim"]
+size = Vector3(0.4, 2, 11.8564)
+
+[node name="CombatRoom30x60" type="Node3D" unique_id=888080166]
+script = ExtResource("1_ch7nr")
+ground_tint = Color(0.32, 0.5, 0.28, 1)
+
+[node name="FloorStatic" type="StaticBody3D" parent="." unique_id=745867498]
+
+[node name="Floor" type="MeshInstance3D" parent="FloorStatic" unique_id=1988577006]
+mesh = SubResource("PlaneMesh_8fro4")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="FloorStatic" unique_id=867963972]
+shape = SubResource("BoxShape3D_3oq2g")
+
+[node name="PlayerStart" type="Marker3D" parent="." unique_id=1781137956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0807, 0, 0)
+
+[node name="Walls" type="StaticBody3D" parent="." unique_id=1133913659]
+
+[node name="WestTop" type="CollisionShape3D" parent="Walls" unique_id=1678717693]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9282, 1, -7.9282)
+shape = SubResource("BoxShape3D_westtop_trim")
+
+[node name="North" type="CollisionShape3D" parent="Walls" unique_id=327821023]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -13.8564)
+shape = SubResource("BoxShape3D_d2hbn")
+
+[node name="WestBot" type="CollisionShape3D" parent="Walls" unique_id=746857119]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9282, 1, 7.9282)
+shape = SubResource("BoxShape3D_westbot_trim")
+
+[node name="South" type="CollisionShape3D" parent="Walls" unique_id=1295455518]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 13.8564)
+shape = SubResource("BoxShape3D_d2hbn")
+
+[node name="EastTop" type="CollisionShape3D" parent="Walls" unique_id=137871164]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9282, 1, -7.9282)
+shape = SubResource("BoxShape3D_easttop_trim")
+
+[node name="EastBot" type="CollisionShape3D" parent="Walls" unique_id=878345509]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9282, 1, 7.9282)
+shape = SubResource("BoxShape3D_eastbot_trim")
+
+[node name="WestExit" parent="." unique_id=1243838311 instance=ExtResource("3_nlg7s")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -6.9282, 0, 0)
+
+[node name="EastExit" parent="." unique_id=1163370842 instance=ExtResource("3_nlg7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9282, 0, 0)
+target_entry = &"WestExit"
+
+[node name="Enemies" type="Node3D" parent="." unique_id=1966559981]
