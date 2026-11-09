@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_world"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://scenes/camera/camera_rig.tscn" id="3_rig"]
-[ext_resource type="PackedScene" path="res://scenes/huyana/sanctuary.tscn" id="4_room_a"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/altar.tscn" id="4_room_a"]
 [ext_resource type="PackedScene" path="res://scenes/ui/interaction_hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="6_pause"]
 [ext_resource type="PackedScene" path="res://scenes/ui/save_indicator.tscn" id="7_saving"]
@@ -28,10 +28,15 @@ environment = SubResource("Environment_bg")
 
 [node name="Rooms" type="Node3D" parent="."]
 
-[node name="Sanctuary" parent="Rooms" instance=ExtResource("4_room_a")]
+[node name="Altar" parent="Rooms" instance=ExtResource("4_room_a")]
 
 [node name="Player" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("2_player")]
 camera_rig = NodePath("../CameraRig")
+display_name = "Constance"
+weapon = null
+
+[node name="Card" parent="Player" index="0"]
+modulate = Color(0.72, 0.5, 0.95, 1)
 
 [node name="CameraRig" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("3_rig")]
 follow_target = NodePath("../Player")
@@ -79,9 +84,10 @@ manager = NodePath("../SanctuaryManager")
 player = NodePath("../Player")
 day_cycle = NodePath("../DayCycle")
 
-[node name="Tutorial" parent="." node_paths=PackedStringArray("manager", "day_cycle", "player", "skip_button", "hud") instance=ExtResource("14_tutorial")]
+[node name="Tutorial" parent="." node_paths=PackedStringArray("world", "manager", "day_cycle", "player", "skip_button", "hud") instance=ExtResource("14_tutorial")]
 manager = NodePath("../SanctuaryManager")
 day_cycle = NodePath("../DayCycle")
 player = NodePath("../Player")
 skip_button = NodePath("../DayCycle/Clock/SkipTutorial")
 hud = NodePath("../InteractionHUD")
+world = NodePath("..")

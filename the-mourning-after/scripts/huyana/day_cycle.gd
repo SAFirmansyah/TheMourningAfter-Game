@@ -33,6 +33,7 @@ var awaiting_beat := false
 ## Tutorial: the clock stands still (the Sanctuary keeps working).
 var clock_paused := false
 
+@onready var clock_layer: CanvasLayer = $Clock
 @onready var clock: ClockFace = $Clock/Dial
 @onready var day_label: Label = $Clock/DayLabel
 @onready var speed_buttons: Container = $Clock/Speeds
