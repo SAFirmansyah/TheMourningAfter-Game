@@ -2,9 +2,13 @@ class_name World
 extends Node3D
 ## Holds the player and camera; swaps rooms when a path exit is entered; plays cutscenes.
 ## Starts from the save file if there is one, otherwise in whichever room is placed under Rooms.
+## A new save starts on Perrin's side (world.tscn); once he has handed over, launching goes straight to Act 2.
 ## Autosaves on every room change, combat room clear and Fate bargain. Entering an uncleared combat
 ## room saves a wiped run instead (GDD: quitting mid-room loses the run); saving is off until it's cleared.
 ## Room changes (e.g. collected loot) only persist for the current room.
+## Nodes in the "save_state" group add their own data via get_save_data() / load_save_data(data).
+
+signal room_entered(room: Room)
 
 const SAVE_VERSION := 2
 const LOOT_PICKUP_SCENE := preload("res://scenes/loot/loot_pickup.tscn")
@@ -12,15 +16,23 @@ const LOOT_PICKUP_SCENE := preload("res://scenes/loot/loot_pickup.tscn")
 @export var fade_time := 0.35 # TUNE: fade to/from black per room change (s)
 @export var load_save_on_start := true # off: always start fresh in the placed room
 @export var base_room_path := "res://scenes/rooms/room_a.tscn"
+@export var save_slot := "savegame" # save file name; one per game half
+@export_file("*.tscn") var act_two_scene := "res://scenes/huyana/huyana.tscn"
+@export_file("*.tscn") var act_two_cutscene := "res://scenes/cutscenes/act_one_end.tscn"
+@export var act_two_slot := "huyana" # Act 2's save file; cleared when Perrin hands over
+@export var villain_max_health := 100 # TUNE: Constance's HP
+@export var villain_move_speed := 1.0 # TUNE: Constance's move speed multiplier
 
 @onready var player: Player = $Player
-@onready var player_hud: PlayerHUD = $PlayerHUD
+@onready var player_hud: PlayerHUD = get_node_or_null(^"PlayerHUD") # hero side only
 @onready var camera_rig: CameraRig = $CameraRig
 @onready var rooms: Node3D = $Rooms
 @onready var fade: ColorRect = $Transition/Fade
 @onready var save_indicator: SaveIndicator = $SaveIndicator
 @onready var skip_prompt: SkipPrompt = $SkipPrompt
-@onready var fate_bargain: FateBargain = $FateBargain
+@onready var fate_bargain: FateBargain = get_node_or_null(^"FateBargain") # hero side only
+
+static var _arriving_in_black := false # the scene before this one ended on a black screen
 
 var current_room: Room
 var _transitioning := false
@@ -30,6 +42,11 @@ var _fade_tween: Tween
 var _menu_paused := false
 var _tree_was_paused := false
 var _room_changes := {}
+var _unsaved := false
+
+
+func _enter_tree() -> void:
+	add_to_group(&"world")
 
 
 func _ready() -> void:
@@ -41,24 +58,31 @@ func _ready() -> void:
 		if child is Room:
 			placed = child
 			break
-			
-	player.died.connect(_on_player_died)
-	fate_bargain.revive_chosen.connect(_on_revive_chosen)
-	fate_bargain.death_chosen.connect(_on_death_chosen)
-	player_hud.bind_stats(player.stats)
-	player_hud.bind_player(player)
-	RunInventory.bind_player(player)
-	CampaignState.reset_campaign()
-	RunInventory.bargained.connect(func() -> void: save_game())
 
-	var data := SaveSystem.load_data() if load_save_on_start else {}
-	RunInventory.magic_residue = data.get("magic_residue", 0)
-	RunInventory.has_completed_first_run = data.get("has_completed_first_run", false)
-	RunInventory.has_reached_boss = data.get("has_reached_boss", false)
-	RunInventory.final_snapshot = data.get("final_snapshot", {})
-	var run: Dictionary = data.get("run", {}) if int(data.get("version", 0)) >= SAVE_VERSION else {}
+	var data := SaveSystem.load_data(save_slot) if load_save_on_start else {}
+	var run: Dictionary = {}
+	if is_hero_side() and data.get("act_two", false):
+		_go_to_act_two()
+		return
+	if is_hero_side():
+		player.died.connect(_on_player_died)
+		fate_bargain.revive_chosen.connect(_on_revive_chosen)
+		fate_bargain.death_chosen.connect(_on_death_chosen)
+		player_hud.bind_stats(player.stats)
+		player_hud.bind_player(player)
+		RunInventory.bind_player(player)
+		CampaignState.reset_campaign()
+		RunInventory.bargained.connect(func() -> void: save_game())
+		RunInventory.magic_residue = data.get("magic_residue", 0)
+		RunInventory.has_completed_first_run = data.get("has_completed_first_run", false)
+		RunInventory.has_reached_boss = data.get("has_reached_boss", false)
+		RunInventory.final_snapshot = data.get("final_snapshot", {})
+		if int(data.get("version", 0)) >= SAVE_VERSION:
+			run = data.get("run", {})
+	else:
+		player.stats.setup_fixed_stats(villain_max_health, villain_move_speed)
 	var saved_room: String = data.get("room", "")
-	if saved_room != "" and run.is_empty():
+	if is_hero_side() and saved_room != "" and run.is_empty():
 		saved_room = base_room_path # no run in progress (or an old save): start at base
 	if saved_room != "" and ResourceLoader.exists(saved_room):
 		if placed:
@@ -71,11 +95,19 @@ func _ready() -> void:
 		_load_room(saved_room, &"", data.get("room_changes", {}), true)
 		_restore_room_state(data)
 		var pos: Variant = data.get("player_position")
-		if pos is Array and pos.size() == 3 and not run.is_empty():
+		if pos is Array and pos.size() == 3 and (not run.is_empty() or not is_hero_side()):
 			player.teleport(Vector3(pos[0], pos[1], pos[2]))
 			camera_rig.snap_to_target()
 	elif placed:
 		_enter_room(placed, &"")
+	var states: Dictionary = data.get("state", {})
+	for node in get_tree().get_nodes_in_group(&"save_state"):
+		if states.has(String(node.name)):
+			node.load_save_data(states[String(node.name)])
+	if _arriving_in_black:
+		_arriving_in_black = false
+		fade.color.a = 1.0
+		_fade_to(0.0)
 
 
 ## Plays a cutscene scene (a Cutscene root) over everything, pausing gameplay.
@@ -130,14 +162,28 @@ func can_save() -> bool:
 	return not _transitioning and not _in_cutscene and current_room != null and current_room.allows_saving()
 
 
+func is_hero_side() -> bool:
+	return fate_bargain != null
+
+
 func can_view_stats() -> bool:
-	return not _in_cutscene # hero side only, once the villain half exists
+	return is_hero_side() and not _in_cutscene
+
+
+## Something worth saving happened since the last save (interaction, pickup, dialogue, order...).
+func mark_unsaved() -> void:
+	_unsaved = true
+
+
+func has_unsaved_changes() -> bool:
+	return _unsaved
 
 
 ## Writes the save. Inside an uncleared combat room this quietly writes a wiped run instead.
 func save_game(show_indicator := true) -> void:
+	_unsaved = false
 	if current_room and not current_room.allows_saving():
-		SaveSystem.save_data(_meta_save_data(base_room_path))
+		SaveSystem.save_data(_meta_save_data(base_room_path), save_slot)
 		return
 	var data := _meta_save_data(current_room.scene_file_path)
 	var pos := player.global_position
@@ -157,7 +203,11 @@ func save_game(show_indicator := true) -> void:
 			"combat": CombatRunState.save_state(),
 			"campaign": CampaignState.save_state(),
 		}
-	SaveSystem.save_data(data)
+	var states := {}
+	for node in get_tree().get_nodes_in_group(&"save_state"):
+		states[String(node.name)] = node.get_save_data()
+	data.state = states
+	SaveSystem.save_data(data, save_slot)
 	if show_indicator:
 		save_indicator.flash()
 
@@ -226,7 +276,8 @@ func _load_room(path: String, entry: StringName, changes := {}, restoring := fal
 func _enter_room(room: Room, entry: StringName, changes := {}) -> void:
 	current_room = room
 	current_room.exit_requested.connect(_on_exit_requested)
-	player_hud.in_base_room = room is BaseRoom
+	if player_hud:
+		player_hud.in_base_room = room is BaseRoom
 	if room is CombatRoom and not room.is_cleared:
 		room.all_enemies_defeated.connect(func() -> void: save_game())
 	if room is BossRoom:
@@ -241,6 +292,7 @@ func _enter_room(room: Room, entry: StringName, changes := {}) -> void:
 	else:
 		player.teleport(current_room.get_start_position())
 	camera_rig.snap_to_target()
+	room_entered.emit(room)
 
 
 func _apply_room_changes(changes: Dictionary) -> void:
@@ -286,6 +338,26 @@ func _on_revive_chosen() -> void:
 func _on_death_chosen() -> void:
 	set_menu_paused(false)
 	_end_run_at_base()
+
+
+## Perrin's story ends here for good: plays the cutscene, marks the save and moves on to Constance.
+func begin_act_two() -> void:
+	if _transitioning or _in_cutscene:
+		return
+	_transitioning = true
+	player.input_enabled = false
+	player.forced_input = Vector2.ZERO
+	await play_cutscene(act_two_cutscene, false)
+	SaveSystem.delete_save(act_two_slot) # Act 2 always starts fresh from here
+	var data := _meta_save_data(base_room_path)
+	data.act_two = true
+	SaveSystem.save_data(data, save_slot)
+	_go_to_act_two()
+
+
+func _go_to_act_two() -> void:
+	_arriving_in_black = true
+	get_tree().change_scene_to_file.call_deferred(act_two_scene)
 
 
 ## Sanctuary stand-in: the run ends and Perrin heads home, progress saved.

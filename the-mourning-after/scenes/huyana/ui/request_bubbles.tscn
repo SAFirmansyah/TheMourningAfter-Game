@@ -1,0 +1,37 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/huyana/request_bubbles.gd" id="1_bubbles"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tray"]
+content_margin_left = 18.0
+content_margin_top = 12.0
+content_margin_right = 18.0
+content_margin_bottom = 14.0
+bg_color = Color(0.08, 0.08, 0.09, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.78, 0.66, 0.38, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="RequestBubbles" type="CanvasLayer"]
+layer = 3
+script = ExtResource("1_bubbles")
+
+[node name="Tray" type="PanelContainer" parent="."]
+z_index = 10
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 620.0
+offset_bottom = 154.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tray")
+
+[node name="Rows" type="HBoxContainer" parent="Tray"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 22

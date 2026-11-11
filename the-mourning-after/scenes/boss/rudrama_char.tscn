@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dvmnvlpfa8kbk"]
+
+[ext_resource type="Script" uid="uid://bumtsbrwnl4i6" path="res://scripts/boss/rudrama_char.gd" id="1_hpn88"]
+[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="2_572jw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5kxcu"]
+radius = 0.4
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i60nm"]
+radius = 0.35
+height = 1.6
+
+[node name="RudramaChar" type="CharacterBody3D" unique_id=2017156122]
+script = ExtResource("1_hpn88")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1364992604]
+texture = ExtResource("2_572jw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1860653854]
+shape = SubResource("CapsuleShape3D_5kxcu")
+
+[node name="HurtboxArea" type="Area3D" parent="." unique_id=1473195062]
+
+[node name="CollisionHurtbox" type="CollisionShape3D" parent="HurtboxArea" unique_id=1795327701]
+shape = SubResource("CapsuleShape3D_i60nm")

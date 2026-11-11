@@ -6,9 +6,9 @@ signal boss_changed
 @export var safe_room_path := "res://scenes/rooms/cooldown_nc.tscn"
 @export var pre_boss_chamber_path := "res://scenes/rooms/pre_boss_chamber.tscn"
 @export var boss_rooms: Dictionary[String, String] = {
-	"GWENITH": "res://scenes/rooms/boss_sandbox.tscn",
-	"SHUYI": "res://scenes/rooms/boss_sandbox_2.tscn",
-	"RUDRAMA": "res://scenes/rooms/boss_sandbox.tscn", # TUNE: placeholder until Rudrama's chamber exists
+	"GWENITH": "res://scenes/rooms/gwenith_fight.tscn",
+	"SHUYI": "res://scenes/rooms/shuyi_fight.tscn",
+	"RUDRAMA": "res://scenes/rooms/rudrama_fight.tscn", # TUNE: placeholder until Rudrama's chamber exists
 }
 @export var route_rest_rooms: Dictionary[String, String] = { # Huyana's non-combat room on each boss's route
 	"GWENITH": "res://scenes/rooms/huyana/barn.tscn",

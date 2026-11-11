@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cdy0s27bc8573"]
+
+[ext_resource type="Script" uid="uid://bse7npdfeo7pe" path="res://scripts/boss/shuyi_char.gd" id="1_dswg1"]
+[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="2_0qhg6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qfrv0"]
+radius = 0.35
+height = 1.65
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q6hwm"]
+radius = 0.35
+height = 1.6
+
+[node name="ShuyiChar" type="CharacterBody3D" unique_id=2039861861]
+script = ExtResource("1_dswg1")
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=1127552916]
+texture = ExtResource("2_0qhg6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1582469777]
+shape = SubResource("CapsuleShape3D_qfrv0")
+
+[node name="HurtboxArea" type="Area3D" parent="." unique_id=115812878]
+
+[node name="CollisionHurtbox" type="CollisionShape3D" parent="HurtboxArea" unique_id=1115231294]
+shape = SubResource("CapsuleShape3D_q6hwm")

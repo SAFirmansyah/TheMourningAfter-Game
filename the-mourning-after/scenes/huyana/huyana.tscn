@@ -1,0 +1,93 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/world.gd" id="1_world"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="PackedScene" path="res://scenes/camera/camera_rig.tscn" id="3_rig"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/altar.tscn" id="4_room_a"]
+[ext_resource type="PackedScene" path="res://scenes/ui/interaction_hud.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="6_pause"]
+[ext_resource type="PackedScene" path="res://scenes/ui/save_indicator.tscn" id="7_saving"]
+[ext_resource type="PackedScene" path="res://scenes/ui/skip_prompt.tscn" id="8_skip"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/day_cycle.tscn" id="9_day"]
+[ext_resource type="Script" path="res://scripts/huyana/sanctuary_manager.gd" id="10_sanctuary"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/ui/request_bubbles.tscn" id="11_bubbles"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/ui/order_menus.tscn" id="12_orders"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/tutorial.tscn" id="14_tutorial"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/ui/order_bubbles.tscn" id="13_order_bubbles"]
+
+[sub_resource type="Environment" id="Environment_bg"]
+background_mode = 1
+background_color = Color(0.09, 0.1, 0.12, 1)
+
+[node name="Huyana" type="Node3D"]
+script = ExtResource("1_world")
+save_slot = "huyana"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bg")
+
+[node name="Rooms" type="Node3D" parent="."]
+
+[node name="Altar" parent="Rooms" instance=ExtResource("4_room_a")]
+
+[node name="Player" parent="." node_paths=PackedStringArray("camera_rig") instance=ExtResource("2_player")]
+camera_rig = NodePath("../CameraRig")
+display_name = "Constance"
+weapon = null
+
+[node name="Card" parent="Player" index="0"]
+modulate = Color(0.72, 0.5, 0.95, 1)
+
+[node name="CameraRig" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("3_rig")]
+follow_target = NodePath("../Player")
+
+[node name="InteractionHUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_hud")]
+player = NodePath("../Player")
+
+[node name="Transition" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Fade" type="ColorRect" parent="Transition"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="PauseMenu" parent="." node_paths=PackedStringArray("world") instance=ExtResource("6_pause")]
+world = NodePath("..")
+
+[node name="SaveIndicator" parent="." instance=ExtResource("7_saving")]
+top_offset = 312.0
+
+[node name="SkipPrompt" parent="." instance=ExtResource("8_skip")]
+
+[node name="DayCycle" parent="." node_paths=PackedStringArray("player", "sanctuary") instance=ExtResource("9_day")]
+player = NodePath("../Player")
+sanctuary = NodePath("../SanctuaryManager")
+
+[node name="SanctuaryManager" type="Node" parent="." node_paths=PackedStringArray("world", "day_cycle")]
+script = ExtResource("10_sanctuary")
+world = NodePath("..")
+day_cycle = NodePath("../DayCycle")
+
+[node name="RequestBubbles" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("11_bubbles")]
+manager = NodePath("../SanctuaryManager")
+
+[node name="OrderBubbles" parent="." node_paths=PackedStringArray("manager") instance=ExtResource("13_order_bubbles")]
+manager = NodePath("../SanctuaryManager")
+
+[node name="OrderMenus" parent="." node_paths=PackedStringArray("manager", "player", "day_cycle") instance=ExtResource("12_orders")]
+manager = NodePath("../SanctuaryManager")
+player = NodePath("../Player")
+day_cycle = NodePath("../DayCycle")
+
+[node name="Tutorial" parent="." node_paths=PackedStringArray("world", "manager", "day_cycle", "player", "skip_button", "hud") instance=ExtResource("14_tutorial")]
+manager = NodePath("../SanctuaryManager")
+day_cycle = NodePath("../DayCycle")
+player = NodePath("../Player")
+skip_button = NodePath("../DayCycle/Clock/SkipTutorial")
+hud = NodePath("../InteractionHUD")
+world = NodePath("..")

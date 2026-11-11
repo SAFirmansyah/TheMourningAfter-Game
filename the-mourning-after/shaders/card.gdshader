@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, depth_draw_opaque;
+render_mode unshaded, depth_prepass_alpha;
 // Card material: optional see-through cutout over the player, optional foliage sway.
 // Sway adapted from an open-source canvas_item foliage shader, ported to 3D cards.
 
