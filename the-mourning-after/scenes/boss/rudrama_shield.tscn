@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://844eaa4d1brv"]
+
+[ext_resource type="Script" uid="uid://cvw0fxlm7lffn" path="res://scripts/boss/rudrama_shield.gd" id="1_b3as6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jhy0a"]
+height = 0.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vlovs"]
+height = 0.5
+
+[node name="RudramaShield" type="Area3D" unique_id=1852544211]
+script = ExtResource("1_b3as6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=253868969]
+shape = SubResource("CylinderShape3D_jhy0a")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=1601282758]
+shape = SubResource("CylinderShape3D_vlovs")
+collision_mask = 39

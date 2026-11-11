@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://77hyg5pj24v0"]
+
+[ext_resource type="Script" uid="uid://cnme11e5judsu" path="res://scripts/boss/gwenith_char.gd" id="1_qeqan"]
+[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="2_yb1ro"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhy0a"]
+radius = 0.35
+height = 1.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vlovs"]
+radius = 0.35
+height = 1.6
+
+[node name="GwenithChar" type="CharacterBody3D" unique_id=1392181352]
+collision_layer = 8
+collision_mask = 167
+script = ExtResource("1_qeqan")
+metadata/_custom_type_script = "uid://dnbf3vat68acm"
+
+[node name="Sprite3D" type="Sprite3D" parent="." unique_id=177550505]
+texture = ExtResource("2_yb1ro")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1856646187]
+shape = SubResource("CapsuleShape3D_jhy0a")
+
+[node name="HurtboxArea" type="Area3D" parent="." unique_id=1254217340]
+
+[node name="CollisionHurtbox" type="CollisionShape3D" parent="HurtboxArea" unique_id=2129606894]
+shape = SubResource("CapsuleShape3D_vlovs")
