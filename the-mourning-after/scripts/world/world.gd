@@ -7,11 +7,15 @@ extends Node3D
 ## room saves a wiped run instead (GDD: quitting mid-room loses the run); saving is off until it's cleared.
 ## Room changes (e.g. collected loot) only persist for the current room.
 ## Nodes in the "save_state" group add their own data via get_save_data() / load_save_data(data).
+## The title screen's Start from (testing) sets pending_start before opening the world.
 
 signal room_entered(room: Room)
 
 const SAVE_VERSION := 2
 const LOOT_PICKUP_SCENE := preload("res://scenes/loot/loot_pickup.tscn")
+const BOSS_TEST_WEAPON := preload("res://scripts/weapons/sword_bronze.tres") # Start from: first boss fight
+const BOSS_TEST_HEALTH := 100
+const BOSS_TEST_SPEED := 1.5
 
 @export var fade_time := 0.35 # TUNE: fade to/from black per room change (s)
 @export var load_save_on_start := true # off: always start fresh in the placed room
@@ -22,6 +26,7 @@ const LOOT_PICKUP_SCENE := preload("res://scenes/loot/loot_pickup.tscn")
 @export var act_two_slot := "huyana" # Act 2's save file; cleared when Perrin hands over
 @export var villain_max_health := 100 # TUNE: Constance's HP
 @export var villain_move_speed := 1.0 # TUNE: Constance's move speed multiplier
+@export_file("*.tscn") var sanctuary_room := "res://scenes/huyana/sanctuary.tscn" # Start from: Huyana
 
 @onready var player: Player = $Player
 @onready var player_hud: PlayerHUD = get_node_or_null(^"PlayerHUD") # hero side only
@@ -33,6 +38,7 @@ const LOOT_PICKUP_SCENE := preload("res://scenes/loot/loot_pickup.tscn")
 @onready var fate_bargain: FateBargain = get_node_or_null(^"FateBargain") # hero side only
 
 static var _arriving_in_black := false # the scene before this one ended on a black screen
+static var pending_start := "" # Start from: "silvaluca", "first_boss" or "huyana"; used once
 
 var current_room: Room
 var _transitioning := false
@@ -61,6 +67,15 @@ func _ready() -> void:
 
 	var data := SaveSystem.load_data(save_slot) if load_save_on_start else {}
 	var run: Dictionary = {}
+	if is_hero_side():
+		RunInventory.reset_session()
+		if pending_start == "huyana": # Perrin's part counts as done
+			data = _meta_save_data(base_room_path)
+			data.act_two = true
+			SaveSystem.save_data(data, save_slot)
+	elif pending_start == "huyana":
+		pending_start = ""
+		data = {"room": sanctuary_room}
 	if is_hero_side() and data.get("act_two", false):
 		_go_to_act_two()
 		return
@@ -104,10 +119,33 @@ func _ready() -> void:
 	for node in get_tree().get_nodes_in_group(&"save_state"):
 		if states.has(String(node.name)):
 			node.load_save_data(states[String(node.name)])
+	if is_hero_side() and pending_start == "first_boss":
+		_start_at_first_boss()
+	elif is_hero_side() and pending_start == "silvaluca":
+		save_game(false) # Start from: the test save exists from the first moment
+	if not is_hero_side() and data.has("room") and not data.has("version"):
+		save_game(false) # Start from: Huyana writes its first save straight away
+	pending_start = ""
 	if _arriving_in_black:
 		_arriving_in_black = false
 		fade.color.a = 1.0
 		_fade_to(0.0)
+
+
+## Start from: first boss fight. A normal (not first) run with both forest gauntlets done, standing
+## in the room before the boss: no forced bargains, a fixed loadout, and free unlimited boss re-rolls
+## so any of the three bosses can be picked.
+func _start_at_first_boss() -> void:
+	RunInventory.has_completed_first_run = true # no forced Fate 1
+	RunInventory.has_reached_boss = true # no forced Fate 2
+	RunInventory.take_loadout()
+	player.weapon = BOSS_TEST_WEAPON
+	player.stats.setup_fixed_stats(BOSS_TEST_HEALTH, BOSS_TEST_SPEED)
+	CampaignState.free_boss_bargains = true
+	CombatRunState.start_next_gauntlet() # past the pond
+	CampaignState.gauntlet_count = 2
+	_load_room(CampaignState.pre_boss_chamber_path, &"")
+	save_game(false)
 
 
 ## Plays a cutscene scene (a Cutscene root) over everything, pausing gameplay.
@@ -330,6 +368,7 @@ func _on_player_died() -> void:
 ## Bargain taken: full health now, the fight resumes once the countdown ends.
 func _on_revive_chosen() -> void:
 	RunInventory.buy_revive()
+	player.clear_stun()
 	player.stats.on_health_set(player.stats.current_max_health)
 	await fate_bargain.countdown_finished
 	set_menu_paused(false)
@@ -360,6 +399,11 @@ func _go_to_act_two() -> void:
 	get_tree().change_scene_to_file.call_deferred(act_two_scene)
 
 
+## Test button: the run ends (no death, no bargain) and starts over at the base.
+func reset_run() -> void:
+	_end_run_at_base()
+
+
 ## Sanctuary stand-in: the run ends and Perrin heads home, progress saved.
 func return_to_base() -> void:
 	_end_run_at_base()
@@ -375,6 +419,7 @@ func _end_run_at_base() -> void:
 	await _fade_to(1.0)
 
 	RunInventory.reset_on_death()
+	player.clear_stun()
 	CampaignState.reset_campaign()
 	player.stats.on_health_set(player.stats.current_max_health)
 	_load_room(base_room_path, &"")

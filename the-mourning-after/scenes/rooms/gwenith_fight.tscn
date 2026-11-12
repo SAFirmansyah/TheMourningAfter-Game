@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://bemo8fs2seh6f"]
 
+[ext_resource type="PackedScene" path="res://scenes/boss/gwenith_char.tscn" id="91_boss"]
 [ext_resource type="Script" uid="uid://dpt8nyhhmf7kl" path="res://scripts/world/boss_room.gd" id="1_jibqg"]
 [ext_resource type="Material" path="res://materials/ground.tres" id="2_5o2fl"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_ghhom"]
-[ext_resource type="PackedScene" path="res://scenes/test/prop.tscn" id="4_n48bx"]
-[ext_resource type="PackedScene" path="res://scenes/world/boss_clear_point.tscn" id="5_xigvd"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gip0k"]
 material = ExtResource("2_5o2fl")
@@ -129,8 +128,5 @@ target_entry = &"East"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
 target_entry = &"WestExit"
 
-[node name="BossStandIn" parent="." unique_id=1902000001 instance=ExtResource("4_n48bx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3)
-
-[node name="BossClearPoint" parent="BossStandIn" unique_id=1902000002 instance=ExtResource("5_xigvd")]
-lines = PackedStringArray()
+[node name="Gwenith" parent="." instance=ExtResource("91_boss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
