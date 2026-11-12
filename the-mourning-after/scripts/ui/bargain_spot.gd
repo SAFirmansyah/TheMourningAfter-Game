@@ -22,5 +22,5 @@ func _on_interacted() -> void:
 
 
 func _refresh_prompt() -> void:
-	interactable.prompt_label = RunInventory.bargain_prompt(CampaignState.boss_bargain_cost)
+	interactable.prompt_label = RunInventory.bargain_prompt(0 if CampaignState.free_boss_bargains else CampaignState.boss_bargain_cost)
 	interactable.enabled = CampaignState.can_bargain_boss()

@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://b5rjs8v16vgmp"]
 
+[ext_resource type="PackedScene" path="res://scenes/boss/rudrama_char.tscn" id="91_boss"]
+[ext_resource type="Script" path="res://scripts/world/boss_room.gd" id="90_room"]
 [ext_resource type="Material" path="res://materials/ground.tres" id="1_868ba"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="2_q0sae"]
 
@@ -32,6 +34,7 @@ size = Vector3(0.4, 2, 5)
 size = Vector3(0.4, 2, 3)
 
 [node name="RudramaFight" type="Node3D" unique_id=1173818160]
+script = ExtResource("90_room")
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=863070441]
 mesh = SubResource("PlaneMesh_375e6")
@@ -177,3 +180,6 @@ target_entry = &"WestExit"
 
 [node name="PlayerStart" type="Marker3D" parent="." unique_id=624232411]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, 0)
+
+[node name="Rudrama" parent="." instance=ExtResource("91_boss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)

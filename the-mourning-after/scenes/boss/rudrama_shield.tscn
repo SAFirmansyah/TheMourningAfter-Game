@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://844eaa4d1brv"]
 
-[ext_resource type="Script" uid="uid://cvw0fxlm7lffn" path="res://scripts/boss/rudrama_shield.gd" id="1_b3as6"]
+[ext_resource type="Script" path="res://scripts/boss/rudrama_shield.gd" id="1_script"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_jhy0a"]
-height = 0.5
+[sub_resource type="StandardMaterial3D" id="Mat_shield"]
+shading_mode = 0
+albedo_color = Color(0.6, 0.62, 0.7, 1)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_vlovs"]
-height = 0.5
+[sub_resource type="CylinderMesh" id="Mesh_shield"]
+material = SubResource("Mat_shield")
+top_radius = 0.45
+bottom_radius = 0.45
+height = 0.1
 
-[node name="RudramaShield" type="Area3D" unique_id=1852544211]
-script = ExtResource("1_b3as6")
+[node name="RudramaShield" type="Node3D"]
+script = ExtResource("1_script")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=253868969]
-shape = SubResource("CylinderShape3D_jhy0a")
-
-[node name="ShapeCast3D" type="ShapeCast3D" parent="." unique_id=1601282758]
-shape = SubResource("CylinderShape3D_vlovs")
-collision_mask = 39
+[node name="Disc" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_shield")

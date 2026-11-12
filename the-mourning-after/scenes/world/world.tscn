@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cywkvj6a2b6qt"]
 
+[ext_resource type="PackedScene" path="res://scenes/ui/test_tools.tscn" id="90_tools"]
 [ext_resource type="Script" uid="uid://crvbgui6750ee" path="res://scripts/world/world.gd" id="1_world"]
 [ext_resource type="PackedScene" uid="uid://cr0w4u33y1d57" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://scenes/camera/camera_rig.tscn" id="3_rig"]
@@ -63,3 +64,6 @@ world = NodePath("..")
 [node name="PlayerHUD" parent="." unique_id=1921822603 instance=ExtResource("9_1yooq")]
 
 [node name="FateBargain" parent="." instance=ExtResource("10_fate")]
+
+[node name="TestTools" parent="." node_paths=PackedStringArray("world") instance=ExtResource("90_tools")]
+world = NodePath("..")

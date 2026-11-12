@@ -1,6 +1,7 @@
 class_name PauseMenu
 extends CanvasLayer
 ## Escape pauses everything: grayscale overlay, slide-out menu, quit confirmation, stats sheet.
+## Quit goes back to the title screen rather than closing the game.
 
 @export var world: World
 @export var slide_time := 0.25 # TUNE: menu and quit box slide in/out (s)
@@ -41,7 +42,7 @@ func _ready() -> void:
 	save_button.pressed.connect(world.save_game)
 	quit_button.pressed.connect(_open_quit_box)
 	save_quit_button.pressed.connect(_save_and_quit)
-	quit_no_save_button.pressed.connect(get_tree().quit)
+	quit_no_save_button.pressed.connect(_quit_to_title)
 	cancel_button.pressed.connect(_close_quit_box)
 	for button: Button in [resume_button, save_button, stats_button, quit_button, save_quit_button, quit_no_save_button, cancel_button, stats_close_button]:
 		button.mouse_entered.connect(func() -> void:
@@ -97,7 +98,7 @@ func close() -> void:
 func _open_quit_box() -> void:
 	stats_box.hide()
 	if not world.has_unsaved_changes():
-		get_tree().quit()
+		_quit_to_title()
 		return
 	_set_enabled(save_quit_button, world.can_save())
 	quit_box.show()
@@ -208,7 +209,12 @@ func _hide_quit_box_now() -> void:
 
 func _save_and_quit() -> void:
 	world.save_game()
-	get_tree().quit()
+	_quit_to_title()
+
+
+func _quit_to_title() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_file(TestTools.TITLE_SCENE)
 
 
 func _restart_tween() -> void:

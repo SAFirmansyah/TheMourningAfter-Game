@@ -80,13 +80,9 @@ func set_speed(multiplier: float) -> void:
 	speed = multiplier
 
 
-## Testing: wipes this world's save and restarts from the first day.
+## Testing: back to a brand-new game (every save wiped, title screen).
 func _reset_save() -> void:
-	var world := get_parent() as World
-	if world:
-		SaveSystem.delete_save(world.save_slot)
-	get_tree().paused = false
-	get_tree().reload_current_scene()
+	TestTools.reset_save(get_tree())
 
 
 func _start_night() -> void:

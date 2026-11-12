@@ -1,231 +1,194 @@
 class_name BossGwenith
-extends CharacterBody3D
+extends Boss
+## Gwenith: rapid sickle slashes, dash strikes, thrown pesticide and the pollen-cloud vanish.
+## From 30% HP she adds Ensnared: vine patches that root Perrin while she slashes him.
 
-signal defeated
-
-enum State { CHASE, BASIC_ATTACK, DASH_ATTACK, PESTICIDE, POLLEN_CLOUD, ENSNARED_GRAB }
-
-@export var stats: BossStats
-@export var target: Node3D
-
-@export_group("Movement")
-@export var base_move_speed := 4.0 # TUNE
-@export var move_speed_multiplier := 2.0
+const PESTICIDE_SCENE := preload("res://scenes/boss/pesticide_gwen.tscn")
+const VINE_SCENE := preload("res://scenes/boss/vine_trap_gwen.tscn")
+const POLLEN_SCENE := preload("res://scenes/boss/pollen_cloud.tscn")
 
 @export_group("Basic Attack")
 @export var basic_damage := 5
 @export var basic_cooldown := 0.3
-@export var basic_range := 1.6 # TUNE: distance to trigger
-@export var basic_hitbox_spacing := 0.3
-@export var basic_hitbox_radius := 0.3
-@export var basic_hitbox_height := 1.0
-@export var basic_hitbox_lifetime := 0.15
+@export var basic_range := 1.8 # TUNE: distance at which she slashes (m)
+@export var basic_windup := 0.08 # TUNE: pause before each slash lands (s)
+@export var basic_reach := 1.3 # TUNE: slash reach (m)
+@export var basic_arc := 70.0 # TUNE: slash width (degrees)
 
 @export_group("Dash Attack")
 @export var dash_damage := 15
 @export var dash_cooldown := 5.0
-@export var dash_speed := 18.0 # TUNE
-@export var dash_duration := 0.2 # TUNE: how long the dash burst lasts
+@export var dash_min_range := 3.5 # TUNE: only dashes at Perrin from at least this far (m)
+@export var dash_speed := 20.0 # TUNE (m/s)
+@export var dash_windup := 0.3 # TUNE: crouch before the dash (s)
 
 @export_group("Pesticide")
-@export var pesticide_scene: PackedScene # AOE hazard scene, see PesticideHazard.gd
-@export var pesticide_radius := 3.0
+@export var pesticide_cooldown := 8.0 # TUNE: not in the spec
+@export var pesticide_first_delay := 4.0 # TUNE: first throw this long into the fight (s)
+@export var pesticide_range := 9.0 # TUNE: throws at Perrin within this distance (m)
+@export var pesticide_radius := 2.0 # TUNE (m)
 @export var pesticide_dps := 5
 @export var pesticide_duration := 3.0
-@export var pesticide_cooldown := 8.0 # TUNE — not specified in design
+@export var pesticide_windup := 0.35 # TUNE: throw time; lands where Perrin stood (s)
 
 @export_group("Pollen Cloud")
-@export var pollen_cloud_radius := 3.0
-@export var pollen_cloud_count := 4
-@export var pollen_cloud_duration := 5.0
-@export var pollen_cloud_cooldown := 15.0 # TUNE — not specified
+@export var pollen_cooldown := 15.0 # TUNE: not in the spec
+@export var pollen_first_delay := 9.0 # TUNE: first vanish this long into the fight (s)
+@export var pollen_total_time := 5.0
+@export var pollen_warning := 1.0 # TUNE: the second cloud shows this long before she steps out of it (s)
+@export var pollen_reappear_distance := 3.5 # TUNE: reappears this far from Perrin (m)
 
-@export_group("Ensnared Phase")
+@export_group("Ensnared")
 @export var ensnared_health_fraction := 0.3
-@export var vine_scene: PackedScene # see VineHazard.gd
-@export var vine_duration := 5.0
-@export var vine_cooldown := 10.0
+@export var ensnared_cooldown := 10.0
+@export var ensnared_patches := 3 # TUNE: vine patches per cast; the first is under Perrin
+@export var ensnared_radius := 1.6 # TUNE (m)
+@export var ensnared_spread := 4.0 # TUNE: other patches land this far from Perrin (m)
+@export var ensnared_warning := 5.0 # TUNE: patches show this long before erupting (s)
+@export var ensnared_root_time := 5.0 # TUNE: how long a caught Perrin stays rooted (s)
+@export var ensnared_damage := 5
 
-var _current_attack_damage := 0
-var _state := State.CHASE
-var _facing := Vector2.DOWN
-var _basic_cd_left := 0.0
-var _dash_cd_left := 0.0
-var _pesticide_cd_left := 0.0
-var _pollen_cd_left := 0.0
-var _vine_cd_left := 0.0
+const DASH_COLOR := Color(1.0, 0.9, 0.55) # TUNE: indicator colours per move
+const POLLEN_PUFF := 0.4 # TUNE: she's seen inside the first cloud this long before vanishing (s)
+const PESTICIDE_COLOR := Color(0.6, 0.95, 0.25)
+const POLLEN_COLOR := Color(1.0, 0.85, 0.35)
+const ENSNARED_COLOR := Color(0.3, 0.75, 0.3)
+const ENSNARED_CAST := 0.5 # TUNE: she stands summoning the vines this long (s)
+
 var _ensnared_unlocked := false
-var _is_dead := false
+var _grab_pending := false
 
 
 func _ready() -> void:
-	if stats == null:
-		stats = BossStats.new()
-	else:
-		stats = stats.duplicate()
-	stats.health_depleted.connect(_on_health_depleted)
-	stats.health_change.connect(_on_health_change)
+	super()
+	use(&"pesticide", pesticide_first_delay)
+	use(&"pollen", pollen_first_delay)
 
 
-func receive_hit(amount: int) -> void:
-	stats.take_damage(amount)
-
-
-func _on_health_change(cur: int, max_h: int) -> void:
-	if not _ensnared_unlocked and float(cur) / float(max_h) <= ensnared_health_fraction:
+func _on_health_fraction(fraction: float) -> void:
+	if fraction <= ensnared_health_fraction:
 		_ensnared_unlocked = true
 
 
-func _on_health_depleted() -> void:
-	if _is_dead:
-		return
-	_is_dead = true
-	set_physics_process(false)
-	visible = false
-	collision_layer = 0
-	collision_mask = 0
-	defeated.emit()
-	queue_free()
+func _think(to: Vector3) -> Vector3:
+	var dist := to.length()
+	if _grab_pending:
+		_grab_pending = false
+		if target.is_stunned():
+			_grab()
+			return Vector3.ZERO
+	if _ensnared_unlocked and is_ready(&"ensnared"):
+		_ensnared()
+		return Vector3.ZERO
+	if is_ready(&"pollen"):
+		_pollen()
+		return Vector3.ZERO
+	if is_ready(&"pesticide") and dist <= pesticide_range:
+		_pesticide()
+		return Vector3.ZERO
+	if dist >= dash_min_range and is_ready(&"dash"):
+		_dash_attack()
+		return Vector3.ZERO
+	if dist <= basic_range and is_ready(&"basic"):
+		_basic()
+		return Vector3.ZERO
+	return chase(to)
 
 
-func _physics_process(delta: float) -> void:
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	_basic_cd_left = maxf(0.0, _basic_cd_left - delta)
-	_dash_cd_left = maxf(0.0, _dash_cd_left - delta)
-	_pesticide_cd_left = maxf(0.0, _pesticide_cd_left - delta)
-	_pollen_cd_left = maxf(0.0, _pollen_cd_left - delta)
-	_vine_cd_left = maxf(0.0, _vine_cd_left - delta)
-
-	if target == null or _state != State.CHASE:
-		return
-
-	var direction := (target.global_position - global_position).normalized()
-	_facing = Vector2(direction.x, direction.z)
-	var dist := global_position.distance_to(target.global_position)
-
-	# Priority order is a TUNE decision — currently: vine > pollen > pesticide > dash > basic > chase.
-	if _ensnared_unlocked and _vine_cd_left <= 0.0:
-		_start_ensnared()
-	elif _pollen_cd_left <= 0.0:
-		_start_pollen_cloud()
-	elif _pesticide_cd_left <= 0.0:
-		_start_pesticide()
-	elif dist > basic_range and _dash_cd_left <= 0.0:
-		_start_dash_attack()
-	elif dist <= basic_range and _basic_cd_left <= 0.0:
-		_start_basic_attack()
-	elif dist > basic_range:
-		velocity = direction * base_move_speed * move_speed_multiplier
-		move_and_slide()
-	else:
-		velocity = Vector3.ZERO
+func _basic() -> void:
+	busy = true
+	use(&"basic", basic_cooldown)
+	await wait(basic_windup)
+	_slash(basic_damage)
+	busy = false
 
 
-func _spawn_twin_hitbox(damage: int) -> void:
-	var side := Vector3(-_facing.y, 0.0, _facing.x)
-	var forward := Vector3(_facing.x, 0.0, _facing.y)
-	for n in 2:
-		var hitbox := preload("res://scenes/weapon/weapon_hitbox.tscn").instantiate() as Hitbox
-		hitbox.damage = damage
-		hitbox.unit_type = Stats.UnitType.ENEMY
-		hitbox.ignore_root = self
-		hitbox.hitbox_lifetime = basic_hitbox_lifetime
-		hitbox.hit_landed.connect(_on_hitbox_hit)
-		add_child(hitbox)
-
-		var shape_node: CollisionShape3D
-		for child in hitbox.get_children():
-			if child is CollisionShape3D:
-				shape_node = child
-				break
-		var capsule := (shape_node.shape as CapsuleShape3D).duplicate()
-		capsule.radius = basic_hitbox_radius
-		capsule.height = basic_hitbox_height
-		shape_node.shape = capsule
-
-		var lateral := (n - 0.5) * basic_hitbox_spacing
-		hitbox.global_position = global_position + forward * (0.5 + basic_hitbox_height / 2.0) + side * lateral
-
-func _start_basic_attack() -> void:
-	_state = State.BASIC_ATTACK
-	_basic_cd_left = basic_cooldown
-	_current_attack_damage = basic_damage
-	_spawn_twin_hitbox(basic_damage)
-	_state = State.CHASE
-
-func _on_hitbox_hit(hit_target: Node3D) -> void:
-	if hit_target.has_method("receive_hit"):
-		hit_target.receive_hit(_current_attack_damage) # damage already baked into the hitbox; see note below
+func _slash(damage: int) -> void:
+	strike(arc_offsets(basic_arc, basic_reach, 3), damage, 0.45)
 
 
-
-func _start_dash_attack() -> void:
-	_state = State.DASH_ATTACK
-	_dash_cd_left = dash_cooldown
-	var direction := (target.global_position - global_position).normalized()
-	velocity = direction * dash_speed
-	await get_tree().create_timer(dash_duration).timeout
-	_current_attack_damage = dash_damage
-	_spawn_twin_hitbox(dash_damage)
-	_state = State.CHASE
-
-
-func _start_pesticide() -> void:
-	_state = State.PESTICIDE
-	_pesticide_cd_left = pesticide_cooldown
-	if pesticide_scene:
-		var hazard := pesticide_scene.instantiate()
-		get_parent().add_child(hazard)
-		hazard.global_position = global_position
-		if hazard.has_method("configure"):
-			hazard.configure(pesticide_radius, pesticide_dps, pesticide_duration, self)
-	_state = State.CHASE
+func _dash_attack() -> void:
+	busy = true
+	use(&"dash", dash_cooldown)
+	announce("Dash!", DASH_COLOR)
+	await wait(dash_windup)
+	var to := flat(target.global_position - global_position)
+	await dash_toward(to, to.length() - 1.0, dash_speed)
+	face(target.global_position - global_position)
+	_slash(dash_damage)
+	await wait(0.2)
+	busy = false
 
 
-func _start_pollen_cloud() -> void:
-	_state = State.POLLEN_CLOUD
-	_pollen_cd_left = pollen_cloud_cooldown
-	visible = false
-	collision_layer = 0
-
-	var points: Array[Vector3] = []
-	for i in pollen_cloud_count:
-		var angle := randf_range(0.0, TAU)
-		var offset := Vector3(cos(angle), 0.0, sin(angle)) * pollen_cloud_radius
-		points.append(target.global_position + offset)
-
-	await get_tree().create_timer(pollen_cloud_duration).timeout
-
-	global_position = points[randi_range(0, points.size() - 1)]
-	visible = true
-	collision_layer = 16 # TUNE: restore to whatever layer this boss uses
-
-	_dash_cd_left = 0.0 # "immediately uses dash-ATK regardless of cooldown status"
-	_start_dash_attack()
+func _pesticide() -> void:
+	busy = true
+	use(&"pesticide", pesticide_cooldown)
+	announce("Pesticide", PESTICIDE_COLOR)
+	var spot := target.global_position
+	await wait(pesticide_windup)
+	var puddle := PESTICIDE_SCENE.instantiate() as PesticideHazard
+	get_parent().add_child(puddle)
+	puddle.global_position = Vector3(spot.x, global_position.y, spot.z)
+	puddle.configure(target, pesticide_radius, pesticide_dps, pesticide_duration)
+	busy = false
 
 
-func _start_ensnared() -> void:
-	_state = State.ENSNARED_GRAB
-	_vine_cd_left = vine_cooldown
-	if vine_scene:
-		var vine := vine_scene.instantiate()
+## Vanishes in one cloud, reappears near Perrin in another, then dash-strikes at once.
+func _pollen() -> void:
+	busy = true
+	use(&"pollen", pollen_cooldown)
+	announce("Pollen Cloud", POLLEN_COLOR)
+	_cloud(global_position)
+	await wait(POLLEN_PUFF)
+	set_hidden(true)
+	await wait(pollen_total_time - pollen_warning - POLLEN_PUFF)
+	var spot := find_open_spot(target.global_position, pollen_reappear_distance)
+	_cloud(spot)
+	await wait(pollen_warning)
+	global_position = spot
+	set_hidden(false)
+	face(target.global_position - global_position)
+	busy = false
+	cooldowns[&"dash"] = 0.0 # regardless of the dash cooldown
+	_dash_attack()
+
+
+func _cloud(at: Vector3) -> void:
+	var cloud := POLLEN_SCENE.instantiate() as Node3D
+	get_parent().add_child(cloud)
+	cloud.global_position = Vector3(at.x, global_position.y, at.z)
+
+
+func _ensnared() -> void:
+	busy = true
+	use(&"ensnared", ensnared_cooldown)
+	announce("Ensnared!", ENSNARED_COLOR)
+	var centres: Array[Vector3] = [target.global_position]
+	for i in ensnared_patches - 1:
+		centres.append(find_open_spot(target.global_position, ensnared_spread))
+	for centre in centres:
+		var vine := VINE_SCENE.instantiate() as VineHazard
 		get_parent().add_child(vine)
-		vine.configure(self, target)
-	else:
-		_state = State.CHASE
+		vine.global_position = Vector3(centre.x, global_position.y, centre.z)
+		vine.configure(self, target, ensnared_radius, ensnared_warning, ensnared_root_time, ensnared_damage)
+	await wait(ENSNARED_CAST)
+	busy = false
 
 
-## Called by VineHazard once it erupts, if the player was standing inside.
-func begin_grab(player: Node3D) -> void:
-	player.input_enabled = false
-	global_position = player.global_position + Vector3(-_facing.x, 0, -_facing.y) * 1.0
-	var grab_timer := get_tree().create_timer(vine_duration)
-	var strike_interval := 0.4 # TUNE: time between repeated strikes during the grab
-	_current_attack_damage = basic_damage 
-	while grab_timer.time_left > 0.0:
-		_spawn_twin_hitbox(basic_damage)
-		await get_tree().create_timer(strike_interval).timeout
-	player.input_enabled = true
-	_state = State.CHASE
+## A vine patch caught Perrin: she closes in on her next free moment.
+func on_player_ensnared() -> void:
+	_grab_pending = true
+
+
+## Dashes in and keeps slashing until Perrin breaks free.
+func _grab() -> void:
+	busy = true
+	var to := flat(target.global_position - global_position)
+	if to.length() > basic_range:
+		await dash_toward(to, to.length() - 1.0, dash_speed)
+	while target and target.is_stunned():
+		face(target.global_position - global_position)
+		await wait(basic_windup)
+		_slash(basic_damage)
+		await wait(maxf(basic_cooldown - basic_windup, 0.05))
+	busy = false
