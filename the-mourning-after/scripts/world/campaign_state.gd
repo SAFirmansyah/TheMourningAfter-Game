@@ -26,6 +26,7 @@ var has_boss_bargained := false
 var boss_cleared := false
 var free_boss_bargains := false # Start from (testing): boss re-rolls are free and unlimited this run
 
+var defeated_boss_name := ""
 var _remaining_boss_pool: Array[String] = []
 
 var chosen_boss_path: String:
@@ -39,6 +40,7 @@ func reset_campaign() -> void:
 	chosen_boss = ""
 	has_boss_bargained = false
 	boss_cleared = false
+	defeated_boss_name = ""
 	_remaining_boss_pool.clear()
 
 
@@ -119,3 +121,7 @@ func load_state(state: Dictionary) -> void:
 	has_boss_bargained = state.get("has_boss_bargained", false)
 	boss_cleared = state.get("boss_cleared", false)
 	_remaining_boss_pool.assign(state.get("remaining_boss_pool", []))
+	
+	
+func mark_boss_defeated(boss_name: String) -> void:
+	defeated_boss_name = boss_name

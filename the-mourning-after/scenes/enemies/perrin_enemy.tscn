@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://bmlc88qlhew43"]
+
+[ext_resource type="Script" uid="uid://c5slr6upa5yvx" path="res://scripts/enemies/perrin_enemy.gd" id="1_ql28b"]
+[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="2_8tbbj"]
+[ext_resource type="Script" uid="uid://bue1mi5yjlgyn" path="res://scripts/visual/facing_card.gd" id="3_uehow"]
+[ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="4_3l04v"]
+[ext_resource type="Script" uid="uid://glnwwouy5k35" path="res://scripts/player/sword_visual.gd" id="5_55085"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_72gnk"]
+radius = 0.35
+height = 1.65
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_oivmy"]
+radius = 0.35
+height = 1.65
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8hpro"]
+shading_mode = 0
+albedo_color = Color(0.9, 0.87, 0.78, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hf2j8"]
+material = SubResource("StandardMaterial3D_8hpro")
+size = Vector3(0.9, 0.12, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4j0vk"]
+material = SubResource("StandardMaterial3D_8hpro")
+size = Vector3(0.08, 0.2, 0.36)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sparkle"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_v1ssk"]
+material = SubResource("StandardMaterial3D_sparkle")
+size = Vector2(0.12, 0.12)
+
+[sub_resource type="Gradient" id="Gradient_jp5kn"]
+offsets = PackedFloat32Array(0, 0.25, 1)
+colors = PackedColorArray(1, 0.95, 0.6, 0, 1, 0.9, 0.45, 1, 1, 0.8, 0.3, 0)
+
+[node name="PerrinEnemy" type="CharacterBody3D" unique_id=1384270876]
+script = ExtResource("1_ql28b")
+
+[node name="Card" type="Sprite3D" parent="." unique_id=2001400344]
+process_physics_priority = 20
+offset = Vector2(0, 64)
+pixel_size = 0.014
+alpha_cut = 1
+texture = ExtResource("2_8tbbj")
+script = ExtResource("3_uehow")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=982151769]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_72gnk")
+
+[node name="PlayerHurtBox" type="Area3D" parent="." unique_id=596226689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+script = ExtResource("4_3l04v")
+
+[node name="CollisionHurtBox" type="CollisionShape3D" parent="PlayerHurtBox" unique_id=1138710218]
+shape = SubResource("CapsuleShape3D_oivmy")
+
+[node name="Sword" type="Node3D" parent="." unique_id=575825867]
+transform = Transform3D(0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, 0.819152, 0, 0.8, 0)
+script = ExtResource("5_55085")
+
+[node name="Blade" type="MeshInstance3D" parent="Sword" unique_id=2011808560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, 0, 0)
+mesh = SubResource("BoxMesh_hf2j8")
+
+[node name="Guard" type="MeshInstance3D" parent="Sword" unique_id=1080282124]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+mesh = SubResource("BoxMesh_4j0vk")
+
+[node name="ReadySparkle" type="CPUParticles3D" parent="." unique_id=732452654]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+emitting = false
+amount = 10
+lifetime = 0.9
+mesh = SubResource("QuadMesh_v1ssk")
+emission_shape = 1
+emission_sphere_radius = 0.35
+direction = Vector3(0, 1, 0)
+spread = 30.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.2
+initial_velocity_max = 0.5
+scale_amount_min = 0.5
+scale_amount_max = 1.2
+color_ramp = SubResource("Gradient_jp5kn")
