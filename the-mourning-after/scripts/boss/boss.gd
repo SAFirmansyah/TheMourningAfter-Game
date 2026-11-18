@@ -114,6 +114,16 @@ func _physics_process(delta: float) -> void:
 		card.flip_h = _facing.x < 0.0
 
 
+func set_stats(new_stats: Stats) -> void:
+	stats = new_stats
+	stats.setup_stats()
+	stats.health_depleted.connect(_die)
+	stats.health_change.connect(func(cur: int, max_h: int) -> void:
+		if max_h > 0:
+			_on_health_fraction(float(cur) / max_h))
+	_damage_flash.watch(stats, card)
+	health_bar.bind(self)
+	get_node("HurtboxArea").refresh_layer()
 # --- Overridden by each boss ---------------------------------------------------------------------
 
 ## Picks the next move (start one as a coroutine, without awaiting) or returns a walk direction.

@@ -86,7 +86,7 @@ mesh = SubResource("BoxMesh_hf2j8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
 mesh = SubResource("BoxMesh_4j0vk")
 
-[node name="ReadySparkle" type="CPUParticles3D" parent="." unique_id=732452654]
+[node name="Aura" type="CPUParticles3D" parent="." unique_id=732452654]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 emitting = false
 amount = 10
