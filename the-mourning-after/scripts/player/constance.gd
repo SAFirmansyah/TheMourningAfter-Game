@@ -1,54 +1,52 @@
 class_name Villain
 extends Player
-## The player-controlled side of the final fight: Perrin's own moveset (dash, attack, weapon
-## abilities) with a fixed starting loadout, plus the three boss-borrowed tools — self-heal,
-## shield, pesticide throw — minus whichever one Hero already defeated this run.
-## Spellcasting and summoning are stubbed below — their mechanics aren't speced yet.
+## Constance's side of the final fight. Fixed loadout, plus two spells determined by which boss
+## Perrin defeated this run, and a Q summon (one of each small mob type, 20s cooldown that only
+## starts once the summoned pair is fully cleared).
 
-@export var staff: WeaponData # duplicate of sword_iron.tres, reskinned as a staff
+enum SpellType { NONE, HEALING, ENSNARED, ADRENALINE }
 
-@export_group("Borrowed Abilities")
-@export var has_self_heal := true    # stripped if Shuyi was the one defeated
-@export var has_shield := true       # stripped if Rudrama was the one defeated
-@export var has_pesticide := true    # stripped if Gwenith was the one defeated
+@export var staff: WeaponData
 
-@export_group("Heal Potion (borrowed from Shuyi)")
+@export_group("Spell 1 (Healing)")
+@export var heal_fraction := 0.5 # TUNE: fraction of MISSING health restored
 @export var heal_cooldown := 15.0
-@export var heal_amount := 50 # TUNE — Shuyi's version is "50% of lost HP"; needs your own number or a % calc here
 
-@export_group("Shield (borrowed from Rudrama)")
-@export var block_damage_reduction := 0.3
-@export var block_duration := 5.0
-@export var block_cooldown := 5.0
+@export_group("Spell 2 (Adrenaline)")
+@export var adrenaline_duration := 10.0
+@export var adrenaline_speed_bonus := 0.5
+@export var adrenaline_cooldown := 20.0
 
-@export_group("Pesticide (borrowed from Gwenith)")
-const PESTICIDE_SCENE := preload("res://scenes/boss/pesticide_gwen.tscn")
-@export var pesticide_cooldown := 8.0
-@export var pesticide_radius := 2.0
-@export var pesticide_dps := 5
-@export var pesticide_duration := 3.0
+@export_group("Spell (Ensnared)")
+const VINE_SCENE := preload("res://scenes/boss/vine_trap_gwen.tscn")
+@export var ensnared_radius := 1.6
+@export var ensnared_warning := 5.0
+@export var ensnared_root_time := 5.0
+@export var ensnared_damage := 5
+@export var ensnared_cooldown := 10.0
 
-@export_group("Summoning")
+@export_group("Summon")
 @export var deformed_human_scene: PackedScene
 @export var low_mutant_scene: PackedScene
-@export var summon_cooldown := 10.0
-@export var max_active_summons := 2
+@export var summon_cooldown := 20.0
 
-var _heal_cd_left := 0.0
-var _shield_cd_left := 0.0
-var _pesticide_cd_left := 0.0
+var spell_1 := SpellType.NONE
+var spell_2 := SpellType.NONE
+
+var _spell_1_cd_left := 0.0
+var _spell_2_cd_left := 0.0
+var _adrenaline_left := 0.0
+var _grab_pending := false
+
 var _summon_cd_left := 0.0
-var _is_blocking := false
-var _block_absorbed := 0
 var _active_summons: Array[Node] = []
+var _summons_were_active := false
 
 
 func _ready() -> void:
 	super._ready()
 	_apply_villain_loadout()
-	has_self_heal = CampaignState.defeated_boss_name != "Shuyi"
-	has_shield = CampaignState.defeated_boss_name != "Rudrama"
-	has_pesticide = CampaignState.defeated_boss_name != "Gwenith"
+	_resolve_spells()
 
 
 func _apply_villain_loadout() -> void:
@@ -65,79 +63,110 @@ func _apply_villain_loadout() -> void:
 	damage_reduction = 0.0
 
 
+func _resolve_spells() -> void:
+	var defeated := CampaignState.defeated_boss_name
+	spell_1 = SpellType.ENSNARED if defeated == "Shuyi" else SpellType.HEALING
+	spell_2 = SpellType.ENSNARED if defeated == "Rudrama" else SpellType.ADRENALINE
+
+
 func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
-	_heal_cd_left = maxf(0.0, _heal_cd_left - delta)
-	_shield_cd_left = maxf(0.0, _shield_cd_left - delta)
-	_pesticide_cd_left = maxf(0.0, _pesticide_cd_left - delta)
+
+	_spell_1_cd_left = maxf(0.0, _spell_1_cd_left - delta)
+	_spell_2_cd_left = maxf(0.0, _spell_2_cd_left - delta)
+
+	if _adrenaline_left > 0.0:
+		_adrenaline_left -= delta
+		is_invulnerable = true
+		if _adrenaline_left <= 0.0:
+			stats.move_speed_multiplier -= adrenaline_speed_bonus
+
+	_active_summons = _active_summons.filter(func(n): return is_instance_valid(n))
+	if _active_summons.is_empty() and _summons_were_active:
+		_summons_were_active = false
+		_summon_cd_left = summon_cooldown
 	_summon_cd_left = maxf(0.0, _summon_cd_left - delta)
 
+	if _grab_pending:
+		_grab_pending = false
+		var opponent := _find_opponent()
+		if opponent and opponent.has_method("is_stunned") and opponent.is_stunned():
+			_grab(opponent)
 
-func receive_hit(amount: int) -> void:
-	var incoming := amount
-	if _is_blocking:
-		incoming = int(incoming * (1.0 - block_damage_reduction))
-		_block_absorbed += incoming
-	stats.take_damage(incoming)
+
+func _grab(opponent: Node3D) -> void:
+	input_enabled = false
+	var to := opponent.global_position - global_position
+	if to.length() > attack_reach + weapon.hitbox_height / 2.0:
+		global_position = opponent.global_position - Vector3(to.x, 0.0, to.z).normalized() * 1.0
+
+	while opponent and is_instance_valid(opponent) and opponent.has_method("is_stunned") and opponent.is_stunned():
+		_facing = Vector2(to.x, to.z).normalized()
+		_try_attack()
+		await get_tree().create_timer(weapon.attack_cooldown + weapon.active_delay).timeout
+		to = opponent.global_position - global_position
+
+	input_enabled = true
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	super._unhandled_input(event)
 	if not input_enabled:
 		return
-	if has_self_heal and event.is_action_pressed(&"villain_heal") and _heal_cd_left <= 0.0:
-		_use_heal()
-	if has_shield and event.is_action_pressed(&"villain_shield") and _shield_cd_left <= 0.0 and not _is_blocking:
-		_use_shield()
-	if has_pesticide and event.is_action_pressed(&"villain_pesticide") and _pesticide_cd_left <= 0.0:
-		_use_pesticide()
-	if event.is_action_pressed(&"villain_summon") and _summon_cd_left <= 0.0:
-		_try_summon()
-	if event.is_action_pressed(&"villain_spell"):
-		_try_cast_spell()
+	if event.is_action_pressed(&"constance_spell_1") and _spell_1_cd_left <= 0.0:
+		_cast(spell_1)
+		_spell_1_cd_left = _cooldown_for(spell_1)
+	if event.is_action_pressed(&"constance_spell_2") and _spell_2_cd_left <= 0.0:
+		_cast(spell_2)
+		_spell_2_cd_left = _cooldown_for(spell_2)
+	if event.is_action_pressed(&"constance_summon") and _active_summons.is_empty() and _summon_cd_left <= 0.0:
+		_summon()
 
 
-func _use_heal() -> void:
-	_heal_cd_left = heal_cooldown
-	stats.on_health_set(stats.health + heal_amount)
+func _cooldown_for(spell: SpellType) -> float:
+	match spell:
+		SpellType.HEALING: return heal_cooldown
+		SpellType.ADRENALINE: return adrenaline_cooldown
+		SpellType.ENSNARED: return ensnared_cooldown
+	return 0.0
 
 
-func _use_shield() -> void:
-	_is_blocking = true
-	_block_absorbed = 0
-	_shield_cd_left = block_cooldown
-	await get_tree().create_timer(block_duration).timeout
-	_is_blocking = false
+func _cast(spell: SpellType) -> void:
+	match spell:
+		SpellType.HEALING:
+			var missing := stats.current_max_health - stats.health
+			stats.on_health_set(stats.health + int(missing * heal_fraction))
+		SpellType.ADRENALINE:
+			_adrenaline_left = adrenaline_duration
+			stats.move_speed_multiplier += adrenaline_speed_bonus
+		SpellType.ENSNARED:
+			var opponent := _find_opponent()
+			if opponent and VINE_SCENE:
+				var vine := VINE_SCENE.instantiate()
+				get_parent().add_child(vine)
+				vine.global_position = opponent.global_position
+				vine.configure(self, opponent, ensnared_radius, ensnared_warning, ensnared_root_time, ensnared_damage)
 
 
-func _use_pesticide() -> void:
-	_pesticide_cd_left = pesticide_cooldown
-	var hazard := PESTICIDE_SCENE.instantiate()
-	get_parent().add_child(hazard)
-	hazard.global_position = global_position + Vector3(_facing.x, 0.0, _facing.y) * 3.0
-	if hazard.has_method("configure"):
-		hazard.configure(_find_opponent(), pesticide_radius, pesticide_dps, pesticide_duration)
+## Called by VineHazard if the opponent gets caught — same callback name Boss uses.
+func on_player_ensnared() -> void:
+	_grab_pending = true
 
 
-func _try_summon() -> void:
-	_active_summons = _active_summons.filter(func(n): return is_instance_valid(n))
-	if _active_summons.size() >= max_active_summons:
-		return
-	_summon_cd_left = summon_cooldown
-	var scene := deformed_human_scene if randf() < 0.5 else low_mutant_scene
-	if scene == null:
-		return
-	var minion := scene.instantiate()
-	get_parent().add_child(minion)
-	minion.global_position = global_position + Vector3(_facing.x, 0.0, _facing.y) * 2.0
-	if "target" in minion:
-		minion.target = _find_opponent()
-	_active_summons.append(minion)
+func _summon() -> void:
+	_summons_were_active = true
+	var opponent := _find_opponent()
+	var scenes: Array[PackedScene] = [deformed_human_scene, low_mutant_scene]
+	for scene in scenes:
+		if scene == null:
+			continue
+		var minion: Node = scene.instantiate()
+		get_parent().add_child(minion)
+		minion.global_position = global_position + Vector3(_facing.x, 0.0, _facing.y) * 2.0
+		if "target" in minion:
+			minion.target = opponent
+		_active_summons.append(minion)
 
 
 func _find_opponent() -> Node3D:
-	return get_tree().get_first_node_in_group(&"boss") # FinalHeroOpponent — still in this group via Boss.add_to_group
-
-
-func _try_cast_spell() -> void:
-	push_warning("Villain spellcasting not yet designed — no-op")
+	return get_tree().get_first_node_in_group(&"boss")

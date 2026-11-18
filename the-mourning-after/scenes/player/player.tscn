@@ -1,12 +1,139 @@
 [gd_scene format=3 uid="uid://cr0w4u33y1d57"]
 
 [ext_resource type="Script" uid="uid://dnbf3vat68acm" path="res://scripts/player/player.gd" id="1_player"]
-[ext_resource type="Script" uid="uid://bue1mi5yjlgyn" path="res://scripts/visual/facing_card.gd" id="2_card"]
 [ext_resource type="Resource" uid="uid://26uqe6v7rx3s" path="res://scripts/stats/hero_stats.tres" id="2_p47bc"]
 [ext_resource type="Resource" uid="uid://fsd1jmnw4ict" path="res://scripts/weapons/sword_wood.tres" id="3_75vfm"]
-[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Texture2D" uid="uid://3icclc6j3duq" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00000.png" id="4_myrg7"]
+[ext_resource type="Texture2D" uid="uid://bgcqw3xqwtykf" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00001.png" id="5_kvlxm"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="6_75vfm"]
-[ext_resource type="Script" path="res://scripts/player/sword_visual.gd" id="7_sword"]
+[ext_resource type="Texture2D" uid="uid://bvrlhmhuxe5qm" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00002.png" id="6_uf5tr"]
+[ext_resource type="Texture2D" uid="uid://mdb6lb43xybn" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00003.png" id="7_lgqa7"]
+[ext_resource type="Script" uid="uid://glnwwouy5k35" path="res://scripts/player/sword_visual.gd" id="7_sword"]
+[ext_resource type="Texture2D" uid="uid://bp6ea67ywptpa" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00004.png" id="8_8ydkj"]
+[ext_resource type="Texture2D" uid="uid://b3crjmjoqm6i4" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00005.png" id="9_3j4b4"]
+[ext_resource type="Texture2D" uid="uid://cobjw3x4skthx" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00007.png" id="10_yj68g"]
+[ext_resource type="Texture2D" uid="uid://demayut45ojbw" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00008.png" id="11_ioxgp"]
+[ext_resource type="Texture2D" uid="uid://csho88v7p7exs" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00009.png" id="12_cnsyf"]
+[ext_resource type="Texture2D" uid="uid://27ugbdi33cth" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00010.png" id="13_007i1"]
+[ext_resource type="Texture2D" uid="uid://cvr8nty3i1waf" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00011.png" id="14_6cv16"]
+[ext_resource type="Texture2D" uid="uid://bmoahhtpfy313" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00000.png" id="15_4hvnv"]
+[ext_resource type="Texture2D" uid="uid://bphkd01ipjwq7" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00001.png" id="16_bbmj2"]
+[ext_resource type="Texture2D" uid="uid://pv0wle25e24a" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00002.png" id="17_kxw46"]
+[ext_resource type="Texture2D" uid="uid://d0dxlt3ir3xwm" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00003.png" id="18_8qxvo"]
+[ext_resource type="Texture2D" uid="uid://c4oqrd2msj18d" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00004.png" id="19_5q8fn"]
+[ext_resource type="Texture2D" uid="uid://dj21rod2haamp" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00005.png" id="20_wva7c"]
+[ext_resource type="Texture2D" uid="uid://diccyycqk6swv" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00006.png" id="21_7obkq"]
+[ext_resource type="Texture2D" uid="uid://i66y7nucaynr" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00007.png" id="22_vo27k"]
+[ext_resource type="Texture2D" uid="uid://bicjnkugiaskn" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00008.png" id="23_genst"]
+[ext_resource type="Texture2D" uid="uid://blttaysgmuolm" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00009.png" id="24_niom3"]
+[ext_resource type="Texture2D" uid="uid://74lt4abo1w0y" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00010.png" id="25_ttakn"]
+[ext_resource type="Texture2D" uid="uid://latvxfrbf763" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00011.png" id="26_rw8a5"]
+[ext_resource type="Texture2D" uid="uid://d4bnplsr3w1uv" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00012.png" id="27_iwuka"]
+[ext_resource type="Texture2D" uid="uid://b0ly8p6tw5pnk" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00013.png" id="28_hyqqp"]
+[ext_resource type="Texture2D" uid="uid://d2vwfeqahfkq0" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00014.png" id="29_ds1xl"]
+[ext_resource type="Texture2D" uid="uid://c4djlyvba5kjs" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00015.png" id="30_1u1sw"]
+[ext_resource type="Texture2D" uid="uid://dldm74kqepxvb" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00016.png" id="31_2t3bg"]
+[ext_resource type="Texture2D" uid="uid://c7v67npipxhkx" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00017.png" id="32_jrbya"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vlovs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_myrg7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kvlxm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_uf5tr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_lgqa7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8ydkj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3j4b4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_yj68g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ioxgp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_cnsyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_007i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_6cv16")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_4hvnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_bbmj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_kxw46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_8qxvo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_5q8fn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_wva7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_7obkq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_vo27k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_genst")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_niom3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_ttakn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_rw8a5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_iwuka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_hyqqp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_ds1xl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_1u1sw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_2t3bg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_jrbya")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 18.0
+}]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
 radius = 0.35
@@ -45,23 +172,24 @@ size = Vector2(0.12, 0.12)
 offsets = PackedFloat32Array(0, 0.25, 1)
 colors = PackedColorArray(1, 0.95, 0.6, 0, 1, 0.9, 0.45, 1, 1, 0.8, 0.3, 0)
 
-[node name="Player" type="CharacterBody3D" unique_id=2125016019 node_paths=PackedStringArray("card")]
+[node name="Player" type="CharacterBody3D" unique_id=2125016019]
 collision_layer = 4
 collision_mask = 11
 motion_mode = 1
 script = ExtResource("1_player")
-card = NodePath("Card")
 stats = ExtResource("2_p47bc")
 weapon = ExtResource("3_75vfm")
 attack_reach = 0.75
 
-[node name="Card" type="Sprite3D" parent="." unique_id=1692736394]
+[node name="Card" type="AnimatedSprite3D" parent="." unique_id=814884419]
 process_physics_priority = 20
+transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, 0, 0.9, 0)
 offset = Vector2(0, 64)
 pixel_size = 0.014
 alpha_cut = 1
-texture = ExtResource("3_icon")
-script = ExtResource("2_card")
+sprite_frames = SubResource("SpriteFrames_vlovs")
+animation = &"walk"
+frame_progress = 0.5254232
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=623702916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -86,8 +214,8 @@ mesh = SubResource("BoxMesh_blade")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
 mesh = SubResource("BoxMesh_guard")
 
-[node name="ReadySparkle" type="CPUParticles3D" parent="." unique_id=1440021004]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+[node name="Aura" type="CPUParticles3D" parent="." unique_id=1440021004]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 emitting = false
 amount = 10
 lifetime = 0.9

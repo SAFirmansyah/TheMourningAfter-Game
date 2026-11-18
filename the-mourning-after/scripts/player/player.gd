@@ -91,6 +91,7 @@ var _damage_flash: DamageFlash
 @onready var _body_shape: CollisionShape3D = $CollisionShape3D
 @onready var _sword: SwordVisual = get_node_or_null(^"Sword")
 @onready var _ready_sparkle: CPUParticles3D = get_node_or_null(^"ReadySparkle")
+@onready var sprite: AnimatedSprite3D = $Card
 
 func _ready() -> void:
 	motion_mode = MOTION_MODE_FLOATING
@@ -124,6 +125,11 @@ func _physics_process(delta: float) -> void:
 	var input := Vector2.ZERO if stunned else (Input.get_vector("move_left", "move_right", "move_up", "move_down") if input_enabled else forced_input)
 	if input != Vector2.ZERO:
 		_facing = input.normalized()
+		sprite.play("walk")
+		if input.x != 0:
+			sprite.flip_h = input.x < 0
+	else:
+		sprite.play("idle")
 
 	_recharge_dashes(delta)
 	if _dash_queued:

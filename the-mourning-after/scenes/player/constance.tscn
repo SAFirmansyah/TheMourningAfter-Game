@@ -1,10 +1,137 @@
 [gd_scene format=3 uid="uid://dhh6h5r6t4oq1"]
 
-[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="1_6gucb"]
 [ext_resource type="Script" uid="uid://4863h02pqnol" path="res://scripts/player/constance.gd" id="1_83nck"]
-[ext_resource type="Script" uid="uid://bue1mi5yjlgyn" path="res://scripts/visual/facing_card.gd" id="2_83nck"]
+[ext_resource type="Texture2D" uid="uid://3icclc6j3duq" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00000.png" id="2_pqbxj"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="3_8lbrl"]
+[ext_resource type="Texture2D" uid="uid://bgcqw3xqwtykf" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00001.png" id="3_avlu3"]
 [ext_resource type="Script" uid="uid://glnwwouy5k35" path="res://scripts/player/sword_visual.gd" id="4_amaya"]
+[ext_resource type="Texture2D" uid="uid://bvrlhmhuxe5qm" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00002.png" id="4_om64g"]
+[ext_resource type="Texture2D" uid="uid://mdb6lb43xybn" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00003.png" id="5_qqar0"]
+[ext_resource type="Texture2D" uid="uid://bp6ea67ywptpa" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00004.png" id="6_f4tbg"]
+[ext_resource type="Texture2D" uid="uid://b3crjmjoqm6i4" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00005.png" id="7_pvxsm"]
+[ext_resource type="Texture2D" uid="uid://cobjw3x4skthx" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00007.png" id="8_uwlvt"]
+[ext_resource type="Texture2D" uid="uid://demayut45ojbw" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00008.png" id="9_8m44x"]
+[ext_resource type="Texture2D" uid="uid://csho88v7p7exs" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00009.png" id="10_jhwdx"]
+[ext_resource type="Texture2D" uid="uid://27ugbdi33cth" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00010.png" id="11_8pr2k"]
+[ext_resource type="Texture2D" uid="uid://cvr8nty3i1waf" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00011.png" id="12_h54aq"]
+[ext_resource type="Texture2D" uid="uid://bmoahhtpfy313" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00000.png" id="13_nyxwp"]
+[ext_resource type="Texture2D" uid="uid://bphkd01ipjwq7" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00001.png" id="14_wbmrr"]
+[ext_resource type="Texture2D" uid="uid://pv0wle25e24a" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00002.png" id="15_umbja"]
+[ext_resource type="Texture2D" uid="uid://d0dxlt3ir3xwm" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00003.png" id="16_rrdyp"]
+[ext_resource type="Texture2D" uid="uid://c4oqrd2msj18d" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00004.png" id="17_aqyn5"]
+[ext_resource type="Texture2D" uid="uid://dj21rod2haamp" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00005.png" id="18_a75fm"]
+[ext_resource type="Texture2D" uid="uid://diccyycqk6swv" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00006.png" id="19_u4ug7"]
+[ext_resource type="Texture2D" uid="uid://i66y7nucaynr" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00007.png" id="20_ggrei"]
+[ext_resource type="Texture2D" uid="uid://bicjnkugiaskn" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00008.png" id="21_4e5dx"]
+[ext_resource type="Texture2D" uid="uid://blttaysgmuolm" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00009.png" id="22_qwt7h"]
+[ext_resource type="Texture2D" uid="uid://74lt4abo1w0y" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00010.png" id="23_ws3oe"]
+[ext_resource type="Texture2D" uid="uid://latvxfrbf763" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00011.png" id="24_s7ol3"]
+[ext_resource type="Texture2D" uid="uid://d4bnplsr3w1uv" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00012.png" id="25_bscbd"]
+[ext_resource type="Texture2D" uid="uid://b0ly8p6tw5pnk" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00013.png" id="26_d8r76"]
+[ext_resource type="Texture2D" uid="uid://d2vwfeqahfkq0" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00014.png" id="27_ha0u5"]
+[ext_resource type="Texture2D" uid="uid://c4djlyvba5kjs" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00015.png" id="28_hyc4p"]
+[ext_resource type="Texture2D" uid="uid://dldm74kqepxvb" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00016.png" id="29_43wg5"]
+[ext_resource type="Texture2D" uid="uid://c7v67npipxhkx" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00017.png" id="30_mgcrv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jhy0a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_pqbxj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_avlu3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_om64g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qqar0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_f4tbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pvxsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_uwlvt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_8m44x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jhwdx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_8pr2k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_h54aq")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_nyxwp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_wbmrr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_umbja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_rrdyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_aqyn5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_a75fm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_u4ug7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ggrei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_4e5dx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_qwt7h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_ws3oe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_s7ol3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_bscbd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_d8r76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_ha0u5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_hyc4p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_43wg5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_mgcrv")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u3137"]
 radius = 0.35
@@ -29,13 +156,14 @@ size = Vector3(0.08, 0.2, 0.36)
 [node name="Constance" type="CharacterBody3D" unique_id=145981841]
 script = ExtResource("1_83nck")
 
-[node name="Card" type="Sprite3D" parent="." unique_id=1194733654]
+[node name="Card" type="AnimatedSprite3D" parent="." unique_id=1720100852]
 process_physics_priority = 20
+transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, 0, 0.9, 0)
 offset = Vector2(0, 64)
 pixel_size = 0.014
 alpha_cut = 1
-texture = ExtResource("1_6gucb")
-script = ExtResource("2_83nck")
+sprite_frames = SubResource("SpriteFrames_jhy0a")
+animation = &"idle"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=345169524]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

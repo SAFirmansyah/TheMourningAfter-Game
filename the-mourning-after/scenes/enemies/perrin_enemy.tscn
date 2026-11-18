@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bue1mi5yjlgyn" path="res://scripts/visual/facing_card.gd" id="3_uehow"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="4_3l04v"]
 [ext_resource type="Script" uid="uid://glnwwouy5k35" path="res://scripts/player/sword_visual.gd" id="5_55085"]
+[ext_resource type="PackedScene" path="res://scenes/ui/boss_health_bar.tscn" id="6_8tbbj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_72gnk"]
 radius = 0.35
@@ -58,12 +59,20 @@ script = ExtResource("3_uehow")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_72gnk")
 
-[node name="PlayerHurtBox" type="Area3D" parent="." unique_id=596226689]
+[node name="HurtboxArea" type="Area3D" parent="." unique_id=596226689]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 script = ExtResource("4_3l04v")
 
-[node name="CollisionHurtBox" type="CollisionShape3D" parent="PlayerHurtBox" unique_id=1138710218]
+[node name="CollisionHurtBox" type="CollisionShape3D" parent="HurtboxArea" unique_id=1138710218]
 shape = SubResource("CapsuleShape3D_oivmy")
+
+[node name="StatusLabel" type="Label3D" parent="." unique_id=447453535]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0)
+pixel_size = 0.01
+billboard = 1
+no_depth_test = true
+text = "Status"
+font_size = 48
 
 [node name="Sword" type="Node3D" parent="." unique_id=575825867]
 transform = Transform3D(0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, 0.819152, 0, 0.8, 0)
@@ -93,3 +102,5 @@ initial_velocity_max = 0.5
 scale_amount_min = 0.5
 scale_amount_max = 1.2
 color_ramp = SubResource("Gradient_jp5kn")
+
+[node name="BossHealthBar" parent="." unique_id=1034646671 instance=ExtResource("6_8tbbj")]
