@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://inqew075ugr8"]
 
-[ext_resource type="Script" path="res://scripts/world/base_room.gd" id="1_room"]
-[ext_resource type="Material" path="res://materials/ground.tres" id="2_ground"]
+[ext_resource type="Script" uid="uid://kx8x5if2lsig" path="res://scripts/world/base_room.gd" id="1_room"]
+[ext_resource type="Texture2D" uid="uid://ccjrrxcuhjp88" path="res://textures/tile_stone_light.png" id="2_j1143"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_exit"]
 [ext_resource type="PackedScene" path="res://scenes/test/prop.tscn" id="4_prop"]
 [ext_resource type="PackedScene" path="res://scenes/world/run_start_point.tscn" id="8_start"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yfm18"]
+albedo_texture = ExtResource("2_j1143")
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
-material = ExtResource("2_ground")
+material = SubResource("StandardMaterial3D_yfm18")
 size = Vector2(24, 16)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_long"]
@@ -62,16 +65,12 @@ target_entry = &"WestExit"
 [node name="SwordStand" parent="Props" unique_id=844313245 instance=ExtResource("4_prop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 6)
 
-[node name="Card" parent="Props/SwordStand" index="0"]
-modulate = Color(0.8, 0.8, 0.85, 1)
-
 [node name="RunStartPoint" parent="Props/SwordStand" unique_id=1780628412 instance=ExtResource("8_start")]
+lines = PackedStringArray()
 
 [node name="PrayerSpot" parent="Props" unique_id=1780628413 instance=ExtResource("4_prop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
 
-[node name="Card" parent="Props/PrayerSpot" index="0"]
-modulate = Color(0.75, 0.6, 0.95, 1)
-
 [node name="RunStartPoint" parent="Props/PrayerSpot" unique_id=1780628414 instance=ExtResource("8_start")]
 kind = 1
+lines = PackedStringArray()

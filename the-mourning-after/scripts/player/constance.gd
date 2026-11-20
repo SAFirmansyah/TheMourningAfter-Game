@@ -47,14 +47,15 @@ func _ready() -> void:
 	super._ready()
 	_apply_villain_loadout()
 	_resolve_spells()
+	$PlayerHurtBox.refresh_layer()
 
 
 func _apply_villain_loadout() -> void:
 	stats = HeroStats.new()
-	stats.current_max_health = 100
-	stats.health = 100
+	stats.current_max_health = 200
+	stats.health = 200
 	stats.move_speed_multiplier = 1.0
-	stats.health_change.emit(100, 100)
+	stats.health_change.emit(200, 200)
 	max_dashes = 1
 	dashes_available = 1
 	weapon = staff

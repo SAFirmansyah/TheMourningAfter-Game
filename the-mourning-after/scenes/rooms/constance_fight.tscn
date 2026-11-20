@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bovali6r4d0xg"]
 
-[ext_resource type="Material" path="res://materials/ground.tres" id="1_3cb7q"]
+[ext_resource type="Material" uid="uid://bjs7uap1srsok" path="res://materials/ground.tres" id="1_3cb7q"]
 [ext_resource type="Script" uid="uid://c575pknxi1h5t" path="res://scripts/world/constance_fight.gd" id="1_pf74m"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="2_pf74m"]
 [ext_resource type="PackedScene" uid="uid://bmlc88qlhew43" path="res://scenes/enemies/perrin_enemy.tscn" id="4_hw0vx"]
@@ -11,6 +11,9 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_hw0vx"]
 material = ExtResource("1_3cb7q")
 size = Vector2(30, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_41uu7"]
+size = Vector3(40, 0.1, 40)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d6gko"]
 size = Vector3(9.5, 2, 0.4)
@@ -30,12 +33,17 @@ size = Vector3(9, 2, 0.4)
 [node name="ConstanceFight" type="Node3D" unique_id=958058731]
 script = ExtResource("1_pf74m")
 
-[node name="Floor3" type="MeshInstance3D" parent="." unique_id=1181980237]
+[node name="FloorArea" type="StaticBody3D" parent="." unique_id=913476446]
+
+[node name="Floor3" type="MeshInstance3D" parent="FloorArea" unique_id=1181980237]
 mesh = SubResource("PlaneMesh_hw0vx")
 
-[node name="Floor4" type="MeshInstance3D" parent="." unique_id=208260437]
+[node name="Floor4" type="MeshInstance3D" parent="FloorArea" unique_id=208260437]
 transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 0)
 mesh = SubResource("PlaneMesh_hw0vx")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="FloorArea" unique_id=993498631]
+shape = SubResource("BoxShape3D_41uu7")
 
 [node name="BossEntry" parent="." unique_id=1540354212 instance=ExtResource("2_pf74m")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -19, 0, 0)

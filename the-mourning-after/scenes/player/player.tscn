@@ -143,16 +143,16 @@ height = 1.65
 radius = 0.35
 height = 1.65
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blade"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4hvnv"]
 shading_mode = 0
 albedo_color = Color(0.9, 0.87, 0.78, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_blade"]
-material = SubResource("StandardMaterial3D_blade")
+material = SubResource("StandardMaterial3D_4hvnv")
 size = Vector3(0.9, 0.12, 0.12)
 
 [sub_resource type="BoxMesh" id="BoxMesh_guard"]
-material = SubResource("StandardMaterial3D_blade")
+material = SubResource("StandardMaterial3D_4hvnv")
 size = Vector3(0.08, 0.2, 0.36)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sparkle"]
@@ -188,8 +188,7 @@ offset = Vector2(0, 64)
 pixel_size = 0.014
 alpha_cut = 1
 sprite_frames = SubResource("SpriteFrames_vlovs")
-animation = &"walk"
-frame_progress = 0.5254232
+animation = &"idle"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=623702916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

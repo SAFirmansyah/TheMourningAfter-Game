@@ -39,6 +39,7 @@ var invulnerable := false
 var speed_bonus := 0.0 # fraction added to move speed
 var damage_multiplier := 1.0
 var cooldowns := {} # move name -> seconds left
+var _stun_time_left := 0.0
 
 var _facing := Vector2.LEFT
 var _dash_velocity := Vector3.ZERO
@@ -244,6 +245,16 @@ func line_offsets(start: float, reach: float, count: int) -> Array[Vector3]:
 		points.append(forward() * lerpf(start, reach, 0.0 if count == 1 else float(i) / (count - 1)))
 	return points
 
+
+func apply_stun(duration: float) -> void:
+	_stun_time_left = maxf(_stun_time_left, duration)
+
+func clear_stun() -> void:
+	_stun_time_left = 0.0
+
+func is_stunned() -> bool:
+	return _stun_time_left > 0.0
+	
 
 ## True when Perrin is within `reach` and inside a cone of `arc_degrees` around the boss's facing.
 func in_arc(arc_degrees: float, reach: float) -> bool:

@@ -18,24 +18,18 @@
 [ext_resource type="Texture2D" uid="uid://dun3spmi0y6gv" path="res://textures/constance/constance_idle/constance_idle_00009.png" id="11_ws3oe"]
 [ext_resource type="Texture2D" uid="uid://bbk3082fakw8f" path="res://textures/constance/constance_idle/constance_idle_00010.png" id="12_s7ol3"]
 [ext_resource type="Texture2D" uid="uid://b3odewdp33nnw" path="res://textures/constance/constance_idle/constance_idle_00011.png" id="13_bscbd"]
-[ext_resource type="Texture2D" uid="uid://bmoahhtpfy313" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00000.png" id="13_nyxwp"]
-[ext_resource type="Texture2D" uid="uid://bphkd01ipjwq7" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00001.png" id="14_wbmrr"]
-[ext_resource type="Texture2D" uid="uid://pv0wle25e24a" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00002.png" id="15_umbja"]
-[ext_resource type="Texture2D" uid="uid://d0dxlt3ir3xwm" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00003.png" id="16_rrdyp"]
-[ext_resource type="Texture2D" uid="uid://c4oqrd2msj18d" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00004.png" id="17_aqyn5"]
-[ext_resource type="Texture2D" uid="uid://dj21rod2haamp" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00005.png" id="18_a75fm"]
-[ext_resource type="Texture2D" uid="uid://diccyycqk6swv" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00006.png" id="19_u4ug7"]
-[ext_resource type="Texture2D" uid="uid://i66y7nucaynr" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00007.png" id="20_ggrei"]
-[ext_resource type="Texture2D" uid="uid://bicjnkugiaskn" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00008.png" id="21_4e5dx"]
-[ext_resource type="Texture2D" uid="uid://blttaysgmuolm" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00009.png" id="22_qwt7h"]
-[ext_resource type="Texture2D" uid="uid://74lt4abo1w0y" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00010.png" id="23_ws3oe"]
-[ext_resource type="Texture2D" uid="uid://latvxfrbf763" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00011.png" id="24_s7ol3"]
-[ext_resource type="Texture2D" uid="uid://d4bnplsr3w1uv" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00012.png" id="25_bscbd"]
-[ext_resource type="Texture2D" uid="uid://b0ly8p6tw5pnk" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00013.png" id="26_d8r76"]
-[ext_resource type="Texture2D" uid="uid://d2vwfeqahfkq0" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00014.png" id="27_ha0u5"]
-[ext_resource type="Texture2D" uid="uid://c4djlyvba5kjs" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00015.png" id="28_hyc4p"]
-[ext_resource type="Texture2D" uid="uid://dldm74kqepxvb" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00016.png" id="29_43wg5"]
-[ext_resource type="Texture2D" uid="uid://c7v67npipxhkx" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00017.png" id="30_mgcrv"]
+[ext_resource type="Texture2D" uid="uid://4iaredfuaesm" path="res://textures/constance/constance_walk/constance_walk_00000.png" id="17_htady"]
+[ext_resource type="Texture2D" uid="uid://chnoj6jruo0ys" path="res://textures/constance/constance_walk/constance_walk_00001.png" id="18_wkv1u"]
+[ext_resource type="Texture2D" uid="uid://dcls4a6l7pu84" path="res://textures/constance/constance_walk/constance_walk_00002.png" id="19_nyxwp"]
+[ext_resource type="Texture2D" uid="uid://b4jhcmep8c77e" path="res://textures/constance/constance_walk/constance_walk_00003.png" id="20_wbmrr"]
+[ext_resource type="Texture2D" uid="uid://c1gr0q5vrff1e" path="res://textures/constance/constance_walk/constance_walk_00004.png" id="21_umbja"]
+[ext_resource type="Texture2D" uid="uid://csmjlu4ffqwk7" path="res://textures/constance/constance_walk/constance_walk_00005.png" id="22_rrdyp"]
+[ext_resource type="Texture2D" uid="uid://dr5bhytrq8ynk" path="res://textures/constance/constance_walk/constance_walk_00006.png" id="23_aqyn5"]
+[ext_resource type="Texture2D" uid="uid://rfmwktnf06kt" path="res://textures/constance/constance_walk/constance_walk_00007.png" id="24_a75fm"]
+[ext_resource type="Texture2D" uid="uid://dl02cernslqcr" path="res://textures/constance/constance_walk/constance_walk_00008.png" id="25_u4ug7"]
+[ext_resource type="Texture2D" uid="uid://4d78jnskvonc" path="res://textures/constance/constance_walk/constance_walk_00009.png" id="26_ggrei"]
+[ext_resource type="Texture2D" uid="uid://bh8mqk70immkh" path="res://textures/constance/constance_walk/constance_walk_00010.png" id="27_4e5dx"]
+[ext_resource type="Texture2D" uid="uid://dtxvfa5ogbnji" path="res://textures/constance/constance_walk/constance_walk_00011.png" id="28_qwt7h"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jhy0a"]
 animations = [{
@@ -82,62 +76,44 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_nyxwp")
+"texture": ExtResource("17_htady")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_wbmrr")
+"texture": ExtResource("18_wkv1u")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_umbja")
+"texture": ExtResource("19_nyxwp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_rrdyp")
+"texture": ExtResource("20_wbmrr")
 }, {
 "duration": 1.0,
-"texture": ExtResource("17_aqyn5")
+"texture": ExtResource("21_umbja")
 }, {
 "duration": 1.0,
-"texture": ExtResource("18_a75fm")
+"texture": ExtResource("22_rrdyp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("19_u4ug7")
+"texture": ExtResource("23_aqyn5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("20_ggrei")
+"texture": ExtResource("24_a75fm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("21_4e5dx")
+"texture": ExtResource("25_u4ug7")
 }, {
 "duration": 1.0,
-"texture": ExtResource("22_qwt7h")
+"texture": ExtResource("26_ggrei")
 }, {
 "duration": 1.0,
-"texture": ExtResource("23_ws3oe")
+"texture": ExtResource("27_4e5dx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("24_s7ol3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("25_bscbd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("26_d8r76")
-}, {
-"duration": 1.0,
-"texture": ExtResource("27_ha0u5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("28_hyc4p")
-}, {
-"duration": 1.0,
-"texture": ExtResource("29_43wg5")
-}, {
-"duration": 1.0,
-"texture": ExtResource("30_mgcrv")
+"texture": ExtResource("28_qwt7h")
 }],
 "loop": 1,
 "name": &"walk",
-"speed": 5.0
+"speed": 12.0
 }]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u3137"]
@@ -152,11 +128,11 @@ height = 1.7
 shading_mode = 0
 albedo_color = Color(0.9, 0.87, 0.78, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_0b0iy"]
+[sub_resource type="BoxMesh" id="BoxMesh_htady"]
 material = SubResource("StandardMaterial3D_blade")
 size = Vector3(0.9, 0.12, 0.12)
 
-[sub_resource type="BoxMesh" id="BoxMesh_egk6d"]
+[sub_resource type="BoxMesh" id="BoxMesh_wkv1u"]
 material = SubResource("StandardMaterial3D_blade")
 size = Vector3(0.08, 0.2, 0.36)
 
@@ -168,13 +144,13 @@ low_mutant_scene = ExtResource("4_u4ug7")
 
 [node name="Card" type="AnimatedSprite3D" parent="." unique_id=1720100852]
 process_physics_priority = 20
-transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, 0, 0.9, 0)
+transform = Transform3D(-0.095, 0, -8.305164e-09, 0, 0.095, 0, 8.305164e-09, 0, -0.095, 0, 0.9, 0)
 offset = Vector2(0, 64)
 pixel_size = 0.014
 alpha_cut = 1
 sprite_frames = SubResource("SpriteFrames_jhy0a")
-animation = &"idle"
-frame_progress = 0.48373196
+animation = &"walk"
+frame_progress = 0.76508087
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=345169524]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
@@ -182,19 +158,21 @@ shape = SubResource("CapsuleShape3D_u3137")
 
 [node name="PlayerHurtBox" type="Area3D" parent="." unique_id=1959197943]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+collision_layer = 32
+collision_mask = 29
 script = ExtResource("3_8lbrl")
 
 [node name="CollisionHurtBox" type="CollisionShape3D" parent="PlayerHurtBox" unique_id=1845983319]
 shape = SubResource("CapsuleShape3D_10enr")
 
-[node name="Sword" type="Node3D" parent="." unique_id=1670443237]
+[node name="Sword" type="Node3D" parent="." unique_id=141239580]
 transform = Transform3D(0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, 0.819152, 0, 0.8, 0)
 script = ExtResource("4_amaya")
 
-[node name="Blade" type="MeshInstance3D" parent="Sword" unique_id=359041429]
+[node name="Blade" type="MeshInstance3D" parent="Sword" unique_id=2031151249]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, 0, 0)
-mesh = SubResource("BoxMesh_0b0iy")
+mesh = SubResource("BoxMesh_htady")
 
-[node name="Guard" type="MeshInstance3D" parent="Sword" unique_id=592268558]
+[node name="Guard" type="MeshInstance3D" parent="Sword" unique_id=1983822086]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
-mesh = SubResource("BoxMesh_egk6d")
+mesh = SubResource("BoxMesh_wkv1u")

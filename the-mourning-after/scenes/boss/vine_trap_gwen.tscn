@@ -1,16 +1,11 @@
 [gd_scene format=3 uid="uid://dgkxrixhlsbxi"]
 
-[ext_resource type="Script" path="res://scripts/boss/vine_trap_gwen.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://cpmrke0u134aq" path="res://scripts/boss/vine_trap_gwen.gd" id="1_script"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_warning"]
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0.25, 0.45, 0.15, 0.5)
-
-[sub_resource type="StandardMaterial3D" id="Mat_vines"]
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.2, 0.6, 0.2, 0.85)
 
 [sub_resource type="CylinderMesh" id="Mesh_warning"]
 material = SubResource("Mat_warning")
@@ -18,19 +13,24 @@ top_radius = 1.0
 bottom_radius = 1.0
 height = 0.04
 
+[sub_resource type="StandardMaterial3D" id="Mat_vines"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.2, 0.6, 0.2, 0.85)
+
 [sub_resource type="CylinderMesh" id="Mesh_vines"]
 material = SubResource("Mat_vines")
 top_radius = 0.3
 bottom_radius = 1.0
 height = 1.6
 
-[node name="VineTrapGwen" type="Node3D"]
+[node name="VineTrapGwen" type="Node3D" unique_id=265877179]
 script = ExtResource("1_script")
 
-[node name="Warning" type="MeshInstance3D" parent="."]
+[node name="Warning" type="MeshInstance3D" parent="." unique_id=1829539528]
 transform = Transform3D(1.6, 0, 0, 0, 1, 0, 0, 0, 1.6, 0, 0.04, 0)
 mesh = SubResource("Mesh_warning")
 
-[node name="Vines" type="MeshInstance3D" parent="."]
+[node name="Vines" type="MeshInstance3D" parent="." unique_id=77175992]
 transform = Transform3D(1.6, 0, 0, 0, 1, 0, 0, 0, 1.6, 0, 0.8, 0)
 mesh = SubResource("Mesh_vines")

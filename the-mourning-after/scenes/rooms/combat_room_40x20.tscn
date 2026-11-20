@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://c5i7s5reh0n2l"]
 
 [ext_resource type="Script" uid="uid://chm8scfmsnvei" path="res://scripts/world/combat_room.gd" id="1_02tjn"]
-[ext_resource type="Material" path="res://materials/ground.tres" id="2_yfm18"]
+[ext_resource type="Texture2D" uid="uid://ccjrrxcuhjp88" path="res://textures/tile_stone_light.png" id="2_02tjn"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_sxs3r"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_yrvbk"]
-material = ExtResource("2_yfm18")
-size = Vector2(27.7128, 13.8564)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q81l4"]
+albedo_texture = ExtResource("2_02tjn")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_06onj"]
+material = SubResource("StandardMaterial3D_q81l4")
+size = Vector2(27.713, 13.856)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_02tjn"]
 size = Vector3(27.7128, 0.1, 13.8564)
@@ -14,14 +17,11 @@ size = Vector3(27.7128, 0.1, 13.8564)
 [sub_resource type="BoxShape3D" id="BoxShape3D_i4pyq"]
 size = Vector3(27.7128, 2, 0.4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_srfin"]
-size = Vector3(0.4, 2, 5.5426)
+[sub_resource type="BoxShape3D" id="BoxShape3D_eastupper_trim"]
+size = Vector3(0.4, 2, 4.8402)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mbqro"]
-size = Vector3(0.4, 2, 5.5426)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_s41p5"]
-size = Vector3(27.7128, 2, 0.4)
+[sub_resource type="BoxShape3D" id="BoxShape3D_eastlower_trim"]
+size = Vector3(0.4, 2, 4.9282)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_westupper_trim"]
 size = Vector3(0.4, 2, 4.9282)
@@ -29,11 +29,8 @@ size = Vector3(0.4, 2, 4.9282)
 [sub_resource type="BoxShape3D" id="BoxShape3D_westlower_trim"]
 size = Vector3(0.4, 2, 4.9282)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_eastupper_trim"]
-size = Vector3(0.4, 2, 4.8402)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_eastlower_trim"]
-size = Vector3(0.4, 2, 4.9282)
+[sub_resource type="BoxShape3D" id="BoxShape3D_s41p5"]
+size = Vector3(27.7128, 2, 0.4)
 
 [node name="CombatRoom40x20" type="Node3D" unique_id=844543870]
 script = ExtResource("1_02tjn")
@@ -42,7 +39,7 @@ ground_tint = Color(0.32, 0.5, 0.28, 1)
 [node name="FloorStatic" type="StaticBody3D" parent="." unique_id=1633995675]
 
 [node name="Floor" type="MeshInstance3D" parent="FloorStatic" unique_id=1761784156]
-mesh = SubResource("PlaneMesh_yrvbk")
+mesh = SubResource("PlaneMesh_06onj")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="FloorStatic" unique_id=1741732368]
 shape = SubResource("BoxShape3D_02tjn")

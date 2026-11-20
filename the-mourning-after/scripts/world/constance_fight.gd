@@ -27,6 +27,7 @@ func _ready() -> void:
 	hero_opponent.defeated.connect(func(): get_tree().change_scene_to_file("res://scenes/endings/victory_time_thief.tscn"))
 	constance_play.died.connect(func(): get_tree().change_scene_to_file("res://scenes/endings/lost_cause.tscn"))
 
+	RunInventory.loadout_taken = true
 	constance_hud.bind_stats(constance_play.stats)
 	constance_hud.bind_player(constance_play)
 
