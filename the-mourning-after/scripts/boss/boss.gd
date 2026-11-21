@@ -21,7 +21,7 @@ const HIT_HEIGHT := 0.9 # Perrin's hurtbox centre (m)
 @export var start_delay := 1.5 # TUNE: pause after the room loads before the fight starts (s)
 @export var keep_distance := 1.2 # TUNE: stops closing in at this distance (m)
 
-@onready var card: Sprite3D = $Card
+@onready var card: AnimatedSprite3D = $Card
 @onready var hurtbox: Area3D = $HurtboxArea
 @onready var health_bar: BossHealthBar = $BossHealthBar
 @onready var status_label: Label3D = $StatusLabel
@@ -110,6 +110,8 @@ func _physics_process(delta: float) -> void:
 			face(to)
 			walk = _think(to)
 		velocity = walk * move_speed()
+	if card and not busy:
+		card.play("walk" if (walk.length() > 0.01 or _dash_time_left > 0.0) else "idle")
 	move_and_slide()
 	if card and absf(_facing.x) > 0.1:
 		card.flip_h = _facing.x < 0.0
@@ -202,6 +204,12 @@ func dash_toward(direction: Vector3, distance: float, speed: float) -> void:
 	await wait(_dash_time_left)
 	_dash_time_left = 0.0
 
+
+func begin_attack() -> void:
+	busy = true
+	if card:
+		card.play("attack")
+		
 
 ## Spawns one attack's hitboxes at offsets from the boss (on the floor plane). Hits Perrin once at most.
 func strike(offsets: Array[Vector3], damage: int, radius: float, lifetime := 0.15) -> void:

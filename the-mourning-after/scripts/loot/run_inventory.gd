@@ -6,7 +6,7 @@ signal bargained # any Fate bargain went through; the world autosaves
 
 var applied_effects: Array[LootData] = [] # kept only so we know what to undo on death
 
-@export var first_run_residue_grant := 2 # TUNE: residue given on the very first ever run
+@export var first_run_residue_grant := 0 # TUNE: residue given on the very first ever run
 @export var reseed_cost := 1 # TUNE: Fate 1 re-seed of starting stats (no limit per run)
 @export var revive_costs: Array[int] = [2, 3] # TUNE: Fate 3 cost of each revive in a run; its length is the revive limit
 @export var _wood_sword: WeaponData = preload("res://scripts/weapons/sword_wood.tres")
@@ -17,6 +17,9 @@ var applied_effects: Array[LootData] = [] # kept only so we know what to undo on
 	preload("res://scripts/weapons/sword_bronze.tres"),
 	preload("res://scripts/weapons/sword_iron.tres"),
 ]
+@export var residue_max_health_bonus := 10
+
+
 var has_completed_first_run := false # set once the first run has begun; saved
 var has_reached_boss := false # the forced Fate 2 bargain has happened; saved
 var final_snapshot := {} # GDD: Perrin's loadout and the boss killed on the run that reached the Sanctuary; saved
@@ -57,8 +60,10 @@ func can_afford(cost: int) -> bool:
 
 
 func spend(cost: int) -> void:
-	if not TestTools.ignore_residue:
-		magic_residue = maxi(magic_residue - cost, 0)
+	if TestTools.ignore_residue:
+		return
+	magic_residue = maxi(magic_residue - cost, 0)
+	_sync_max_health()
 
 func get_player() -> Player:
 	return _player
@@ -75,11 +80,13 @@ func mark_first_run_if_needed() -> void:
 		magic_residue = first_run_residue_grant
 		has_completed_first_run = true
 
+
 func collect(loot: LootData) -> void:
 	if loot.effect == LootData.EffectType.MAGIC_RESIDUE:
 		if can_drop_residue():
 			magic_residue += 1
 			residue_gained_this_run += 1
+			_sync_max_health()
 			effects_changed.emit()
 		return
 
@@ -88,16 +95,23 @@ func collect(loot: LootData) -> void:
 	effects_changed.emit()
 	
 	
+func _sync_max_health() -> void:
+	if _player == null:
+		return
+	var stats := _player.stats
+	var new_max := max_health_for_residue()
+	var delta := new_max - stats.current_max_health
+	stats.current_max_health = new_max
+	stats.health = clampi(stats.health + delta, 0, new_max)
+	stats.health_change.emit(stats.health, stats.current_max_health)
+	
+	
 func roll_starting_loadout() -> void:
-	print("roll_starting_loadout called, has_completed_first_run=", has_completed_first_run)
+	_player.stats.setup_fixed_stats(max_health_for_residue(), 1.0)
 	if _first_run_active and not has_bargained_this_run:
-		_player.stats.setup_first_run_stats()
 		_player.weapon = _wood_sword
 	else:
-		_player.stats.setup_stats()
 		_player.weapon = _starting_weapon_pool.pick_random()
-		print("bargain rerolled weapon to: ", _player.weapon.weapon_name if _player.weapon else "null")
-
 
 func can_drop_residue() -> bool:
 	return residue_gained_this_run < MAX_RESIDUE_PER_RUN
@@ -151,10 +165,11 @@ func can_bargain() -> bool:
 	return loadout_taken and can_afford(reseed_cost)
 
 
-## Fresh save only: the first run can't leave the starting room until Fate 1 is bargained with.
+## Every run: Perrin hasn't bargained Fate 1 yet, and can afford it — forced until he does.
+## (Previously only forced on a fresh save; now applies to the first visit of every run.)
 func fate1_forced_pending() -> bool:
-	return _first_run_active and loadout_taken and not has_bargained_this_run
-
+	return loadout_taken and not has_bargained_this_run and can_afford(reseed_cost)
+	
 
 func start_new_run_loadout() -> void:
 	mark_first_run_if_needed()
@@ -184,19 +199,14 @@ func _apply(loot: LootData) -> void:
 		LootData.EffectType.DMG_REDUCTION:
 			_player.damage_reduction = clampf(_player.damage_reduction + loot.value, 0.0, 0.9) # TUNE: cap
 
-## Fate 1: 1 residue re-seeds the starting stats + weapon, once per run.
-## On the very first run it always grants 100 HP, 1x speed and the bone sword (GDD).
+## Fate 1: 1 residue re-seeds this run's weapon, once per run's worth of rerolls.
+## The very first run ever always gets the bone sword; every other bargain picks a random weapon.
 func try_bargain() -> bool:
 	if not can_bargain():
 		return false
 	spend(reseed_cost)
-	var forced := fate1_forced_pending()
 	has_bargained_this_run = true
-	if forced:
-		_player.stats.setup_fixed_stats(100, 1.0)
-		_player.weapon = _bone_sword
-	else:
-		roll_starting_loadout()
+	_player.weapon = _bone_sword if _first_run_active else _starting_weapon_pool.pick_random()
 	effects_changed.emit()
 	bargained.emit()
 	return true
@@ -221,16 +231,13 @@ func save_run() -> Dictionary:
 		"effects": applied_effects.map(func(l: LootData) -> String: return l.resource_path),
 		"weapon": p.weapon.resource_path if p.weapon else "",
 		"charge": p.charge_points,
-		"max_health": p.stats.current_max_health,
 		"health": p.stats.health,
-		"move_speed": p.stats.move_speed_multiplier,
 		"bonus_damage": p.bonus_weapon_damage,
 		"bonus_attack_speed": p.bonus_cooldown_reduction,
 		"damage_reduction": p.damage_reduction,
 		"bonus_move_speed": p.bonus_move_speed,
 		"max_dashes": p.max_dashes,
 	}
-
 
 ## Puts a saved run back on the player (stats wait a frame so HeroStats' own setup can't overwrite them).
 func load_run(run: Dictionary) -> void:
@@ -255,11 +262,21 @@ func load_run(run: Dictionary) -> void:
 	p.bonus_move_speed = run.get("bonus_move_speed", 0.0)
 	p.max_dashes = run.get("max_dashes", 1)
 	p.dashes_available = p.max_dashes
-	_restore_stats.call_deferred(int(run.get("max_health", 100)), int(run.get("health", 100)), float(run.get("move_speed", 1.0)))
+	_restore_stats.call_deferred(int(run.get("health", 100)))
 	effects_changed.emit()
 
 
-func _restore_stats(max_health: int, health: int, move_speed: float) -> void:
-	_player.stats.setup_fixed_stats(max_health, move_speed)
+func _restore_stats(health: int) -> void:
+	_player.stats.setup_fixed_stats(max_health_for_residue(), 1.0)
 	_player.stats.on_health_set(health)
 	effects_changed.emit()
+	
+## Shifts max HP (and current HP with it) by `amount`, mirroring how PLAYER_HEALTH_UP loot works.
+## Negative amounts (spending residue) can bring health to 0 and should kill Perrin like any other damage.
+func _adjust_health_for_residue(amount: int) -> void:
+	if _player == null or amount == 0:
+		return
+	var stats := _player.stats
+	stats.current_max_health = maxi(stats.current_max_health + amount, 1)
+	stats.health = clampi(stats.health + amount, 0, stats.current_max_health)
+	stats.health_change.emit(stats.health, stats.current_max_health)

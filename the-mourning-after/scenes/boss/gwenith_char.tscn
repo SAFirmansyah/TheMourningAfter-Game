@@ -2,17 +2,215 @@
 
 [ext_resource type="Script" uid="uid://cnme11e5judsu" path="res://scripts/boss/gwenith_char.gd" id="1_script"]
 [ext_resource type="Resource" path="res://scripts/boss/gwenith_stats.tres" id="2_stats"]
-[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Texture2D" uid="uid://cxtme25b3hplg" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00000.png" id="3_bb2wk"]
+[ext_resource type="Texture2D" uid="uid://dvad42f6qvtlj" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00001.png" id="4_1250y"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="4_hurtbox"]
+[ext_resource type="Texture2D" uid="uid://d4a2l81l0r6vh" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00002.png" id="5_8fycc"]
 [ext_resource type="PackedScene" path="res://scenes/ui/boss_health_bar.tscn" id="5_bar"]
+[ext_resource type="Texture2D" uid="uid://b0x04df4cgvu2" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00003.png" id="6_xx255"]
+[ext_resource type="Texture2D" uid="uid://ckilq4er5t6a5" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00004.png" id="7_g164m"]
+[ext_resource type="Texture2D" uid="uid://bto2ryf0mqwm3" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00005.png" id="8_w1whh"]
+[ext_resource type="Texture2D" uid="uid://ck7ntramu5rad" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00006.png" id="9_v4g3p"]
+[ext_resource type="Texture2D" uid="uid://k0ggfsvnxwl" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00007.png" id="10_ryx78"]
+[ext_resource type="Texture2D" uid="uid://dox7lc0bu144h" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00008.png" id="11_aaqkh"]
+[ext_resource type="Texture2D" uid="uid://c5ksixnwalpdl" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00009.png" id="12_r714j"]
+[ext_resource type="Texture2D" uid="uid://m03ug6mecayn" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00010.png" id="13_sbii4"]
+[ext_resource type="Texture2D" uid="uid://c31l5y2cwcafh" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00011.png" id="14_n3nsw"]
+[ext_resource type="Texture2D" uid="uid://diiu7b4a05sjl" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00012.png" id="15_pagq6"]
+[ext_resource type="Texture2D" uid="uid://grm8158lkhsw" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00013.png" id="16_h5d55"]
+[ext_resource type="Texture2D" uid="uid://cirfu4krajn4j" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00014.png" id="17_o61bl"]
+[ext_resource type="Texture2D" uid="uid://dcong0gxf4218" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00015.png" id="18_bt2ws"]
+[ext_resource type="Texture2D" uid="uid://bb7vfm3imneqx" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00016.png" id="19_d3443"]
+[ext_resource type="Texture2D" uid="uid://ba16dyfafkswx" path="res://textures/Gwenith/gwenith_attack/gwenith_attack_00017.png" id="20_tmqqb"]
+[ext_resource type="Texture2D" uid="uid://cf1l6hrvf3srq" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0001.png" id="33_nlf7o"]
+[ext_resource type="Texture2D" uid="uid://dx7c6g4ehn60s" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0002.png" id="34_dgtlk"]
+[ext_resource type="Texture2D" uid="uid://bpj7pe8xb1lty" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0003.png" id="35_gp44w"]
+[ext_resource type="Texture2D" uid="uid://y1706y0xne11" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0004.png" id="36_trmtv"]
+[ext_resource type="Texture2D" uid="uid://b6k4gcnpauej6" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0005.png" id="37_loed8"]
+[ext_resource type="Texture2D" uid="uid://dtbg25foyig0t" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0006.png" id="38_4qi67"]
+[ext_resource type="Texture2D" uid="uid://cgxscq85dmawc" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0007.png" id="39_vbhui"]
+[ext_resource type="Texture2D" uid="uid://dgbqj0q83gkid" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0008.png" id="40_l7442"]
+[ext_resource type="Texture2D" uid="uid://c35biw4dietpg" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0009.png" id="41_5l83g"]
+[ext_resource type="Texture2D" uid="uid://bcg63j4kwx3eg" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0010.png" id="42_ubeq6"]
+[ext_resource type="Texture2D" uid="uid://behj0acyoehbh" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0011.png" id="43_1hlet"]
+[ext_resource type="Texture2D" uid="uid://by1oqymyewm5e" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0012.png" id="44_qdr3q"]
+[ext_resource type="Texture2D" uid="uid://ph6eiid0axya" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0013.png" id="45_q0fru"]
+[ext_resource type="Texture2D" uid="uid://b5co3yw6r8axr" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0014.png" id="46_c035f"]
+[ext_resource type="Texture2D" uid="uid://jimcb7v0moal" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0015.png" id="47_6fdad"]
+[ext_resource type="Texture2D" uid="uid://8qgkl4pi4jn5" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0016.png" id="48_lmqrw"]
+[ext_resource type="Texture2D" uid="uid://cgr55sey0h65w" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0017.png" id="49_cvt3b"]
+[ext_resource type="Texture2D" uid="uid://bvggjvqjnwt7o" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0018.png" id="50_xpycn"]
+[ext_resource type="Texture2D" uid="uid://dw0yyrdydpmmd" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0019.png" id="51_cdvhm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jhy0a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_g164m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_w1whh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_v4g3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ryx78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_aaqkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_r714j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_sbii4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_n3nsw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_pagq6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_h5d55")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_o61bl")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_bb2wk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1250y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_8fycc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xx255")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_g164m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_w1whh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_v4g3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ryx78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_aaqkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_r714j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_sbii4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_n3nsw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_pagq6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_h5d55")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_o61bl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_bt2ws")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_d3443")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_tmqqb")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("33_nlf7o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_dgtlk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_gp44w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_trmtv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_loed8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_4qi67")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_vbhui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_l7442")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_5l83g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_ubeq6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_1hlet")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_qdr3q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_q0fru")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_c035f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_6fdad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_lmqrw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_cvt3b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_xpycn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_cdvhm")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 19.0
+}]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
-radius = 0.6
-height = 2.8
+radius = 0.35
+height = 1.6
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hurt"]
-radius = 0.6
-height = 2.4
+radius = 0.35
+height = 1.6
 
 [sub_resource type="StandardMaterial3D" id="Mat_aura"]
 transparency = 1
@@ -40,18 +238,20 @@ stats = ExtResource("2_stats")
 display_name = "Gwenith"
 move_speed_multiplier = 2.0
 
-[node name="Card" type="Sprite3D" parent="." unique_id=1479451697]
+[node name="Card" type="AnimatedSprite3D" parent="." unique_id=1150996936]
+transform = Transform3D(-0.06, 0, -5.2453664e-09, 0, 0.06, 0, 5.2453664e-09, 0, -0.06, 0, 0.9, 0)
 offset = Vector2(0, 64)
-modulate = Color(0.55, 0.85, 0.45, 1)
 pixel_size = 0.024
-texture = ExtResource("3_icon")
+sprite_frames = SubResource("SpriteFrames_jhy0a")
+animation = &"idle"
+frame_progress = 0.7780215
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2033394269]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("CapsuleShape3D_body")
 
 [node name="HurtboxArea" type="Area3D" parent="." unique_id=1759485261]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 script = ExtResource("4_hurtbox")
 
 [node name="CollisionHurtbox" type="CollisionShape3D" parent="HurtboxArea" unique_id=22340408]

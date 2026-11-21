@@ -19,7 +19,7 @@ func _think(to: Vector3) -> Vector3:
 
 
 func _basic_attack() -> void:
-	busy = true
+	begin_attack()
 	use(&"basic", weapon.attack_cooldown)
 	await wait(weapon.active_delay)
 	var side := Vector3(-_facing.y, 0.0, _facing.x)

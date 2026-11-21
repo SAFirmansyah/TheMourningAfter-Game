@@ -96,7 +96,7 @@ func _think(to: Vector3) -> Vector3:
 
 
 func _basic() -> void:
-	busy = true
+	begin_attack()
 	use(&"basic", basic_cooldown)
 	await wait(basic_windup)
 	_slash(basic_damage)
@@ -108,6 +108,7 @@ func _slash(damage: int) -> void:
 
 
 func _dash_attack() -> void:
+	begin_attack()
 	busy = true
 	use(&"dash", dash_cooldown)
 	announce("Dash!", DASH_COLOR)

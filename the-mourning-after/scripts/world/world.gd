@@ -16,6 +16,8 @@ const LOOT_PICKUP_SCENE := preload("res://scenes/loot/loot_pickup.tscn")
 const BOSS_TEST_WEAPON := preload("res://scripts/weapons/sword_bronze.tres") # Start from: first boss fight
 const BOSS_TEST_HEALTH := 100
 const BOSS_TEST_SPEED := 1.5
+const BASE_MAX_HEALTH := 50   # TUNE: max HP with zero residue (matches the old first-run value)
+const MAX_HEALTH_CAP := 200   # TUNE: ceiling; residue beyond this stops adding HP
 
 @export var fade_time := 0.35 # TUNE: fade to/from black per room change (s)
 @export var load_save_on_start := true # off: always start fresh in the placed room
@@ -428,3 +430,7 @@ func _end_run_at_base() -> void:
 	await _fade_to(0.0)
 	player.input_enabled = true
 	_transitioning = false
+	
+	
+func max_health_for_residue() -> int:
+	return clampi(BASE_MAX_HEALTH + residue_max_health_bonus * magic_residue, BASE_MAX_HEALTH, MAX_HEALTH_CAP)

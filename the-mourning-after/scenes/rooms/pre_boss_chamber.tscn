@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://4a7kj88lkjqa"]
 
 [ext_resource type="Script" uid="uid://b32jn6yi6dtem" path="res://scripts/world/pre_boss_chamber.gd" id="1_hfug0"]
-[ext_resource type="Material" path="res://materials/ground.tres" id="2_y2fns"]
+[ext_resource type="Material" uid="uid://bjs7uap1srsok" path="res://materials/ground.tres" id="2_y2fns"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_m20so"]
 [ext_resource type="PackedScene" uid="uid://cjdp2l5i2b8uj" path="res://scenes/world/bargain_spot.tscn" id="4_0pgl6"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="5_xnjcq"]
