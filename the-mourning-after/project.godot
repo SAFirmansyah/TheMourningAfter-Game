@@ -128,3 +128,7 @@ sun_shadow_alpha={
 "type": "float",
 "value": 0.3
 }
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/story_text_import/plugin.cfg")

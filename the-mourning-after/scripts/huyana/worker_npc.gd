@@ -6,6 +6,8 @@ extends NPC
 
 @export_enum("rudrama", "gwenith", "shuyi") var worker := "rudrama"
 
+var scripted := false # a story scene is moving her; the manager's position is ignored
+
 var _manager: SanctuaryManager
 
 
@@ -20,6 +22,6 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if Engine.is_editor_hint() or _manager == null:
+	if Engine.is_editor_hint() or _manager == null or scripted:
 		return
 	global_position = _manager.worker_position(StringName(worker))

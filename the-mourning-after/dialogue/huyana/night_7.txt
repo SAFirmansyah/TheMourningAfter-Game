@@ -1,0 +1,25 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 7
+@move shuyi FireBack
+@move rudrama FireRight
+@move gwenith FireLeft
+@walk constance Campfire
+@settle
+CONSTANCE (neutral): I have something to tell you three.
+CONSTANCE (neutral): Something I’ve been working on.
+SHUYI (neutral): What’s that?
+CONSTANCE (lost in thought): Bits of magic, here and there, put together.
+RUDRAMA (neutral): You still have inspiration to work on new spells, Connie?
+GWENITH (scared): Please, tell me it’s something to help us out with our predicament here.
+CONSTANCE (lost in thought): Yes, yes it is. Or at least, I hope it will be. It’s not complete yet.
+SHUYI (neutral): Well, how can we help?
+CONSTANCE (sad): I’m not sure. We’ve come so far from Burhana. I’m convinced our magic was stronger there because of our ties to the land.
+CONSTANCE (lost in thought): But our magic is also tied to our people. It’s why we can still use it.
+CONSTANCE (sad): But as we lose more of us, it weakens.
+RUDRAMA (angry): So, what you’re saying is…
+RUDRAMA (angry): This is basically a race against time? Do we complete the spell first?
+GWENITH (scared): Or do we run out of people and resources to stay alive before that?
+CONSTANCE (sad): I’m afraid so.
+CONSTANCE (praying): I know we evaluated every possibility when we found our cause and pledged to it.
+CONSTANCE (praying): But this is too close. Too terrifying.

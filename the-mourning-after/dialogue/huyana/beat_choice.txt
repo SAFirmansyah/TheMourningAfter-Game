@@ -1,0 +1,34 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NARRATIVE BEAT: The Choice
+# At the Sanctuary's campfire, after the last part of the spell.
+@fade black
+@room sanctuary Campfire
+@show gwenith FireLeft
+@show shuyi FireBack
+@show rudrama FireRight
+@fade in
+GWENITH (neutral): No.
+GWENITH (scared): You can’t.
+SHUYI (sad): I can’t tell you what to do. This is a horrifying decision. The gods have been unkind in extreme measure.
+RUDRAMA (angry): To grant you this power, show you this magic… and expect you to not use it?
+CONSTANCE (sad): Yes. It’s too potent, and at the same time, too volatile.
+CONSTANCE (lost in thought): I don’t know which of those attributes to focus on.
+GWENITH (scared): Obviously, that it’s too volatile!
+GWENITH (scared): Come on, sis, I’ve never been one to consider an experiment off-bounds. But I know better now.
+GWENITH (scared): You can’t do this. All the pain that brought us here and all the more that led us to this decision…
+GWENITH (scared): You can’t impose that the Silvalu people.
+RUDRAMA (angry): But it isn’t designed to do that. It’s a chance, Gwenith, just a chance.
+SHUYI (stern): We have no way of knowing how large that chance is.
+CONSTANCE (lost in thought): A spell to take time, rather than make it.
+CONSTANCE (lost in thought): Robbing a few days off the lifespans of every citizen of that kingdom…
+CONSTANCE (lost in thought): But it could get out of hand so easily. And takes years and years away instead.
+SHUYI (neutral): In all my years, I’ve not seen a spell so unforgiving in its execution.
+GWENITH (pout): And we know our magic is weak here!
+GWENITH (scared): I can’t believe I’m the one saying this, but that’s not a chance we can take!
+RUDRAMA (angry): But it’s one we have to! It’s that chance, whatever you want to estimate it as, or…
+CONSTANCE (sad): …Or we all perish. Definitely. No odds remain.
+# An interactable choice appears in Constance's text box.
+@choice
+> We HAVE TO take that chance. Cast the spell. | cast
+> We CANNOT take that chance. Destroy the spell. | destroy

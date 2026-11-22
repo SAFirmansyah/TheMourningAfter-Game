@@ -1,0 +1,82 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NARRATIVE BEAT: The Fates
+@walk constance Campfire
+CONSTANCE (sad): I can’t believe it.
+CONSTANCE (sad): This is it.
+CONSTANCE (neutral): Our cause is a lost one. We’re done, we’re out. No one left to conduct our research on, no more sisters to lose.
+@show archi Entrance
+@show seira Entrance
+@show kano Entrance
+@move archi FireLeft
+@move seira FireBack
+@move kano FireRight
+@settle
+ARCHI, SEIRA, KANO (neutral): Constance?
+CONSTANCE (neutral): Sisters, hello. What brings you here?
+ARCHI (neutral): Well, it’s hardly like we have much to do in the other areas of Huyana.
+ARCHI (neutral): We’re at the end of the rope, aren’t we?
+CONSTANCE (sad): You’re quite right. For what it’s worth, you’re welcome here as always.
+SEIRA (neutral): Say, we had something to bring up with you. A proposition, if you will.
+CONSTANCE (neutral): Of course. What is it?
+KANO (neutral): Our experiments. We are out of sisters to conduct them on. No blood left to spill. Except for ours, that is.
+CONSTANCE (sad): What? But you hadn’t wanted to be a part of that at the start.
+CONSTANCE (sad): Sisters, please. You know Huyana would sooner perish than prosper at the cost of unwilling sacrifices.
+ARCHI, SEIRA, KANO (neutral): We’ve changed our minds, but we do truly want this. For ourselves as much as for all our sisters.
+CONSTANCE (lost in thought): You’re certain?
+ARCHI, SEIRA, KANO (neutral): Yes. But let us make this clear: we only want this if it will be our best shot at success.
+ARCHI, SEIRA, KANO (neutral): So please, as the most capable among us, we beg of you:
+ARCHI, SEIRA, KANO (neutral): Try what you’ve always wondered about trying, but never seen reason to.
+ARCHI, SEIRA, KANO (neutral): The most ambitious magic you can conjure, the most dangerous, in fact.
+CONSTANCE (sad): Oh…
+CONSTANCE (neutral): You’re putting me in such a dire position by giving me the liberty to essentially do anything.
+CONSTANCE (sad): Is that how little you value your own lives, now, sisters?
+ARCHI, SEIRA, KANO (neutral): It’s the opposite. We value life too much, as a whole, no matter whose.
+ARCHI, SEIRA, KANO (neutral): Come on now, sister Constance.
+# Fade to black. Open in Huyana's Altar at the altar podium, with Constance, Archi, Seira, Kano, Shuyi, Rudrama, and Gwenith.
+@fade black
+@room altar Podium
+@show archi ArchiSpot
+@show seira SeiraSpot
+@show kano KanoSpot
+@show shuyi ShuyiSpot
+@show rudrama RudramaSpot
+@show gwenith GwenithSpot
+@fade in
+CONSTANCE (sad): I can’t fathom this. We’re the last ones left standing.
+CONSTANCE (sad): Sisters, are you sure? I have to ask again, before doing anything.
+ARCHI, SEIRA, KANO (neutral): Yes. Yes, Constance. Hurry along, now…
+SHUYI (stern): Everything I’ve taught you, my girl. Everything you’ve taught yourself, too.
+GWENITH (scared): Please, please let this work. I’m praying with all I am.
+RUDRAMA (melancholic): If this doesn’t work… oh hell, I’ll miss you three.
+CONSTANCE (praying): Thank you, sisters. One last, long shot. Here goes… everything.
+# Fade to white. Reopen at the same spot, but without Archi, Seira, and Kano.
+@fade white
+@hide archi seira kano
+@wait 4
+@fade in
+RUDRAMA (angry): What happened? Where did they go?
+GWENITH (scared): I don’t know, I could barely see a thing in here, it got so bright…
+SHUYI (sad): Constance?
+CONSTANCE (praying): …
+CONSTANCE (sad): …
+SHUYI (neutral): Constance?
+GWENITH (scared): It didn’t work, did it? They’re just… gone.
+RUDRAMA (melancholic): Well, drat.
+RUDRAMA (angry): Of course it didn’t. Nothing does, not here, not for us.
+CONSTANCE (sad): Oh, gods…
+GWENITH (pout): They didn’t even turn into other forms like our lost sisters. There’s nothing even to study from this.
+SHUYI (sad): Nothing with which to perform last rites, either…
+RUDRAMA (angry): I’ve had it. Why do we even try?
+# Rudrama, Shuyi, and Gwenith exit the Altar room, but Constance stays behind.
+@exit rudrama shuyi gwenith
+CONSTANCE (praying): Gods…
+CONSTANCE (praying): Please, let something come of this. Let this be what pushes us over the line.
+CONSTANCE (praying): Let this… complete the spell.
+# Fade to black, text appears on screen like in a cutscene.
+@fade black
+@text
+No foe, not ours, not of life, can be thwarted without naming it.
+In fear we hold it at arm’s length, in courage we swallow it whole.
+I invoke death itself, and bid it arrive where I stand in sane measure.
+@end

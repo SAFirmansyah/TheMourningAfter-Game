@@ -1,12 +1,11 @@
 @tool
 class_name NarrativeBeat
 extends Interactable
-## Campfire spot for each night's narrative beat. Once the night's results (and any story event) are
-## done, a bubble pops up over the fire; talking there plays the beat for the current Sanctuary Health
-## band (95+, 90-95, 85-90, ...), and the next day starts when it ends.
+## Campfire spot for each night's scene. Once the night's results are done, a bubble pops up over the
+## fire; reflecting there has the StoryDirector play the night's scene (or milestone beat), after which
+## the next day starts.
 
 @export var bubble_height := 4.6 # TUNE: height of the bubble's tip above the campfire (m)
-@export var health_band := 5.0 # TUNE: width of each narrative beat's health range (%)
 @export var pop_in_time := 0.35 # TUNE: bubble grow-in (s)
 
 @onready var bubble: Control = $Bubble/View
@@ -23,13 +22,13 @@ func _ready() -> void:
 	_manager = get_tree().get_first_node_in_group(&"sanctuary_manager")
 	bubble.hide()
 	interacted.connect(_on_interacted)
-	finished.connect(_on_finished)
 
 
 func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
-	var waiting := _manager != null and _manager.day_cycle.awaiting_beat
+	var director := get_tree().get_first_node_in_group(&"story_director") as StoryDirector
+	var waiting := _manager != null and _manager.day_cycle.awaiting_beat and not (director and director.busy)
 	enabled = waiting
 	if waiting != _shown:
 		_shown = waiting
@@ -43,18 +42,7 @@ func _process(_delta: float) -> void:
 		bubble.position = cam.unproject_position(anchor) - bubble.pivot_offset
 
 
-## Lower edge of the health band the beat belongs to (95 covers 95-100).
-func band(health: float) -> int:
-	return int(minf(floorf(health / health_band) * health_band, 100.0 - health_band))
-
-
 func _on_interacted() -> void:
-	var line := DialogueLine.new()
-	line.speaker = DialogueLine.Speaker.PLAYER
-	line.text = "Dummy narrative beat for %d%%" % roundi(_manager.health)
-	conversation = [line]
-
-
-func _on_finished() -> void:
-	conversation = []
-	_manager.day_cycle.start_day()
+	var director := get_tree().get_first_node_in_group(&"story_director") as StoryDirector
+	if director:
+		director.play_night()

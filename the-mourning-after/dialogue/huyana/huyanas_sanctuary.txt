@@ -1,0 +1,34 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NARRATIVE BEAT: Huyana’s Sanctuary
+CONSTANCE (happy): Huyana’s beautiful sanctuary…
+CONSTANCE (happy): Where every path converges. Our little gathering spot.
+# Camera pans away from Constance.
+@pan Containments
+CONSTANCE (out of sight): The trials and errors… they leave our noble sacrificers in quite the state. Deformed, mutated…
+CONSTANCE (out of sight): But they are still our people, even if they no longer know it. The sisters of Huyana never give up on our own.
+@pan Planters
+CONSTANCE (out of sight): We have farmlands aplenty, but my sister’s green thumb is best put to use here, tending to the needs of the sanctuary.
+@pan MedStation
+CONSTANCE (out of sight): Though, where would I be without the one person I can count on, amidst leading everyone who counts on me?
+CONSTANCE (out of sight): She heals my soul, just as she heals this sanctuary.
+@pan Anvil
+CONSTANCE (out of sight): And… ah. Her. The one who mans the forge and keeps us all safe.
+CONSTANCE (out of sight): She’s as important to me as she is to this sanctuary, though I don’t know if she feels as much in return.
+@pan back
+# Constance walks to the campfire. Night sets in.
+@walk constance Campfire
+@night
+@move rudrama FireRight
+@move shuyi FireBack
+@move gwenith FireLeft
+@settle
+CONSTANCE (neutral): Our lost sisters are asleep. We’ve made it through another day, after all…
+RUDRAMA (neutral): By some odd miracle.
+SHUYI (stern): You give Constance here too little credit. She’s the reason we’ve come this far.
+GWENITH (lost in thought): How far is that, though? A long time doesn’t mean much if we have nothing to show for it.
+CONSTANCE (sad): Come now, Gwen. Each step and misstep brings us that much closer to the solution.
+RUDRAMA (angry): Keep saying that. We’ll try not to starve or rot in the meantime…
+SHUYI (light-hearted): Pfft, if anybody has to worry about dropping dead one fine day, it’s me!
+GWENITH (pout): Don’t talk like that. Connie, get some sleep. Dawn’s almost around.
+CONSTANCE (lost in thought): Yes, alright. All of you, too. Another long day awaits.

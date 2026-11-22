@@ -1,0 +1,13 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 6 v2
+@move shuyi FireRight
+@walk constance Campfire
+@settle
+CONSTANCE (neutral): Shuyi, what do you think about death?
+SHUYI (light-hearted): You’re asking what I think about the one foe we’ve sworn to thwart against all odds?
+SHUYI (neutral): Obvious, is it not?
+CONSTANCE (lost in thought): Mmm. I’ll change my question. What did you think of it before all this? Before Burhana fell?
+SHUYI (sad): I had barely given it thought, truth be told.
+SHUYI (sad): Even as I was getting older, I had so much confidence in the years I’d have left.
+SHUYI (neutral): Of course, I’m still here, but… I needn’t tell you the cost of everything else we took for granted.

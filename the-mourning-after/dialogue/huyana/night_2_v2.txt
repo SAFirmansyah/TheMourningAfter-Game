@@ -1,0 +1,10 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 2 v2
+@move rudrama FireRight
+@walk constance Campfire
+@settle
+RUDRAMA (neutral): Hey, you. Almighty leader. I hope you’ve got a clue what you’re doing here…
+CONSTANCE (lost in thought): …hmm? Oh.
+CONSTANCE (sad): Of course I don’t. We’re trying to do the impossible, here. There’s hardly any precedent.
+RUDRAMA (angry): Oh, there’s precedent alright, at least of you not knowing what you’re doing…

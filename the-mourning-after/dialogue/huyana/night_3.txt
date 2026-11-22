@@ -1,0 +1,27 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 3
+@move shuyi FireBack
+@move rudrama FireRight
+@move gwenith FireLeft
+@walk constance Campfire
+@settle
+CONSTANCE (neutral): Hold fast, sisters. I feel better about our odds than I have in a few nights.
+CONSTANCE (neutral): It’s imperative we let our faith burn when our fuel cannot.
+SHUYI (neutral): Better about our odds, hm?
+SHUYI (neutral): I wonder why that might be.
+RUDRAMA (neutral): What does that mean? You got something on your mind, say it straight.
+SHUYI (neutral): Very well then.
+SHUYI (stern): Care to explain why I found several of our lost sisters aching and tired?
+SHUYI (stern): Missing parts? Is this your idea of treating our ill with care?
+GWENITH (pout): It was mine.
+GWENITH (lost in thought): See some reason, Shuyi. They are beyond our help, but they could still help us.
+GWENITH (neutral): Right, Connie?
+CONSTANCE (lost in thought): It’s not what I would’ve thought of doing, but I don’t blame Gwen.
+CONSTANCE (lost in thought): She’s found a great many things we didn’t know about before.
+SHUYI (stern): Well, this is not what I’ve taught you, is it, Constance?
+SHUYI (stern): Or does none of that matter now that you’re no longer my student?
+CONSTANCE (sad): Shuyi, no, I’ll always be your student. It’s just–
+SHUYI (neutral): I don’t want to hear it.
+SHUYI (sad): I can only hope that we don’t run dry of our resources faster in healing our lost sisters…
+SHUYI (neutral): …from this mockery of research.

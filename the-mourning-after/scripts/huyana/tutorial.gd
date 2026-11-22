@@ -1,6 +1,7 @@
 class_name Tutorial
 extends Node
-## First-run tutorial, per the GDD. The Sanctuary sits idle until Constance first leaves the Altar:
+## First-run tutorial, per the GDD. The Sanctuary sits idle (AT_ALTAR) until the StoryDirector's
+## opening ends and calls begin_night_0():
 ## - Night 0: paged instructions over the dark Sanctuary on what each station needs and makes, and how to order.
 ## - Day 1: a guided run through fixed requests (food, then a repair, then medicine), with a caption and an
 ##   arrow at each step. The clock waits and nothing expires until the guide is done; then the rest of a
@@ -28,7 +29,6 @@ const MEDICINE := &"haemoshear"
 @export var player: Player
 @export var skip_button: Button
 @export var hud: InteractionHUD
-@export_file("*.tscn") var altar_room := "res://scenes/huyana/altar.tscn"
 @export var day_1_length := 180.0 # TUNE: length of Day 1 (s at 1x); the clock only starts once the guide is done
 @export var done_caption_time := 6.0 # TUNE: how long the closing caption stays up (s)
 @export var character_arrow_height := 2.9 # TUNE: height of the arrow's tip over Gwenith, Shuyi or Rudrama (m)
@@ -79,10 +79,7 @@ func _begin() -> void:
 	# Saves from before the tutorial existed are already past it.
 	if stage in [Stage.NIGHT_0, Stage.AT_ALTAR] and (day_cycle.day > 1 or day_cycle.elapsed > 0.0 or day_cycle.phase == DayCycle.Phase.NIGHT):
 		stage = Stage.DONE
-	elif stage == Stage.AT_ALTAR and not _in_altar():
-		stage = Stage.NIGHT_0
 	_apply_stage()
-	world.room_entered.connect(_on_room_entered)
 
 
 func _process(delta: float) -> void:
@@ -124,12 +121,9 @@ func _apply_stage() -> void:
 				_caption_wanted = false
 
 
-func _in_altar() -> bool:
-	return world.current_room != null and world.current_room.scene_file_path == altar_room
-
-
-func _on_room_entered(_room: Room) -> void:
-	if stage == Stage.AT_ALTAR and not _in_altar():
+## The opening has played: Night 0's instruction pages.
+func begin_night_0() -> void:
+	if stage == Stage.AT_ALTAR:
 		stage = Stage.NIGHT_0
 		_apply_stage()
 
@@ -169,6 +163,14 @@ func _on_night_started(_day: int) -> void:
 	if stage != Stage.DONE:
 		stage = Stage.DONE # the manager has already settled the day, so Day 1 cost no health
 		_apply_stage()
+
+
+## Already past the tutorial (Start from a milestone): no instructions, no guide.
+func mark_done() -> void:
+	stage = Stage.DONE
+	_caption_timer = 0.0
+	_caption_wanted = false
+	_apply_stage()
 
 
 ## Test button: straight to a normal day, wherever the tutorial is.

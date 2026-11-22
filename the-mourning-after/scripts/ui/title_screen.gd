@@ -2,7 +2,8 @@ class_name TitleScreen
 extends Control
 ## Title screen: New game / Resume game, Exit, and (testing only) Start from, which wipes and
 ## rebuilds a separate test save at a chosen point: Silvaluca (Perrin's base), the first boss
-## fight (the room before it) or Huyana (the Sanctuary).
+## fight (the room before it), Huyana (Constance's opening) or a Huyana milestone (75/50/25/0%),
+## which starts at that milestone's narrative beat.
 
 const WORLD_SCENE := "res://scenes/world/world.tscn"
 
@@ -13,6 +14,7 @@ const WORLD_SCENE := "res://scenes/world/world.tscn"
 @onready var silvaluca_button: Button = $StartFrom/Content/Silvaluca
 @onready var first_boss_button: Button = $StartFrom/Content/FirstBoss
 @onready var huyana_button: Button = $StartFrom/Content/Huyana
+@onready var milestone_buttons: Array[Button] = [$StartFrom/Content/Huyana75, $StartFrom/Content/Huyana50, $StartFrom/Content/Huyana25, $StartFrom/Content/Huyana0]
 @onready var cancel_button: Button = $StartFrom/Content/Cancel
 
 
@@ -22,16 +24,21 @@ func _ready() -> void:
 	World.pending_start = ""
 	start_box.hide()
 	play_button.text = "Resume game" if SaveSystem.has_save(SaveSystem.DEFAULT_SLOT) else "New game"
+	if SaveSystem.is_ended(): # the game "deleted itself": only the testing option is left
+		play_button.hide()
+		exit_button.hide()
 	play_button.pressed.connect(_on_play)
 	start_from_button.pressed.connect(_open_start_box)
 	exit_button.pressed.connect(get_tree().quit)
 	silvaluca_button.pressed.connect(_start_from.bind("silvaluca"))
 	first_boss_button.pressed.connect(_start_from.bind("first_boss"))
 	huyana_button.pressed.connect(_start_from.bind("huyana"))
+	for i in milestone_buttons.size():
+		milestone_buttons[i].pressed.connect(_start_from.bind("huyana_%d" % i))
 	cancel_button.pressed.connect(_close_start_box)
-	for button: Button in [play_button, start_from_button, exit_button, silvaluca_button, first_boss_button, huyana_button, cancel_button]:
+	for button: Button in [play_button, start_from_button, exit_button, silvaluca_button, first_boss_button, huyana_button, cancel_button] + milestone_buttons:
 		button.mouse_entered.connect(button.grab_focus)
-	play_button.grab_focus()
+	(start_from_button if SaveSystem.is_ended() else play_button).grab_focus()
 
 
 func _unhandled_input(event: InputEvent) -> void:

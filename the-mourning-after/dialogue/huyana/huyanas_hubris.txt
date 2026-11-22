@@ -1,0 +1,22 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# CUTSCENE: Huyana’s Hubris (cast-the-spell route; not played yet)
+@text
+Behind every fight is a spirit too desperate to surrender.
+
+Some causes are simply too precious to give up. The sisters of Huyana would never know if theirs – a cure to death – was truly one such cause.
+
+But having decided it was, they won the race against time.
+
+The people of Silvaluca bore the cost of the most punishing magic ever fathomed.
+A boy of fourteen wakes up twenty-four. Many do not wake at all.
+The spell was meant to take days, and instead, it took years. An uneven slice shaven off every citizen, not one spared.
+
+The rumours of strange, mutated creatures outside their walls would be proven true, every last lost sister having been filled with vitality.
+They barge through their containment walls and infest the forest between Huyana and Silvaluca, but fall by the blade of a lad who appears to be assisted by fate itself.
+
+The sisters of Huyana fall in battle, leaving Constance at the Altar, on her knees with no one left to fight for.
+
+The cycle of pain and death never would end.
+This is the mourning after.
+@end

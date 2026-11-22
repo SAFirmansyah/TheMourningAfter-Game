@@ -137,9 +137,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -300.0
-offset_top = -230.0
+offset_top = -340.0
 offset_right = 300.0
-offset_bottom = 230.0
+offset_bottom = 340.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_box")
@@ -213,6 +213,66 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
 text = "Huyana"
+
+[node name="Huyana75" type="Button" parent="StartFrom/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+text = "Huyana 75%"
+
+[node name="Huyana50" type="Button" parent="StartFrom/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+text = "Huyana 50%"
+
+[node name="Huyana25" type="Button" parent="StartFrom/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+text = "Huyana 25%"
+
+[node name="Huyana0" type="Button" parent="StartFrom/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+text = "Huyana 0%"
 
 [node name="Cancel" type="Button" parent="StartFrom/Content"]
 layout_mode = 2

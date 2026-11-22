@@ -1,0 +1,51 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NARRATIVE BEAT: Perrin (cast-the-spell route; not played yet)
+CONSTANCE (lost in thought): So it’s you.
+CONSTANCE (lost in thought): You’re Silvaluca’s great hero.
+CONSTANCE (lost in thought): Well, I stand here having lost everything.
+CONSTANCE (neutral): Before you take whatever you think I have left… could you tell me what it is you lost?
+PERRIN (angry): You foul witch, talking down to me like that.
+PERRIN (angry): I won’t tell you a thing. You don’t deserve to know.
+PERRIN (confident): I’ll let you feel just how I’ve lost when I destroy you here.
+PERRIN (angry): In your own home, at the dead of night, just like you did to my people.
+CONSTANCE (neutral): How noble of you.
+CONSTANCE (neutral): Very well, then. Have your revenge, or justice, or whatever it is you seek.
+PERRIN (neutral): Set things right. This is your only salvation, witch.
+CONSTANCE (sad): I cannot.
+CONSTANCE (neutral): The magic of my people is not reversible. Less so when it’s a matter of life and death.
+CONSTANCE (neutral): Isn’t that right, sisters – Archi, Seira, Kano?
+THE FATES (silhouette): Sister Constance.
+THE FATES (silhouette): You can sense our presence.
+CONSTANCE (lost in thought): I never did understand what happened to the three of you after that fateful night.
+THE FATES (silhouette): What happened, sister, is that our cause was won.
+CONSTANCE (neutral): What?
+THE FATES (silhouette): You had it. The cure to death was found that night.
+ARCHI (silhouette): I’m able to alter the conditions of life.
+SEIRA (silhouette): I’m able to provide more favorable circumstances to prolong one’s life.
+KANO (silhouette): And I, though it takes much from me, can bring somebody back when they fall.
+THE FATES (silhouette): But look at what it’s done to us, sister.
+THE FATES (silhouette): The cure to death has deprived us of anything resembling life.
+THE FATES (silhouette): We cannot communicate as we used to. It’s taken a lot for us to be able to be heard like this at all.
+THE FATES (silhouette): And we do not have a physical form that can be lived in.
+CONSTANCE (sad): I… I see. So that is the cost of our cause.
+CONSTANCE (sad): Of bending the natural order more than it allows before breaking.
+PERRIN (neutral): So you three know this witch, do you?
+PERRIN (neutral): Why help me all this time, then? I’m sure you’ve long since figured I intend to exact vengeance from her.
+THE FATES (silhouette): Having been granted the power to decide anyone’s fate, and having lost everything else to obtain it…
+THE FATES (silhouette): We no longer have an interest in writing out a destiny to suit our wishes.
+THE FATES (silhouette): We have brought you this far, young man, so that you may have the chance…
+THE FATES (silhouette): …to see things through with the cause of your predicament.
+PERRIN (scared): Does that mean… you’ll go no further?
+THE FATES (silhouette): Yes. The outcome of this battle is entirely in your hands.
+THE FATES (silhouette): And yours, sister.
+CONSTANCE (happy): Hah… ha, hah.
+CONSTANCE (happy): It’s almost poetic.
+CONSTANCE (neutral): So be it, then.
+PERRIN (angry): What are you saying, witch?
+CONSTANCE (neutral): I cannot change what happened to my people, or yours.
+CONSTANCE (neutral): But I heed my sisters’ call.
+CONSTANCE (happy): I will not surrender here.
+PERRIN (angry): Oh, I see how it is!
+PERRIN (angry): Well, if you won’t give back the time you stole from us, I’ll just have to do to you what you did to us…
+PERRIN (angry): All of us!

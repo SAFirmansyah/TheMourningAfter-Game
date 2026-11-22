@@ -1,0 +1,13 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 4 v3
+@move rudrama FireRight
+@walk constance Campfire
+@settle
+RUDRAMA (melancholic): Seeing Shuyi go off on Gwen kind of took me back, Constance.
+CONSTANCE (neutral): To what? That’s not something you’ve seen before.
+RUDRAMA (happy): Oh, but she looks a lot like you. More so now as she’s grown up.
+RUDRAMA (happy): So it just takes me back to when you got an earful from her in university.
+CONSTANCE (lost in thought): What I wouldn’t give to go back to those times.
+RUDRAMA (melancholic): Really? Even the parts that… you maybe regret?
+CONSTANCE (sad): Especially those.

@@ -132,22 +132,6 @@ grow_horizontal = 0
 mouse_filter = 2
 script = ExtResource("2_clock")
 
-[node name="DayLabel" type="Label" parent="Clock"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -196.0
-offset_top = 184.0
-offset_right = -44.0
-offset_bottom = 222.0
-grow_horizontal = 0
-theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.8)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 28
-text = "Day 1"
-horizontal_alignment = 1
-
 [node name="Speeds" type="HBoxContainer" parent="Clock"]
 anchors_preset = 1
 anchor_left = 1.0
@@ -256,6 +240,25 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_speed_on")
 theme_override_colors/font_hover_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
 text = "Skip tutorial"
+
+[node name="SkipDay" type="Button" parent="Clock"]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -212.0
+offset_top = 306.0
+offset_right = -28.0
+offset_bottom = 338.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_speed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_speed_on")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_speed_on")
+theme_override_colors/font_hover_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+text = "Skip day"
 
 [node name="NightModal" type="CanvasLayer" parent="."]
 layer = 6

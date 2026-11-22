@@ -17,6 +17,22 @@ func delete_profile(prefix: String) -> void:
 			DirAccess.remove_absolute(path)
 
 
+const ENDED_FLAG := "user://ended.flag" # the 'Destroy the spell' ending's self-deletion; survives delete_all
+
+
+func mark_ended() -> void:
+	FileAccess.open(ENDED_FLAG, FileAccess.WRITE).store_string("There would be no mourning after.")
+
+
+func is_ended() -> bool:
+	return FileAccess.file_exists(ENDED_FLAG)
+
+
+func clear_ended() -> void:
+	if is_ended():
+		DirAccess.remove_absolute(ENDED_FLAG)
+
+
 ## A brand-new game: the real saves and the test save are all gone.
 func delete_all() -> void:
 	delete_profile("")
