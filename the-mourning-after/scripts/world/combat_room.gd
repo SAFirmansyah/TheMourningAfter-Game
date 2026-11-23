@@ -15,8 +15,15 @@ signal all_enemies_defeated
 @export var wall_clearance := 0.6 # TUNE: minimum distance from walls (m)
 @export var spawn_max_attempts := 40 # TUNE: random tries per position before giving up
 
-var low_enemy_scn: PackedScene = load("res://scenes/enemies/low_mutant.tscn")
-var big_enemy_scn: PackedScene = load("res://scenes/enemies/deformed_humans.tscn")
+@export_group("Grass")
+@export var grass_scn: PackedScene = load("res://scenes/world/grass.tscn")
+@export var grass_textures: Array[Texture2D] = [] # fill with all 20 variants in the inspector
+@export var grass_count := Vector2i(6, 14)
+@export var grass_wall_clearance := 0.3
+
+var big_enemy_scn: PackedScene = load("res://scenes/enemies/low_mutant.tscn")
+var low_enemy_scn2: PackedScene = load("res://scenes/enemies/deformed_humans_2.tscn")
+var low_enemy_scn: PackedScene = load("res://scenes/enemies/deformed_humans.tscn")
 
 var is_cleared := false
 
@@ -32,9 +39,10 @@ func _ready() -> void:
 			exit.set_blocked(false)
 	)
 	if restoring:
-		is_cleared = true # only cleared combat rooms are ever saved; the world restores exit targets
+		is_cleared = true
 		return
 	spawn_enemies()
+	spawn_grass()
 	_configure_next_exit()
 	for exit in get_exits():
 		exit.set_blocked(true)
@@ -56,15 +64,57 @@ func _configure_next_exit() -> void:
 		exit.target_room = CampaignState.get_post_gauntlet_room_path()	 # adjust to your actual cooldown room path
 
 
+## Scatters decorative grass sprites across the room's floor. Purely visual —
+## no collision, so these can overlap each other and sit near walls/exits freely.
+func spawn_grass() -> void:
+	if grass_scn == null or grass_textures.is_empty():
+		print("spawn_grass bailed: grass_scn=", grass_scn, " textures=", grass_textures.size())
+		return
+	var count := _rng.randi_range(grass_count.x, grass_count.y)
+	print("spawning ", count, " grass")
+	for i in count:
+		var pos: Variant = _random_grass_point(_floor_bounds)
+		if pos == null:
+			print("grass spot ", i, " rejected")
+			continue
+		var grass := grass_scn.instantiate() as Grass
+		add_child(grass)
+		grass.global_position = pos
+		grass.set_texture(grass_textures[_rng.randi() % grass_textures.size()])
+		
+
+## Like _random_floor_point, but skips the exit-clearance check (grass can grow near exits)
+## and uses a looser wall clearance.
+func _random_grass_point(area: AABB) -> Variant:
+	var space_state := get_world_3d().direct_space_state
+	var x := _rng.randf_range(area.position.x, area.end.x)
+	var z := _rng.randf_range(area.position.z, area.end.z)
+	var from := Vector3(x, area.position.y + 5.0, z)
+	var hit := space_state.intersect_ray(PhysicsRayQueryParameters3D.create(from, Vector3(x, area.position.y - 5.0, z)))
+	if hit.is_empty() or absf(hit.position.y - area.position.y) > 0.3:
+		return null
+	var pos: Vector3 = hit.position
+	var probe := SphereShape3D.new()
+	probe.radius = grass_wall_clearance
+	var query := PhysicsShapeQueryParameters3D.new()
+	query.shape = probe
+	query.transform = Transform3D(Basis(), pos + Vector3.UP * (grass_wall_clearance + 0.3))
+	if not space_state.intersect_shape(query, 1).is_empty():
+		return null
+	return pos
+
+
 ## Mobs spawn in clusters (plus the odd loner) at random spots away from the exits,
 ## so every visit to a room lays them out differently.
 func spawn_enemies() -> void:
 	var mobs := CombatRunState.roll_room_mobs()
-	print("room weight ", snappedf(CombatRunState.current_room_weight(), 0.01), ": ", mobs.x, " low mutants, ", mobs.y, " deformed humans")
+	print("room weight ", snappedf(CombatRunState.current_room_weight(), 0.01), ": ", mobs.x, " deformed humans, ", mobs.y, " deformed humans 2, ", mobs.z, " low mutants")
 	var queue: Array[PackedScene] = []
 	for i in mobs.x:
 		queue.append(low_enemy_scn)
 	for i in mobs.y:
+		queue.append(low_enemy_scn2)
+	for i in mobs.z:
 		queue.append(big_enemy_scn)
 	queue.shuffle()
 

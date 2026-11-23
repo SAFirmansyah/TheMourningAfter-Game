@@ -1,6 +1,40 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dn72xy2p4ylvl"]
 
-[ext_resource type="Script" path="res://scripts/boss/pollen_cloud.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://catdbss362r07" path="res://scripts/boss/pollen_cloud.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://div2ods1oni4l" path="res://textures/Gwenith/pollen_dust/pollen_dust_00002.png" id="4_pymj0"]
+[ext_resource type="Texture2D" uid="uid://bqobgymp0ul1p" path="res://textures/Gwenith/pollen_dust/pollen_dust_00003.png" id="5_qpdja"]
+[ext_resource type="Texture2D" uid="uid://b6omtaw54i8qx" path="res://textures/Gwenith/pollen_dust/pollen_dust_00004.png" id="6_tvq4m"]
+[ext_resource type="Texture2D" uid="uid://bgu3y5epigpcs" path="res://textures/Gwenith/pollen_dust/pollen_dust_00005.png" id="7_m5anc"]
+[ext_resource type="Texture2D" uid="uid://c2vbbum53c1fo" path="res://textures/Gwenith/pollen_dust/pollen_dust_00006.png" id="8_gwwgj"]
+[ext_resource type="Texture2D" uid="uid://c8qch7o4oc77y" path="res://textures/Gwenith/pollen_dust/pollen_dust_00007.png" id="9_v60r0"]
+[ext_resource type="Texture2D" uid="uid://clhcbr8thrjh6" path="res://textures/Gwenith/pollen_dust/pollen_dust_00008.png" id="10_aug7a"]
+[ext_resource type="Texture2D" uid="uid://bcsfl6y0y2mky" path="res://textures/Gwenith/pollen_dust/pollen_dust_00009.png" id="11_j3fb3"]
+[ext_resource type="Texture2D" uid="uid://bvhujsqonq30x" path="res://textures/Gwenith/pollen_dust/pollen_dust_00010.png" id="12_edh36"]
+[ext_resource type="Texture2D" uid="uid://cd2jacf222013" path="res://textures/Gwenith/pollen_dust/pollen_dust_00011.png" id="13_nb5b0"]
+[ext_resource type="Texture2D" uid="uid://cypei4avm3lbk" path="res://textures/Gwenith/pollen_dust/pollen_dust_00012.png" id="14_rusrc"]
+[ext_resource type="Texture2D" uid="uid://n51l2ccjaiqi" path="res://textures/Gwenith/pollen_dust/pollen_dust_00013.png" id="15_q7nrj"]
+[ext_resource type="Texture2D" uid="uid://bd4jflqumt0cd" path="res://textures/Gwenith/pollen_dust/pollen_dust_00014.png" id="16_5evhy"]
+[ext_resource type="Texture2D" uid="uid://chvy261h8wbk2" path="res://textures/Gwenith/pollen_dust/pollen_dust_00015.png" id="17_7eprm"]
+[ext_resource type="Texture2D" uid="uid://bhqjopnrat0y3" path="res://textures/Gwenith/pollen_dust/pollen_dust_00016.png" id="18_voyht"]
+[ext_resource type="Texture2D" uid="uid://d0ro5jtrdjbyg" path="res://textures/Gwenith/pollen_dust/pollen_dust_00017.png" id="19_60g60"]
+[ext_resource type="Texture2D" uid="uid://beqafmf70r7qu" path="res://textures/Gwenith/pollen_dust/pollen_dust_00018.png" id="20_qga40"]
+[ext_resource type="Texture2D" uid="uid://dehqgdco2iyha" path="res://textures/Gwenith/pollen_dust/pollen_dust_00019.png" id="21_peb8i"]
+[ext_resource type="Texture2D" uid="uid://dglrejtsdt4ox" path="res://textures/Gwenith/pollen_dust/pollen_dust_00020.png" id="22_xr0f7"]
+[ext_resource type="Texture2D" uid="uid://fy46ofmu345f" path="res://textures/Gwenith/pollen_dust/pollen_dust_00021.png" id="23_5lanp"]
+[ext_resource type="Texture2D" uid="uid://djfnsmj4j08qb" path="res://textures/Gwenith/pollen_dust/pollen_dust_00022.png" id="24_iun48"]
+[ext_resource type="Texture2D" uid="uid://ya330eh7xejr" path="res://textures/Gwenith/pollen_dust/pollen_dust_00023.png" id="25_86gvo"]
+[ext_resource type="Texture2D" uid="uid://bp6wjevvrt0j7" path="res://textures/Gwenith/pollen_dust/pollen_dust_00024.png" id="26_6cya2"]
+[ext_resource type="Texture2D" uid="uid://dui4p1cw8mtc1" path="res://textures/Gwenith/pollen_dust/pollen_dust_00025.png" id="27_mqdnq"]
+[ext_resource type="Texture2D" uid="uid://d30s5pxneva42" path="res://textures/Gwenith/pollen_dust/pollen_dust_00026.png" id="28_0dl1w"]
+[ext_resource type="Texture2D" uid="uid://0r75ve7hgm8p" path="res://textures/Gwenith/pollen_dust/pollen_dust_00027.png" id="29_7mitr"]
+[ext_resource type="Texture2D" uid="uid://c1hv4lagkitjg" path="res://textures/Gwenith/pollen_dust/pollen_dust_00028.png" id="30_0ne7g"]
+[ext_resource type="Texture2D" uid="uid://b5srdvf5j7hru" path="res://textures/Gwenith/pollen_dust/pollen_dust_00029.png" id="31_2eyyi"]
+[ext_resource type="Texture2D" uid="uid://bw0g0x4amkfig" path="res://textures/Gwenith/pollen_dust/pollen_dust_00030.png" id="32_0tk4m"]
+[ext_resource type="Texture2D" uid="uid://8oe1eparor22" path="res://textures/Gwenith/pollen_dust/pollen_dust_00031.png" id="33_1kiq8"]
+[ext_resource type="Texture2D" uid="uid://ddrma7qiw0oe5" path="res://textures/Gwenith/pollen_dust/pollen_dust_00032.png" id="34_84eg4"]
+[ext_resource type="Texture2D" uid="uid://ceg0nthi0vxmx" path="res://textures/Gwenith/pollen_dust/pollen_dust_00033.png" id="35_1x54v"]
+[ext_resource type="Texture2D" uid="uid://dq60k2b6ku7ik" path="res://textures/Gwenith/pollen_dust/pollen_dust_00034.png" id="36_twaes"]
+[ext_resource type="Texture2D" uid="uid://bnf7k02v8sgkq" path="res://textures/Gwenith/pollen_dust/pollen_dust_00035.png" id="37_lj8jn"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_cloud"]
 transparency = 1
@@ -12,9 +46,125 @@ material = SubResource("Mat_cloud")
 radius = 1.4
 height = 2.2
 
-[node name="PollenCloud" type="Node3D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_jhy0a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_pymj0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_qpdja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_tvq4m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_m5anc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gwwgj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_v60r0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_aug7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_j3fb3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_edh36")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_nb5b0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_rusrc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_q7nrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_5evhy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_7eprm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_voyht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_60g60")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_qga40")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_peb8i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_xr0f7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_5lanp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_iun48")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_86gvo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_6cya2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_mqdnq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_0dl1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_7mitr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_0ne7g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_2eyyi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_0tk4m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_1kiq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_84eg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_1x54v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_twaes")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_lj8jn")
+}],
+"loop": 1,
+"name": &"cloud",
+"speed": 35.0
+}]
+
+[node name="PollenCloud" type="Node3D" unique_id=1560179410]
 script = ExtResource("1_script")
 
-[node name="Cloud" type="MeshInstance3D" parent="."]
+[node name="Cloud" type="MeshInstance3D" parent="." unique_id=1234774221]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+visible = false
 mesh = SubResource("Mesh_cloud")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=1232022646]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 2, 0)
+sprite_frames = SubResource("SpriteFrames_jhy0a")
+animation = &"cloud"

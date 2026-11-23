@@ -432,5 +432,3 @@ func _end_run_at_base() -> void:
 	_transitioning = false
 	
 	
-func max_health_for_residue() -> int:
-	return clampi(BASE_MAX_HEALTH + residue_max_health_bonus * magic_residue, BASE_MAX_HEALTH, MAX_HEALTH_CAP)

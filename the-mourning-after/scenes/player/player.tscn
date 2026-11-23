@@ -3,21 +3,42 @@
 [ext_resource type="Script" uid="uid://dnbf3vat68acm" path="res://scripts/player/player.gd" id="1_player"]
 [ext_resource type="Resource" uid="uid://26uqe6v7rx3s" path="res://scripts/stats/hero_stats.tres" id="2_p47bc"]
 [ext_resource type="Resource" uid="uid://fsd1jmnw4ict" path="res://scripts/weapons/sword_wood.tres" id="3_75vfm"]
+[ext_resource type="Texture2D" uid="uid://dn78qxvrla372" path="res://textures/Perrin/perrin_dash/perrin_dash_00000.png" id="4_hyqqp"]
 [ext_resource type="Texture2D" uid="uid://3icclc6j3duq" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00000.png" id="4_myrg7"]
+[ext_resource type="Texture2D" uid="uid://c0eoh65ji75ju" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00000.png" id="4_upxxc"]
+[ext_resource type="Texture2D" uid="uid://b0ub8xskhthy4" path="res://textures/Perrin/perrin_dash/perrin_dash_00001.png" id="5_ds1xl"]
 [ext_resource type="Texture2D" uid="uid://bgcqw3xqwtykf" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00001.png" id="5_kvlxm"]
+[ext_resource type="Texture2D" uid="uid://diuni47yfdleo" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00001.png" id="5_ln3h3"]
+[ext_resource type="Texture2D" uid="uid://dmkaigtjnx78n" path="res://textures/Perrin/perrin_dash/perrin_dash_00002.png" id="6_1u1sw"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="6_75vfm"]
 [ext_resource type="Texture2D" uid="uid://bvrlhmhuxe5qm" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00002.png" id="6_uf5tr"]
+[ext_resource type="Texture2D" uid="uid://edfpwu2fa0sw" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00002.png" id="6_uygh0"]
+[ext_resource type="Texture2D" uid="uid://c6w6fye2urtwv" path="res://textures/Perrin/perrin_dash/perrin_dash_00003.png" id="7_2t3bg"]
 [ext_resource type="Texture2D" uid="uid://mdb6lb43xybn" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00003.png" id="7_lgqa7"]
 [ext_resource type="Script" uid="uid://glnwwouy5k35" path="res://scripts/player/sword_visual.gd" id="7_sword"]
+[ext_resource type="Texture2D" uid="uid://d3mmxky6dduyf" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00003.png" id="7_t1aof"]
 [ext_resource type="Texture2D" uid="uid://bp6ea67ywptpa" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00004.png" id="8_8ydkj"]
+[ext_resource type="Texture2D" uid="uid://dgwlk2kyi0ya3" path="res://textures/Perrin/perrin_dash/perrin_dash_00004.png" id="8_jrbya"]
+[ext_resource type="Texture2D" uid="uid://c30qq4e5xd8o" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00004.png" id="8_w8qe1"]
 [ext_resource type="Texture2D" uid="uid://b3crjmjoqm6i4" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00005.png" id="9_3j4b4"]
+[ext_resource type="Texture2D" uid="uid://c6aohgnrm8241" path="res://textures/Perrin/perrin_dash/perrin_dash_00005.png" id="9_ahqnk"]
+[ext_resource type="Texture2D" uid="uid://brmw76nnygo7l" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00005.png" id="9_hdvrm"]
+[ext_resource type="Texture2D" uid="uid://bhhkc1j3v13jc" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00006.png" id="10_5xbmr"]
+[ext_resource type="Texture2D" uid="uid://vxolkc02ppoq" path="res://textures/Perrin/perrin_dash/perrin_dash_00006.png" id="10_vb1ce"]
 [ext_resource type="Texture2D" uid="uid://cobjw3x4skthx" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00007.png" id="10_yj68g"]
+[ext_resource type="Texture2D" uid="uid://elhsj8lqnk2i" path="res://textures/Perrin/perrin_dash/perrin_dash_00007.png" id="11_0ncpa"]
+[ext_resource type="Texture2D" uid="uid://ut6pyydao2uv" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00007.png" id="11_hir57"]
 [ext_resource type="Texture2D" uid="uid://demayut45ojbw" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00008.png" id="11_ioxgp"]
 [ext_resource type="Texture2D" uid="uid://csho88v7p7exs" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00009.png" id="12_cnsyf"]
+[ext_resource type="Texture2D" uid="uid://dmrorvpmapeb4" path="res://textures/Perrin/perrin_dash/perrin_dash_00008.png" id="12_upxxc"]
 [ext_resource type="Texture2D" uid="uid://27ugbdi33cth" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00010.png" id="13_007i1"]
+[ext_resource type="Texture2D" uid="uid://btvmo4hpl67uj" path="res://textures/Perrin/perrin_dash/perrin_dash_00009.png" id="13_ln3h3"]
 [ext_resource type="Texture2D" uid="uid://cvr8nty3i1waf" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00011.png" id="14_6cv16"]
+[ext_resource type="Texture2D" uid="uid://c3dug7ae4dric" path="res://textures/Perrin/perrin_dash/perrin_dash_00010.png" id="14_uygh0"]
 [ext_resource type="Texture2D" uid="uid://bmoahhtpfy313" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00000.png" id="15_4hvnv"]
+[ext_resource type="Texture2D" uid="uid://cth4r8bf36pud" path="res://textures/Perrin/perrin_dash/perrin_dash_00011.png" id="15_t1aof"]
 [ext_resource type="Texture2D" uid="uid://bphkd01ipjwq7" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00001.png" id="16_bbmj2"]
+[ext_resource type="Texture2D" uid="uid://boab4yb6cl8hf" path="res://textures/Perrin/perrin_dash/perrin_dash_00012.png" id="16_w8qe1"]
 [ext_resource type="Texture2D" uid="uid://pv0wle25e24a" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00002.png" id="17_kxw46"]
 [ext_resource type="Texture2D" uid="uid://d0dxlt3ir3xwm" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00003.png" id="18_8qxvo"]
 [ext_resource type="Texture2D" uid="uid://c4oqrd2msj18d" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00004.png" id="19_5q8fn"]
@@ -37,6 +58,79 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vlovs"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_upxxc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ln3h3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_uygh0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_t1aof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_w8qe1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hdvrm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_5xbmr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_hir57")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_hyqqp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ds1xl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1u1sw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2t3bg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_jrbya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ahqnk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vb1ce")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_0ncpa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_upxxc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ln3h3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_uygh0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_t1aof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_w8qe1")
+}],
+"loop": 1,
+"name": &"dash",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_myrg7")
@@ -188,7 +282,7 @@ offset = Vector2(0, 64)
 pixel_size = 0.014
 alpha_cut = 1
 sprite_frames = SubResource("SpriteFrames_vlovs")
-animation = &"idle"
+animation = &"attack"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=623702916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

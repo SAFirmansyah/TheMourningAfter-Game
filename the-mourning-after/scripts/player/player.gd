@@ -51,6 +51,7 @@ signal weapon_changed(weapon: WeaponData)
 @export var pinned_damage_multiplier := 1.5 # TUNE: damage vs a mob pressed against a wall
 @export var pinned_gap := 0.1 # TUNE: wall distance that counts as pressed against it (m)
 @export var aim_assist_range := 2.4 # TUNE: swings turn toward an enemy within this distance (m)
+@export var attack_anim_min_time := 0.2
 @export_range(0.0, 180.0) var aim_assist_angle := 60.0 # TUNE: ...if it's within this angle of where Perrin faces (degrees)
 
 @export_group("Heal Effect")
@@ -82,6 +83,7 @@ var _iframe_time_left := 0.0
 var _dash_velocity := Vector3.ZERO
 var _recharge_progress := 0.0
 
+var _attacking := false
 var _attack_queued := false
 var _attack_cooldown_left := 0.0
 var _ability_queued := false
@@ -105,6 +107,7 @@ func _ready() -> void:
 	_damage_flash = damage_flash
 	if _sword:
 		_sword.set_weapon(weapon)
+	sprite.animation_finished.connect(_on_sprite_animation_finished)
 	
 	print("weapon at _ready start: ", weapon.weapon_name if weapon else "null")
 	call_deferred("_print_health")
@@ -125,11 +128,10 @@ func _physics_process(delta: float) -> void:
 	var input := Vector2.ZERO if stunned else (Input.get_vector("move_left", "move_right", "move_up", "move_down") if input_enabled else forced_input)
 	if input != Vector2.ZERO:
 		_facing = input.normalized()
-		sprite.play("walk")
 		if input.x != 0:
 			sprite.flip_h = input.x < 0
-	else:
-		sprite.play("idle")
+	if not _dashing and not _attacking:
+		sprite.play("walk" if input != Vector2.ZERO else "idle")
 
 	_recharge_dashes(delta)
 	if _dash_queued:
@@ -206,6 +208,12 @@ func is_stunned() -> bool:
 	return _stun_time_left > 0.0
 
 
+func _on_sprite_animation_finished() -> void:
+	if sprite.animation == &"attack":
+		_attacking = false
+		sprite.speed_scale = 1.0
+
+
 func teleport(pos: Vector3) -> void:
 	global_position = pos
 	if _dashing:
@@ -262,6 +270,7 @@ func _try_dash() -> void:
 		return
 	dashes_available -= 1
 	_dashing = true
+	sprite.play("dash")
 	_dash_time_left = dash_duration
 	_dash_velocity = _to_world(_facing) * (dash_distance / dash_duration)
 	collision_mask &= ~dash_phase_layers
@@ -288,6 +297,14 @@ func _try_attack(ability_swing := false) -> bool:
 		return false
 	_attack_cooldown_left = weapon.attack_cooldown * (1.0 - bonus_cooldown_reduction)
 	_aim_at_nearby_enemy()
+	_attacking = true
+
+	var frames := sprite.sprite_frames
+	var natural_duration := frames.get_frame_count(&"attack") / frames.get_animation_speed(&"attack")
+	var display_time := maxf(attack_anim_min_time, weapon.active_delay + weapon.active_window)
+	sprite.speed_scale = natural_duration / display_time
+	sprite.play("attack")
+	
 	var swing := {
 		"damage": hit_damage(),
 		"abilities": weapon.charged_abilities if ability_swing else [],

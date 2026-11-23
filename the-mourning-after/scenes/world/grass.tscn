@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ckakiy7lmk260"]
+
+[ext_resource type="Script" uid="uid://0ogqidcip5q5" path="res://scripts/world/grass.gd" id="1_ma61n"]
+
+[node name="Grass" type="Node3D" unique_id=72220911 node_paths=PackedStringArray("card")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+script = ExtResource("1_ma61n")
+card = NodePath("GrassSprite")
+
+[node name="GrassSprite" type="Sprite3D" parent="." unique_id=941856897]

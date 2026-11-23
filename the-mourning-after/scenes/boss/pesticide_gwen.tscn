@@ -223,4 +223,5 @@ animation = &"splash"
 
 [node name="Puddle" type="MeshInstance3D" parent="." unique_id=1977233100]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0.03, 0)
+visible = false
 mesh = SubResource("Mesh_puddle")

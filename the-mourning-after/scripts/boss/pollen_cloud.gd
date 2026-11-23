@@ -5,9 +5,12 @@ extends Node3D
 @export var lifetime := 1.2 # TUNE (s)
 
 @onready var cloud: MeshInstance3D = $Cloud
+@onready var sprite: AnimatedSprite3D = $Sprite
 
 var _age := 0.0
 
+func _ready() -> void:
+	sprite.play("cloud")
 
 func _physics_process(delta: float) -> void:
 	_age += delta

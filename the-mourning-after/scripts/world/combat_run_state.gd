@@ -22,8 +22,9 @@ const FIRST_HUYANA_GAUNTLET := 2 # gauntlets from here on use the boss's route p
 
 const BASE_ROOM_WEIGHT := 2.0 # TUNE: enemy weight in the run's first combat room
 const ROOM_WEIGHT_GROWTH := 0.1 # TUNE: weight added per combat room (fraction, compounding; up to 12 rooms a run)
-const LOW_MUTANT_WEIGHT := 1.0 # TUNE: weight of one low mutant
-const DEFORMED_HUMAN_WEIGHT := 0.2 # TUNE: weight of one deformed human
+const LOW_MUTANT_WEIGHT := 0.2 # TUNE: weight of one low mutant
+const DEFORMED_HUMAN_WEIGHT := 1 # TUNE: weight of one deformed human
+const DEFORMED_HUMAN_2_WEIGHT := 1 # TUNE: weight of DEFOREMD HUMAN 2
 
 var first_room_path := "" # where the starting room's exit leads this run
 var rests_used: Array[int] = [] # gauntlets whose non-combat heal spot has been used
@@ -134,9 +135,17 @@ func current_room_weight() -> float:
 	return BASE_ROOM_WEIGHT * pow(1.0 + ROOM_WEIGHT_GROWTH, maxi(combat_room_number() - 1, 0))
 
 
-## Rolls (low mutants, deformed humans) that exactly fill this room's weight, any mix.
-func roll_room_mobs() -> Vector2i:
-	var units := roundi(current_room_weight() / DEFORMED_HUMAN_WEIGHT)
-	var units_per_low := roundi(LOW_MUTANT_WEIGHT / DEFORMED_HUMAN_WEIGHT)
-	var low := randi_range(0, units / units_per_low)
-	return Vector2i(low, units - low * units_per_low)
+## Rolls (low mutants, deformed humans, new enemies) that exactly fill this room's weight, any mix.
+## Rolls (low mutants, deformed humans, deformed humans 2) that exactly fill this room's weight, any mix.
+func roll_room_mobs() -> Vector3i:
+	var units := roundi(current_room_weight() / LOW_MUTANT_WEIGHT) # smallest unit is now low mutants
+	var units_per_deformed := roundi(DEFORMED_HUMAN_WEIGHT / LOW_MUTANT_WEIGHT)
+	var units_per_deformed2 := roundi(DEFORMED_HUMAN_2_WEIGHT / LOW_MUTANT_WEIGHT)
+
+	var deformed := randi_range(0, units / units_per_deformed)
+	units -= deformed * units_per_deformed
+
+	var deformed2 := randi_range(0, units / units_per_deformed2)
+	units -= deformed2 * units_per_deformed2
+
+	return Vector3i(units, deformed, deformed2) # x=low mutants, y=deformed humans, z=deformed humans 2

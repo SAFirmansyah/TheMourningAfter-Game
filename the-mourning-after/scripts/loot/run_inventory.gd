@@ -31,6 +31,8 @@ var magic_residue := 0
 var residue_gained_this_run := 0
 
 const MAX_RESIDUE_PER_RUN := 5 # TUNE: residue that can drop in one run
+const BASE_MAX_HEALTH := 50
+const MAX_HEALTH_CAP := 200
 
 var _player: Player
 
@@ -94,6 +96,9 @@ func collect(loot: LootData) -> void:
 	_apply(loot)
 	effects_changed.emit()
 	
+func max_health_for_residue() -> int:
+	return clampi(BASE_MAX_HEALTH + residue_max_health_bonus * magic_residue, BASE_MAX_HEALTH, MAX_HEALTH_CAP)
+
 	
 func _sync_max_health() -> void:
 	if _player == null:

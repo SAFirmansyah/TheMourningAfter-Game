@@ -1,11 +1,232 @@
 [gd_scene format=3 uid="uid://bmlc88qlhew43"]
 
 [ext_resource type="Script" uid="uid://c5slr6upa5yvx" path="res://scripts/enemies/perrin_enemy.gd" id="1_ql28b"]
-[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="2_8tbbj"]
-[ext_resource type="Script" uid="uid://bue1mi5yjlgyn" path="res://scripts/visual/facing_card.gd" id="3_uehow"]
+[ext_resource type="Texture2D" uid="uid://c0eoh65ji75ju" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00000.png" id="2_3406t"]
+[ext_resource type="Texture2D" uid="uid://dn78qxvrla372" path="res://textures/Perrin/perrin_dash/perrin_dash_00000.png" id="2_l7sad"]
+[ext_resource type="Texture2D" uid="uid://b0ub8xskhthy4" path="res://textures/Perrin/perrin_dash/perrin_dash_00001.png" id="3_u3juw"]
+[ext_resource type="Texture2D" uid="uid://diuni47yfdleo" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00001.png" id="3_wnokm"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="4_3l04v"]
+[ext_resource type="Texture2D" uid="uid://edfpwu2fa0sw" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00002.png" id="4_oounh"]
+[ext_resource type="Texture2D" uid="uid://dmkaigtjnx78n" path="res://textures/Perrin/perrin_dash/perrin_dash_00002.png" id="4_v8jr8"]
 [ext_resource type="Script" uid="uid://glnwwouy5k35" path="res://scripts/player/sword_visual.gd" id="5_55085"]
+[ext_resource type="Texture2D" uid="uid://c6w6fye2urtwv" path="res://textures/Perrin/perrin_dash/perrin_dash_00003.png" id="5_cur5l"]
+[ext_resource type="Texture2D" uid="uid://d3mmxky6dduyf" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00003.png" id="5_i5k6m"]
+[ext_resource type="Texture2D" uid="uid://c30qq4e5xd8o" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00004.png" id="6_2sj8p"]
 [ext_resource type="PackedScene" path="res://scenes/ui/boss_health_bar.tscn" id="6_8tbbj"]
+[ext_resource type="Texture2D" uid="uid://dgwlk2kyi0ya3" path="res://textures/Perrin/perrin_dash/perrin_dash_00004.png" id="6_cf1yu"]
+[ext_resource type="Texture2D" uid="uid://brmw76nnygo7l" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00005.png" id="7_iv4o6"]
+[ext_resource type="Texture2D" uid="uid://c6aohgnrm8241" path="res://textures/Perrin/perrin_dash/perrin_dash_00005.png" id="7_trc8r"]
+[ext_resource type="Texture2D" uid="uid://vxolkc02ppoq" path="res://textures/Perrin/perrin_dash/perrin_dash_00006.png" id="8_rs2k4"]
+[ext_resource type="Texture2D" uid="uid://bhhkc1j3v13jc" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00006.png" id="8_yxcbv"]
+[ext_resource type="Texture2D" uid="uid://elhsj8lqnk2i" path="res://textures/Perrin/perrin_dash/perrin_dash_00007.png" id="9_10si1"]
+[ext_resource type="Texture2D" uid="uid://ut6pyydao2uv" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00007.png" id="9_ufrsa"]
+[ext_resource type="Texture2D" uid="uid://dmrorvpmapeb4" path="res://textures/Perrin/perrin_dash/perrin_dash_00008.png" id="10_hvkia"]
+[ext_resource type="Texture2D" uid="uid://btvmo4hpl67uj" path="res://textures/Perrin/perrin_dash/perrin_dash_00009.png" id="11_frsne"]
+[ext_resource type="Texture2D" uid="uid://c3dug7ae4dric" path="res://textures/Perrin/perrin_dash/perrin_dash_00010.png" id="12_fq5di"]
+[ext_resource type="Texture2D" uid="uid://cth4r8bf36pud" path="res://textures/Perrin/perrin_dash/perrin_dash_00011.png" id="13_yq5lf"]
+[ext_resource type="Texture2D" uid="uid://boab4yb6cl8hf" path="res://textures/Perrin/perrin_dash/perrin_dash_00012.png" id="14_crkfm"]
+[ext_resource type="Texture2D" uid="uid://bmoahhtpfy313" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00000.png" id="15_hte3q"]
+[ext_resource type="Texture2D" uid="uid://bphkd01ipjwq7" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00001.png" id="16_iip53"]
+[ext_resource type="Texture2D" uid="uid://pv0wle25e24a" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00002.png" id="17_fb3xi"]
+[ext_resource type="Texture2D" uid="uid://d0dxlt3ir3xwm" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00003.png" id="18_bkyg8"]
+[ext_resource type="Texture2D" uid="uid://c4oqrd2msj18d" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00004.png" id="19_q4vgn"]
+[ext_resource type="Texture2D" uid="uid://dj21rod2haamp" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00005.png" id="20_o1ebn"]
+[ext_resource type="Texture2D" uid="uid://diccyycqk6swv" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00006.png" id="21_3406t"]
+[ext_resource type="Texture2D" uid="uid://i66y7nucaynr" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00007.png" id="22_wnokm"]
+[ext_resource type="Texture2D" uid="uid://3icclc6j3duq" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00000.png" id="23_m1fre"]
+[ext_resource type="Texture2D" uid="uid://bicjnkugiaskn" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00008.png" id="23_oounh"]
+[ext_resource type="Texture2D" uid="uid://blttaysgmuolm" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00009.png" id="24_i5k6m"]
+[ext_resource type="Texture2D" uid="uid://bgcqw3xqwtykf" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00001.png" id="24_vdpcc"]
+[ext_resource type="Texture2D" uid="uid://74lt4abo1w0y" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00010.png" id="25_2sj8p"]
+[ext_resource type="Texture2D" uid="uid://bvrlhmhuxe5qm" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00002.png" id="25_n1fg1"]
+[ext_resource type="Texture2D" uid="uid://mdb6lb43xybn" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00003.png" id="26_717lw"]
+[ext_resource type="Texture2D" uid="uid://latvxfrbf763" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00011.png" id="26_iv4o6"]
+[ext_resource type="Texture2D" uid="uid://bp6ea67ywptpa" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00004.png" id="27_c51nt"]
+[ext_resource type="Texture2D" uid="uid://d4bnplsr3w1uv" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00012.png" id="27_yxcbv"]
+[ext_resource type="Texture2D" uid="uid://b3crjmjoqm6i4" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00005.png" id="28_7ek02"]
+[ext_resource type="Texture2D" uid="uid://b0ly8p6tw5pnk" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00013.png" id="28_ufrsa"]
+[ext_resource type="Texture2D" uid="uid://cobjw3x4skthx" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00007.png" id="29_lovvk"]
+[ext_resource type="Texture2D" uid="uid://d2vwfeqahfkq0" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00014.png" id="29_m1fre"]
+[ext_resource type="Texture2D" uid="uid://demayut45ojbw" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00008.png" id="30_jgb20"]
+[ext_resource type="Texture2D" uid="uid://c4djlyvba5kjs" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00015.png" id="30_vdpcc"]
+[ext_resource type="Texture2D" uid="uid://csho88v7p7exs" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00009.png" id="31_hcdrw"]
+[ext_resource type="Texture2D" uid="uid://dldm74kqepxvb" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00016.png" id="31_n1fg1"]
+[ext_resource type="Texture2D" uid="uid://c7v67npipxhkx" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00017.png" id="32_717lw"]
+[ext_resource type="Texture2D" uid="uid://27ugbdi33cth" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00010.png" id="32_c3vl1"]
+[ext_resource type="Texture2D" uid="uid://cvr8nty3i1waf" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00011.png" id="33_mbcdq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q81l4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3406t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wnokm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_oounh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_i5k6m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_2sj8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iv4o6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_yxcbv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ufrsa")
+}],
+"loop": 1,
+"name": &"attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_l7sad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_u3juw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_v8jr8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_cur5l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cf1yu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_trc8r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rs2k4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_10si1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_hvkia")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_frsne")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fq5di")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_yq5lf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_crkfm")
+}],
+"loop": 1,
+"name": &"dash",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_m1fre")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_vdpcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_n1fg1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_717lw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_c51nt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_7ek02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_lovvk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_jgb20")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_hcdrw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_c3vl1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_mbcdq")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_hte3q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_iip53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_fb3xi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_bkyg8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_q4vgn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_o1ebn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_3406t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_wnokm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_oounh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_i5k6m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_2sj8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_iv4o6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_yxcbv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_ufrsa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_m1fre")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_vdpcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_n1fg1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_717lw")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 9.0
+}]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_72gnk"]
 radius = 0.35
@@ -47,13 +268,14 @@ colors = PackedColorArray(1, 0.95, 0.6, 0, 1, 0.9, 0.45, 1, 1, 0.8, 0.3, 0)
 [node name="PerrinEnemy" type="CharacterBody3D" unique_id=1384270876]
 script = ExtResource("1_ql28b")
 
-[node name="Card" type="Sprite3D" parent="." unique_id=2001400344]
+[node name="Card" type="AnimatedSprite3D" parent="." unique_id=1127043154]
 process_physics_priority = 20
+transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, 0, 0.9, 0)
 offset = Vector2(0, 64)
 pixel_size = 0.014
 alpha_cut = 1
-texture = ExtResource("2_8tbbj")
-script = ExtResource("3_uehow")
+sprite_frames = SubResource("SpriteFrames_q81l4")
+animation = &"attack"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=982151769]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

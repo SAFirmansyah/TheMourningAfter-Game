@@ -1,27 +1,16 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://bo67plntlruy6"]
 
-[ext_resource type="Script" path="res://scripts/world/obstacle.gd" id="1_obstacle"]
-[ext_resource type="Script" path="res://scripts/visual/facing_card.gd" id="2_card"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Script" uid="uid://b17d7f873tt24" path="res://scripts/world/obstacle.gd" id="1_obstacle"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_prop"]
 size = Vector3(2.816, 2, 0.6)
 
-[node name="Prop" type="StaticBody3D" node_paths=PackedStringArray("card")]
+[node name="Prop" type="StaticBody3D" unique_id=125809204 node_paths=PackedStringArray("card")]
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("1_obstacle")
-card = NodePath("Card")
+card = NodePath("")
 
-[node name="Card" type="Sprite3D" parent="."]
-modulate = Color(0.55, 0.8, 0.55, 1)
-offset = Vector2(0, 64)
-pixel_size = 0.022
-alpha_cut = 1
-texture = ExtResource("3_icon")
-script = ExtResource("2_card")
-see_through_over_player = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=65578842]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_prop")

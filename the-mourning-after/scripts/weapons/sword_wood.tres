@@ -8,7 +8,7 @@
 script = ExtResource("2_d2eom")
 weapon_name = "Wood Sword"
 damage = 8.0
-attack_cooldown = 0.25
+attack_cooldown = 0.3
 hits_to_charge = 4
 charged_abilities = Array[ExtResource("1_w7k0u")]([ExtResource("3_ability")])
 charge_instant_use = true
