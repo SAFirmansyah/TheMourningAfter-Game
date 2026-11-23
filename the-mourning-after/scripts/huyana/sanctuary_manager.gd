@@ -209,6 +209,15 @@ func collapse(containment: int, slot: int) -> void:
 	expanded.erase(request_at(containment, slot).get("id", -1))
 
 
+## Testing (Skip day): today's requests are settled without penalty and a fixed amount is lost instead.
+func skip_day(loss: float) -> void:
+	for request in requests.duplicate():
+		_remove(request, true)
+	_cancel_repair()
+	if not health_locked:
+		set_health(health - loss)
+
+
 func set_health(value: float) -> void:
 	health = clampf(value, 0.0, 100.0)
 	health_changed.emit(health)

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://844eaa4d1brv"]
+
+[ext_resource type="Script" path="res://scripts/boss/rudrama_shield.gd" id="1_script"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_shield"]
+shading_mode = 0
+albedo_color = Color(0.6, 0.62, 0.7, 1)
+
+[sub_resource type="CylinderMesh" id="Mesh_shield"]
+material = SubResource("Mat_shield")
+top_radius = 0.45
+bottom_radius = 0.45
+height = 0.1
+
+[node name="RudramaShield" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Disc" type="MeshInstance3D" parent="."]
+mesh = SubResource("Mesh_shield")

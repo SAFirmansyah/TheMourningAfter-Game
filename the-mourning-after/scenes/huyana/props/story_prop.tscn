@@ -1,0 +1,22 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/visual/facing_card.gd" id="1_card"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="2_icon"]
+
+[node name="StoryProp" type="Node3D"]
+
+[node name="Card" type="Sprite3D" parent="."]
+modulate = Color(0.75, 0.7, 0.6, 1)
+offset = Vector2(0, 64)
+pixel_size = 0.012
+texture = ExtResource("2_icon")
+script = ExtResource("1_card")
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0, 0)
+pixel_size = 0.008
+billboard = 1
+no_depth_test = true
+text = "Prop"
+font_size = 40
+outline_size = 10

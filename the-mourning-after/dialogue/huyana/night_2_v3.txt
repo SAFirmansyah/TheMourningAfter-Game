@@ -1,0 +1,11 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 2 v3
+@move shuyi FireRight
+@walk constance Campfire
+@settle
+CONSTANCE (lost in thought): Shuyi, can I tell you something?
+SHUYI (light-hearted): Always, dear. I know you can’t always tell people what’s on your mind.
+SHUYI (neutral): That’s the burden of being a leader. Your composure keeps everyone faithful.
+CONSTANCE (happy): I can’t thank you enough for being the one person I can spill my heart out to.
+CONSTANCE (neutral): I really don’t know what’d become of me if I couldn’t do that.

@@ -1,0 +1,44 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NARRATIVE BEAT: Shuyi
+@walk constance Campfire
+@walk shuyi FireRight
+CONSTANCE (neutral): Shuyi?
+SHUYI (neutral): Yes, Constance?
+CONSTANCE (neutral): You got to see more of Burhana than I did.
+SHUYI (light-hearted): And you got over three decades of it! That’s an interesting way to call me old.
+CONSTANCE (happy): No, no… but I do wish you’d tell us more stories. I want to know everything…
+CONSTANCE (lost in thought): …everything we lost. Our glory, our people, all the work that built the empire.
+CONSTANCE (lost in thought): Remind me of it, won’t you?
+SHUYI (neutral): For what joy?
+SHUYI (neutral): So that you can compare everything that was, with what we have left here?
+CONSTANCE (sad): Oh, no. I know Huyana isn’t Burhana, and it never will be.
+SHUYI (stern): Think about that for a moment longer. You are right, but why is that so, Constance?
+CONSTANCE (neutral): Because some changes are irreversible. What we lost back there…
+CONSTANCE (sad): We can’t ever hope to get back.
+SHUYI (neutral): Too true.
+SHUYI (neutral): But here’s what I want to get through your skull. Consider it another lesson from your old mentor.
+CONSTANCE (happy): If only the stakes this time were simply grades on a sheet, hm?
+CONSTANCE (neutral): But do tell.
+SHUYI (neutral): I want you to know that what we lose in our sanctuary every day is not like what we lost then.
+SHUYI (stern): The lost sisters are not like our fallen Burhana kin.
+SHUYI (sad): They turned from people into these new, painful forms.
+SHUYI (neutral): But they are still with us. Still alive.
+CONSTANCE (lost in thought): So, are you saying they could turn back?
+SHUYI (neutral): It’s infinitely more possible than the losses that brought us here.
+SHUYI (neutral): So your lesson today is to treat them with infinitely more hope.
+# Fade to black. Open again in Huyana's Altar Room.
+@fade black
+@room altar Podium
+@fade in
+CONSTANCE (neutral): Infinitely more hope, is it?
+CONSTANCE (happy): My mentor, you’ve done it again. Opened my eyes to more knowledge.
+CONSTANCE (lost in thought): I can understand now. There is magic here to be discovered.
+CONSTANCE (praying): A second part to that spell…
+# Fade to black, text appears on screen like in a cutscene.
+@fade black
+@text
+Thus does life not begin or end at all, merely changing forms.
+As day turns to night, so shall night not fail to bring back day.
+I invoke these turns of phrase in our being, and bid them bring hope.
+@end

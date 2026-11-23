@@ -1,0 +1,27 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 5
+@move shuyi FireBack
+@move rudrama FireRight
+@move gwenith FireLeft
+@walk constance Campfire
+@settle
+CONSTANCE (sad): My sisters..!
+RUDRAMA (neutral): How bad is it?
+GWENITH (scared): We’re doing everything we can, and yet…
+SHUYI (sad): How much harder are things going to get?
+CONSTANCE (sad): We’re losing too many of us. What’s worse is that we can’t keep up with the needs of our lost sisters.
+CONSTANCE (sad): They’re starving. Becoming too ill to help. And I’m not sure how much longer the containments will hold out!
+CONSTANCE (lost in thought): We need more time…
+SHUYI (stern): Our lost sisters are still our sisters.
+SHUYI (stern): We need to focus on keeping them secure and amongst us.
+RUDRAMA (angry): Oh, I could round them up wherever they’ve strayed!
+RUDRAMA (angry): Don’t you think we should keep them alive and fed first?
+GWENITH (pout): I’m sure, though feeding them isn’t doing much when illness starts to spread.
+GWENITH (pout): Healing them definitely takes priority.
+CONSTANCE (praying): Sisters, please…
+CONSTANCE (lost in thought): Even if any one of you were completely right, we would still be at a loss.
+CONSTANCE (sad): Our hands are full. It is what it is. We’re losing sisters, and no one can do what we do here in the sanctuary.
+CONSTANCE (sad): Day in and out, hardly a reprieve…
+CONSTANCE (sad): It’s eating us all alive. But it can’t be helped.
+CONSTANCE (neutral): We chose this, didn’t we?

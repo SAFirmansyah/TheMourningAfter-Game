@@ -85,6 +85,8 @@ var _recharge_progress := 0.0
 var _attack_queued := false
 var _attack_cooldown_left := 0.0
 var _ability_queued := false
+var _stun_time_left := 0.0
+var _damage_flash: DamageFlash
 
 @onready var _body_shape: CollisionShape3D = $CollisionShape3D
 @onready var _sword: SwordVisual = get_node_or_null(^"Sword")
@@ -95,9 +97,11 @@ func _ready() -> void:
 	dashes_available = max_dashes
 	if stats == null:
 		stats = HeroStats.new()
+	add_to_group(&"player")
 	var damage_flash := DamageFlash.new()
 	add_child(damage_flash)
 	damage_flash.watch(stats, card)
+	_damage_flash = damage_flash
 	if _sword:
 		_sword.set_weapon(weapon)
 	
@@ -111,25 +115,31 @@ func _print_health() -> void:
 	
 
 func _physics_process(delta: float) -> void:
-	var input := Input.get_vector("move_left", "move_right", "move_up", "move_down") if input_enabled else forced_input
+	if _stun_time_left > 0.0:
+		_stun_time_left -= delta
+		if _stun_time_left <= 0.0:
+			clear_stun()
+	var stunned := is_stunned()
+	var can_act := input_enabled and not stunned
+	var input := Vector2.ZERO if stunned else (Input.get_vector("move_left", "move_right", "move_up", "move_down") if input_enabled else forced_input)
 	if input != Vector2.ZERO:
 		_facing = input.normalized()
 
 	_recharge_dashes(delta)
 	if _dash_queued:
 		_dash_queued = false
-		if input_enabled:
+		if can_act:
 			_try_dash()
 
 	_attack_cooldown_left = maxf(0.0, _attack_cooldown_left - delta)
 	if _attack_queued:
 		_attack_queued = false
-		if input_enabled:
+		if can_act:
 			_try_attack()
 
 	if _ability_queued:
 		_ability_queued = false
-		if input_enabled:
+		if can_act:
 			_try_activate_ability()
 
 	if _dashing:
@@ -171,6 +181,23 @@ func _process(_delta: float) -> void:
 	if _ready_sparkle:
 		_ready_sparkle.emitting = is_ability_ready()
 	RenderingServer.global_shader_parameter_set(&"occlusion_target", get_global_transform_interpolated().origin)
+
+
+## Rooted: can't move, dash, attack or use sword abilities, and the card greys out.
+func apply_stun(duration: float) -> void:
+	_stun_time_left = maxf(_stun_time_left, duration)
+	if _dashing:
+		_end_dash()
+	_damage_flash.set_greyed(true)
+
+
+func clear_stun() -> void:
+	_stun_time_left = 0.0
+	_damage_flash.set_greyed(false)
+
+
+func is_stunned() -> bool:
+	return _stun_time_left > 0.0
 
 
 func teleport(pos: Vector3) -> void:
@@ -219,8 +246,8 @@ func move_speed_multiplier() -> float:
 
 
 func receive_hit(amount: int) -> void:
-	if is_invulnerable:
-		return # dash i-frames
+	if is_invulnerable or TestTools.no_health_loss:
+		return # dash i-frames, or the No health loss test button
 	var reduced := int(amount * (1.0 - damage_reduction))
 	stats.take_damage(reduced)
 

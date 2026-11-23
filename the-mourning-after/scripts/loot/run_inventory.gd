@@ -35,6 +35,31 @@ var _player: Player
 func bind_player(player: Player) -> void:
 	_player = player
 
+
+## A world is starting (launch, or back from the title screen): drop anything left from an earlier
+## session before the save is read.
+func reset_session() -> void:
+	applied_effects.clear()
+	loadout_taken = false
+	_first_run_active = false
+	revives_used = 0
+	has_bargained_this_run = false
+	residue_gained_this_run = 0
+	magic_residue = 0
+	has_completed_first_run = false
+	has_reached_boss = false
+	final_snapshot = {}
+
+
+## Every Fate bargain checks and pays through these (the Ignore residue test button skips both).
+func can_afford(cost: int) -> bool:
+	return TestTools.ignore_residue or magic_residue >= cost
+
+
+func spend(cost: int) -> void:
+	if not TestTools.ignore_residue:
+		magic_residue = maxi(magic_residue - cost, 0)
+
 func get_player() -> Player:
 	return _player
 
@@ -103,14 +128,14 @@ func revive_cost() -> int:
 
 
 func can_revive() -> bool:
-	return loadout_taken and revives_used < revive_costs.size() and magic_residue >= revive_cost()
+	return loadout_taken and revives_used < revive_costs.size() and can_afford(revive_cost())
 
 
 ## Spends the residue for a Fate 3 revive.
 func buy_revive() -> bool:
 	if not can_revive():
 		return false
-	magic_residue -= revive_cost()
+	spend(revive_cost())
 	revives_used += 1
 	effects_changed.emit()
 	bargained.emit()
@@ -119,11 +144,11 @@ func buy_revive() -> bool:
 
 ## Interact prompt for any Fate bargain.
 func bargain_prompt(cost: int) -> String:
-	return "Bargain (-%d)" % cost
+	return "Bargain (free)" if cost <= 0 else "Bargain (-%d)" % cost
 
 
 func can_bargain() -> bool:
-	return loadout_taken and magic_residue >= reseed_cost
+	return loadout_taken and can_afford(reseed_cost)
 
 
 ## Fresh save only: the first run can't leave the starting room until Fate 1 is bargained with.
@@ -164,7 +189,7 @@ func _apply(loot: LootData) -> void:
 func try_bargain() -> bool:
 	if not can_bargain():
 		return false
-	magic_residue -= reseed_cost
+	spend(reseed_cost)
 	var forced := fate1_forced_pending()
 	has_bargained_this_run = true
 	if forced:

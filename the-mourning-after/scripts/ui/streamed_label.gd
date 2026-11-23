@@ -4,7 +4,7 @@ extends Label
 
 signal stream_finished
 
-@export var chars_per_second := 45.0 # TUNE: typing speed (characters per second)
+@export var chars_per_second := 28.0 # TUNE: typing speed (characters per second)
 
 var _progress := 0.0
 var _streaming := false

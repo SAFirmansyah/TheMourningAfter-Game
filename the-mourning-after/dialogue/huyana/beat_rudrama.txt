@@ -1,0 +1,48 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NARRATIVE BEAT: Rudrama
+@walk constance Campfire
+@walk rudrama FireRight
+RUDRAMA (angry): Constance.
+CONSTANCE (sad): You look agitated, Rudy. You haven’t not looked that way in a while now, either.
+RUDRAMA (angry): Rudy? You’ve not called me that in longer. I don’t know what to think of that.
+RUDRAMA (angry): I don’t know what to think of anything anymore.
+CONSTANCE (neutral): Do you not want me to call you that?
+RUDRAMA (angry): Why do you want to call me that? We didn’t call things off on good terms, ‘Connie’.
+RUDRAMA (angry): Circumstances forced us back together here.
+RUDRAMA (angry): I thought we were both pretty grudging about that.
+CONSTANCE (sad): I know. I thought so, too.
+CONSTANCE (sad): But are we, Rudy? Even while everything falls apart around us? Again?
+RUDRAMA (neutral): I went out earlier tonight. To scout for the lost sisters that escaped.
+RUDRAMA (neutral): The forest turned up rather empty. I made my way to the clearing with that one kingdom in it.
+RUDRAMA (neutral): Silvaluca, they call themselves.
+CONSTANCE (lost in thought): Our lost sisters made it all the way there?
+RUDRAMA (angry): Those folks have fortified their place well enough that none got through. I managed to round them up outside…
+RUDRAMA (angry): …but while I was in their town, I heard things. Rumours of sightings.
+CONSTANCE (sad): Oh, no.
+RUDRAMA (angry): They used such strong, hostile words for our sisters, Connie.
+RUDRAMA (angry): Mutated. Deformed. Mangled, cursed, malformed–
+RUDRAMA (angry): I couldn’t take it. What do they even know?
+CONSTANCE (sad): Oh, Rudy…
+CONSTANCE (sad): Did the people there believe those rumours?
+RUDRAMA (angry): Of course not. We’re not even real to those people, and who can blame them?
+RUDRAMA (angry): Our world’s crumbling. Even I can hardly tell what’s real anymore.
+CONSTANCE (sad): I can understand. In that, at least, we’re together.
+CONSTANCE (sad): Why don’t we find something real to hold onto together, then?
+RUDRAMA (melancholic): That’s a lot to ask of an old flame, Constance.
+RUDRAMA (neutral): I’ve trusted you as a leader. That’s trusting you with my life.
+RUDRAMA (neutral): But to trust you with my faith, and my heart?
+# Fade to black. Open in Huyana's Altar.
+@fade black
+@room altar Podium
+@fade in
+CONSTANCE (lost in thought): Rekindling an old flame. Building a bridge once burnt…
+CONSTANCE (neutral): So much for the heart, huh? Rudy, you’ve shown me something tonight.
+CONSTANCE (praying): Another part of the spell. It’s almost complete, and yet, I’m not sure it ever will be.
+# Fade to black, text appears on screen like a cutscene.
+@fade black
+@text
+If life’s cyclical cruelties and mercies are but a matter of time,
+As hearts, once stopped, thaw again by time’s command.
+I invoke every passing hour, and bid them return to my hands.
+@end

@@ -6,9 +6,9 @@ signal boss_changed
 @export var safe_room_path := "res://scenes/rooms/cooldown_nc.tscn"
 @export var pre_boss_chamber_path := "res://scenes/rooms/pre_boss_chamber.tscn"
 @export var boss_rooms: Dictionary[String, String] = {
-	"GWENITH": "res://scenes/rooms/boss_sandbox.tscn",
-	"SHUYI": "res://scenes/rooms/boss_sandbox_2.tscn",
-	"RUDRAMA": "res://scenes/rooms/boss_sandbox.tscn", # TUNE: placeholder until Rudrama's chamber exists
+	"GWENITH": "res://scenes/rooms/gwenith_fight.tscn",
+	"SHUYI": "res://scenes/rooms/shuyi_fight.tscn",
+	"RUDRAMA": "res://scenes/rooms/rudrama_fight.tscn",
 }
 @export var route_rest_rooms: Dictionary[String, String] = { # Huyana's non-combat room on each boss's route
 	"GWENITH": "res://scenes/rooms/huyana/barn.tscn",
@@ -24,6 +24,7 @@ var gauntlet_count := 0
 var chosen_boss := ""
 var has_boss_bargained := false
 var boss_cleared := false
+var free_boss_bargains := false # Start from (testing): boss re-rolls are free and unlimited this run
 
 var _remaining_boss_pool: Array[String] = []
 
@@ -33,6 +34,7 @@ var chosen_boss_path: String:
 
 
 func reset_campaign() -> void:
+	free_boss_bargains = false
 	gauntlet_count = 0
 	chosen_boss = ""
 	has_boss_bargained = false
@@ -72,14 +74,17 @@ func fate2_forced_pending() -> bool:
 
 
 func can_bargain_boss() -> bool:
-	return chosen_boss != "" and not has_boss_bargained and (RunInventory.magic_residue >= boss_bargain_cost or fate2_forced_pending())
+	if free_boss_bargains:
+		return chosen_boss != "" and not boss_cleared
+	return chosen_boss != "" and not has_boss_bargained and (RunInventory.can_afford(boss_bargain_cost) or fate2_forced_pending())
 
 
 func bargain_boss() -> bool:
 	if not can_bargain_boss():
 		return false
 	var forced := fate2_forced_pending()
-	RunInventory.magic_residue = maxi(RunInventory.magic_residue - boss_bargain_cost, 0) # the forced bargain never strands Perrin
+	if not free_boss_bargains:
+		RunInventory.spend(boss_bargain_cost) # never below 0, so the forced bargain never strands Perrin
 	has_boss_bargained = true
 	if forced:
 		RunInventory.has_reached_boss = true

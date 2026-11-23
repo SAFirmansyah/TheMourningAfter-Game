@@ -7,18 +7,22 @@ extends Node3D
 ## room saves a wiped run instead (GDD: quitting mid-room loses the run); saving is off until it's cleared.
 ## Room changes (e.g. collected loot) only persist for the current room.
 ## Nodes in the "save_state" group add their own data via get_save_data() / load_save_data(data).
+## The title screen's Start from (testing) sets pending_start before opening the world.
 
 signal room_entered(room: Room)
 
 const SAVE_VERSION := 2
 const LOOT_PICKUP_SCENE := preload("res://scenes/loot/loot_pickup.tscn")
+const BOSS_TEST_WEAPON := preload("res://scripts/weapons/sword_bronze.tres") # Start from: first boss fight
+const BOSS_TEST_HEALTH := 100
+const BOSS_TEST_SPEED := 1.5
 
 @export var fade_time := 0.35 # TUNE: fade to/from black per room change (s)
 @export var load_save_on_start := true # off: always start fresh in the placed room
 @export var base_room_path := "res://scenes/rooms/room_a.tscn"
 @export var save_slot := "savegame" # save file name; one per game half
 @export_file("*.tscn") var act_two_scene := "res://scenes/huyana/huyana.tscn"
-@export_file("*.tscn") var act_two_cutscene := "res://scenes/cutscenes/act_one_end.tscn"
+@export_file("*.txt") var act_two_cutscene := "res://dialogue/hero/act_one_end.txt"
 @export var act_two_slot := "huyana" # Act 2's save file; cleared when Perrin hands over
 @export var villain_max_health := 100 # TUNE: Constance's HP
 @export var villain_move_speed := 1.0 # TUNE: Constance's move speed multiplier
@@ -29,15 +33,16 @@ const LOOT_PICKUP_SCENE := preload("res://scenes/loot/loot_pickup.tscn")
 @onready var rooms: Node3D = $Rooms
 @onready var fade: ColorRect = $Transition/Fade
 @onready var save_indicator: SaveIndicator = $SaveIndicator
-@onready var skip_prompt: SkipPrompt = $SkipPrompt
+@onready var hud: InteractionHUD = $InteractionHUD
 @onready var fate_bargain: FateBargain = get_node_or_null(^"FateBargain") # hero side only
 
 static var _arriving_in_black := false # the scene before this one ended on a black screen
+static var pending_start := "" # Start from: "silvaluca", "first_boss", "huyana" or "huyana_0".."huyana_3" (milestones); used once
 
 var current_room: Room
 var _transitioning := false
 var _in_cutscene := false
-var _cutscene: Cutscene
+var story: StoryPlayer # runs cutscenes and scripted scenes (dialogue/*.txt)
 var _fade_tween: Tween
 var _menu_paused := false
 var _tree_was_paused := false
@@ -50,9 +55,10 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	skip_prompt.skip_requested.connect(func() -> void:
-		if _cutscene:
-			_cutscene.skip())
+	story = StoryPlayer.new()
+	story.name = "StoryPlayer"
+	story.world = self
+	add_child(story)
 	var placed: Room
 	for child in rooms.get_children():
 		if child is Room:
@@ -61,6 +67,14 @@ func _ready() -> void:
 
 	var data := SaveSystem.load_data(save_slot) if load_save_on_start else {}
 	var run: Dictionary = {}
+	if is_hero_side():
+		RunInventory.reset_session()
+		if pending_start.begins_with("huyana"): # Perrin's part counts as done
+			data = _meta_save_data(base_room_path)
+			data.act_two = true
+			SaveSystem.save_data(data, save_slot)
+	elif pending_start.begins_with("huyana"): # the test save starts empty (StoryDirector reads milestones)
+		pending_start = ""
 	if is_hero_side() and data.get("act_two", false):
 		_go_to_act_two()
 		return
@@ -104,36 +118,65 @@ func _ready() -> void:
 	for node in get_tree().get_nodes_in_group(&"save_state"):
 		if states.has(String(node.name)):
 			node.load_save_data(states[String(node.name)])
+	if is_hero_side() and pending_start == "first_boss":
+		_start_at_first_boss()
+	elif is_hero_side() and pending_start == "silvaluca":
+		save_game(false) # Start from: the test save exists from the first moment
+	pending_start = ""
 	if _arriving_in_black:
 		_arriving_in_black = false
 		fade.color.a = 1.0
 		_fade_to(0.0)
 
 
-## Plays a cutscene scene (a Cutscene root) over everything, pausing gameplay.
-## Callable from any trigger: story beats, room changes, first launch, etc.
+## Start from: first boss fight. A normal (not first) run with both forest gauntlets done, standing
+## in the room before the boss: no forced bargains, a fixed loadout, and free unlimited boss re-rolls
+## so any of the three bosses can be picked.
+func _start_at_first_boss() -> void:
+	RunInventory.has_completed_first_run = true # no forced Fate 1
+	RunInventory.has_reached_boss = true # no forced Fate 2
+	RunInventory.take_loadout()
+	player.weapon = BOSS_TEST_WEAPON
+	player.stats.setup_fixed_stats(BOSS_TEST_HEALTH, BOSS_TEST_SPEED)
+	CampaignState.free_boss_bargains = true
+	CombatRunState.start_next_gauntlet() # past the pond
+	CampaignState.gauntlet_count = 2
+	_load_room(CampaignState.pre_boss_chamber_path, &"")
+	save_game(false)
+
+
+## Plays a scene script (dialogue/*.txt): black-screen text and/or a scripted scene. Not skippable
+## (only the testing Skip button). Fades to black first; fade_back_in reveals the room afterwards.
 func play_cutscene(path: String, fade_back_in := true) -> void:
 	if _in_cutscene:
 		return
-	_in_cutscene = true
-	var cutscene: Cutscene = (load(path) as PackedScene).instantiate()
-	cutscene.process_mode = Node.PROCESS_MODE_ALWAYS
 	if fade.color.a < 1.0:
 		await _fade_to(1.0)
-	get_tree().paused = true
-	_cutscene = cutscene
-	add_child(cutscene)
-	skip_prompt.begin()
-	await _fade_to(0.0)
-	await cutscene.play()
-	skip_prompt.end()
-	await _fade_to(1.0)
-	_cutscene = null
-	cutscene.queue_free()
-	get_tree().paused = false
-	_in_cutscene = false
+	await story.play_file(path)
+	story.release()
 	if fade_back_in:
 		await _fade_to(0.0)
+
+
+## A scripted scene is playing: no saving, exits or stats sheet.
+func set_story_active(on: bool) -> void:
+	_in_cutscene = on
+
+
+func is_story_playing() -> bool:
+	return story != null and story.playing
+
+
+## Room change without the walk-out, fade or save (scripted scenes, Start from).
+func load_room(path: String, entry: StringName) -> void:
+	_load_room(path, entry)
+
+
+## Straight to black and stay there (e.g. an opening cutscene right after arriving).
+func hold_black() -> void:
+	if _fade_tween:
+		_fade_tween.kill()
+	fade.color = Color(0, 0, 0, 1)
 
 
 ## Pause menu freeze: stops gameplay, any running cutscene and any fade in progress.
@@ -144,15 +187,9 @@ func set_menu_paused(on: bool) -> void:
 	if on:
 		_tree_was_paused = get_tree().paused
 		get_tree().paused = true
-		skip_prompt.frozen = true
-		if _cutscene:
-			_cutscene.process_mode = Node.PROCESS_MODE_DISABLED
 		if _fade_tween and _fade_tween.is_running():
 			_fade_tween.pause()
 	else:
-		skip_prompt.frozen = false
-		if _cutscene:
-			_cutscene.process_mode = Node.PROCESS_MODE_ALWAYS
 		if _fade_tween and _fade_tween.is_valid():
 			_fade_tween.play()
 		get_tree().paused = _tree_was_paused
@@ -330,6 +367,7 @@ func _on_player_died() -> void:
 ## Bargain taken: full health now, the fight resumes once the countdown ends.
 func _on_revive_chosen() -> void:
 	RunInventory.buy_revive()
+	player.clear_stun()
 	player.stats.on_health_set(player.stats.current_max_health)
 	await fate_bargain.countdown_finished
 	set_menu_paused(false)
@@ -360,6 +398,11 @@ func _go_to_act_two() -> void:
 	get_tree().change_scene_to_file.call_deferred(act_two_scene)
 
 
+## Test button: the run ends (no death, no bargain) and starts over at the base.
+func reset_run() -> void:
+	_end_run_at_base()
+
+
 ## Sanctuary stand-in: the run ends and Perrin heads home, progress saved.
 func return_to_base() -> void:
 	_end_run_at_base()
@@ -375,6 +418,7 @@ func _end_run_at_base() -> void:
 	await _fade_to(1.0)
 
 	RunInventory.reset_on_death()
+	player.clear_stun()
 	CampaignState.reset_campaign()
 	player.stats.on_health_set(player.stats.current_max_health)
 	_load_room(base_room_path, &"")

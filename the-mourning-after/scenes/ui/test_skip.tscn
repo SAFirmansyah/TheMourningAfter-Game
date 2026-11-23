@@ -1,0 +1,48 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/test_skip.gd" id="1_skip"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_off"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.08, 0.08, 0.09, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78, 0.66, 0.38, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_on"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.78, 0.66, 0.38, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="TestSkip" type="CanvasLayer"]
+layer = 40
+script = ExtResource("1_skip")
+
+[node name="Skip" type="Button" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -420.0
+offset_top = 28.0
+offset_right = -236.0
+offset_bottom = 62.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_off")
+theme_override_styles/hover = SubResource("StyleBoxFlat_on")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_on")
+theme_override_colors/font_hover_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+text = "Skip scene"

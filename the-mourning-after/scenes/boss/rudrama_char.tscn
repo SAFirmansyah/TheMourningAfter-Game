@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://dvmnvlpfa8kbk"]
+
+[ext_resource type="Script" path="res://scripts/boss/rudrama_char.gd" id="1_script"]
+[ext_resource type="Resource" path="res://scripts/boss/rudrama_stats.tres" id="2_stats"]
+[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="4_hurtbox"]
+[ext_resource type="PackedScene" path="res://scenes/ui/boss_health_bar.tscn" id="5_bar"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
+radius = 0.6
+height = 2.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hurt"]
+radius = 0.6
+height = 2.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shield"]
+shading_mode = 0
+albedo_color = Color(0.6, 0.62, 0.7, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_shield"]
+material = SubResource("StandardMaterial3D_shield")
+size = Vector3(0.9, 1.1, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="Mat_aura"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="Mesh_aura"]
+material = SubResource("Mat_aura")
+size = Vector2(0.16, 0.16)
+
+[sub_resource type="Gradient" id="Gradient_aura"]
+offsets = PackedFloat32Array(0, 0.25, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="RudramaChar" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 135
+motion_mode = 1
+script = ExtResource("1_script")
+stats = ExtResource("2_stats")
+display_name = "Rudrama"
+move_speed_multiplier = 1.0
+
+[node name="Card" type="Sprite3D" parent="."]
+modulate = Color(0.95, 0.5, 0.4, 1)
+pixel_size = 0.024
+offset = Vector2(0, 64)
+texture = ExtResource("3_icon")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+shape = SubResource("CapsuleShape3D_body")
+
+[node name="HurtboxArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+script = ExtResource("4_hurtbox")
+
+[node name="CollisionHurtbox" type="CollisionShape3D" parent="HurtboxArea"]
+shape = SubResource("CapsuleShape3D_hurt")
+
+[node name="StatusLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0)
+pixel_size = 0.01
+billboard = 1
+no_depth_test = true
+text = "Status"
+font_size = 48
+outline_size = 12
+
+[node name="ShieldVisual" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0.55)
+mesh = SubResource("BoxMesh_shield")
+
+[node name="Aura" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+emitting = false
+amount = 24
+lifetime = 0.9
+mesh = SubResource("Mesh_aura")
+emission_shape = 1
+emission_sphere_radius = 0.9
+direction = Vector3(0, 1, 0)
+spread = 30.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 0.4
+initial_velocity_max = 0.9
+scale_amount_min = 0.6
+scale_amount_max = 1.4
+color_ramp = SubResource("Gradient_aura")
+
+[node name="BossHealthBar" parent="." instance=ExtResource("5_bar")]

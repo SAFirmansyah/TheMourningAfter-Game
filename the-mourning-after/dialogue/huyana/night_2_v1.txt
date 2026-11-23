@@ -1,0 +1,11 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 2 v1 (the script labels the first two lines GWENITH; they're Constance's)
+@move gwenith FireRight
+@walk constance Campfire
+@settle
+CONSTANCE (neutral): Still staying afloat…
+CONSTANCE (neutral): Gwen, I hope you’re not taking on too much. Rudrama expressed concern earlier.
+GWENITH (pout): Does it look like I can’t handle it?
+CONSTANCE (neutral): I’m sure that’s not what she–
+GWENITH (pout): And I’m sure she can speak for herself. Don’t be the messenger.

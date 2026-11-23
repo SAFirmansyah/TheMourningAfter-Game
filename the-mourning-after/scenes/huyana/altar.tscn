@@ -1,5 +1,6 @@
 [gd_scene format=3]
 
+[ext_resource type="PackedScene" path="res://scenes/huyana/props/story_prop.tscn" id="9_prop"]
 [ext_resource type="Script" path="res://scripts/world/room.gd" id="1_room"]
 [ext_resource type="Material" path="res://materials/ground.tres" id="2_ground"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_exit"]
@@ -58,3 +59,46 @@ shape = SubResource("BoxShape3D_East")
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -8.0, 0, 0)
 target_room = "res://scenes/huyana/sanctuary.tscn"
 target_entry = &"East"
+
+[node name="Stage" type="Node3D" parent="."]
+
+[node name="SonPortrait" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0, 0, -5.0)
+
+[node name="Podium" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0, -5.0)
+
+[node name="Exit" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4, 0, 0.0)
+
+[node name="ArchiSpot" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -4.0)
+
+[node name="SeiraSpot" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0, 0, -2.6)
+
+[node name="KanoSpot" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, -2.0)
+
+[node name="ShuyiSpot" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0, -2.0)
+
+[node name="RudramaSpot" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, 0, -2.6)
+
+[node name="GwenithSpot" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -4.0)
+
+[node name="Props" type="Node3D" parent="."]
+
+[node name="SonPortrait" parent="Props" instance=ExtResource("9_prop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0, 0, -6.6)
+
+[node name="Label" parent="Props/SonPortrait" index="1"]
+text = "Mico's portrait"
+
+[node name="Podium" parent="Props" instance=ExtResource("9_prop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.6)
+
+[node name="Label" parent="Props/Podium" index="1"]
+text = "Altar podium"

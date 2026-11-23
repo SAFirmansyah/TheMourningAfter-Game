@@ -1,0 +1,25 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NARRATIVE BEAT: Huyana’s Altar
+@fade in
+CONSTANCE (lost in thought): How far we’ve fallen…
+CONSTANCE (neutral): And yet, my people don’t despair.
+CONSTANCE (neutral): We’re almost a year from when we lost everything.
+# Constance inspects the portrait of her son.
+@walk constance SonPortrait
+CONSTANCE (sad): Almost a year from when we lost you, Mico. The world’s not been bright since.
+CONSTANCE (neutral): But you’d be pleased to know everything that’s happened since then…
+CONSTANCE (neutral): All the study, toil, and sacrifice – it’s all been for you.
+CONSTANCE (sad): Nothing may ever bring you back, but…
+CONSTANCE (lost in thought): If we get our way, no one will be robbed of their life like you were, my child.
+# Constance walks to the altar podium.
+@walk constance Podium
+CONSTANCE (happy): These bloodstains don’t scare me.
+CONSTANCE (happy): They’re proof of how far we’re willing to go for our cause.
+CONSTANCE (neutral): Cutting your palm here means pledging yourself to the trials and… unfortunately, errors, that it will take to find what we’re seeking.
+CONSTANCE (praying): A cure for death.
+# Constance exits the Altar room.
+@walk constance Exit
+@fade black
+@room sanctuary East
+@fade in

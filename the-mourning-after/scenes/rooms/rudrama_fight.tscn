@@ -1,0 +1,185 @@
+[gd_scene format=3 uid="uid://b5rjs8v16vgmp"]
+
+[ext_resource type="PackedScene" path="res://scenes/boss/rudrama_char.tscn" id="91_boss"]
+[ext_resource type="Script" path="res://scripts/world/boss_room.gd" id="90_room"]
+[ext_resource type="Material" path="res://materials/ground.tres" id="1_868ba"]
+[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="2_q0sae"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_375e6"]
+material = ExtResource("1_868ba")
+size = Vector2(40, 10)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_txb4h"]
+material = ExtResource("1_868ba")
+size = Vector2(30, 20)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_80ayd"]
+material = ExtResource("1_868ba")
+size = Vector2(20, 30)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aixel"]
+material = ExtResource("1_868ba")
+size = Vector2(10, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dusen"]
+size = Vector3(10, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r3knc"]
+size = Vector3(5, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gxhuc"]
+size = Vector3(0.4, 2, 5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l1dka"]
+size = Vector3(0.4, 2, 3)
+
+[node name="RudramaFight" type="Node3D" unique_id=1173818160]
+script = ExtResource("90_room")
+
+[node name="Floor" type="MeshInstance3D" parent="." unique_id=863070441]
+mesh = SubResource("PlaneMesh_375e6")
+
+[node name="Floor2" type="MeshInstance3D" parent="." unique_id=823279402]
+mesh = SubResource("PlaneMesh_txb4h")
+
+[node name="Floor3" type="MeshInstance3D" parent="." unique_id=585014280]
+mesh = SubResource("PlaneMesh_80ayd")
+
+[node name="Floor4" type="MeshInstance3D" parent="." unique_id=1362580932]
+mesh = SubResource("PlaneMesh_aixel")
+
+[node name="Walls" type="StaticBody3D" parent="." unique_id=422124592]
+
+[node name="North" type="CollisionShape3D" parent="Walls" unique_id=2039468430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -20)
+shape = SubResource("BoxShape3D_dusen")
+
+[node name="North2" type="CollisionShape3D" parent="Walls" unique_id=1431121533]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, -15)
+shape = SubResource("BoxShape3D_r3knc")
+
+[node name="WestUpper3" type="CollisionShape3D" parent="Walls" unique_id=1035302951]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -17.5)
+shape = SubResource("BoxShape3D_gxhuc")
+
+[node name="WestUpper4" type="CollisionShape3D" parent="Walls" unique_id=1815644078]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -17.5)
+shape = SubResource("BoxShape3D_gxhuc")
+
+[node name="North3" type="CollisionShape3D" parent="Walls" unique_id=920966922]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1, -15)
+shape = SubResource("BoxShape3D_r3knc")
+
+[node name="North4" type="CollisionShape3D" parent="Walls" unique_id=1768912917]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 1, -10)
+shape = SubResource("BoxShape3D_r3knc")
+
+[node name="North5" type="CollisionShape3D" parent="Walls" unique_id=565137338]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 1, -10)
+shape = SubResource("BoxShape3D_r3knc")
+
+[node name="WestUpper5" type="CollisionShape3D" parent="Walls" unique_id=1028500358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, -12.5)
+shape = SubResource("BoxShape3D_gxhuc")
+
+[node name="WestUpper6" type="CollisionShape3D" parent="Walls" unique_id=994934934]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, -12.5)
+shape = SubResource("BoxShape3D_gxhuc")
+
+[node name="North6" type="CollisionShape3D" parent="Walls" unique_id=837646578]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 1, -5)
+shape = SubResource("BoxShape3D_r3knc")
+
+[node name="WestUpper7" type="CollisionShape3D" parent="Walls" unique_id=1528696254]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, -7.5)
+shape = SubResource("BoxShape3D_gxhuc")
+
+[node name="North7" type="CollisionShape3D" parent="Walls" unique_id=353580050]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, 1, -5)
+shape = SubResource("BoxShape3D_r3knc")
+
+[node name="WestUpper8" type="CollisionShape3D" parent="Walls" unique_id=1269282081]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, -7.54)
+shape = SubResource("BoxShape3D_gxhuc")
+
+[node name="WestUpper9" type="CollisionShape3D" parent="Walls" unique_id=20343958]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, -3.5)
+shape = SubResource("BoxShape3D_l1dka")
+
+[node name="WestUpper10" type="CollisionShape3D" parent="Walls" unique_id=146923]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, -3.5)
+shape = SubResource("BoxShape3D_l1dka")
+
+[node name="North8" type="CollisionShape3D" parent="Walls" unique_id=1866457027]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
+shape = SubResource("BoxShape3D_dusen")
+
+[node name="North9" type="CollisionShape3D" parent="Walls" unique_id=10944029]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, 15)
+shape = SubResource("BoxShape3D_r3knc")
+
+[node name="WestUpper11" type="CollisionShape3D" parent="Walls" unique_id=1680380745]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 17.5)
+shape = SubResource("BoxShape3D_gxhuc")
+
+[node name="WestUpper12" type="CollisionShape3D" parent="Walls" unique_id=1365010389]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 17.5)
+shape = SubResource("BoxShape3D_gxhuc")
+
+[node name="North10" type="CollisionShape3D" parent="Walls" unique_id=1785302905]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1, 15)
+shape = SubResource("BoxShape3D_r3knc")
+
+[node name="North11" type="CollisionShape3D" parent="Walls" unique_id=670967512]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 1, 10)
+shape = SubResource("BoxShape3D_r3knc")
+
+[node name="North12" type="CollisionShape3D" parent="Walls" unique_id=1305633659]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 1, 10)
+shape = SubResource("BoxShape3D_r3knc")
+
+[node name="WestUpper13" type="CollisionShape3D" parent="Walls" unique_id=878530388]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 12.5)
+shape = SubResource("BoxShape3D_gxhuc")
+
+[node name="WestUpper14" type="CollisionShape3D" parent="Walls" unique_id=1501820715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 12.5)
+shape = SubResource("BoxShape3D_gxhuc")
+
+[node name="North13" type="CollisionShape3D" parent="Walls" unique_id=1117567913]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5, 1, 5)
+shape = SubResource("BoxShape3D_r3knc")
+
+[node name="WestUpper15" type="CollisionShape3D" parent="Walls" unique_id=636201003]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 7.5)
+shape = SubResource("BoxShape3D_gxhuc")
+
+[node name="North14" type="CollisionShape3D" parent="Walls" unique_id=962164601]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, 1, 5)
+shape = SubResource("BoxShape3D_r3knc")
+
+[node name="WestUpper16" type="CollisionShape3D" parent="Walls" unique_id=1175223774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, 7.54)
+shape = SubResource("BoxShape3D_gxhuc")
+
+[node name="WestUpper17" type="CollisionShape3D" parent="Walls" unique_id=1143292476]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 1, 3.5)
+shape = SubResource("BoxShape3D_l1dka")
+
+[node name="WestUpper18" type="CollisionShape3D" parent="Walls" unique_id=1027256121]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 1, 3.5)
+shape = SubResource("BoxShape3D_l1dka")
+
+[node name="BossEntry" parent="." unique_id=1754206773 instance=ExtResource("2_q0sae")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -20, 0, 0)
+target_entry = &"East"
+
+[node name="BossExit" parent="." unique_id=638487829 instance=ExtResource("2_q0sae")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
+target_entry = &"WestExit"
+
+[node name="PlayerStart" type="Marker3D" parent="." unique_id=624232411]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, 0)
+
+[node name="Rudrama" parent="." instance=ExtResource("91_boss")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)

@@ -1,0 +1,8 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# Placeholder for the hero side's end (NARRATIVE BEAT: denied glory, CUTSCENE: false credits).
+@text
+Cutscene: Denied glory
+
+Cutscene: False credits
+@end

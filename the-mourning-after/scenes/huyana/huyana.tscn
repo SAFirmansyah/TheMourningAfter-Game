@@ -1,5 +1,7 @@
 [gd_scene format=3]
 
+[ext_resource type="PackedScene" path="res://scenes/ui/test_skip.tscn" id="91_testskip"]
+[ext_resource type="Script" path="res://scripts/huyana/story_director.gd" id="92_director"]
 [ext_resource type="Script" path="res://scripts/world/world.gd" id="1_world"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://scenes/camera/camera_rig.tscn" id="3_rig"]
@@ -7,7 +9,6 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/interaction_hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="6_pause"]
 [ext_resource type="PackedScene" path="res://scenes/ui/save_indicator.tscn" id="7_saving"]
-[ext_resource type="PackedScene" path="res://scenes/ui/skip_prompt.tscn" id="8_skip"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/day_cycle.tscn" id="9_day"]
 [ext_resource type="Script" path="res://scripts/huyana/sanctuary_manager.gd" id="10_sanctuary"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/ui/request_bubbles.tscn" id="11_bubbles"]
@@ -62,8 +63,6 @@ world = NodePath("..")
 [node name="SaveIndicator" parent="." instance=ExtResource("7_saving")]
 top_offset = 312.0
 
-[node name="SkipPrompt" parent="." instance=ExtResource("8_skip")]
-
 [node name="DayCycle" parent="." node_paths=PackedStringArray("player", "sanctuary") instance=ExtResource("9_day")]
 player = NodePath("../Player")
 sanctuary = NodePath("../SanctuaryManager")
@@ -91,3 +90,13 @@ player = NodePath("../Player")
 skip_button = NodePath("../DayCycle/Clock/SkipTutorial")
 hud = NodePath("../InteractionHUD")
 world = NodePath("..")
+
+[node name="TestSkip" parent="." node_paths=PackedStringArray("world") instance=ExtResource("91_testskip")]
+world = NodePath("..")
+
+[node name="StoryDirector" type="Node" parent="." node_paths=PackedStringArray("world", "manager", "day_cycle", "tutorial")]
+script = ExtResource("92_director")
+world = NodePath("..")
+manager = NodePath("../SanctuaryManager")
+day_cycle = NodePath("../DayCycle")
+tutorial = NodePath("../Tutorial")

@@ -1,8 +1,9 @@
 class_name DayCycle
 extends Node
 ## Sanctuary day/night loop. Days run on a timer and move the sun; nights darken the scene and show
-## the night modal. Proceed plays any story event the night unlocked, then Constance is free to walk
-## to the campfire for the night's narrative beat, which starts the next day.
+## the night modal. After Proceed, Constance walks to the campfire, where the StoryDirector plays the
+## night's scene (or milestone beat) and starts the next day.
+## Testing: Skip day ends the day at once, costing some Sanctuary Health.
 
 signal day_started(day: int)
 signal night_started(day: int)
@@ -14,7 +15,7 @@ enum Phase { DAY, NIGHT }
 @export var night_fade_time := 1.5 # TUNE: seconds to darken at dusk / brighten at dawn
 @export var sanctuary: SanctuaryManager
 @export_multiline var first_night_note := "This is the Sanctuary's health. Every request left unfulfilled during the day lowers it, and it never comes back up." # shown on Night 1's modal
-@export var story_event_path := "res://scenes/huyana/cutscenes/story_%s.tscn" # %s = story event name
+@export var skip_day_health_loss := 4.0 # TUNE: Sanctuary Health the Skip day test button costs (%)
 
 @export_group("Sun")
 @export var shadow_angle_start := 170.0 # TUNE: shadow direction at dawn (degrees; 0 = right, 90 = away from camera, 180 = left)
@@ -35,9 +36,9 @@ var clock_paused := false
 
 @onready var clock_layer: CanvasLayer = $Clock
 @onready var clock: ClockFace = $Clock/Dial
-@onready var day_label: Label = $Clock/DayLabel
 @onready var speed_buttons: Container = $Clock/Speeds
 @onready var reset_button: Button = $Clock/ResetSave
+@onready var skip_day_button: Button = $Clock/SkipDay
 @onready var night_shade: ColorRect = $NightOverlay/Shade
 @onready var night_modal: Control = $NightModal/Panel
 @onready var night_title: Label = $NightModal/Panel/Content/Title
@@ -50,6 +51,8 @@ var _shade_tween: Tween
 
 func _ready() -> void:
 	add_to_group(&"save_state")
+	add_to_group(&"day_cycle")
+	skip_day_button.pressed.connect(_skip_day)
 	_set_night_amount(0.0)
 	night_modal.hide()
 	proceed_button.pressed.connect(_on_proceed)
@@ -62,6 +65,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	var world := get_parent() as World
+	skip_day_button.visible = phase == Phase.DAY and not clock_paused and not (world and world.is_story_playing())
 	if phase != Phase.DAY or clock_paused:
 		return
 	elapsed = minf(elapsed + delta * speed, day_length)
@@ -80,13 +85,15 @@ func set_speed(multiplier: float) -> void:
 	speed = multiplier
 
 
-## Testing: wipes this world's save and restarts from the first day.
+## Testing: straight to tonight, as if the day had passed with some Sanctuary Health lost.
+func _skip_day() -> void:
+	sanctuary.skip_day(skip_day_health_loss)
+	elapsed = day_length
+
+
+## Testing: back to a brand-new game (every save wiped, title screen).
 func _reset_save() -> void:
-	var world := get_parent() as World
-	if world:
-		SaveSystem.delete_save(world.save_slot)
-	get_tree().paused = false
-	get_tree().reload_current_scene()
+	TestTools.reset_save(get_tree())
 
 
 func _start_night() -> void:
@@ -102,10 +109,6 @@ func _start_night() -> void:
 func _on_proceed() -> void:
 	night_modal.hide()
 	var world := get_parent() as World
-	var event := sanctuary.pending_story_event
-	if event != &"" and world:
-		await world.play_cutscene(story_event_path % event)
-	sanctuary.pending_story_event = &""
 	awaiting_beat = true
 	player.input_enabled = true
 	if world:
@@ -129,7 +132,7 @@ func start_day() -> void:
 
 
 func _show_night_modal() -> void:
-	night_title.text = "Night %d" % day
+	night_title.text = "Night"
 	health_bar.value = sanctuary.health
 	night_note.text = first_night_note
 	night_note.visible = day == 1 and first_night_note != ""
@@ -167,7 +170,6 @@ func _update_sun() -> void:
 func _update_clock() -> void:
 	var night_share := clock.night_fraction
 	clock.pointer_turn = (1.0 - night_share / 2.0) if phase == Phase.NIGHT else progress() * (1.0 - night_share)
-	day_label.text = "Day %d" % day
 
 
 ## Night darkness outside the normal cycle (the tutorial's Night 0).

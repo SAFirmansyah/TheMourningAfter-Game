@@ -1,0 +1,13 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 4 v2
+@move shuyi FireRight
+@walk constance Campfire
+@settle
+SHUYI (sad): I don’t know what to do.
+CONSTANCE (sad): Worried you went off on Gwen too harshly?
+SHUYI (light-hearted): No, no. She had that coming, though, I suppose I should’ve dished some out to you too.
+SHUYI (neutral): But I do wonder if I’m right at all.
+CONSTANCE (neutral): You’re the most experienced we have, Shuyi.
+SHUYI (sad): I wish you wouldn’t conflate age with wisdom. Having lived longer…
+SHUYI (neutral): …just means I’ve had the time to make more mistakes.

@@ -1,7 +1,6 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/interaction_hud.gd" id="1_hud"]
-[ext_resource type="Texture2D" path="res://icon.svg" id="2_icon"]
 [ext_resource type="Script" path="res://scripts/ui/streamed_label.gd" id="3_stream"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_prompt"]
@@ -78,37 +77,25 @@ mouse_filter = 2
 
 [node name="PlayerPortrait" type="TextureRect" parent="Portraits"]
 layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
+anchor_top = 0.1
+anchor_right = 0.4
 anchor_bottom = 1.0
-offset_left = 60.0
-offset_top = -820.0
-offset_right = 560.0
-offset_bottom = -320.0
 grow_vertical = 0
 mouse_filter = 2
-texture = ExtResource("2_icon")
 expand_mode = 1
 stretch_mode = 5
 
 [node name="CharacterPortrait" type="TextureRect" parent="Portraits"]
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
+anchor_left = 0.6
+anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -560.0
-offset_top = -820.0
-offset_right = -60.0
-offset_bottom = -320.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
-texture = ExtResource("2_icon")
 expand_mode = 1
 stretch_mode = 5
-flip_h = true
 
 [node name="Prompt" type="PanelContainer" parent="."]
 anchors_preset = 7
@@ -117,9 +104,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -120.0
-offset_top = -112.0
+offset_top = -152.0
 offset_right = 120.0
-offset_bottom = -56.0
+offset_bottom = -96.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
@@ -140,9 +127,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -560.0
-offset_top = -340.0
+offset_top = -390.0
 offset_right = 560.0
-offset_bottom = -80.0
+offset_bottom = -130.0
 grow_horizontal = 2
 grow_vertical = 0
 mouse_filter = 2
