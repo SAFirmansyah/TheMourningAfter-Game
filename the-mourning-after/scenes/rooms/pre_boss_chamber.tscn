@@ -68,8 +68,14 @@ transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -5.65, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.65, 0, 0)
 target_entry = &"BossEntry"
 
-[node name="Bargain Spot" parent="." unique_id=844313245 instance=ExtResource("4_0pgl6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+[node name="Bargain Spot" parent="." unique_id=844313245 node_paths=PackedStringArray("after_heal") instance=ExtResource("4_0pgl6")]
+after_heal = NodePath("../Pond/HealSpot")
+
+[node name="Sprite3D" parent="Bargain Spot"]
+visible = false
+
+[node name="CollisionShape3D" parent="Bargain Spot"]
+disabled = true
 
 [node name="Interactable" parent="Bargain Spot" unique_id=2055157304 instance=ExtResource("5_xnjcq")]
 lines = PackedStringArray()
@@ -84,4 +90,4 @@ offset_bottom = 277.0
 text = "next boss"
 
 [node name="Pond" parent="." instance=ExtResource("p_pond")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.39, 0, -2.825)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)

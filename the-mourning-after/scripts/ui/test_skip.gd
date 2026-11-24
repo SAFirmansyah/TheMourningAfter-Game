@@ -14,4 +14,4 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	button.visible = world != null and world.is_story_playing() and not get_tree().paused
+	button.visible = TestTools.shown and world != null and world.is_story_playing() and not get_tree().paused

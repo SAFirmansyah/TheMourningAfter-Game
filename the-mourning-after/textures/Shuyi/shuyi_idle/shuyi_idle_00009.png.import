@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3kv7w3m4livy"
-path="res://.godot/imported/grass_tile_nobg_6.png-ccc1ddc36606d9524da9d83435f1b115.ctex"
+uid="uid://br4laxf16ngsv"
+path="res://.godot/imported/shuyi_idle_00009.png-27687a0b09144b253c44b64c44e93d0b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Grass/grass_tile_nobg_6.png"
-dest_files=["res://.godot/imported/grass_tile_nobg_6.png-ccc1ddc36606d9524da9d83435f1b115.ctex"]
+source_file="res://textures/Shuyi/shuyi_idle/shuyi_idle_00009.png"
+dest_files=["res://.godot/imported/shuyi_idle_00009.png-27687a0b09144b253c44b64c44e93d0b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvkrvehb2lhbh"
-path="res://.godot/imported/grass_tile_nobg_12.png-91b164ea5b9c9367e31d6c781735bd00.ctex"
+uid="uid://lg2ls2e05ttj"
+path="res://.godot/imported/Pond Heal.png-059c83138a88a7e3faf2d26b82d4ed14.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Grass/grass_tile_nobg_12.png"
-dest_files=["res://.godot/imported/grass_tile_nobg_12.png-91b164ea5b9c9367e31d6c781735bd00.ctex"]
+source_file="res://textures/Pond Heal.png"
+dest_files=["res://.godot/imported/Pond Heal.png-059c83138a88a7e3faf2d26b82d4ed14.ctex"]
 
 [params]
 

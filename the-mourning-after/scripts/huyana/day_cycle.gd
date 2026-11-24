@@ -72,7 +72,25 @@ func _ready() -> void:
 	day_started.emit(day)
 
 
+var _test_buttons: Control
+
+## The testing buttons under the clock sit in one container so the pause menu toggle hides them all.
+func _gather_test_buttons() -> void:
+	_test_buttons = Control.new()
+	_test_buttons.name = "TestButtons"
+	_test_buttons.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_test_buttons.set_anchors_preset(Control.PRESET_FULL_RECT)
+	clock_layer.add_child(_test_buttons)
+	for path in [^"Clock/Speeds", ^"Clock/ResetSave", ^"Clock/SkipTutorial", ^"Clock/SkipDay"]:
+		var node := get_node_or_null(path)
+		if node:
+			node.reparent(_test_buttons, false)
+
+
 func _process(delta: float) -> void:
+	if _test_buttons == null:
+		_gather_test_buttons()
+	_test_buttons.visible = TestTools.shown
 	var world := get_parent() as World
 	skip_day_button.visible = phase == Phase.DAY and not clock_paused and not (world and world.is_story_playing())
 	if phase != Phase.DAY or clock_paused:

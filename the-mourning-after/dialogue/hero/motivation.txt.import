@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://dedd1esmtp2na"
+path="res://.godot/imported/motivation.txt-745e2fa8fb30d36112237889f710114e.res"
+
+[deps]
+
+source_file="res://dialogue/hero/motivation.txt"
+dest_files=["res://.godot/imported/motivation.txt-745e2fa8fb30d36112237889f710114e.res"]
+
+[params]
+

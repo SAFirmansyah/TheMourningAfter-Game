@@ -1,4 +1,5 @@
 [gd_scene format=3]
+[ext_resource type="Script" path="res://scripts/visual/sprite_parallax.gd" id="95_parallax"]
 [ext_resource type="Texture2D" uid="uid://cule3s7g3s75g" path="res://textures/constance/constance_idle/constance_idle_00000.png" id="ct_2_wbmrr"]
 [ext_resource type="Texture2D" uid="uid://pu4yb266wrv3" path="res://textures/constance/constance_idle/constance_idle_00001.png" id="ct_3_umbja"]
 [ext_resource type="Texture2D" uid="uid://hk7krksevyki" path="res://textures/constance/constance_idle/constance_idle_00002.png" id="ct_4_rrdyp"]
@@ -229,7 +230,7 @@ display_name = "Constance"
 weapon = null
 
 [node name="Card" parent="Player" index="0"]
-transform = Transform3D(-0.095, 0, -8.305164e-09, 0, 0.095, 0, 8.305164e-09, 0, -0.095, 0, 0.9, 0)
+transform = Transform3D(-0.0914, 0, 0, 0, 0.0914, 0, 0, 0, -0.0914, 0, 0.818, 0)
 sprite_frames = SubResource("SpriteFrames_constance")
 
 [node name="CameraRig" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("3_rig")]
@@ -296,3 +297,6 @@ tutorial = NodePath("../Tutorial")
 [node name="RequestBranches" parent="." node_paths=PackedStringArray("manager", "world") instance=ExtResource("93_branches")]
 manager = NodePath("../SanctuaryManager")
 world = NodePath("..")
+
+[node name="SpriteParallax" type="Node" parent="."]
+script = ExtResource("95_parallax")

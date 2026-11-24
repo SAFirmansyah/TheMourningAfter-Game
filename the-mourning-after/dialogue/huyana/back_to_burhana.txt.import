@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://baonl7qpl8vl6"
+path="res://.godot/imported/back_to_burhana.txt-ad947948be080c013c5643afe2769526.res"
+
+[deps]
+
+source_file="res://dialogue/huyana/back_to_burhana.txt"
+dest_files=["res://.godot/imported/back_to_burhana.txt-ad947948be080c013c5643afe2769526.res"]
+
+[params]
+

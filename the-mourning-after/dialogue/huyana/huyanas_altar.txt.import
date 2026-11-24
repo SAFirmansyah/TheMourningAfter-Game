@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://c1iqvv6nffnad"
+path="res://.godot/imported/huyanas_altar.txt-330db8a01fc58dfb93d9e007f98c13bd.res"
+
+[deps]
+
+source_file="res://dialogue/huyana/huyanas_altar.txt"
+dest_files=["res://.godot/imported/huyanas_altar.txt-330db8a01fc58dfb93d9e007f98c13bd.res"]
+
+[params]
+

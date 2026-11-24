@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/world/grass.gd" id="1_grass"]
+[ext_resource type="Script" path="res://scripts/visual/facing_card.gd" id="2_card"]
+
+[node name="Grass" type="Node3D" node_paths=PackedStringArray("card")]
+script = ExtResource("1_grass")
+card = NodePath("GrassSprite")
+
+[node name="GrassSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+script = ExtResource("2_card")
+sway = true
+casts_shadow = false

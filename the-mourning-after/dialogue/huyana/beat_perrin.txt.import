@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://bb8d1a8elqayr"
+path="res://.godot/imported/beat_perrin.txt-fd72ea106d5daf7b738e6029321d1168.res"
+
+[deps]
+
+source_file="res://dialogue/huyana/beat_perrin.txt"
+dest_files=["res://.godot/imported/beat_perrin.txt-fd72ea106d5daf7b738e6029321d1168.res"]
+
+[params]
+

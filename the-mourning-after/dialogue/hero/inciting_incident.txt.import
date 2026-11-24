@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://dlunrsx2cqwal"
+path="res://.godot/imported/inciting_incident.txt-7999dd59c66a37b05c331105f755a2da.res"
+
+[deps]
+
+source_file="res://dialogue/hero/inciting_incident.txt"
+dest_files=["res://.godot/imported/inciting_incident.txt-7999dd59c66a37b05c331105f755a2da.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://c6164k5je32u3"
+path="res://.godot/imported/beat_fates.txt-4239e7019133a55b10095eef33fa45ea.res"
+
+[deps]
+
+source_file="res://dialogue/huyana/beat_fates.txt"
+dest_files=["res://.godot/imported/beat_fates.txt-4239e7019133a55b10095eef33fa45ea.res"]
+
+[params]
+

@@ -144,7 +144,7 @@ low_mutant_scene = ExtResource("4_u4ug7")
 
 [node name="Card" type="AnimatedSprite3D" parent="." unique_id=1720100852]
 process_physics_priority = 20
-transform = Transform3D(-0.095, 0, -8.305164e-09, 0, 0.095, 0, 8.305164e-09, 0, -0.095, 0, 0.9, 0)
+transform = Transform3D(-0.0914, 0, 0, 0, 0.0914, 0, 0, 0, -0.0914, 0, 0.818, 0)
 offset = Vector2(0, 64)
 pixel_size = 0.014
 alpha_cut = 1

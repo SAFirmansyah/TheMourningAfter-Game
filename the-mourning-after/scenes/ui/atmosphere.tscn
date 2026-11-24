@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Shader" path="res://shaders/night_overlay.gdshader" id="1_shader"]
+[ext_resource type="Script" path="res://scripts/world/hero_daylight.gd" id="2_daylight"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mood"]
 shader = ExtResource("1_shader")
@@ -8,8 +9,9 @@ shader_parameter/amount = 0.0
 
 [node name="Atmosphere" type="CanvasLayer"]
 layer = 1
+script = ExtResource("2_daylight")
 
-[node name="Shade" type="ColorRect" parent="."]
+[node name="Shade" type="ColorRect" parent="." groups=["atmosphere_shade"]]
 material = SubResource("ShaderMaterial_mood")
 anchors_preset = 15
 anchor_right = 1.0

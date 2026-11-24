@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://wfjv0s1gpruy"
+path="res://.godot/imported/beat_rudrama.txt-186ed5b5a57f5ac490ab685b46c31bde.res"
+
+[deps]
+
+source_file="res://dialogue/huyana/beat_rudrama.txt"
+dest_files=["res://.godot/imported/beat_rudrama.txt-186ed5b5a57f5ac490ab685b46c31bde.res"]
+
+[params]
+

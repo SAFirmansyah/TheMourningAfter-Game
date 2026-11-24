@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://dfg2xieo4mcwl"
+path="res://.godot/imported/night_3.txt-567feea1b54d3805bb604973c5ec97eb.res"
+
+[deps]
+
+source_file="res://dialogue/huyana/night_3.txt"
+dest_files=["res://.godot/imported/night_3.txt-567feea1b54d3805bb604973c5ec97eb.res"]
+
+[params]
+

@@ -12,7 +12,8 @@ extends Node3D
 
 func _ready() -> void:
 	if card:
-		card.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
+		if card is not FacingCard: # swaying grass turns itself to the camera
+			card.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
 		card.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 		card.alpha_cut = SpriteBase3D.ALPHA_CUT_DISCARD
 		_sit_on_floor()
@@ -34,8 +35,17 @@ func half_width() -> float:
 	return card.texture.get_width() * card.pixel_size * card.scale.x * random_scale_range.y / 2.0
 
 
+## Blank rows under each texture's drawing (measured once per texture), so the blades themselves,
+## not the image's empty bottom edge, touch the floor.
+static var _bottom_gap := {}
+
+
 func _sit_on_floor() -> void:
 	if card and card.texture:
+		var tex := card.texture
+		if not _bottom_gap.has(tex):
+			var img := tex.get_image()
+			_bottom_gap[tex] = img.get_height() - img.get_used_rect().end.y if img else 0
 		card.centered = true
-		card.offset.y = card.texture.get_height() / 2.0 # bottom edge at this node's origin
+		card.offset.y = tex.get_height() / 2.0 - _bottom_gap[tex] # the drawing's lowest pixel at this node's origin
 		card.position.y = 0.0

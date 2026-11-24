@@ -10,7 +10,7 @@ extends CanvasLayer
 @onready var health_bar: TextureProgressBar = $Panel/HealthBar
 @onready var health_label: Label = $Panel/HealthBar/HealthLabel
 @onready var charge_bar: ProgressBar = $Panel/ChargeBar
-@onready var residue_icon: TextureRect = $Panel/Ring/Icon # placeholder until the residue art exists
+@onready var residue_icon: TextureRect = $Panel/Ring/Icon
 @onready var residue_count: Label = $Panel/Ring/ResidueCount # inside the ring, under the icon
 @onready var info_label: Label = $Panel/InfoLabel
 
