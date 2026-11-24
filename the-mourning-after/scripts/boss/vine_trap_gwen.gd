@@ -5,9 +5,10 @@ extends Node3D
 ## whichever opponent she's caught).
 
 @export var erupted_time := 0.5 # TUNE: how long the erupted vines stay visible (s)
+@export var trap_sprite_height := 0.4
 
 @onready var warning: MeshInstance3D = $Warning
-@onready var vines: MeshInstance3D = $Vines
+@onready var trap_sprite: AnimatedSprite3D = $Trap
 
 var _caster: Node3D
 var _target: Node3D
@@ -26,8 +27,9 @@ func configure(caster: Node3D, target: Node3D, radius: float, warning_time: floa
 	_root_time = root_time
 	_damage = damage
 	warning.scale = Vector3(radius, 1.0, radius)
-	vines.scale = Vector3(radius, 1.0, radius)
-	vines.hide()
+	trap_sprite.scale = Vector3(radius, radius, radius)
+	trap_sprite.position.y = trap_sprite_height
+	trap_sprite.hide()
 
 
 func _physics_process(delta: float) -> void:
@@ -43,20 +45,28 @@ func _physics_process(delta: float) -> void:
 func _erupt() -> void:
 	_erupted = true
 	warning.hide()
-	vines.show()
-	if not is_instance_valid(_target):
-		return
-	if "is_invulnerable" in _target and _target.is_invulnerable:
-		return
-	if _target.has_method("is_stunned") and _target.is_stunned():
-		return
-	var offset := _target.global_position - global_position
-	offset.y = 0.0
-	if offset.length() > _radius:
-		return
-	if _target.has_method("receive_hit"):
-		_target.receive_hit(_damage)
-	if _target.has_method("apply_stun"):
-		_target.apply_stun(_root_time)
-	if is_instance_valid(_caster) and _caster.has_method("on_player_ensnared"):
-		_caster.on_player_ensnared()
+
+	var caught := false
+	if is_instance_valid(_target):
+		var invulnerable: bool = "is_invulnerable" in _target and _target.is_invulnerable
+		var dodging: bool = _target.has_method("is_stunned") and _target.is_stunned()
+		if not invulnerable and not dodging:
+			var offset := _target.global_position - global_position
+			offset.y = 0.0
+			if offset.length() <= _radius:
+				caught = true
+
+	trap_sprite.show()
+	trap_sprite.play("trap")
+	if caught:
+		trap_sprite.animation_finished.connect(trap_sprite.pause, CONNECT_ONE_SHOT)
+	else:
+		trap_sprite.animation_finished.connect(trap_sprite.hide, CONNECT_ONE_SHOT)
+
+	if caught:
+		if _target.has_method("receive_hit"):
+			_target.receive_hit(_damage)
+		if _target.has_method("apply_stun"):
+			_target.apply_stun(_root_time)
+		if is_instance_valid(_caster) and _caster.has_method("on_player_ensnared"):
+			_caster.on_player_ensnared()
