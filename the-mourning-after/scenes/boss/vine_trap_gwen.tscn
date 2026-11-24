@@ -104,5 +104,3 @@ mesh = SubResource("Mesh_warning")
 transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, 0, 0.4, 0)
 sprite_frames = SubResource("SpriteFrames_jhy0a")
 animation = &"trap"
-frame = 17
-frame_progress = 1.0

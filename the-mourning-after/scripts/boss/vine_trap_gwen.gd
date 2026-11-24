@@ -6,6 +6,7 @@ extends Node3D
 
 @export var erupted_time := 0.5 # TUNE: how long the erupted vines stay visible (s)
 @export var trap_sprite_height := 0.4
+@export var trap_sprite_scale := 0.3 # TUNE: visual size of the Trap sprite, independent of ensnared_radius
 
 @onready var warning: MeshInstance3D = $Warning
 @onready var trap_sprite: AnimatedSprite3D = $Trap
@@ -27,8 +28,12 @@ func configure(caster: Node3D, target: Node3D, radius: float, warning_time: floa
 	_root_time = root_time
 	_damage = damage
 	warning.scale = Vector3(radius, 1.0, radius)
-	trap_sprite.scale = Vector3(radius, radius, radius)
-	trap_sprite.position.y = trap_sprite_height
+	trap_sprite.scale = Vector3.ONE * trap_sprite_scale
+
+	var tex := trap_sprite.sprite_frames.get_frame_texture(&"trap", 0)
+	var half_height := (tex.get_height() * trap_sprite.pixel_size * trap_sprite_scale) / 2.0
+	trap_sprite.position.y = half_height + trap_sprite_height
+
 	trap_sprite.hide()
 
 

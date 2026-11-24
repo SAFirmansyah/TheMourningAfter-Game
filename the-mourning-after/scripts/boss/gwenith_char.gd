@@ -171,6 +171,7 @@ func _ensnared() -> void:
 		var vine := VINE_SCENE.instantiate() as VineHazard
 		get_parent().add_child(vine)
 		vine.global_position = Vector3(centre.x, global_position.y, centre.z)
+		print("Gwenith Y: ", global_position.y, " | vine spawn Y: ", vine.global_position.y)
 		vine.configure(self, target, ensnared_radius, ensnared_warning, ensnared_root_time, ensnared_damage)
 	await wait(ENSNARED_CAST)
 	busy = false
