@@ -1,37 +1,44 @@
 [gd_scene format=3 uid="uid://cqggnj0swrig5"]
 
+[ext_resource type="Material" path="res://materials/ground_faint.tres" id="m_ground"]
+
 [ext_resource type="Script" uid="uid://chm8scfmsnvei" path="res://scripts/world/combat_room.gd" id="1_ch7nr"]
-[ext_resource type="Material" path="res://materials/ground.tres" id="2_6i74s"]
-[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_nlg7s"]
+[ext_resource type="PackedScene" uid="uid://ckakiy7lmk260" path="res://scenes/world/grass.tscn" id="2_c0dit"]
+[ext_resource type="PackedScene" uid="uid://764k273fks56" path="res://scenes/world/path_exit.tscn" id="3_nlg7s"]
+[ext_resource type="Texture2D" uid="uid://bdidw2btubx25" path="res://textures/Grass/grass_tile_nobg_2.png" id="5_v4j1u"]
+[ext_resource type="Texture2D" uid="uid://cgt7wg8juo6jw" path="res://textures/Grass/grass_tile_nobg_3.png" id="6_8fy0y"]
+[ext_resource type="Texture2D" uid="uid://bom7740w2ny3r" path="res://textures/Grass/grass_tile_nobg_7.png" id="10_iyfjp"]
+[ext_resource type="Texture2D" uid="uid://clxodmos3vkjf" path="res://textures/Grass/grass_tile_nobg_8.png" id="11_25jcn"]
+[ext_resource type="Texture2D" uid="uid://mf7ufqkoflqu" path="res://textures/Grass/grass_tile_nobg_9.png" id="12_mplgc"]
+[ext_resource type="Texture2D" uid="uid://dnyjr52nd52fi" path="res://textures/Grass/grass_tile_nobg_11.png" id="14_3iwle"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8fro4"]
-material = ExtResource("2_6i74s")
-size = Vector2(13.8564, 27.7128)
+material = ExtResource("m_ground")
+size = Vector2(9.2376, 18.4752)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3oq2g"]
-size = Vector3(13.8564, 0.1, 27.7128)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_w0rgk"]
-size = Vector3(0.4, 2, 12.9326)
+size = Vector3(9.2376, 0.1, 18.4752)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d2hbn"]
-size = Vector3(13.8564, 2, 0.4)
+size = Vector3(9.2376, 2, 0.4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_westtop_trim"]
-size = Vector3(0.4, 2, 11.8564)
+[sub_resource type="BoxShape3D" id="BoxShape3D_fit_WestTop"]
+size = Vector3(0.4, 2, 7.2376)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_westbot_trim"]
-size = Vector3(0.4, 2, 11.8564)
+[sub_resource type="BoxShape3D" id="BoxShape3D_fit_WestBot"]
+size = Vector3(0.4, 2, 7.2376)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_easttop_trim"]
-size = Vector3(0.4, 2, 11.8564)
+[sub_resource type="BoxShape3D" id="BoxShape3D_fit_EastTop"]
+size = Vector3(0.4, 2, 7.2376)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_eastbot_trim"]
-size = Vector3(0.4, 2, 11.8564)
+[sub_resource type="BoxShape3D" id="BoxShape3D_fit_EastBot"]
+size = Vector3(0.4, 2, 7.2376)
 
 [node name="CombatRoom30x60" type="Node3D" unique_id=888080166]
 script = ExtResource("1_ch7nr")
-ground_tint = Color(0.32, 0.5, 0.28, 1)
+grass_scn = ExtResource("2_c0dit")
+grass_textures = Array[Texture2D]([ExtResource("5_v4j1u"), ExtResource("6_8fy0y"), ExtResource("10_iyfjp"), ExtResource("11_25jcn"), ExtResource("12_mplgc"), ExtResource("14_3iwle")])
+ground_tint = Color(0.21952349, 0.24131262, 0.14266372, 1)
 
 [node name="FloorStatic" type="StaticBody3D" parent="." unique_id=745867498]
 
@@ -42,39 +49,39 @@ mesh = SubResource("PlaneMesh_8fro4")
 shape = SubResource("BoxShape3D_3oq2g")
 
 [node name="PlayerStart" type="Marker3D" parent="." unique_id=1781137956]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0807, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3871, 0, 0)
 
 [node name="Walls" type="StaticBody3D" parent="." unique_id=1133913659]
 
 [node name="WestTop" type="CollisionShape3D" parent="Walls" unique_id=1678717693]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9282, 1, -7.9282)
-shape = SubResource("BoxShape3D_westtop_trim")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6188, 1, -5.6188)
+shape = SubResource("BoxShape3D_fit_WestTop")
 
 [node name="North" type="CollisionShape3D" parent="Walls" unique_id=327821023]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -13.8564)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -9.2376)
 shape = SubResource("BoxShape3D_d2hbn")
 
 [node name="WestBot" type="CollisionShape3D" parent="Walls" unique_id=746857119]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9282, 1, 7.9282)
-shape = SubResource("BoxShape3D_westbot_trim")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6188, 1, 5.6188)
+shape = SubResource("BoxShape3D_fit_WestBot")
 
 [node name="South" type="CollisionShape3D" parent="Walls" unique_id=1295455518]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 13.8564)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 9.2376)
 shape = SubResource("BoxShape3D_d2hbn")
 
 [node name="EastTop" type="CollisionShape3D" parent="Walls" unique_id=137871164]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9282, 1, -7.9282)
-shape = SubResource("BoxShape3D_easttop_trim")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6188, 1, -5.6188)
+shape = SubResource("BoxShape3D_fit_EastTop")
 
 [node name="EastBot" type="CollisionShape3D" parent="Walls" unique_id=878345509]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9282, 1, 7.9282)
-shape = SubResource("BoxShape3D_eastbot_trim")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6188, 1, 5.6188)
+shape = SubResource("BoxShape3D_fit_EastBot")
 
 [node name="WestExit" parent="." unique_id=1243838311 instance=ExtResource("3_nlg7s")]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -6.9282, 0, 0)
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -4.6188, 0, 0)
 
 [node name="EastExit" parent="." unique_id=1163370842 instance=ExtResource("3_nlg7s")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9282, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6188, 0, 0)
 target_entry = &"WestExit"
 
 [node name="Enemies" type="Node3D" parent="." unique_id=1966559981]

@@ -1,0 +1,192 @@
+[gd_scene format=3 uid="uid://bovali6r4d0xg"]
+
+[ext_resource type="Material" uid="uid://bjs7uap1srsok" path="res://materials/ground.tres" id="1_3cb7q"]
+[ext_resource type="Script" uid="uid://c575pknxi1h5t" path="res://scripts/world/constance_fight.gd" id="1_pf74m"]
+[ext_resource type="PackedScene" uid="uid://764k273fks56" path="res://scenes/world/path_exit.tscn" id="2_pf74m"]
+[ext_resource type="PackedScene" uid="uid://bmlc88qlhew43" path="res://scenes/enemies/perrin_enemy.tscn" id="4_hw0vx"]
+[ext_resource type="PackedScene" uid="uid://dhh6h5r6t4oq1" path="res://scenes/player/constance.tscn" id="5_d6gko"]
+[ext_resource type="PackedScene" path="res://scenes/camera/camera_rig.tscn" id="6_886oe"]
+[ext_resource type="PackedScene" uid="uid://cyoq8xehvpyji" path="res://scenes/ui/player_hud.tscn" id="7_mr52n"]
+[ext_resource type="PackedScene" uid="uid://bo67plntlruy6" path="res://scenes/test/prop.tscn" id="8_qbrs8"]
+[ext_resource type="Texture2D" uid="uid://btssw56c0cff6" path="res://textures/Altar/altar_altarwithbox.png" id="9_ypmcc"]
+[ext_resource type="Texture2D" uid="uid://duqyxc7msi70o" path="res://textures/Altar/altar_fortunetable.png" id="11_euea7"]
+[ext_resource type="Texture2D" uid="uid://b8y8pye86ktvf" path="res://textures/Altar/altar_booksvertical.png" id="12_ejakq"]
+[ext_resource type="Texture2D" uid="uid://bkk8mti7yvwdw" path="res://textures/Altar/altar_bookshorixontal.png" id="13_yjnm5"]
+[ext_resource type="Texture2D" uid="uid://ckmbpj4prwfle" path="res://textures/Altar/altar_bookshelf.png" id="14_obuwb"]
+[ext_resource type="Texture2D" uid="uid://b1gb38stlvla8" path="res://textures/Altar/altar_writingtable.png" id="15_snaxq"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hw0vx"]
+material = ExtResource("1_3cb7q")
+size = Vector2(30, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_41uu7"]
+size = Vector3(40, 0.1, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d6gko"]
+size = Vector3(9.5, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_886oe"]
+size = Vector3(8.5, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mr52n"]
+size = Vector3(8.5, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y8xv3"]
+size = Vector3(6, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4if5a"]
+size = Vector3(9, 2, 0.4)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_q81l4"]
+load_path = "res://.godot/imported/altar_chair.png-1c9bb75308472e19597674e8c3fc3b80.s3tc.ctex"
+
+[node name="ConstanceFight" type="Node3D" unique_id=958058731]
+script = ExtResource("1_pf74m")
+
+[node name="FloorArea" type="StaticBody3D" parent="." unique_id=913476446]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="Floor3" type="MeshInstance3D" parent="FloorArea" unique_id=1181980237]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+mesh = SubResource("PlaneMesh_hw0vx")
+
+[node name="Floor4" type="MeshInstance3D" parent="FloorArea" unique_id=208260437]
+transform = Transform3D(0.56568545, 0, 0.56568545, 0, 0.8, 0, -0.56568545, 0, 0.56568545, 0, 0, 0)
+mesh = SubResource("PlaneMesh_hw0vx")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="FloorArea" unique_id=993498631]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+shape = SubResource("BoxShape3D_41uu7")
+
+[node name="BossEntry" parent="." unique_id=1540354212 instance=ExtResource("2_pf74m")]
+transform = Transform3D(-3.4969112e-08, 0, -0.8, 0, 0.8, 0, 0.8, 0, -3.4969112e-08, 0, 0, 12)
+target_entry = &"East"
+
+[node name="Walls" type="StaticBody3D" parent="." unique_id=1309078569]
+transform = Transform3D(0.65, 0, 0, 0, 0.65, 0, 0, 0, 0.65, 0, 0, 0)
+
+[node name="North" type="CollisionShape3D" parent="Walls" unique_id=503873705]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 1, -15)
+shape = SubResource("BoxShape3D_d6gko")
+
+[node name="North2" type="CollisionShape3D" parent="Walls" unique_id=1643801742]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 1, -15)
+shape = SubResource("BoxShape3D_d6gko")
+
+[node name="North3" type="CollisionShape3D" parent="Walls" unique_id=1677046492]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -3, 1, -18.5)
+shape = SubResource("BoxShape3D_d6gko")
+
+[node name="North4" type="CollisionShape3D" parent="Walls" unique_id=554096615]
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 3, 1, -18.5)
+shape = SubResource("BoxShape3D_d6gko")
+
+[node name="North5" type="CollisionShape3D" parent="Walls" unique_id=462806301]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15, 1, -10.5)
+shape = SubResource("BoxShape3D_886oe")
+
+[node name="North6" type="CollisionShape3D" parent="Walls" unique_id=976815818]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15, 1, -10.5)
+shape = SubResource("BoxShape3D_mr52n")
+
+[node name="North7" type="CollisionShape3D" parent="Walls" unique_id=1629003499]
+transform = Transform3D(-0.7079039, 0, 0.70630866, 0, 1, 0, -0.70630866, 0, -0.7079039, -4, 1, 17)
+shape = SubResource("BoxShape3D_y8xv3")
+
+[node name="North8" type="CollisionShape3D" parent="Walls" unique_id=2101111912]
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 18, 1, -3)
+shape = SubResource("BoxShape3D_4if5a")
+
+[node name="North9" type="CollisionShape3D" parent="Walls" unique_id=935192377]
+transform = Transform3D(0.7071067, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, 0.7071067, 18, 1, 3)
+shape = SubResource("BoxShape3D_4if5a")
+
+[node name="North10" type="CollisionShape3D" parent="Walls" unique_id=1077918320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 1, 15)
+shape = SubResource("BoxShape3D_d6gko")
+
+[node name="North11" type="CollisionShape3D" parent="Walls" unique_id=1793811031]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 1, 15)
+shape = SubResource("BoxShape3D_d6gko")
+
+[node name="North12" type="CollisionShape3D" parent="Walls" unique_id=1420351695]
+transform = Transform3D(0.70710665, 0, 0.70710665, 0, 1, 0, -0.70710665, 0, 0.70710665, -18, 1, -3)
+shape = SubResource("BoxShape3D_d6gko")
+
+[node name="North13" type="CollisionShape3D" parent="Walls" unique_id=312834973]
+transform = Transform3D(0.70710665, 0, -0.70710665, 0, 1, 0, 0.70710665, 0, 0.70710665, -18.5, 1, 3)
+shape = SubResource("BoxShape3D_d6gko")
+
+[node name="North14" type="CollisionShape3D" parent="Walls" unique_id=878030105]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15, 1, 10.5)
+shape = SubResource("BoxShape3D_886oe")
+
+[node name="North15" type="CollisionShape3D" parent="Walls" unique_id=1325009530]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15, 1, 10.5)
+shape = SubResource("BoxShape3D_mr52n")
+
+[node name="North16" type="CollisionShape3D" parent="Walls" unique_id=1671290244]
+transform = Transform3D(0.7063086, 0, 0.70790386, 0, 1, 0, -0.70790386, 0, 0.7063086, 3.5, 1, 16.5)
+shape = SubResource("BoxShape3D_y8xv3")
+
+[node name="PerrinEnemy" parent="." unique_id=1384270876 instance=ExtResource("4_hw0vx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 13)
+
+[node name="Constance" parent="." unique_id=145981841 instance=ExtResource("5_d6gko")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
+
+[node name="CameraRig" parent="." unique_id=147726263 instance=ExtResource("6_886oe")]
+process_priority = -10
+process_physics_priority = 10
+transform = Transform3D(1, 0, 0, 0, 0.9063077, 0.42261824, 0, -0.42261824, 0.9063077, 0, 0.8, 0)
+distance = 13.0
+
+[node name="PlayerHUD" parent="." unique_id=1921822603 instance=ExtResource("7_mr52n")]
+
+[node name="Props" type="Node3D" parent="." unique_id=990354253]
+
+[node name="PropTable" parent="Props" unique_id=125809204 instance=ExtResource("8_qbrs8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, -10)
+
+[node name="Sprite3D" type="Sprite3D" parent="Props/PropTable" unique_id=1694846338]
+texture = ExtResource("9_ypmcc")
+
+[node name="PropChair" parent="Props" unique_id=236698715 instance=ExtResource("8_qbrs8")]
+transform = Transform3D(-3.4969112e-08, 0, 0.8, 0, 0.8, 0, -0.8, 0, -3.4969112e-08, -6, 0.9, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Props/PropChair" unique_id=1974801212]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 0, 0, 0)
+texture = SubResource("CompressedTexture2D_q81l4")
+
+[node name="PropFortune" parent="Props" unique_id=100316997 instance=ExtResource("8_qbrs8")]
+transform = Transform3D(-3.4969112e-08, 0, 0.8, 0, 0.8, 0, -0.8, 0, -3.4969112e-08, 9, 0.9, -1)
+
+[node name="Sprite3D" type="Sprite3D" parent="Props/PropFortune" unique_id=1260888421]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+texture = ExtResource("11_euea7")
+
+[node name="PropBooksVert" parent="Props" unique_id=1556865789 instance=ExtResource("8_qbrs8")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -10, 0.9, 2)
+
+[node name="Sprite3D" type="Sprite3D" parent="Props/PropBooksVert" unique_id=110347984]
+texture = ExtResource("12_ejakq")
+
+[node name="PropBooksHorz" parent="Props" unique_id=1981761578 instance=ExtResource("8_qbrs8")]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -10, 1.3, 0.5)
+
+[node name="Sprite3D" type="Sprite3D" parent="Props/PropBooksHorz" unique_id=588016061]
+texture = ExtResource("13_yjnm5")
+
+[node name="PropBookshelf" parent="Props" unique_id=675194671 instance=ExtResource("8_qbrs8")]
+transform = Transform3D(-3.059797e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.059797e-08, 9, 0.9, 2.5)
+
+[node name="Sprite3D" type="Sprite3D" parent="Props/PropBookshelf" unique_id=691163297]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.7, 0)
+texture = ExtResource("14_obuwb")
+
+[node name="PropWriteTable" parent="Props" unique_id=1383035070 instance=ExtResource("8_qbrs8")]
+transform = Transform3D(-3.4969112e-08, 0, 0.8, 0, 0.8, 0, -0.8, 0, -3.4969112e-08, -10, 0.9, 0)
+
+[node name="Sprite3D" type="Sprite3D" parent="Props/PropWriteTable" unique_id=587453102]
+transform = Transform3D(-3.9340247e-08, 0, -0.9, 0, 0.9, 0, 0.9, 0, -3.9340247e-08, 0, 0, 0)
+texture = ExtResource("15_snaxq")

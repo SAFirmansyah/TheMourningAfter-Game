@@ -3,6 +3,7 @@ extends Node3D
 ## Gwenith's spilled pesticide: hurts Perrin for every full second he spends standing in it.
 
 @onready var puddle: MeshInstance3D = $Puddle
+@onready var sprite: AnimatedSprite3D = $Sprite   # match this to the actual node name
 
 var _player: Player
 var _radius := 2.0
@@ -17,6 +18,10 @@ func configure(player: Player, radius: float, dps: int, duration: float) -> void
 	_dps = dps
 	_time_left = duration
 	puddle.scale = Vector3(radius, 1.0, radius)
+
+
+func _ready() -> void:
+	sprite.play("splash") # ambient bubbling loop while the puddle sits there
 
 
 func _physics_process(delta: float) -> void:

@@ -53,12 +53,21 @@ var _damage_flash: DamageFlash
 
 @onready var _alert: Label3D = get_node_or_null(^"Alert")
 @onready var _health_bar: MobHealthBar = get_node_or_null(^"HealthBar")
+@onready var sprite: AnimatedSprite3D = $Card
+
+## Per animation, how far (art pixels) to shift the card so its feet line up with the idle art, for
+## animations drawn on a different canvas (e.g. {&"attack": Vector2(-58, 111)}). Mirrors with flip_h.
+@export var animation_offsets := {}
+var _base_offset := Vector2.ZERO
+
+var _attacking := false
+
 
 func _ready():
 	if stats == null:
 		stats = MutantStats.new()
 	else:
-		stats = stats.duplicate() # don't share the Inspector-assigned resource across instance
+		stats = stats.duplicate()
 	call_deferred("_print_health")
 	stats.health_depleted.connect(_on_health_depleted)
 	_damage_flash = DamageFlash.new()
@@ -70,7 +79,15 @@ func _ready():
 	if _alert:
 		_alert.hide()
 	_pace = 1.0 + randf_range(-chase_pace_variation, chase_pace_variation)
+	sprite.animation_finished.connect(_on_sprite_animation_finished)
+	_base_offset = sprite.offset
 	add_to_group(&"enemies")
+
+
+func _on_sprite_animation_finished() -> void:
+	if sprite.animation == &"attack":
+		_attacking = false
+		
 
 func _print_health() -> void:
 	print("health: ", stats.health)
@@ -240,12 +257,15 @@ func _look_for_player() -> void:
 		pop.tween_interval(maxf(sense_delay - 0.15, 0.0))
 		pop.tween_callback(_alert.hide)
 
+
 func _attack(delta: float) -> void:
 	var to_target: Vector3 = target.global_position - global_position
 	to_target.y = 0.0
 	var dist_to_target := to_target.length()
 	var direction := to_target.normalized()
 	_facing = Vector2(direction.x, direction.z)
+	if direction.x != 0.0:
+		sprite.flip_h = direction.x < 0.0
 
 	var desired := Vector3.ZERO
 	if dist_to_target > attack_range:
@@ -253,21 +273,24 @@ func _attack(delta: float) -> void:
 		if _replan_left <= 0.0:
 			_replan_left = randf_range(chase_replan_time.x, chase_replan_time.y)
 			_lean = randf_range(-chase_bend, chase_bend)
-		# Lean off the straight line while far away, straightening out on the final approach.
 		var lean := _lean * clampf((dist_to_target - attack_range) / chase_bend_fade, 0.0, 1.0)
 		var heading := (direction + direction.cross(Vector3.UP) * lean).normalized()
 		var slow := lerpf(chase_ease_min, 1.0, clampf((dist_to_target - attack_range) / chase_ease_distance, 0.0, 1.0))
 		desired = heading * base_move_speed * move_speed_multiplier * _pace * slow
+		if not _attacking:
+			sprite.play("walk")
 	elif _attack_cooldown_left <= 0.0:
 		_spawn_hitbox()
 
 	var flat := Vector3(velocity.x, 0.0, velocity.z).move_toward(desired, chase_acceleration * delta)
 	velocity = Vector3(flat.x, velocity.y if motion_mode == MOTION_MODE_GROUNDED else 0.0, flat.z)
 	move_and_slide()
-
+	
 	
 func _spawn_hitbox() -> void:
 	_attack_cooldown_left = attack_cooldown
+	_attacking = true
+	sprite.play("attack")
 
 	var hitbox := preload("res://scenes/weapon/weapon_hitbox.tscn").instantiate() as Hitbox
 
@@ -297,3 +320,11 @@ func _spawn_hitbox() -> void:
 func _on_hitbox_hit(target_body: Node3D) -> void:
 	if target_body.has_method("receive_hit"):
 		target_body.receive_hit(stats.get_damage())
+
+
+## Keeps the body still when an animation's frames sit differently in their canvas.
+func _process(_delta: float) -> void:
+	var shift: Vector2 = animation_offsets.get(sprite.animation, Vector2.ZERO)
+	if sprite.flip_h:
+		shift.x = -shift.x
+	sprite.offset = _base_offset + shift

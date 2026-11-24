@@ -1,37 +1,14 @@
 [gd_scene format=3 uid="uid://cyoq8xehvpyji"]
 
 [ext_resource type="Script" uid="uid://druygkaqa6nmn" path="res://scripts/ui/player_hud.gd" id="1_e6e0b"]
+[ext_resource type="Texture2D" path="res://textures/ui/residue_indicator.png" id="2_ring"]
+[ext_resource type="Texture2D" path="res://textures/ui/Hero_Health_Bar_bg.png" id="3_bar_bg"]
+[ext_resource type="Texture2D" path="res://textures/ui/Hero_Health_Bar.png" id="4_bar"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="5_placeholder"]
+[ext_resource type="FontFile" path="res://fonts/IMFellGreatPrimerSC-Regular.ttf" id="f_title"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-content_margin_left = 20.0
-content_margin_top = 16.0
-content_margin_right = 20.0
-content_margin_bottom = 16.0
-bg_color = Color(0.08, 0.08, 0.09, 0.85)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.78, 0.66, 0.38, 0.9)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
-bg_color = Color(0.05, 0.05, 0.06, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.78, 0.66, 0.38, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_health_fill"]
-bg_color = Color(0.55, 0.75, 0.45, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_charge_bg"]
+bg_color = Color(0.12, 0.09, 0.07, 0.85)
 corner_radius_top_left = 3
 corner_radius_top_right = 3
 corner_radius_bottom_right = 3
@@ -48,59 +25,112 @@ corner_radius_bottom_left = 3
 [node name="PlayerHUD" type="CanvasLayer" unique_id=1921822603]
 script = ExtResource("1_e6e0b")
 
-[node name="Panel" type="PanelContainer" parent="."]
+[node name="Panel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_left = 24.0
-offset_top = 24.0
-offset_right = 404.0
-offset_bottom = 120.0
-custom_minimum_size = Vector2(380, 0)
+offset_top = 20.0
+offset_right = 680.0
+offset_bottom = 240.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
-[node name="Content" type="VBoxContainer" parent="Panel"]
-layout_mode = 2
+[node name="HealthBar" type="TextureProgressBar" parent="Panel"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 45.0
+offset_right = 610.0
+offset_bottom = 115.0
 mouse_filter = 2
-theme_override_constants/separation = 10
-
-[node name="HealthBar" type="ProgressBar" parent="Panel/Content" unique_id=376333451]
-custom_minimum_size = Vector2(0, 32)
-layout_mode = 2
-mouse_filter = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
-theme_override_styles/fill = SubResource("StyleBoxFlat_health_fill")
 max_value = 200.0
 value = 120.0
-show_percentage = false
+nine_patch_stretch = true
+texture_under = ExtResource("3_bar_bg")
+texture_progress = ExtResource("4_bar")
+texture_progress_offset = Vector2(3, 2)
 
-[node name="HealthLabel" type="Label" parent="Panel/Content/HealthBar" unique_id=859944961]
+[node name="HealthLabel" type="Label" parent="Panel/HealthBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 76.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.95, 0.95, 0.92, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0.9)
-theme_override_constants/outline_size = 6
-theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.95, 0.93, 0.86, 1)
+theme_override_colors/font_outline_color = Color(0.16, 0.11, 0.07, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 30
 text = "120 / 200"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ChargeBar" type="ProgressBar" parent="Panel/Content" unique_id=1760903485]
-custom_minimum_size = Vector2(0, 16)
-layout_mode = 2
+[node name="ChargeBar" type="ProgressBar" parent="Panel"]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 121.0
+offset_right = 600.0
+offset_bottom = 131.0
 mouse_filter = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/background = SubResource("StyleBoxFlat_charge_bg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_charge_fill")
 value = 60.0
 show_percentage = false
 
-[node name="InfoLabel" type="Label" parent="Panel/Content" unique_id=1875521134]
+[node name="Ring" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 159.0
+mouse_filter = 2
+texture = ExtResource("2_ring")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Icon" type="TextureRect" parent="Panel/Ring"]
+modulate = Color(0.75, 0.5, 0.9, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -46.0
+offset_right = 28.0
+offset_bottom = 10.0
+mouse_filter = 2
+texture = ExtResource("5_placeholder")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ResidueCount" type="Label" parent="Panel/Ring"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 48.0
+pivot_offset = Vector2(50, 19)
+theme_override_fonts/font = ExtResource("f_title")
+theme_override_colors/font_color = Color(0.24, 0.15, 0.09, 1)
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InfoLabel" type="Label" parent="Panel"]
 visible = false
-layout_mode = 2
-theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
-theme_override_font_sizes/font_size = 24
+layout_mode = 0
+offset_left = 160.0
+offset_top = 126.0
+offset_right = 640.0
+offset_bottom = 226.0
+theme_override_colors/font_color = Color(0.95, 0.93, 0.86, 1)
+theme_override_colors/font_outline_color = Color(0.16, 0.11, 0.07, 1)
+theme_override_constants/outline_size = 7
+theme_override_font_sizes/font_size = 26
 text = "Max HP: 100
-Move Speed: 1x
-Residue: 1"
+Move Speed: 1x"

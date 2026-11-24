@@ -5,6 +5,9 @@ extends Interactable
 
 @export_range(0.0, 1.0) var restore_fraction := 0.5 # TUNE: share of missing HP restored
 @export var action_label := "Rest" # prompt verb, e.g. "Drink" at the pond
+@export var once_per_visit := false # on: usable once each time the room is entered (ponds); off: once per gauntlet
+
+var _used_here := false
 
 
 func _ready() -> void:
@@ -19,7 +22,7 @@ func _process(_delta: float) -> void:
 		return
 	var amount := _heal_amount()
 	prompt_label = "%s (+%d HP)" % [action_label, amount]
-	enabled = not CombatRunState.is_rest_used() and amount > 0
+	enabled = not _is_used() and amount > 0
 
 
 func _heal_amount() -> int:
@@ -31,7 +34,14 @@ func _heal_amount() -> int:
 
 func _on_interacted() -> void:
 	var amount := _heal_amount()
-	if CombatRunState.is_rest_used() or amount <= 0:
+	if _is_used() or amount <= 0:
 		return
-	CombatRunState.use_rest()
+	if once_per_visit:
+		_used_here = true
+	else:
+		CombatRunState.use_rest()
 	RunInventory.get_player().heal(amount)
+
+
+func _is_used() -> bool:
+	return _used_here if once_per_visit else CombatRunState.is_rest_used()

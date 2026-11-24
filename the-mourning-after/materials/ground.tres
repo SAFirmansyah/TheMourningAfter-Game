@@ -1,8 +1,11 @@
-[gd_resource type="ShaderMaterial" format=3]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bjs7uap1srsok"]
 
-[ext_resource type="Shader" path="res://shaders/ground.gdshader" id="1_shader"]
-[ext_resource type="Texture2D" path="res://textures/ground_noise.tres" id="2_noise"]
+[ext_resource type="Shader" uid="uid://c1s6kpuokatt1" path="res://shaders/ground.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" uid="uid://ccjrrxcuhjp88" path="res://textures/tile_stone_light.png" id="2_3c7dl"]
 
 [resource]
+render_priority = 0
 shader = ExtResource("1_shader")
-shader_parameter/albedo_texture = ExtResource("2_noise")
+shader_parameter/albedo_texture = ExtResource("2_3c7dl")
+shader_parameter/world_uv_scale = 0.1
+shader_parameter/stone_strength = 1.0

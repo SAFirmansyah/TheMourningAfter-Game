@@ -12,7 +12,7 @@ const MOB_CARD_SHADER := preload("res://shaders/mob_card.gdshader")
 @export var white_flash_time := 0.35 # TUNE: crit flash fade (s)
 @export var grey_tint := Color(0.55, 0.55, 0.6) # TUNE: stunned tint for cards without the mob shader (Perrin)
 
-var _card: Sprite3D
+var _card: SpriteBase3D
 var _base_modulate := Color.WHITE
 var _tween: Tween
 var _white_tween: Tween
@@ -20,7 +20,7 @@ var _material: ShaderMaterial
 var _greyed := false
 
 
-func watch(stats: Stats, card: Sprite3D) -> void:
+func watch(stats: Stats, card: SpriteBase3D) -> void:
 	if card == null:
 		return
 	_card = card
@@ -34,8 +34,20 @@ func enable_effects() -> void:
 		return
 	_material = ShaderMaterial.new()
 	_material.shader = MOB_CARD_SHADER
-	_material.set_shader_parameter(&"card_texture", _card.texture)
+	_update_card_texture()
+	if _card is AnimatedSprite3D:
+		(_card as AnimatedSprite3D).frame_changed.connect(_update_card_texture)
 	_card.material_override = _material
+	
+func _update_card_texture() -> void:
+	if _material == null:
+		return
+	if _card is AnimatedSprite3D:
+		var anim := _card as AnimatedSprite3D
+		if anim.sprite_frames and anim.sprite_frames.has_animation(anim.animation):
+			_material.set_shader_parameter(&"card_texture", anim.sprite_frames.get_frame_texture(anim.animation, anim.frame))
+	elif _card is Sprite3D:
+		_material.set_shader_parameter(&"card_texture", (_card as Sprite3D).texture)
 
 
 func flash() -> void:

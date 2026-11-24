@@ -113,7 +113,7 @@ func _sweep(damage: int, arc: float) -> void:
 
 
 func _basic() -> void:
-	busy = true
+	begin_attack()
 	use(&"basic", basic_cooldown)
 	await wait(basic_windup)
 	_sweep(basic_damage, basic_arc)
@@ -123,7 +123,7 @@ func _basic() -> void:
 
 ## Dash in, then a sweep twice as wide as the basic one.
 func _dash_attack() -> void:
-	busy = true
+	begin_attack()
 	use(&"dash", dash_cooldown)
 	announce("Dash!", DASH_COLOR)
 	await wait(dash_windup)

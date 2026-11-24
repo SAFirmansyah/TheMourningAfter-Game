@@ -21,7 +21,7 @@ const HIT_HEIGHT := 0.9 # Perrin's hurtbox centre (m)
 @export var start_delay := 1.5 # TUNE: pause after the room loads before the fight starts (s)
 @export var keep_distance := 1.2 # TUNE: stops closing in at this distance (m)
 
-@onready var card: Sprite3D = $Card
+@onready var card: AnimatedSprite3D = $Card
 @onready var hurtbox: Area3D = $HurtboxArea
 @onready var health_bar: BossHealthBar = $BossHealthBar
 @onready var status_label: Label3D = $StatusLabel
@@ -39,6 +39,7 @@ var invulnerable := false
 var speed_bonus := 0.0 # fraction added to move speed
 var damage_multiplier := 1.0
 var cooldowns := {} # move name -> seconds left
+var _stun_time_left := 0.0
 
 var _facing := Vector2.LEFT
 var _dash_velocity := Vector3.ZERO
@@ -109,11 +110,23 @@ func _physics_process(delta: float) -> void:
 			face(to)
 			walk = _think(to)
 		velocity = walk * move_speed()
+	if card and not busy:
+		card.play("walk" if (walk.length() > 0.01 or _dash_time_left > 0.0) else "idle")
 	move_and_slide()
 	if card and absf(_facing.x) > 0.1:
 		card.flip_h = _facing.x < 0.0
 
 
+func set_stats(new_stats: Stats) -> void:
+	stats = new_stats
+	stats.setup_stats()
+	stats.health_depleted.connect(_die)
+	stats.health_change.connect(func(cur: int, max_h: int) -> void:
+		if max_h > 0:
+			_on_health_fraction(float(cur) / max_h))
+	_damage_flash.watch(stats, card)
+	health_bar.bind(self)
+	get_node("HurtboxArea").refresh_layer()
 # --- Overridden by each boss ---------------------------------------------------------------------
 
 ## Picks the next move (start one as a coroutine, without awaiting) or returns a walk direction.
@@ -192,6 +205,12 @@ func dash_toward(direction: Vector3, distance: float, speed: float) -> void:
 	_dash_time_left = 0.0
 
 
+func begin_attack() -> void:
+	busy = true
+	if card:
+		card.play("attack")
+		
+
 ## Spawns one attack's hitboxes at offsets from the boss (on the floor plane). Hits Perrin once at most.
 func strike(offsets: Array[Vector3], damage: int, radius: float, lifetime := 0.15) -> void:
 	var log := HitLog.new()
@@ -234,6 +253,16 @@ func line_offsets(start: float, reach: float, count: int) -> Array[Vector3]:
 		points.append(forward() * lerpf(start, reach, 0.0 if count == 1 else float(i) / (count - 1)))
 	return points
 
+
+func apply_stun(duration: float) -> void:
+	_stun_time_left = maxf(_stun_time_left, duration)
+
+func clear_stun() -> void:
+	_stun_time_left = 0.0
+
+func is_stunned() -> bool:
+	return _stun_time_left > 0.0
+	
 
 ## True when Perrin is within `reach` and inside a cone of `arc_degrees` around the boss's facing.
 func in_arc(arc_degrees: float, reach: float) -> bool:

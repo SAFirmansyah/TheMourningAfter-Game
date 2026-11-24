@@ -11,22 +11,22 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
 material = ExtResource("2_ground")
-size = Vector2(16, 16)
+size = Vector2(11.3, 11.3)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_North"]
-size = Vector3(16.40, 2, 0.40)
+size = Vector3(11.5825, 2, 0.4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_South"]
-size = Vector3(16.40, 2, 0.40)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_WestUpper"]
-size = Vector3(0.40, 2, 6.40)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_WestLower"]
-size = Vector3(0.40, 2, 6.40)
+size = Vector3(11.5825, 2, 0.4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_East"]
-size = Vector3(0.40, 2, 16.40)
+size = Vector3(0.4, 2, 11.5825)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fit_WestUpper"]
+size = Vector3(0.4, 2, 3.9912)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fit_WestLower"]
+size = Vector3(0.4, 2, 3.9912)
 
 [node name="Altar" type="Node3D"]
 script = ExtResource("1_room")
@@ -40,72 +40,72 @@ mesh = SubResource("PlaneMesh_floor")
 [node name="Walls" type="StaticBody3D" parent="."]
 
 [node name="North" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -8.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5.65)
 shape = SubResource("BoxShape3D_North")
 
 [node name="South" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 8.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5.65)
 shape = SubResource("BoxShape3D_South")
 
 [node name="WestUpper" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 1, -5.0)
-shape = SubResource("BoxShape3D_WestUpper")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.65, 1, -3.7956)
+shape = SubResource("BoxShape3D_fit_WestUpper")
 
 [node name="WestLower" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.0, 1, 5.0)
-shape = SubResource("BoxShape3D_WestLower")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.65, 1, 3.7956)
+shape = SubResource("BoxShape3D_fit_WestLower")
 
 [node name="East" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.65, 1, 0)
 shape = SubResource("BoxShape3D_East")
 
 [node name="West" parent="." instance=ExtResource("3_exit")]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -8.0, 0, 0)
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -5.65, 0, 0)
 target_room = "res://scenes/huyana/sanctuary.tscn"
 target_entry = &"East"
 
 [node name="Stage" type="Node3D" parent="."]
 
 [node name="SonPortrait" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0, -4.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8475, 0, -3.1075)
 
 [node name="Podium" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -4.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2825, 0, -3.2487)
 
 [node name="Exit" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4, 0, 0.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2263, 0, 0)
 
 [node name="ArchiSpot" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -4.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1781, 0, -2.825)
 
 [node name="SeiraSpot" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0, 0, -2.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1188, 0, -1.8363)
 
 [node name="KanoSpot" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, -2.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9888, 0, -1.4125)
 
 [node name="ShuyiSpot" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0, -2.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9888, 0, -1.4125)
 
 [node name="RudramaSpot" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, 0, -2.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1188, 0, -1.8363)
 
 [node name="GwenithSpot" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -4.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.1781, 0, -2.825)
 
 [node name="Props" type="Node3D" parent="."]
 
 [node name="Podium" parent="Props" instance=ExtResource("4_podium")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.52)
 
 [node name="Bookshelf" parent="Props" instance=ExtResource("5_shelf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4, 0, -6.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.52, 0, -4.2375)
 
 [node name="WritingTable" parent="Props" instance=ExtResource("6_writing")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6, 0, 6.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6612, 0, 4.6612)
 
 [node name="Chair" parent="Props" instance=ExtResource("7_chair")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3, 0, -5.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4494, 0, -4.0963)
 
 [node name="FortuneTable" parent="Props" instance=ExtResource("8_fortune")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3, 0, 6.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.1, 0, 4.6612)

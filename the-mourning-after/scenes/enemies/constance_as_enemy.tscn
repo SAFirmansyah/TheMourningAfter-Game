@@ -1,0 +1,144 @@
+[gd_scene format=3 uid="uid://dd83vwxevu5ai"]
+
+[ext_resource type="Script" uid="uid://b1nluray262k7" path="res://scripts/enemies/constance_as_enemy.gd" id="1_8tutq"]
+[ext_resource type="Texture2D" uid="uid://cule3s7g3s75g" path="res://textures/constance/constance_idle/constance_idle_00000.png" id="2_hyjaq"]
+[ext_resource type="Texture2D" uid="uid://pu4yb266wrv3" path="res://textures/constance/constance_idle/constance_idle_00001.png" id="3_0vh3e"]
+[ext_resource type="Texture2D" uid="uid://hk7krksevyki" path="res://textures/constance/constance_idle/constance_idle_00002.png" id="4_0qu6a"]
+[ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="4_hco53"]
+[ext_resource type="Texture2D" uid="uid://b4bp8sb8i6oha" path="res://textures/constance/constance_idle/constance_idle_00003.png" id="5_fs74w"]
+[ext_resource type="Texture2D" uid="uid://c3auwf22xwf4" path="res://textures/constance/constance_idle/constance_idle_00004.png" id="6_md62a"]
+[ext_resource type="Texture2D" uid="uid://btafpmr1l4unm" path="res://textures/constance/constance_idle/constance_idle_00005.png" id="7_fvvjd"]
+[ext_resource type="Texture2D" uid="uid://bdmynrs4wyw5c" path="res://textures/constance/constance_idle/constance_idle_00006.png" id="8_6xb0d"]
+[ext_resource type="Texture2D" uid="uid://dojheoeq7m7i8" path="res://textures/constance/constance_idle/constance_idle_00007.png" id="9_62wq0"]
+[ext_resource type="Texture2D" uid="uid://boeefe4jm2ita" path="res://textures/constance/constance_idle/constance_idle_00008.png" id="10_irl4b"]
+[ext_resource type="Texture2D" uid="uid://dun3spmi0y6gv" path="res://textures/constance/constance_idle/constance_idle_00009.png" id="11_3jq5o"]
+[ext_resource type="Texture2D" uid="uid://bbk3082fakw8f" path="res://textures/constance/constance_idle/constance_idle_00010.png" id="12_l3s37"]
+[ext_resource type="Texture2D" uid="uid://b3odewdp33nnw" path="res://textures/constance/constance_idle/constance_idle_00011.png" id="13_8w8gl"]
+[ext_resource type="Texture2D" uid="uid://4iaredfuaesm" path="res://textures/constance/constance_walk/constance_walk_00000.png" id="14_3eq7d"]
+[ext_resource type="Texture2D" uid="uid://chnoj6jruo0ys" path="res://textures/constance/constance_walk/constance_walk_00001.png" id="15_pjxq1"]
+[ext_resource type="Texture2D" uid="uid://dcls4a6l7pu84" path="res://textures/constance/constance_walk/constance_walk_00002.png" id="16_j70o6"]
+[ext_resource type="Texture2D" uid="uid://b4jhcmep8c77e" path="res://textures/constance/constance_walk/constance_walk_00003.png" id="17_q8kwi"]
+[ext_resource type="Texture2D" uid="uid://c1gr0q5vrff1e" path="res://textures/constance/constance_walk/constance_walk_00004.png" id="18_o7uix"]
+[ext_resource type="Texture2D" uid="uid://csmjlu4ffqwk7" path="res://textures/constance/constance_walk/constance_walk_00005.png" id="19_ds675"]
+[ext_resource type="Texture2D" uid="uid://dr5bhytrq8ynk" path="res://textures/constance/constance_walk/constance_walk_00006.png" id="20_j8voy"]
+[ext_resource type="Texture2D" uid="uid://rfmwktnf06kt" path="res://textures/constance/constance_walk/constance_walk_00007.png" id="21_72npw"]
+[ext_resource type="Texture2D" uid="uid://dl02cernslqcr" path="res://textures/constance/constance_walk/constance_walk_00008.png" id="22_cefrf"]
+[ext_resource type="Texture2D" uid="uid://4d78jnskvonc" path="res://textures/constance/constance_walk/constance_walk_00009.png" id="23_rhowa"]
+[ext_resource type="Texture2D" uid="uid://bh8mqk70immkh" path="res://textures/constance/constance_walk/constance_walk_00010.png" id="24_0nkkm"]
+[ext_resource type="Texture2D" uid="uid://dtxvfa5ogbnji" path="res://textures/constance/constance_walk/constance_walk_00011.png" id="25_4k0dj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rfefn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hyjaq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0vh3e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0qu6a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_fs74w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_md62a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fvvjd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6xb0d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_62wq0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_irl4b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_3jq5o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_l3s37")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_8w8gl")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_3eq7d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_pjxq1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_j70o6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_q8kwi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_o7uix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_ds675")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_j8voy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_72npw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_cefrf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_rhowa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_0nkkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_4k0dj")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dlvkj"]
+radius = 0.35
+height = 1.65
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u2o0r"]
+radius = 0.35
+height = 1.65
+
+[node name="ConstanceAsEnemy" type="CharacterBody3D" unique_id=200868823]
+script = ExtResource("1_8tutq")
+
+[node name="Card" type="AnimatedSprite3D" parent="." unique_id=969756039]
+process_physics_priority = 20
+transform = Transform3D(-0.095, 0, -8.305164e-09, 0, 0.095, 0, 8.305164e-09, 0, -0.095, 0, 0.9, 0)
+offset = Vector2(0, 64)
+pixel_size = 0.014
+alpha_cut = 1
+sprite_frames = SubResource("SpriteFrames_rfefn")
+animation = &"walk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=425341997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_dlvkj")
+
+[node name="PlayerHurtBox" type="Area3D" parent="." unique_id=525711067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+script = ExtResource("4_hco53")
+
+[node name="CollisionHurtBox" type="CollisionShape3D" parent="PlayerHurtBox" unique_id=798154711]
+shape = SubResource("CapsuleShape3D_u2o0r")

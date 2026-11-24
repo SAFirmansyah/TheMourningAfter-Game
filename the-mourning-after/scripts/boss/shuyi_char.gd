@@ -113,7 +113,7 @@ func _stab(damage: int) -> void:
 
 
 func _basic() -> void:
-	busy = true
+	begin_attack()
 	use(&"basic", basic_cooldown)
 	await wait(basic_windup)
 	_stab(basic_damage)
@@ -121,7 +121,7 @@ func _basic() -> void:
 
 
 func _dash_attack() -> void:
-	busy = true
+	begin_attack()
 	use(&"dash", dash_cooldown)
 	announce("Dash!", DASH_COLOR)
 	await wait(dash_windup)

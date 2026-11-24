@@ -26,6 +26,7 @@ var has_boss_bargained := false
 var boss_cleared := false
 var free_boss_bargains := false # Start from (testing): boss re-rolls are free and unlimited this run
 
+var defeated_boss_name := ""
 var _remaining_boss_pool: Array[String] = []
 
 var chosen_boss_path: String:
@@ -39,6 +40,7 @@ func reset_campaign() -> void:
 	chosen_boss = ""
 	has_boss_bargained = false
 	boss_cleared = false
+	defeated_boss_name = ""
 	_remaining_boss_pool.clear()
 
 
@@ -60,7 +62,7 @@ func start_boss_selection() -> void:
 		return # already chosen — don't reroll on repeat visits to the chamber
 	_remaining_boss_pool.assign(boss_rooms.keys())
 	_remaining_boss_pool.shuffle()
-	if fate2_forced_pending():
+	if _is_first_ever_boss_visit():
 		_remaining_boss_pool.erase(first_boss_shown)
 		chosen_boss = first_boss_shown
 	else:
@@ -69,24 +71,31 @@ func start_boss_selection() -> void:
 
 
 ## Fresh save only: the first time Perrin reaches the boss chamber, Fate 2 must be bargained with.
+## Every run: the first time Perrin reaches the boss chamber, the re-roll is forced if he can afford it.
+## (Previously only forced on a fresh save; now applies to the first visit of every run.)
 func fate2_forced_pending() -> bool:
-	return not RunInventory.has_reached_boss and not has_boss_bargained
+	return not has_boss_bargained and RunInventory.can_afford(boss_bargain_cost)
+
+
+## True only on the player's very first-ever visit to a boss chamber (fresh save) — controls the
+## scripted Rudrama-then-swap-to-Shuyi opener, independent of whether THIS run's bargain was forced.
+func _is_first_ever_boss_visit() -> bool:
+	return not RunInventory.has_reached_boss
 
 
 func can_bargain_boss() -> bool:
 	if free_boss_bargains:
 		return chosen_boss != "" and not boss_cleared
-	return chosen_boss != "" and not has_boss_bargained and (RunInventory.can_afford(boss_bargain_cost) or fate2_forced_pending())
+	return chosen_boss != "" and not has_boss_bargained and RunInventory.can_afford(boss_bargain_cost)
 
 
 func bargain_boss() -> bool:
 	if not can_bargain_boss():
 		return false
-	var forced := fate2_forced_pending()
 	if not free_boss_bargains:
-		RunInventory.spend(boss_bargain_cost) # never below 0, so the forced bargain never strands Perrin
+		RunInventory.spend(boss_bargain_cost) # never below 0
 	has_boss_bargained = true
-	if forced:
+	if _is_first_ever_boss_visit():
 		RunInventory.has_reached_boss = true
 		chosen_boss = first_boss_fought
 	else:
@@ -119,3 +128,7 @@ func load_state(state: Dictionary) -> void:
 	has_boss_bargained = state.get("has_boss_bargained", false)
 	boss_cleared = state.get("boss_cleared", false)
 	_remaining_boss_pool.assign(state.get("remaining_boss_pool", []))
+	
+	
+func mark_boss_defeated(boss_name: String) -> void:
+	defeated_boss_name = boss_name

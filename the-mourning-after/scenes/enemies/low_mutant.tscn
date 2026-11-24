@@ -1,15 +1,135 @@
 [gd_scene format=3 uid="uid://dwl4exhk82y7p"]
 
 [ext_resource type="Script" uid="uid://dsabkrdimbjiq" path="res://scripts/enemies/mutants.gd" id="1_w71w8"]
-[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="2_m2su8"]
-[ext_resource type="Resource" uid="uid://d3ilrgaxx0fve" path="res://scripts/stats/low_mutant_stats.tres" id="2_mxl8y"]
+[ext_resource type="Resource" uid="uid://dufd88e1ost1r" path="res://scripts/stats/big_mutant_stats.tres" id="2_8gpck"]
 [ext_resource type="Script" uid="uid://boygl2hxayimj" path="res://scripts/loot/loot_data.gd" id="3_lh2w7"]
 [ext_resource type="Resource" uid="uid://da1rcp5236rtr" path="res://scripts/loot/loot_2x_dash.tres" id="4_40sm3"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="4_mxl8y"]
 [ext_resource type="Resource" uid="uid://c3vnvs1am64e2" path="res://scripts/loot/loot_dmg_reduction.tres" id="5_8gpck"]
 [ext_resource type="Resource" uid="uid://ccmhq5rc8u5g7" path="res://scripts/loot/loot_residue.tres" id="6_7jj0p"]
 [ext_resource type="Resource" uid="uid://dcob8m1oig70a" path="res://scripts/loot/loot_health.tres" id="7_hp"]
-[ext_resource type="Script" path="res://scripts/ui/mob_health_bar.gd" id="9_hpbar"]
+[ext_resource type="Texture2D" uid="uid://w3mqg6x48i0k" path="res://textures/mobs/mutant_attack/mutant_attack_00000.png" id="8_v1i8m"]
+[ext_resource type="Script" uid="uid://d2themr4ood1v" path="res://scripts/ui/mob_health_bar.gd" id="9_hpbar"]
+[ext_resource type="Texture2D" uid="uid://cg22o8dwrng2m" path="res://textures/mobs/mutant_attack/mutant_attack_00001.png" id="9_t2otr"]
+[ext_resource type="Texture2D" uid="uid://cremirrsexr3o" path="res://textures/mobs/mutant_attack/mutant_attack_00002.png" id="10_qoelu"]
+[ext_resource type="Texture2D" uid="uid://bx8wjs7ml3cu3" path="res://textures/mobs/mutant_attack/mutant_attack_00003.png" id="11_uvr7q"]
+[ext_resource type="Texture2D" uid="uid://dsaniwfaq8upq" path="res://textures/mobs/mutant_attack/mutant_attack_00004.png" id="12_fsedd"]
+[ext_resource type="Texture2D" uid="uid://wd7o6kwxueej" path="res://textures/mobs/mutant_attack/mutant_attack_00005.png" id="13_nlxbi"]
+[ext_resource type="Texture2D" uid="uid://bf6eeunpatu5m" path="res://textures/mobs/mutant_attack/mutant_attack_00006.png" id="14_mnu7a"]
+[ext_resource type="Texture2D" uid="uid://0aeselmc5jdv" path="res://textures/mobs/mutant_attack/mutant_attack_00007.png" id="15_mt6vi"]
+[ext_resource type="Texture2D" uid="uid://cr5abk6pp24pn" path="res://textures/mobs/mutant_attack/mutant_attack_00008.png" id="16_pbpht"]
+[ext_resource type="Texture2D" uid="uid://cva361p57d7de" path="res://textures/mobs/mutant_attack/mutant_attack_00009.png" id="17_m728t"]
+[ext_resource type="Texture2D" uid="uid://c3iv2i70qhgit" path="res://textures/mobs/mutant_attack/mutant_attack_00010.png" id="18_huh3r"]
+[ext_resource type="Texture2D" uid="uid://0xm7vg5o8rk8" path="res://textures/mobs/mutant_attack/mutant_attack_00011.png" id="19_aa3k8"]
+[ext_resource type="Texture2D" uid="uid://bjuujkduh34ay" path="res://textures/mobs/mutant_attack/mutant_attack_00012.png" id="20_r32hd"]
+[ext_resource type="Texture2D" uid="uid://do7kwxrwmlga6" path="res://textures/mobs/mutant_attack/mutant_attack_00013.png" id="21_1fli2"]
+[ext_resource type="Texture2D" uid="uid://2t7ws145w67c" path="res://textures/mobs/mutant_attack/mutant_attack_00014.png" id="22_ppckt"]
+[ext_resource type="Texture2D" uid="uid://cvytxta3wksxx" path="res://textures/mobs/mutant_attack/mutant_attack_00015.png" id="23_4mom2"]
+[ext_resource type="Texture2D" uid="uid://dkbgpaxknhksp" path="res://textures/mobs/mutant_attack/mutant_attack_00016.png" id="24_x337e"]
+[ext_resource type="Texture2D" uid="uid://b3g2fmjcf7vuy" path="res://textures/mobs/mutant_attack/mutant_attack_00017.png" id="25_i33i2"]
+[ext_resource type="Texture2D" uid="uid://d3tpf1ccrmnt2" path="res://textures/mobs/mutant_walk/mutant_walk_00004.png" id="26_bma7r"]
+[ext_resource type="Texture2D" uid="uid://bipov6mbp8djm" path="res://textures/mobs/mutant_walk/mutant_walk_00005.png" id="27_cgenx"]
+[ext_resource type="Texture2D" uid="uid://be2bn80l3i4i2" path="res://textures/mobs/mutant_walk/mutant_walk_00006.png" id="28_uuo7g"]
+[ext_resource type="Texture2D" uid="uid://dulvvbkubllkx" path="res://textures/mobs/mutant_walk/mutant_walk_00007.png" id="29_rhc3c"]
+[ext_resource type="Texture2D" uid="uid://bojen083pf1l8" path="res://textures/mobs/mutant_walk/mutant_walk_00010.png" id="30_dol21"]
+[ext_resource type="Texture2D" uid="uid://caqox40lbm14t" path="res://textures/mobs/mutant_walk/mutant_walk_00011.png" id="31_l53c5"]
+[ext_resource type="Texture2D" uid="uid://cub86a3ru8wdb" path="res://textures/mobs/mutant_walk/mutant_walk_00012.png" id="32_qnwq3"]
+[ext_resource type="Texture2D" uid="uid://b7tbvg7fevofc" path="res://textures/mobs/mutant_walk/mutant_walk_00013.png" id="33_m5duw"]
+[ext_resource type="Texture2D" uid="uid://8yags8h78he5" path="res://textures/mobs/mutant_walk/mutant_walk_00014.png" id="34_sdwk1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jhy0a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_v1i8m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_t2otr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qoelu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_uvr7q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_fsedd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_nlxbi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_mnu7a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_mt6vi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_pbpht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_m728t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_huh3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_aa3k8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_r32hd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_1fli2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ppckt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_4mom2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_x337e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_i33i2")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_bma7r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_cgenx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_uuo7g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_rhc3c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_dol21")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_l53c5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_qnwq3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_m5duw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_sdwk1")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 18.0
+}]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vlovs"]
 radius = 0.55
@@ -17,10 +137,8 @@ height = 2.6
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jhy0a"]
 radius = 0.55
-height = 2.0
 
 [sub_resource type="Gradient" id="Gradient_bar"]
-offsets = PackedFloat32Array(0, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bar"]
@@ -33,7 +151,7 @@ collision_layer = 8
 collision_mask = 151
 motion_mode = 1
 script = ExtResource("1_w71w8")
-stats = ExtResource("2_mxl8y")
+stats = ExtResource("2_8gpck")
 base_move_speed = 1.0
 attack_reach = 0.7
 attack_cooldown = 1.5
@@ -41,11 +159,12 @@ attack_range = 1.5
 loot_pool = Array[ExtResource("3_lh2w7")]([ExtResource("4_40sm3"), ExtResource("6_7jj0p"), ExtResource("5_8gpck"), ExtResource("7_hp")])
 metadata/_custom_type_script = "uid://dnbf3vat68acm"
 
-[node name="Card" type="Sprite3D" parent="." unique_id=1358649332]
-modulate = Color(0.75, 0.45, 0.95, 1)
-pixel_size = 0.02
+[node name="Card" type="AnimatedSprite3D" parent="." unique_id=343223806]
+transform = Transform3D(-0.08, 0, -6.993822e-09, 0, 0.08, 0, 6.993822e-09, 0, -0.08, 0, 1.7, 0)
 offset = Vector2(0, 64)
-texture = ExtResource("2_m2su8")
+pixel_size = 0.02
+sprite_frames = SubResource("SpriteFrames_jhy0a")
+animation = &"attack"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=936884657]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
@@ -58,35 +177,35 @@ script = ExtResource("4_mxl8y")
 [node name="CollisionHurtBox" type="CollisionShape3D" parent="LowMutantHurtBox" unique_id=1732531385]
 shape = SubResource("CapsuleShape3D_jhy0a")
 
-[node name="HealthBar" type="Node3D" parent="."]
+[node name="HealthBar" type="Node3D" parent="." unique_id=2050300236]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.85, 0)
 script = ExtResource("9_hpbar")
 
-[node name="Back" type="Sprite3D" parent="HealthBar"]
+[node name="Back" type="Sprite3D" parent="HealthBar" unique_id=1276490789]
+centered = false
+offset = Vector2(-34, -5)
 modulate = Color(0.08, 0.08, 0.09, 0.85)
 pixel_size = 0.016
 billboard = 1
 no_depth_test = true
-centered = false
-offset = Vector2(-34, -5)
+texture = SubResource("GradientTexture2D_bar")
 region_enabled = true
 region_rect = Rect2(0, 0, 68, 10)
-texture = SubResource("GradientTexture2D_bar")
 
-[node name="Fill" type="Sprite3D" parent="HealthBar"]
+[node name="Fill" type="Sprite3D" parent="HealthBar" unique_id=1253305610]
+centered = false
+offset = Vector2(-32, -3)
 modulate = Color(0.85, 0.25, 0.22, 1)
-render_priority = 1
 pixel_size = 0.016
 billboard = 1
 no_depth_test = true
-centered = false
-offset = Vector2(-32, -3)
+render_priority = 1
+texture = SubResource("GradientTexture2D_bar")
 region_enabled = true
 region_rect = Rect2(0, 0, 64, 6)
-texture = SubResource("GradientTexture2D_bar")
 
-[node name="Alert" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.30, 0)
+[node name="Alert" type="Label3D" parent="." unique_id=165074769]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.3, 0)
 billboard = 1
 no_depth_test = true
 render_priority = 2

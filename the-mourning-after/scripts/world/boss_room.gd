@@ -38,9 +38,17 @@ func clear_boss() -> void:
 	if CampaignState.boss_cleared:
 		return
 	CampaignState.boss_cleared = true
+	CampaignState.mark_boss_defeated(_boss_name())
 	CombatRunState.start_next_gauntlet()
 	var exit := get_exit(route_exit_name)
 	if exit:
 		exit.target_room = CombatRunState.pick_next_room_path()
 		exit.target_entry = &"WestExit"
 	boss_defeated.emit()
+
+
+func _boss_name() -> String:
+	var boss := _find_boss()
+	if boss == null:
+		return ""
+	return boss.get_class() if boss.get_script() == null else boss.get_script().get_global_name()

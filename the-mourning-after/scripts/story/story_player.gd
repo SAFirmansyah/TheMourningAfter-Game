@@ -10,7 +10,7 @@ extends Node
 ##   @walk WHO MARK  (waits)            @move WHO MARK  (doesn't wait)      @settle  (waits for moves)
 ##   @show WHO MARK                      @hide WHO...                         @exit WHO...  (walk out, vanish)
 ##   @pan MARK | back                    @night                               @wait SECONDS
-## WHO is constance, gwenith, shuyi, rudrama, archi, seira or kano. Characters missing from the room
+## WHO is the protagonist (constance / perrin), gwenith, shuyi, rudrama, archi, seira or kano. Characters missing from the room
 ## appear as placeholder cards.
 
 const TEXT_SCENE := preload("res://scenes/story/story_text.tscn")
@@ -19,6 +19,7 @@ const PORTRAIT_DIR := "res://textures/portraits/"
 const ROOMS := {
 	"altar": "res://scenes/huyana/altar.tscn",
 	"sanctuary": "res://scenes/huyana/sanctuary.tscn",
+	"base": "res://scenes/rooms/room_a.tscn",
 }
 const CAST_TINTS := { # placeholder card colours in the world until the character art exists
 	"constance": Color(0.72, 0.5, 0.95),
@@ -160,7 +161,7 @@ func _end() -> void:
 func _line(step: Dictionary, has_more := false) -> void:
 	var key: String = step.speaker.replace(",", "")
 	var off_screen: bool = step.variant.begins_with("out of sight")
-	var left := key == "constance"
+	var left := key == protagonist() # the side being played sits on the left
 	world.hud.story_line(_display_name(step.speaker), key, left, portrait(key, step.variant), step.text, not off_screen, has_more)
 	while is_inside_tree() and not world.hud.story_line_done() and not _skipping:
 		await get_tree().process_frame
@@ -277,6 +278,7 @@ func _walk(who: String, mark_name: String, vanish := false) -> void:
 	if _skipping or distance < 0.05:
 		actor.global_position = target
 	else:
+		_animate(actor, &"walk")
 		var tween := actor.create_tween()
 		tween.tween_property(actor, "global_position", target, distance / walk_speed)
 		while tween.is_running() and not _skipping and is_inside_tree():
@@ -284,6 +286,8 @@ func _walk(who: String, mark_name: String, vanish := false) -> void:
 		if _skipping:
 			tween.kill()
 			actor.global_position = target
+		if is_instance_valid(actor):
+			_animate(actor, &"idle")
 	if vanish:
 		_hide(who)
 
@@ -321,8 +325,14 @@ func _wait(seconds: float) -> void:
 
 # --- Cast and marks ------------------------------------------------------------------------------
 
+## Whoever is being played: Perrin on the hero side, Constance on the villain side. Their lines
+## sit on the left and their name moves the player.
+func protagonist() -> String:
+	return "perrin" if world and world.is_hero_side() else "constance"
+
+
 func _actor(who: String) -> Node3D:
-	if who == "constance":
+	if who == protagonist():
 		return world.player
 	if _spawned.has(who) and is_instance_valid(_spawned[who]):
 		return _spawned[who]
@@ -370,8 +380,17 @@ func _mark(mark_name: String) -> Node3D:
 	return mark
 
 
+## Animated cards (Constance) walk while a scene moves them; plain cards just slide.
+func _animate(actor: Node3D, animation: StringName) -> void:
+	var card := actor.get_node_or_null(^"Card") as AnimatedSprite3D
+	if card and card.sprite_frames and card.sprite_frames.has_animation(animation):
+		card.play(animation)
+	if actor is Player:
+		(actor as Player).animation_held = animation != &"idle"
+
+
 func _face(actor: Node3D, direction: Vector3) -> void:
-	var card := actor.get_node_or_null(^"Card") as Sprite3D
+	var card := actor.get_node_or_null(^"Card") as SpriteBase3D # Sprite3D cards and Constance's animated one
 	if card and absf(direction.x) > 0.05:
 		card.flip_h = direction.x < 0.0
 

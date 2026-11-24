@@ -15,8 +15,14 @@ signal all_enemies_defeated
 @export var wall_clearance := 0.6 # TUNE: minimum distance from walls (m)
 @export var spawn_max_attempts := 40 # TUNE: random tries per position before giving up
 
-var low_enemy_scn: PackedScene = load("res://scenes/enemies/low_mutant.tscn")
-var big_enemy_scn: PackedScene = load("res://scenes/enemies/deformed_humans.tscn")
+@export_group("Grass")
+@export var grass_scn: PackedScene = load("res://scenes/world/grass.tscn")
+@export var grass_textures: Array[Texture2D] = [] # fill with all 20 variants in the inspector
+@export var grass_spacing := 0.75 # TUNE: average distance between grass cards (m); bigger = sparser
+
+var big_enemy_scn: PackedScene = load("res://scenes/enemies/low_mutant.tscn")
+var low_enemy_scn2: PackedScene = load("res://scenes/enemies/deformed_humans_2.tscn")
+var low_enemy_scn: PackedScene = load("res://scenes/enemies/deformed_humans.tscn")
 
 var is_cleared := false
 
@@ -32,9 +38,10 @@ func _ready() -> void:
 			exit.set_blocked(false)
 	)
 	if restoring:
-		is_cleared = true # only cleared combat rooms are ever saved; the world restores exit targets
+		is_cleared = true
 		return
 	spawn_enemies()
+	spawn_grass()
 	_configure_next_exit()
 	for exit in get_exits():
 		exit.set_blocked(true)
@@ -56,15 +63,25 @@ func _configure_next_exit() -> void:
 		exit.target_room = CampaignState.get_post_gauntlet_room_path()	 # adjust to your actual cooldown room path
 
 
+## Scatters decorative grass semi-evenly over the room's floor and the start of its paths.
+## Purely visual: no collision.
+func spawn_grass() -> void:
+	if grass_scn == null or grass_textures.is_empty():
+		return
+	GrassScatter.scatter_room(self, self, grass_scn, grass_textures, _rng, grass_spacing)
+
+
 ## Mobs spawn in clusters (plus the odd loner) at random spots away from the exits,
 ## so every visit to a room lays them out differently.
 func spawn_enemies() -> void:
 	var mobs := CombatRunState.roll_room_mobs()
-	print("room weight ", snappedf(CombatRunState.current_room_weight(), 0.01), ": ", mobs.x, " low mutants, ", mobs.y, " deformed humans")
+	print("room weight ", snappedf(CombatRunState.current_room_weight(), 0.01), ": ", mobs.x, " deformed humans, ", mobs.y, " deformed humans 2, ", mobs.z, " low mutants")
 	var queue: Array[PackedScene] = []
 	for i in mobs.x:
 		queue.append(low_enemy_scn)
 	for i in mobs.y:
+		queue.append(low_enemy_scn2)
+	for i in mobs.z:
 		queue.append(big_enemy_scn)
 	queue.shuffle()
 

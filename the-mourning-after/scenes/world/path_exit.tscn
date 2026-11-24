@@ -1,14 +1,14 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://764k273fks56"]
 
-[ext_resource type="Script" path="res://scripts/world/path_exit.gd" id="1_exit"]
-[ext_resource type="Material" path="res://materials/ground_path_fade.tres" id="2_fade"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_path"]
-material = ExtResource("2_fade")
-size = Vector2(6, 4)
+[ext_resource type="Script" uid="uid://dehwhg0tnq675" path="res://scripts/world/path_exit.gd" id="1_exit"]
+[ext_resource type="Material" uid="uid://cc3gcb2s5js71" path="res://materials/ground_path_fade.tres" id="2_path_mat"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_trigger"]
 size = Vector3(1.5, 2, 4)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_path"]
+material = ExtResource("2_path_mat")
+size = Vector2(6, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_side"]
 size = Vector3(6.4, 2, 0.4)
@@ -22,44 +22,44 @@ size = Vector3(6.4, 0.1, 4.4)
 [sub_resource type="BoxShape3D" id="BoxShape3D_mob_barrier"]
 size = Vector3(0.4, 2, 4.4)
 
-[node name="PathExit" type="Area3D"]
+[node name="PathExit" type="Area3D" unique_id=466570339]
 collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_exit")
 
-[node name="Trigger" type="CollisionShape3D" parent="."]
+[node name="Trigger" type="CollisionShape3D" parent="." unique_id=205826711]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 1, 0)
 shape = SubResource("BoxShape3D_trigger")
 
-[node name="Spawn" type="Marker3D" parent="."]
+[node name="Spawn" type="Marker3D" parent="." unique_id=1792134794]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
 
-[node name="PathMesh" type="MeshInstance3D" parent="."]
+[node name="PathMesh" type="MeshInstance3D" parent="." unique_id=1892460766]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 mesh = SubResource("PlaneMesh_path")
 
-[node name="Walls" type="StaticBody3D" parent="."]
+[node name="Walls" type="StaticBody3D" parent="." unique_id=531416929]
 
-[node name="Left" type="CollisionShape3D" parent="Walls"]
+[node name="Left" type="CollisionShape3D" parent="Walls" unique_id=369673282]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -2.2)
 shape = SubResource("BoxShape3D_side")
 
-[node name="Right" type="CollisionShape3D" parent="Walls"]
+[node name="Right" type="CollisionShape3D" parent="Walls" unique_id=332805989]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, 2.2)
 shape = SubResource("BoxShape3D_side")
 
-[node name="End" type="CollisionShape3D" parent="Walls"]
+[node name="End" type="CollisionShape3D" parent="Walls" unique_id=90754446]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2, 1, 0)
 shape = SubResource("BoxShape3D_end")
 
-[node name="Floor" type="CollisionShape3D" parent="Walls"]
+[node name="Floor" type="CollisionShape3D" parent="Walls" unique_id=314733459]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 shape = SubResource("BoxShape3D_floor")
 
-[node name="MobBarrier" type="StaticBody3D" parent="."]
+[node name="MobBarrier" type="StaticBody3D" parent="." unique_id=1597096143]
 collision_layer = 128
 collision_mask = 0
 
-[node name="Shape" type="CollisionShape3D" parent="MobBarrier"]
+[node name="Shape" type="CollisionShape3D" parent="MobBarrier" unique_id=1301072021]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 1, 0)
 shape = SubResource("BoxShape3D_mob_barrier")

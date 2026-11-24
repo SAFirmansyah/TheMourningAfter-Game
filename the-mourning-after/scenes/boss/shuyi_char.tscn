@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cdy0s27bc8573"]
 
-[ext_resource type="Script" path="res://scripts/boss/shuyi_char.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bse7npdfeo7pe" path="res://scripts/boss/shuyi_char.gd" id="1_script"]
 [ext_resource type="Resource" path="res://scripts/boss/shuyi_stats.tres" id="2_stats"]
 [ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="3_icon"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="4_hurtbox"]
@@ -31,7 +31,7 @@ size = Vector2(0.16, 0.16)
 offsets = PackedFloat32Array(0, 0.25, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="ShuyiChar" type="CharacterBody3D"]
+[node name="ShuyiChar" type="CharacterBody3D" unique_id=329201228]
 collision_layer = 8
 collision_mask = 135
 motion_mode = 1
@@ -40,33 +40,32 @@ stats = ExtResource("2_stats")
 display_name = "Shuyi"
 move_speed_multiplier = 1.5
 
-[node name="Card" type="Sprite3D" parent="."]
+[node name="Card" type="Sprite3D" parent="." unique_id=1880408425]
+offset = Vector2(0, 64)
 modulate = Color(0.45, 0.7, 0.95, 1)
 pixel_size = 0.024
-offset = Vector2(0, 64)
 texture = ExtResource("3_icon")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=157060479]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 shape = SubResource("CapsuleShape3D_body")
 
-[node name="HurtboxArea" type="Area3D" parent="."]
+[node name="HurtboxArea" type="Area3D" parent="." unique_id=2097576780]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 script = ExtResource("4_hurtbox")
 
-[node name="CollisionHurtbox" type="CollisionShape3D" parent="HurtboxArea"]
+[node name="CollisionHurtbox" type="CollisionShape3D" parent="HurtboxArea" unique_id=1441657549]
 shape = SubResource("CapsuleShape3D_hurt")
 
-[node name="StatusLabel" type="Label3D" parent="."]
+[node name="StatusLabel" type="Label3D" parent="." unique_id=2105578522]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0)
 pixel_size = 0.01
 billboard = 1
 no_depth_test = true
 text = "Status"
 font_size = 48
-outline_size = 12
 
-[node name="Aura" type="CPUParticles3D" parent="."]
+[node name="Aura" type="CPUParticles3D" parent="." unique_id=291320590]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 emitting = false
 amount = 24
@@ -83,4 +82,4 @@ scale_amount_min = 0.6
 scale_amount_max = 1.4
 color_ramp = SubResource("Gradient_aura")
 
-[node name="BossHealthBar" parent="." instance=ExtResource("5_bar")]
+[node name="BossHealthBar" parent="." unique_id=1731046990 instance=ExtResource("5_bar")]

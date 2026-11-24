@@ -1,0 +1,178 @@
+[gd_scene format=3 uid="uid://dhh6h5r6t4oq1"]
+
+[ext_resource type="Script" uid="uid://4863h02pqnol" path="res://scripts/player/constance.gd" id="1_83nck"]
+[ext_resource type="Resource" uid="uid://bbk5x1dnpd5ev" path="res://scripts/weapons/sword_iron.tres" id="2_aqyn5"]
+[ext_resource type="Texture2D" uid="uid://cule3s7g3s75g" path="res://textures/constance/constance_idle/constance_idle_00000.png" id="2_wbmrr"]
+[ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="3_8lbrl"]
+[ext_resource type="PackedScene" uid="uid://cxrl8h6xe6r7n" path="res://scenes/enemies/deformed_humans.tscn" id="3_a75fm"]
+[ext_resource type="Texture2D" uid="uid://pu4yb266wrv3" path="res://textures/constance/constance_idle/constance_idle_00001.png" id="3_umbja"]
+[ext_resource type="Script" uid="uid://glnwwouy5k35" path="res://scripts/player/sword_visual.gd" id="4_amaya"]
+[ext_resource type="Texture2D" uid="uid://hk7krksevyki" path="res://textures/constance/constance_idle/constance_idle_00002.png" id="4_rrdyp"]
+[ext_resource type="PackedScene" uid="uid://dwl4exhk82y7p" path="res://scenes/enemies/low_mutant.tscn" id="4_u4ug7"]
+[ext_resource type="Texture2D" uid="uid://b4bp8sb8i6oha" path="res://textures/constance/constance_idle/constance_idle_00003.png" id="5_aqyn5"]
+[ext_resource type="Texture2D" uid="uid://c3auwf22xwf4" path="res://textures/constance/constance_idle/constance_idle_00004.png" id="6_a75fm"]
+[ext_resource type="Texture2D" uid="uid://btafpmr1l4unm" path="res://textures/constance/constance_idle/constance_idle_00005.png" id="7_u4ug7"]
+[ext_resource type="Texture2D" uid="uid://bdmynrs4wyw5c" path="res://textures/constance/constance_idle/constance_idle_00006.png" id="8_ggrei"]
+[ext_resource type="Texture2D" uid="uid://dojheoeq7m7i8" path="res://textures/constance/constance_idle/constance_idle_00007.png" id="9_4e5dx"]
+[ext_resource type="Texture2D" uid="uid://boeefe4jm2ita" path="res://textures/constance/constance_idle/constance_idle_00008.png" id="10_qwt7h"]
+[ext_resource type="Texture2D" uid="uid://dun3spmi0y6gv" path="res://textures/constance/constance_idle/constance_idle_00009.png" id="11_ws3oe"]
+[ext_resource type="Texture2D" uid="uid://bbk3082fakw8f" path="res://textures/constance/constance_idle/constance_idle_00010.png" id="12_s7ol3"]
+[ext_resource type="Texture2D" uid="uid://b3odewdp33nnw" path="res://textures/constance/constance_idle/constance_idle_00011.png" id="13_bscbd"]
+[ext_resource type="Texture2D" uid="uid://4iaredfuaesm" path="res://textures/constance/constance_walk/constance_walk_00000.png" id="17_htady"]
+[ext_resource type="Texture2D" uid="uid://chnoj6jruo0ys" path="res://textures/constance/constance_walk/constance_walk_00001.png" id="18_wkv1u"]
+[ext_resource type="Texture2D" uid="uid://dcls4a6l7pu84" path="res://textures/constance/constance_walk/constance_walk_00002.png" id="19_nyxwp"]
+[ext_resource type="Texture2D" uid="uid://b4jhcmep8c77e" path="res://textures/constance/constance_walk/constance_walk_00003.png" id="20_wbmrr"]
+[ext_resource type="Texture2D" uid="uid://c1gr0q5vrff1e" path="res://textures/constance/constance_walk/constance_walk_00004.png" id="21_umbja"]
+[ext_resource type="Texture2D" uid="uid://csmjlu4ffqwk7" path="res://textures/constance/constance_walk/constance_walk_00005.png" id="22_rrdyp"]
+[ext_resource type="Texture2D" uid="uid://dr5bhytrq8ynk" path="res://textures/constance/constance_walk/constance_walk_00006.png" id="23_aqyn5"]
+[ext_resource type="Texture2D" uid="uid://rfmwktnf06kt" path="res://textures/constance/constance_walk/constance_walk_00007.png" id="24_a75fm"]
+[ext_resource type="Texture2D" uid="uid://dl02cernslqcr" path="res://textures/constance/constance_walk/constance_walk_00008.png" id="25_u4ug7"]
+[ext_resource type="Texture2D" uid="uid://4d78jnskvonc" path="res://textures/constance/constance_walk/constance_walk_00009.png" id="26_ggrei"]
+[ext_resource type="Texture2D" uid="uid://bh8mqk70immkh" path="res://textures/constance/constance_walk/constance_walk_00010.png" id="27_4e5dx"]
+[ext_resource type="Texture2D" uid="uid://dtxvfa5ogbnji" path="res://textures/constance/constance_walk/constance_walk_00011.png" id="28_qwt7h"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jhy0a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_wbmrr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_umbja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rrdyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_aqyn5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_a75fm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_u4ug7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ggrei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_4e5dx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_qwt7h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ws3oe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_s7ol3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_bscbd")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_htady")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_wkv1u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_nyxwp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_wbmrr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_umbja")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_rrdyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_aqyn5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_a75fm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_u4ug7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_ggrei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_4e5dx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_qwt7h")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u3137"]
+radius = 0.35
+height = 1.7
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_10enr"]
+radius = 0.35
+height = 1.7
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blade"]
+shading_mode = 0
+albedo_color = Color(0.9, 0.87, 0.78, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_htady"]
+material = SubResource("StandardMaterial3D_blade")
+size = Vector3(0.9, 0.12, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wkv1u"]
+material = SubResource("StandardMaterial3D_blade")
+size = Vector3(0.08, 0.2, 0.36)
+
+[node name="Constance" type="CharacterBody3D" unique_id=145981841]
+script = ExtResource("1_83nck")
+staff = ExtResource("2_aqyn5")
+deformed_human_scene = ExtResource("3_a75fm")
+low_mutant_scene = ExtResource("4_u4ug7")
+
+[node name="Card" type="AnimatedSprite3D" parent="." unique_id=1720100852]
+process_physics_priority = 20
+transform = Transform3D(-0.095, 0, -8.305164e-09, 0, 0.095, 0, 8.305164e-09, 0, -0.095, 0, 0.9, 0)
+offset = Vector2(0, 64)
+pixel_size = 0.014
+alpha_cut = 1
+sprite_frames = SubResource("SpriteFrames_jhy0a")
+animation = &"walk"
+frame_progress = 0.76508087
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=345169524]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_u3137")
+
+[node name="PlayerHurtBox" type="Area3D" parent="." unique_id=1959197943]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+collision_layer = 32
+collision_mask = 29
+script = ExtResource("3_8lbrl")
+
+[node name="CollisionHurtBox" type="CollisionShape3D" parent="PlayerHurtBox" unique_id=1845983319]
+shape = SubResource("CapsuleShape3D_10enr")
+
+[node name="Sword" type="Node3D" parent="." unique_id=141239580]
+transform = Transform3D(0.819152, 0, -0.573576, 0, 1, 0, 0.573576, 0, 0.819152, 0, 0.8, 0)
+script = ExtResource("4_amaya")
+
+[node name="Blade" type="MeshInstance3D" parent="Sword" unique_id=2031151249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, 0, 0)
+mesh = SubResource("BoxMesh_htady")
+
+[node name="Guard" type="MeshInstance3D" parent="Sword" unique_id=1983822086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+mesh = SubResource("BoxMesh_wkv1u")

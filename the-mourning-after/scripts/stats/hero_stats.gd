@@ -21,7 +21,7 @@ func _init() -> void:
 func setup_stats() -> void:
 	current_max_health = min_health + health_step * randi_range(0, (max_health - min_health) / health_step)
 	health = current_max_health
-	move_speed_multiplier = min_move_speed + move_speed_step * randi_range(0, roundi((max_move_speed - min_move_speed) / move_speed_step))
+	move_speed_multiplier = 1.0
 	health_change.emit(health, current_max_health)
 
 func setup_fixed_stats(max_hp: int, speed: float) -> void:
@@ -34,7 +34,7 @@ func setup_fixed_stats(max_hp: int, speed: float) -> void:
 func setup_first_run_stats() -> void:
 	current_max_health = 50
 	health = 50
-	move_speed_multiplier = 0.5
+	move_speed_multiplier = 1.0
 	health_change.emit(health, current_max_health)
 
 func get_damage() -> int:

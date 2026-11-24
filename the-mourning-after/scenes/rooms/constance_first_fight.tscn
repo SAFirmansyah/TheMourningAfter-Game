@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://fgyrgca1p07o"]
+
+[ext_resource type="Material" path="res://materials/ground.tres" id="1_p6ff0"]
+[ext_resource type="Script" uid="uid://ynw3dd46iap6" path="res://scripts/huyana/constance_first_fight.gd" id="1_pie85"]
+[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="2_pie85"]
+[ext_resource type="PackedScene" uid="uid://dd83vwxevu5ai" path="res://scenes/enemies/constance_as_enemy.tscn" id="3_yktea"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6o3bk"]
+material = ExtResource("1_p6ff0")
+size = Vector2(30, 30)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ei3j3"]
+size = Vector3(9.5, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4no3m"]
+size = Vector3(8.5, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_duefi"]
+size = Vector3(8.5, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xvtu4"]
+size = Vector3(6, 2, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8j6pj"]
+size = Vector3(9, 2, 0.4)
+
+[node name="Constance_First_Fight" type="Node3D" unique_id=1443931440]
+script = ExtResource("1_pie85")
+
+[node name="Floor3" type="MeshInstance3D" parent="." unique_id=1451569765]
+mesh = SubResource("PlaneMesh_6o3bk")
+
+[node name="Floor4" type="MeshInstance3D" parent="." unique_id=709540597]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0, 0)
+mesh = SubResource("PlaneMesh_6o3bk")
+
+[node name="BossEntry" parent="." unique_id=1962955913 instance=ExtResource("2_pie85")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -19, 0, 0)
+target_entry = &"East"
+
+[node name="Walls" type="StaticBody3D" parent="." unique_id=602636649]
+
+[node name="North" type="CollisionShape3D" parent="Walls" unique_id=1251322684]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 1, -15)
+shape = SubResource("BoxShape3D_ei3j3")
+
+[node name="North2" type="CollisionShape3D" parent="Walls" unique_id=1105074566]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 1, -15)
+shape = SubResource("BoxShape3D_ei3j3")
+
+[node name="North3" type="CollisionShape3D" parent="Walls" unique_id=452028314]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -3, 1, -18.5)
+shape = SubResource("BoxShape3D_ei3j3")
+
+[node name="North4" type="CollisionShape3D" parent="Walls" unique_id=1938061936]
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 3, 1, -18.5)
+shape = SubResource("BoxShape3D_ei3j3")
+
+[node name="North5" type="CollisionShape3D" parent="Walls" unique_id=217437586]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15, 1, -10.5)
+shape = SubResource("BoxShape3D_4no3m")
+
+[node name="North6" type="CollisionShape3D" parent="Walls" unique_id=1848030854]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15, 1, -10.5)
+shape = SubResource("BoxShape3D_duefi")
+
+[node name="North7" type="CollisionShape3D" parent="Walls" unique_id=249411422]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, -17, 1, -4)
+shape = SubResource("BoxShape3D_xvtu4")
+
+[node name="North8" type="CollisionShape3D" parent="Walls" unique_id=589931828]
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, 18, 1, -3)
+shape = SubResource("BoxShape3D_8j6pj")
+
+[node name="North9" type="CollisionShape3D" parent="Walls" unique_id=1504887983]
+transform = Transform3D(0.7071067, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, 0.7071067, 18, 1, 3)
+shape = SubResource("BoxShape3D_8j6pj")
+
+[node name="North10" type="CollisionShape3D" parent="Walls" unique_id=865815542]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 1, 15)
+shape = SubResource("BoxShape3D_ei3j3")
+
+[node name="North11" type="CollisionShape3D" parent="Walls" unique_id=789322821]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5, 1, 15)
+shape = SubResource("BoxShape3D_ei3j3")
+
+[node name="North12" type="CollisionShape3D" parent="Walls" unique_id=818393439]
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, -3, 1, 18.5)
+shape = SubResource("BoxShape3D_ei3j3")
+
+[node name="North13" type="CollisionShape3D" parent="Walls" unique_id=837988319]
+transform = Transform3D(0.7071067, 0, 0.7071067, 0, 1, 0, -0.7071067, 0, 0.7071067, 3, 1, 18.5)
+shape = SubResource("BoxShape3D_ei3j3")
+
+[node name="North14" type="CollisionShape3D" parent="Walls" unique_id=316332737]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -15, 1, 10.5)
+shape = SubResource("BoxShape3D_4no3m")
+
+[node name="North15" type="CollisionShape3D" parent="Walls" unique_id=548211741]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15, 1, 10.5)
+shape = SubResource("BoxShape3D_duefi")
+
+[node name="North16" type="CollisionShape3D" parent="Walls" unique_id=1908536110]
+transform = Transform3D(0.7071067, 0, -0.7071067, 0, 1, 0, 0.7071067, 0, 0.7071067, -17, 1, 4.5)
+shape = SubResource("BoxShape3D_xvtu4")
+
+[node name="PlayerStart" type="Marker3D" parent="." unique_id=1241381863]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, 0)
+
+[node name="ConstanceAsEnemy" parent="." unique_id=200868823 instance=ExtResource("3_yktea")]
