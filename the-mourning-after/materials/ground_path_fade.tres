@@ -1,3 +1,11 @@
 [gd_resource type="ShaderMaterial" format=3 uid="uid://cc3gcb2s5js71"]
 
+[ext_resource type="Shader" path="res://shaders/ground_path_fade.gdshader" id="1_shader"]
+[ext_resource type="Texture2D" uid="uid://ccjrrxcuhjp88" path="res://textures/tile_stone_light.png" id="2_stone"]
+
 [resource]
+render_priority = 0
+shader = ExtResource("1_shader")
+shader_parameter/albedo_texture = ExtResource("2_stone")
+shader_parameter/world_uv_scale = 0.1
+shader_parameter/stone_strength = 0.35

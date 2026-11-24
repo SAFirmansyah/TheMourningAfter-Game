@@ -122,6 +122,10 @@ constance_summon={
 3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
 
+[gui]
+
+theme/custom_font="res://fonts/IMFellDoublePica-Regular.ttf"
+
 [rendering]
 
 rendering_device/driver.windows="d3d12"
@@ -144,3 +148,7 @@ sun_shadow_alpha={
 "type": "float",
 "value": 0.3
 }
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/story_text_import/plugin.cfg")

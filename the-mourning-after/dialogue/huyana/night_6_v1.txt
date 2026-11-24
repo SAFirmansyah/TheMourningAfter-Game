@@ -1,0 +1,16 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 6 v1
+@move rudrama FireRight
+@walk constance Campfire
+@settle
+RUDRAMA (neutral): Hey. Constance. You’re awake later than usual, what’s going on?
+CONSTANCE (neutral): This is your usual, is it? I’ve no idea how you get by like this.
+CONSTANCE (sad): Though, you’re going to say I’m dodging the question.
+RUDRAMA (melancholic): Nothing I’m not used to from your highness…
+CONSTANCE (lost in thought): Well, I’m unable to sleep because I’m worried for the future.
+CONSTANCE (lost in thought): But it looks like you’re awake dwelling on the past, instead.
+RUDRAMA (neutral): Two sides of the same coin, really.
+CONSTANCE (lost in thought): You say I’m always dodging questions.
+CONSTANCE (neutral): Then maybe tonight, on account of the exceptions I’ve already made…
+CONSTANCE (lost in thought): …I’ll let you ask me anything, and just try to answer.

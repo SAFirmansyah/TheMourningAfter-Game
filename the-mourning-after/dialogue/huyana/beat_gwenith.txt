@@ -1,0 +1,60 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NARRATIVE BEAT: Gwenith
+@walk constance Campfire
+@walk gwenith FireRight
+GWENITH (scared): Sister?
+CONSTANCE (neutral): Ah, Gwen, hello–
+CONSTANCE (sad): What’s wrong? You look…
+GWENITH (scared): I need to tell you something. Something I’ve been doing.
+CONSTANCE (neutral): You make it sound like you’ve done something bad. But Gwen, I know you.
+CONSTANCE (neutral): You’d never do something you deem bad. So you must just be scared it’s something that I deem bad.
+GWENITH (pout): That’s right…
+GWENITH (neutral): Our lost sisters. I’ve been into their containments.
+CONSTANCE (neutral): Gwenith! That isn’t safe, that’s why nobody goes in but me, you know this–
+GWENITH (pout): They’re still our sisters! And I had a good reason!
+CONSTANCE (sad): What could possibly warrant risking your life like that? As if we haven’t suffered enough! As if our entire mission isn’t to prevent needless loss of life–
+GWENITH (pout): Sister! Listen to me, please.
+GWENITH (pout): I wanted to study them.
+GWENITH (neutral): All forms of life fall under my field of study, and the lost sisters are an entirely new life form.
+GWENITH (pout): I would be failing my responsibilities to Huyana if I didn’t follow through on the experiments that created the mutations.
+CONSTANCE (neutral): Thank your stars you are unscathed. So, what exactly did you study, you madlady?
+GWENITH (lost in thought): I took as much as I could from them without hurting them… at least, significantly.
+CONSTANCE (neutral): What–
+GWENITH (lost in thought): Scales, nails, scabs… teeth, even–
+CONSTANCE (neutral): You took out their teeth?!
+GWENITH (neutral): They weren’t going to miss one or two, and studying them is too important.
+GWENITH (lost in thought): And I’ve understood a great many things about the… whatever they’ve become now.
+GWENITH (lost in thought): ‘Lost sisters’ really doesn’t capture what they are. They’re so different from us, Connie.
+GWENITH (lost in thought): In more ways than just appearance.
+CONSTANCE (sad): What do you mean?
+GWENITH (neutral): They’re incredible. Sister, don’t you get it?
+GWENITH (lost in thought): Those experiments were meant to make them resistant to death, yes…
+GWENITH (lost in thought): But they didn’t fail. Barring the side-effects, they actually worked.
+GWENITH (neutral): To some extent, anyway.
+CONSTANCE (lost in thought): How do you say?
+GWENITH (neutral): Every single lost sister is enhanced in some attribute that could be considered a human’s weakness.
+GWENITH (lost in thought): Tougher exteriors, more seamless forms…
+GWENITH (scared): And when I studied the stuff within…
+GWENITH (neutral): Yes, they hold so much more vitality. What’s cut grows back faster…
+GWENITH (neutral): …they preserve themselves better, aging slower…
+GWENITH (neutral): …or simply need less to get by.
+CONSTANCE (happy): Truly? That’s… that’s blessed, Gwen.
+CONSTANCE (neutral): The failures feel so much lighter now.
+CONSTANCE (praying): The loss of our sisters’ humanity wasn’t for nothing.
+CONSTANCE (happy): In fact…
+# Black screen. Open again in Huyana's Altar Room.
+@fade black
+@room altar Podium
+@fade in
+CONSTANCE (neutral): Gwenith’s discoveries have set my mind racing down a path I hadn’t considered before.
+CONSTANCE (neutral): She’s inspired a bit of magic, the kind that could come in handy for our cause…
+CONSTANCE (neutral): …though it’s far from developed as yet.
+CONSTANCE (praying): Please, let this lead somewhere.
+# Fade to black, text appears on screen like in a cutscene.
+@fade black
+@text
+Life begins at its own end — Where falls a tree grows a thicket.
+Manifold are the strengths of our sisters lost, for having lost them.
+I invoke the pains of those losses, and bid them turn to power.
+@end

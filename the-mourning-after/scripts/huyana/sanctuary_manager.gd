@@ -94,8 +94,6 @@ var pending_story_event: StringName = &""
 var wanderers := {}
 ## Not saved: a worker stops walking while her own order menu is open.
 var paused_workers := {}
-## UI only, not saved: ids of requests shown expanded.
-var expanded := {}
 ## Tutorial controls, not saved (the tutorial re-applies them on load): frozen stops everything,
 ## spawning off means only scripted requests appear, requests_paused stops their timers,
 ## health_locked makes expired requests cost nothing.
@@ -189,8 +187,8 @@ func repair_progress(request: Dictionary) -> float:
 	return repair_order.progress if repair_order.get("request_id", -1) == request.id else -1.0
 
 
-## Constance presses E at one end of a containment: hand over the item if it's in stock,
-## otherwise expand/collapse the request to show where it comes from. Repairs are ordered from Rudrama.
+## Constance presses E at one end of a containment: hand over the item if it's in stock.
+## (Details are on the request branch; repairs are ordered from Rudrama.)
 func interact(containment: int, slot: int) -> void:
 	var request := request_at(containment, slot)
 	if request.is_empty():
@@ -199,14 +197,15 @@ func interact(containment: int, slot: int) -> void:
 		stock[request.item] -= 1
 		_remove(request, true)
 		world.save_game()
-	elif expanded.has(request.id):
-		expanded.erase(request.id)
-	else:
-		expanded[request.id] = true
 
 
-func collapse(containment: int, slot: int) -> void:
-	expanded.erase(request_at(containment, slot).get("id", -1))
+## Testing (Skip day): today's requests are settled without penalty and a fixed amount is lost instead.
+func skip_day(loss: float) -> void:
+	for request in requests.duplicate():
+		_remove(request, true)
+	_cancel_repair()
+	if not health_locked:
+		set_health(health - loss)
 
 
 func set_health(value: float) -> void:
@@ -645,5 +644,4 @@ func _find(id: int) -> Dictionary:
 
 func _remove(request: Dictionary, fulfilled: bool) -> void:
 	requests.erase(request)
-	expanded.erase(request.id)
 	request_removed.emit(request.id, fulfilled)

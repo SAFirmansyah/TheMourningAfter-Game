@@ -1,13 +1,51 @@
 [gd_scene format=3]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00000.png" id="ridle0"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00001.png" id="ridle1"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00002.png" id="ridle2"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00003.png" id="ridle3"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00004.png" id="ridle4"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00005.png" id="ridle5"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00006.png" id="ridle6"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00007.png" id="ridle7"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00008.png" id="ridle8"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00009.png" id="ridle9"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00010.png" id="ridle10"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00011.png" id="ridle11"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_walk/rudrama_walk_00000.png" id="rwalk0"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_walk/rudrama_walk_00001.png" id="rwalk1"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_walk/rudrama_walk_00002.png" id="rwalk2"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_walk/rudrama_walk_00003.png" id="rwalk3"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_walk/rudrama_walk_00004.png" id="rwalk4"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_walk/rudrama_walk_00005.png" id="rwalk5"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_walk/rudrama_walk_00006.png" id="rwalk6"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_walk/rudrama_walk_00007.png" id="rwalk7"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_walk/rudrama_walk_00008.png" id="rwalk8"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_walk/rudrama_walk_00009.png" id="rwalk9"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_walk/rudrama_walk_00010.png" id="rwalk10"]
+[ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_walk/rudrama_walk_00011.png" id="rwalk11"]
 
 [ext_resource type="Script" path="res://scripts/world/room.gd" id="1_room"]
-[ext_resource type="Material" path="res://materials/ground.tres" id="2_ground"]
+[ext_resource type="Script" path="res://scripts/world/grass_scatter.gd" id="15_grass"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_1.png" id="g1"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_2.png" id="g2"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_3.png" id="g3"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_4.png" id="g4"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_5.png" id="g5"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_6.png" id="g6"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_7.png" id="g7"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_8.png" id="g8"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_9.png" id="g9"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_10.png" id="g10"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_11.png" id="g11"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_12.png" id="g12"]
+[ext_resource type="Material" path="res://materials/ground_faint.tres" id="2_ground"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_exit"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/containment.tscn" id="4_containment"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/anvil.tscn" id="5_anvil"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/campfire.tscn" id="6_campfire"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/med_station.tscn" id="7_med"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/planter_boxes.tscn" id="8_planters"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/props/med_station_2.tscn" id="9_med2"]
 [ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="10_npc"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/order_point.tscn" id="11_order"]
 [ext_resource type="Script" path="res://scripts/huyana/worker_npc.gd" id="12_rudrama"]
@@ -42,6 +80,10 @@ mesh = SubResource("PlaneMesh_floor")
 
 [node name="PlayerStart" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -0.75)
+
+[node name="Grass" type="Node3D" parent="."]
+script = ExtResource("15_grass")
+textures = Array[Texture2D]([ExtResource("g1"), ExtResource("g2"), ExtResource("g3"), ExtResource("g4"), ExtResource("g5"), ExtResource("g6"), ExtResource("g7"), ExtResource("g8"), ExtResource("g9"), ExtResource("g10"), ExtResource("g11"), ExtResource("g12")])
 
 [node name="Walls" type="StaticBody3D" parent="."]
 
@@ -87,11 +129,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0, -7)
 [node name="Campfire" parent="Stations" instance=ExtResource("6_campfire")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.333)
 
-[node name="MedStation" parent="Stations" instance=ExtResource("7_med")]
+[node name="MedStations" type="Node3D" parent="Stations"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, 7.5)
+script = ExtResource("13_station")
+worker = "shuyi"
+menu_height = 3.8
 
-[node name="PlanterBoxes" parent="Stations" instance=ExtResource("8_planters")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6.875)
+[node name="MedStation" parent="Stations/MedStations" instance=ExtResource("7_med")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0, 0)
+
+[node name="MedStation2" parent="Stations/MedStations" instance=ExtResource("9_med2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 0)
+
+[node name="Planters" type="Node3D" parent="Stations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6.9)
+script = ExtResource("13_station")
+worker = "gwenith"
+menu_height = 3.4
+
+[node name="Planter1" parent="Stations/Planters" instance=ExtResource("8_planters")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0, 1.1)
+
+[node name="Planter2" parent="Stations/Planters" instance=ExtResource("8_planters")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+
+[node name="Planter3" parent="Stations/Planters" instance=ExtResource("8_planters")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, 1.1)
 
 [node name="Characters" type="Node3D" parent="."]
 
@@ -100,6 +163,8 @@ script = ExtResource("12_rudrama")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25, 0, -6.667)
 character_name = "Rudrama"
 tint = Color(0.55, 0.62, 0.85, 1)
+idle_frames = Array[Texture2D]([ExtResource("ridle0"), ExtResource("ridle1"), ExtResource("ridle2"), ExtResource("ridle3"), ExtResource("ridle4"), ExtResource("ridle5"), ExtResource("ridle6"), ExtResource("ridle7"), ExtResource("ridle8"), ExtResource("ridle9"), ExtResource("ridle10"), ExtResource("ridle11")])
+walk_frames = Array[Texture2D]([ExtResource("rwalk0"), ExtResource("rwalk1"), ExtResource("rwalk2"), ExtResource("rwalk3"), ExtResource("rwalk4"), ExtResource("rwalk5"), ExtResource("rwalk6"), ExtResource("rwalk7"), ExtResource("rwalk8"), ExtResource("rwalk9"), ExtResource("rwalk10"), ExtResource("rwalk11")])
 
 [node name="Shuyi" parent="Characters" instance=ExtResource("10_npc")]
 script = ExtResource("12_rudrama")
@@ -111,7 +176,7 @@ tint = Color(0.85, 0.85, 0.55, 1)
 [node name="Gwenith" parent="Characters" instance=ExtResource("10_npc")]
 script = ExtResource("12_rudrama")
 worker = "gwenith"
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 7.333)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 0, 6.8)
 character_name = "Gwenith"
 tint = Color(0.6, 0.9, 0.5, 1)
 
@@ -138,65 +203,78 @@ interact_radius = 2.0
 
 [node name="OrderPoint" parent="Characters/Shuyi" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 pauses_worker = true
-station = NodePath("../../../Stations/MedStation/WorkStation")
+station = NodePath("../../../Stations/MedStations")
 worker = "shuyi"
 menu_height = 2.4
 interact_radius = 2.0
 
 [node name="OrderPoint" parent="Characters/Gwenith" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 pauses_worker = true
-station = NodePath("../../../Stations/PlanterBoxes/WorkStation")
+station = NodePath("../../../Stations/Planters")
 worker = "gwenith"
 menu_height = 2.4
 interact_radius = 2.0
 
-[node name="WorkStation" type="Node3D" parent="Stations/PlanterBoxes"]
-script = ExtResource("13_station")
-worker = "gwenith"
-slot_depth = 0.0
-bubble_height = 5.0
-menu_height = 6.4
-
-[node name="Slot1" parent="Stations/PlanterBoxes/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, 0)
+[node name="OrderPoint" parent="Stations/Planters/Planter1" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 worker = "gwenith"
 slot = 0
-station = NodePath("..")
-interact_radius = 2.6
+station = NodePath("../..")
+interact_radius = 1.8
 
-[node name="Slot2" parent="Stations/PlanterBoxes/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0, 0)
+[node name="OrderPoint" parent="Stations/Planters/Planter2" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 worker = "gwenith"
 slot = 1
-station = NodePath("..")
-interact_radius = 2.6
+station = NodePath("../..")
+interact_radius = 1.8
 
-[node name="Slot3" parent="Stations/PlanterBoxes/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 0, 0)
+[node name="OrderPoint" parent="Stations/Planters/Planter3" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 worker = "gwenith"
 slot = 2
-station = NodePath("..")
-interact_radius = 2.6
+station = NodePath("../..")
+interact_radius = 1.8
 
-[node name="WorkStation" type="Node3D" parent="Stations/MedStation"]
-script = ExtResource("13_station")
-worker = "shuyi"
-slot_depth = 0.0
-bubble_height = 3.6
-menu_height = 5.0
-
-[node name="Slot1" parent="Stations/MedStation/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, 0)
+[node name="OrderPoint" parent="Stations/MedStations/MedStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 worker = "shuyi"
 slot = 0
-station = NodePath("..")
-interact_radius = 1.6
+station = NodePath("../..")
+interact_radius = 1.5
 
-[node name="Slot2" parent="Stations/MedStation/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0, 0)
+[node name="OrderPoint" parent="Stations/MedStations/MedStation2" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 worker = "shuyi"
 slot = 1
-station = NodePath("..")
-interact_radius = 1.6
+station = NodePath("../..")
+interact_radius = 1.8
 
 [node name="NarrativeBeat" parent="Stations/Campfire" instance=ExtResource("14_beat")]
+
+[node name="Stage" type="Node3D" parent="."]
+
+[node name="Campfire" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0, 2.4)
+
+[node name="FireLeft" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0, 0, 0.6)
+
+[node name="FireRight" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, 0, 0.6)
+
+[node name="FireBack" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0, -3.2)
+
+[node name="Containments" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, 0, -7.0)
+
+[node name="Planters" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0, 0, 6.9)
+
+[node name="MedStation" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, 7.5)
+
+[node name="Anvil" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6, 0, -7.0)
+
+[node name="Entrance" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -0.75)
+
+[node name="Exit" type="Marker3D" parent="Stage"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -0.75)

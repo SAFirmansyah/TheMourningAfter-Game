@@ -1,0 +1,12 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 1
+@move shuyi FireBack
+@move rudrama FireRight
+@move gwenith FireLeft
+@walk constance Campfire
+@settle
+CONSTANCE (neutral): I can feel it setting in. The scarcity of resources, I mean.
+SHUYI (neutral): Well, we are losing more of our sisters by the day. And there’s only so much Gwen, Rudy and I can do on our own.
+RUDRAMA (neutral): A crying shame we’re the only ones who can do what’s needed here, though.
+GWENITH (neutral): A shame? Hah, I rather enjoy being special…

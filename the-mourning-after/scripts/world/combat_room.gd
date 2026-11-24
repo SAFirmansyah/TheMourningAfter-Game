@@ -18,8 +18,7 @@ signal all_enemies_defeated
 @export_group("Grass")
 @export var grass_scn: PackedScene = load("res://scenes/world/grass.tscn")
 @export var grass_textures: Array[Texture2D] = [] # fill with all 20 variants in the inspector
-@export var grass_count := Vector2i(10000, 10000)
-@export var grass_wall_clearance := 0.3
+@export var grass_spacing := 0.75 # TUNE: average distance between grass cards (m); bigger = sparser
 
 var big_enemy_scn: PackedScene = load("res://scenes/enemies/low_mutant.tscn")
 var low_enemy_scn2: PackedScene = load("res://scenes/enemies/deformed_humans_2.tscn")
@@ -64,44 +63,12 @@ func _configure_next_exit() -> void:
 		exit.target_room = CampaignState.get_post_gauntlet_room_path()	 # adjust to your actual cooldown room path
 
 
-## Scatters decorative grass sprites across the room's floor. Purely visual —
-## no collision, so these can overlap each other and sit near walls/exits freely.
+## Scatters decorative grass semi-evenly over the room's floor and the start of its paths.
+## Purely visual: no collision.
 func spawn_grass() -> void:
 	if grass_scn == null or grass_textures.is_empty():
-		print("spawn_grass bailed: grass_scn=", grass_scn, " textures=", grass_textures.size())
 		return
-	var count := _rng.randi_range(grass_count.x, grass_count.y)
-	print("spawning ", count, " grass")
-	for i in count:
-		var pos: Variant = _random_grass_point(_floor_bounds)
-		if pos == null:
-			print("grass spot ", i, " rejected")
-			continue
-		var grass := grass_scn.instantiate() as Grass
-		add_child(grass)
-		grass.global_position = pos
-		grass.set_texture(grass_textures[_rng.randi() % grass_textures.size()])
-		
-
-## Like _random_floor_point, but skips the exit-clearance check (grass can grow near exits)
-## and uses a looser wall clearance.
-func _random_grass_point(area: AABB) -> Variant:
-	var space_state := get_world_3d().direct_space_state
-	var x := _rng.randf_range(area.position.x, area.end.x)
-	var z := _rng.randf_range(area.position.z, area.end.z)
-	var from := Vector3(x, area.position.y + 5.0, z)
-	var hit := space_state.intersect_ray(PhysicsRayQueryParameters3D.create(from, Vector3(x, area.position.y - 5.0, z)))
-	if hit.is_empty() or absf(hit.position.y - area.position.y) > 0.3:
-		return null
-	var pos: Vector3 = hit.position
-	var probe := SphereShape3D.new()
-	probe.radius = grass_wall_clearance
-	var query := PhysicsShapeQueryParameters3D.new()
-	query.shape = probe
-	query.transform = Transform3D(Basis(), pos + Vector3.UP * (grass_wall_clearance + 0.3))
-	if not space_state.intersect_shape(query, 1).is_empty():
-		return null
-	return pos
+	GrassScatter.scatter_room(self, self, grass_scn, grass_textures, _rng, grass_spacing)
 
 
 ## Mobs spawn in clusters (plus the odd loner) at random spots away from the exits,

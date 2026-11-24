@@ -1,0 +1,42 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/visual/facing_card.gd" id="1_card"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="2_icon"]
+[ext_resource type="PackedScene" path="res://scenes/world/heal_spot.tscn" id="3_heal"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_water"]
+top_radius = 1.2
+bottom_radius = 1.2
+height = 0.02
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_water"]
+shading_mode = 0
+albedo_color = Color(0.25, 0.45, 0.62, 1)
+
+[node name="Pond" type="Node3D"]
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+mesh = SubResource("CylinderMesh_water")
+surface_material_override/0 = SubResource("StandardMaterial3D_water")
+
+[node name="Card" type="Sprite3D" parent="."]
+modulate = Color(0.45, 0.65, 0.9, 1)
+offset = Vector2(0, 64)
+pixel_size = 0.009
+texture = ExtResource("2_icon")
+script = ExtResource("1_card")
+
+[node name="Label" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+pixel_size = 0.008
+billboard = 1
+no_depth_test = true
+text = "Pond"
+font_size = 40
+outline_size = 10
+
+[node name="HealSpot" parent="." instance=ExtResource("3_heal")]
+action_label = "Drink"
+once_per_visit = true
+interact_radius = 2.0

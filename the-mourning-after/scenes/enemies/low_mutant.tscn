@@ -94,7 +94,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("25_i33i2")
 }],
-"loop": 1,
+"loop": false,
 "name": &"attack",
 "speed": 18.0
 }, {

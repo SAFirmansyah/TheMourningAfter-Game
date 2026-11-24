@@ -1,0 +1,32 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# CUTSCENE: Inciting Incident
+@text
+There’s no shortage of poetry about time.
+
+The foe no one can conquer, the force that flows untouched by any other…
+None of that means much to you. You’re only fourteen, after all.
+
+You’ve all the time in the world.
+
+The greatest losses are the ones nobody can warn you of,
+So when a stranger arrived in the dead of night to your home and stole from it,
+You wake up changed, to find some didn’t wake at all, you break.
+
+No one can name what had happened. A silence like none other falls over Silvaluca.
+The stranger, just as unnamed, had taken time itself, touched the untouchable,
+And now, it means so much to you.
+
+Elders died where they’d lain.
+Adults lost the spryness in their step, the sharpness of their wit.
+Years had been shaved off everyone’s lives, unequal in measure.
+Children could no longer call themselves children, and you’re one of them.
+
+Now twenty-four, you almost think you got it good.
+You’d always wanted to grow up faster. Be taken more seriously,
+Be given command and the trust that goes along with it.
+But the one who would’ve given you that, the only light you’ve known,
+Was snuffed, and would not be restored with dawn…
+
+Your mother is gone.
+@end

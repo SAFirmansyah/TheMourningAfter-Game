@@ -10,3 +10,9 @@ modulate = Color(0.6, 0.55, 0.5, 1)
 
 [node name="HealSpot" parent="Props/RestSpot"]
 action_label = "Use supplies"
+
+[node name="PondWater" parent="Props/RestSpot"]
+visible = false
+
+[node name="PondLabel" parent="Props/RestSpot"]
+visible = false

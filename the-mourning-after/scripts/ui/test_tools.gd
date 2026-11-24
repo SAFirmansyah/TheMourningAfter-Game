@@ -33,5 +33,6 @@ func _ready() -> void:
 ## and the title screen opens.
 static func reset_save(tree: SceneTree) -> void:
 	SaveSystem.delete_all()
+	SaveSystem.clear_ended() # undoes the 'Destroy the spell' self-deletion too
 	tree.paused = false
 	tree.change_scene_to_file(TITLE_SCENE)

@@ -4,10 +4,14 @@ extends Label
 
 signal stream_finished
 
-@export var chars_per_second := 45.0 # TUNE: typing speed (characters per second)
+@export var chars_per_second := 28.0 # TUNE: typing speed (characters per second)
 
 var _progress := 0.0
 var _streaming := false
+
+
+func _ready() -> void:
+	visible_characters_behavior = TextServer.VC_CHARS_AFTER_SHAPING # lay out the whole line first, so centred text doesn't shift as it types
 
 
 func stream(new_text: String) -> void:

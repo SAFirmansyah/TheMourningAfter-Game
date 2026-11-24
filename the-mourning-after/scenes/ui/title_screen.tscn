@@ -1,27 +1,15 @@
 [gd_scene format=3 uid="uid://rutja1nrt7t4"]
 
+[ext_resource type="Texture2D" path="res://textures/long title.png" id="t_long"]
+
+[ext_resource type="FontFile" path="res://fonts/IMFellGreatPrimerSC-Regular.ttf" id="f_title"]
+
 [ext_resource type="Script" uid="uid://c21wxa4d3ba61" path="res://scripts/ui/title_screen.gd" id="1_title"]
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_sep"]
-color = Color(0.78, 0.66, 0.38, 0.6)
-thickness = 2
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_button"]
-content_margin_left = 24.0
-content_margin_top = 10.0
-content_margin_right = 24.0
-content_margin_bottom = 10.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
-content_margin_left = 24.0
-content_margin_top = 10.0
-content_margin_right = 24.0
-content_margin_bottom = 10.0
-bg_color = Color(0.78, 0.66, 0.38, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
+[ext_resource type="Script" path="res://scripts/ui/title_parallax.gd" id="2_parallax"]
+[ext_resource type="Texture2D" path="res://textures/title scren bg.png" id="3_bg"]
+[ext_resource type="Texture2D" path="res://textures/title screen overlay/Detail2 1.png" id="4_vine_right"]
+[ext_resource type="Texture2D" path="res://textures/title screen overlay/Detail2 2.png" id="5_vine_top"]
+[ext_resource type="Texture2D" path="res://textures/title screen overlay/Detail2 3.png" id="6_vine_bottom"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_box"]
 content_margin_left = 56.0
@@ -41,7 +29,28 @@ corner_radius_bottom_left = 6
 shadow_color = Color(0, 0, 0, 0.5)
 shadow_size = 12
 
-[node name="TitleScreen" type="Control" unique_id=1473608304]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
+content_margin_left = 24.0
+content_margin_top = 10.0
+content_margin_right = 24.0
+content_margin_bottom = 10.0
+bg_color = Color(0.78, 0.66, 0.38, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_button"]
+content_margin_left = 24.0
+content_margin_top = 10.0
+content_margin_right = 24.0
+content_margin_bottom = 10.0
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_sep"]
+color = Color(0.78, 0.66, 0.38, 0.6)
+thickness = 2
+
+[node name="TitleScreen" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -50,16 +59,93 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_title")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1676676631]
+[node name="Backdrop" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.05, 0.05, 0.06, 1)
+mouse_filter = 2
+script = ExtResource("2_parallax")
 
-[node name="Center" type="CenterContainer" parent="." unique_id=536409768]
+[node name="Base" type="ColorRect" parent="Backdrop"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="Paper" type="TextureRect" parent="Backdrop"]
+layout_mode = 1
+anchor_left = 0
+anchor_top = 0
+anchor_right = 1
+anchor_bottom = 1
+offset_left = -24
+offset_top = -24
+offset_right = 24
+offset_bottom = 24
+mouse_filter = 2
+texture = ExtResource("3_bg")
+expand_mode = 1
+stretch_mode = 6
+metadata/parallax_depth = 12.0
+
+[node name="VineTop" type="TextureRect" parent="Backdrop"]
+layout_mode = 1
+anchor_left = 0
+anchor_top = 0
+anchor_right = 0
+anchor_bottom = 0
+offset_left = -36
+offset_top = -36
+offset_right = 1154
+offset_bottom = 400
+mouse_filter = 2
+texture = ExtResource("5_vine_top")
+expand_mode = 1
+stretch_mode = 0
+metadata/parallax_depth = 28.0
+
+[node name="VineBottom" type="TextureRect" parent="Backdrop"]
+layout_mode = 1
+anchor_left = 0
+anchor_top = 1
+anchor_right = 0
+anchor_bottom = 1
+offset_left = -36
+offset_top = -380
+offset_right = 650
+offset_bottom = 36
+mouse_filter = 2
+texture = ExtResource("6_vine_bottom")
+expand_mode = 1
+stretch_mode = 0
+metadata/parallax_depth = 22.0
+
+[node name="VineRight" type="TextureRect" parent="Backdrop"]
+layout_mode = 1
+anchor_left = 1
+anchor_top = 1
+anchor_right = 1
+anchor_bottom = 1
+offset_left = -560
+offset_top = -1034
+offset_right = 36
+offset_bottom = 36
+mouse_filter = 2
+texture = ExtResource("4_vine_right")
+expand_mode = 1
+stretch_mode = 0
+metadata/parallax_depth = 34.0
+
+[node name="Center" type="CenterContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,69 +153,71 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Content" type="VBoxContainer" parent="Center" unique_id=1953147468]
+[node name="Content" type="VBoxContainer" parent="Center"]
 custom_minimum_size = Vector2(520, 0)
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="Title" type="Label" parent="Center/Content" unique_id=1466571219]
+[node name="Title" type="TextureRect" parent="Center/Content"]
+custom_minimum_size = Vector2(1100, 125)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
-theme_override_font_sizes/font_size = 72
-text = "The Mourning After"
-horizontal_alignment = 1
+size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("t_long")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Separator" type="HSeparator" parent="Center/Content" unique_id=1494251341]
+[node name="Separator" type="HSeparator" parent="Center/Content"]
 layout_mode = 2
 theme_override_constants/separation = 48
 theme_override_styles/separator = SubResource("StyleBoxLine_sep")
 
-[node name="Play" type="Button" parent="Center/Content" unique_id=58992711]
+[node name="Play" type="Button" parent="Center/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
-theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_font_sizes/font_size = 34
-theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
 text = "New game"
 
-[node name="StartFrom" type="Button" parent="Center/Content" unique_id=888717877]
+[node name="StartFrom" type="Button" parent="Center/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.62, 0.72, 0.85, 1)
-theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
-theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_colors/font_hover_color = Color(0.62, 0.72, 0.85, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
-theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
-theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
-text = "Start from (testing)"
-
-[node name="Exit" type="Button" parent="Center/Content" unique_id=1541349671]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
-theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_font_sizes/font_size = 34
-theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+text = "Start from (testing)"
+
+[node name="Exit" type="Button" parent="Center/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_font_sizes/font_size = 34
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
 text = "Exit"
 
-[node name="StartFrom" type="PanelContainer" parent="." unique_id=215003789]
+[node name="StartFrom" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -137,26 +225,27 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -300.0
-offset_top = -230.0
+offset_top = -340.0
 offset_right = 300.0
-offset_bottom = 230.0
+offset_bottom = 340.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_box")
 
-[node name="Content" type="VBoxContainer" parent="StartFrom" unique_id=124919327]
+[node name="Content" type="VBoxContainer" parent="StartFrom"]
 layout_mode = 2
-theme_override_constants/separation = 10
 alignment = 1
+theme_override_constants/separation = 10
 
-[node name="Heading" type="Label" parent="StartFrom/Content" unique_id=1074787365]
+[node name="Heading" type="Label" parent="StartFrom/Content"]
+theme_override_fonts/font = ExtResource("f_title")
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
 theme_override_font_sizes/font_size = 40
 text = "Start from"
 horizontal_alignment = 1
 
-[node name="Message" type="Label" parent="StartFrom/Content" unique_id=1894671521]
+[node name="Message" type="Label" parent="StartFrom/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.67, 0.6, 1)
 theme_override_font_sizes/font_size = 20
@@ -164,57 +253,117 @@ text = "Testing: uses a separate save, wiped each time."
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Separator" type="HSeparator" parent="StartFrom/Content" unique_id=1786389576]
+[node name="Separator" type="HSeparator" parent="StartFrom/Content"]
 layout_mode = 2
 theme_override_constants/separation = 24
 theme_override_styles/separator = SubResource("StyleBoxLine_sep")
 
-[node name="Silvaluca" type="Button" parent="StartFrom/Content" unique_id=1320284364]
+[node name="Silvaluca" type="Button" parent="StartFrom/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
-theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
 text = "Silvaluca"
 
-[node name="FirstBoss" type="Button" parent="StartFrom/Content" unique_id=967044938]
+[node name="FirstBoss" type="Button" parent="StartFrom/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
-theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
 text = "First boss fight"
 
-[node name="Huyana" type="Button" parent="StartFrom/Content" unique_id=203669042]
+[node name="Huyana" type="Button" parent="StartFrom/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
-theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
 text = "Huyana"
 
-[node name="FinalBossFight" type="Button" parent="StartFrom/Content" unique_id=918875346]
+[node name="Huyana75" type="Button" parent="StartFrom/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+text = "Huyana 75%"
+
+[node name="Huyana50" type="Button" parent="StartFrom/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+text = "Huyana 50%"
+
+[node name="Huyana25" type="Button" parent="StartFrom/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+text = "Huyana 25%"
+
+[node name="Huyana0" type="Button" parent="StartFrom/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_hover_color = Color(0.85, 0.82, 0.75, 1)
+theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
+text = "Huyana 0%"
+
+[node name="FinalBossFight" type="Button" parent="StartFrom/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
@@ -229,22 +378,22 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
 text = "Final Boss Fight as Constance"
 
-[node name="Cancel" type="Button" parent="StartFrom/Content" unique_id=1221491255]
+[node name="Cancel" type="Button" parent="StartFrom/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.67, 0.6, 1)
+theme_override_colors/font_hover_color = Color(0.7, 0.67, 0.6, 1)
 theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.08, 0.05, 1)
-theme_override_colors/font_hover_color = Color(0.7, 0.67, 0.6, 1)
 theme_override_colors/font_hover_pressed_color = Color(0.1, 0.08, 0.05, 1)
 theme_override_font_sizes/font_size = 26
-theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
-theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_button")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_focus")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
 text = "Cancel"
 
-[node name="ConstanceTestBox" type="PanelContainer" parent="." unique_id=876345748]
+[node name="ConstanceTestBox" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_left = 716.0
 offset_top = 276.0
@@ -254,19 +403,19 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_box")
 
-[node name="Content" type="VBoxContainer" parent="ConstanceTestBox" unique_id=1812403134]
+[node name="Content" type="VBoxContainer" parent="ConstanceTestBox"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Heading" type="Label" parent="ConstanceTestBox/Content" unique_id=1543256259]
+[node name="Heading" type="Label" parent="ConstanceTestBox/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.95, 0.85, 0.6, 1)
 theme_override_font_sizes/font_size = 40
 text = "Play as Constance"
 horizontal_alignment = 1
 
-[node name="Message" type="Label" parent="ConstanceTestBox/Content" unique_id=1341409765]
+[node name="Message" type="Label" parent="ConstanceTestBox/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.67, 0.6, 1)
 theme_override_font_sizes/font_size = 20
@@ -274,12 +423,12 @@ text = "Testing: for playing as Constance in final fight"
 horizontal_alignment = 1
 autowrap_mode = 3
 
-[node name="Separator" type="HSeparator" parent="ConstanceTestBox/Content" unique_id=66800048]
+[node name="Separator" type="HSeparator" parent="ConstanceTestBox/Content"]
 layout_mode = 2
 theme_override_constants/separation = 24
 theme_override_styles/separator = SubResource("StyleBoxLine_sep")
 
-[node name="GwenithDead" type="Button" parent="ConstanceTestBox/Content" unique_id=2136128548]
+[node name="GwenithDead" type="Button" parent="ConstanceTestBox/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
@@ -294,7 +443,7 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
 text = "Gwenith Dead"
 
-[node name="ShuyiDead" type="Button" parent="ConstanceTestBox/Content" unique_id=2021066361]
+[node name="ShuyiDead" type="Button" parent="ConstanceTestBox/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
@@ -309,7 +458,7 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
 text = "Shuyi Dead"
 
-[node name="RudramaDead" type="Button" parent="ConstanceTestBox/Content" unique_id=1821116772]
+[node name="RudramaDead" type="Button" parent="ConstanceTestBox/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.82, 0.75, 1)
 theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)
@@ -324,7 +473,7 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_focus")
 theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
 text = "Rudrama Dead"
 
-[node name="Cancel" type="Button" parent="ConstanceTestBox/Content" unique_id=2120590852]
+[node name="Cancel" type="Button" parent="ConstanceTestBox/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.7, 0.67, 0.6, 1)
 theme_override_colors/font_focus_color = Color(0.1, 0.08, 0.05, 1)

@@ -128,7 +128,15 @@ func _setup_material() -> void:
 func _sync_card_material() -> void:
 	if _card_material:
 		_card_material.set_shader_parameter("card_texture", texture)
+		_card_material.set_shader_parameter("card_texture_pixel", texture)
+		_card_material.set_shader_parameter("pixel_art", texture_filter == BaseMaterial3D.TEXTURE_FILTER_NEAREST)
 		_card_material.set_shader_parameter("card_modulate", modulate)
+
+
+## Tint the card (e.g. dimmed while a station is busy); works with or without the card material.
+func set_tint(color: Color) -> void:
+	modulate = color
+	_sync_card_material()
 
 
 func _apply_pivot() -> void:

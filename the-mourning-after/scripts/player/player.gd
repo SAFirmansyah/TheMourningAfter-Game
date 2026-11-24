@@ -46,7 +46,7 @@ signal weapon_changed(weapon: WeaponData)
 @export var attack_height := 0.8 # TUNE: vertical offset — roughly chest/sword height
 @export var attack_hitbox_count := 3 # TUNE: how many hitboxes spawn per attack
 @export var attack_hitbox_spacing := 0.3 # TUNE: lateral gap between hitboxes in the arc
-@export var knockback_speed := 6.0 # TUNE: push speed given to enemies hit (m/s)
+@export var knockback_speed := 3.0 # TUNE: push speed given to enemies hit (m/s)
 @export var knockback_time := 0.1 # TUNE: how long the push lasts (s)
 @export var pinned_damage_multiplier := 1.5 # TUNE: damage vs a mob pressed against a wall
 @export var pinned_gap := 0.1 # TUNE: wall distance that counts as pressed against it (m)
@@ -72,6 +72,7 @@ const MAX_CHARGE := 100.0
 var is_invulnerable := false
 var dashes_available := 0
 var input_enabled := true
+var animation_held := false # a cutscene is animating the card itself (e.g. walking her to a mark)
 var forced_input := Vector2.ZERO # screen-space direction used while input is disabled
 var charge_points := 0.0 # 0–MAX_CHARGE; fills from successful base hits, spent by the sword's ability (RMB/Q)
 
@@ -130,7 +131,7 @@ func _physics_process(delta: float) -> void:
 		_facing = input.normalized()
 		if input.x != 0:
 			sprite.flip_h = input.x < 0
-	if not _dashing and not _attacking:
+	if not _dashing and not _attacking and not animation_held:
 		sprite.play("walk" if input != Vector2.ZERO else "idle")
 
 	_recharge_dashes(delta)

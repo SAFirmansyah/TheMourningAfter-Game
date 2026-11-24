@@ -1,4 +1,22 @@
 [gd_scene format=3 uid="uid://cxrl8h6xe6r7n"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00000.png" id="atk_0"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00001.png" id="atk_1"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00002.png" id="atk_2"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00003.png" id="atk_3"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00004.png" id="atk_4"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00005.png" id="atk_5"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00006.png" id="atk_6"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00007.png" id="atk_7"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00008.png" id="atk_8"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00009.png" id="atk_9"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00010.png" id="atk_10"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00011.png" id="atk_11"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00012.png" id="atk_12"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00013.png" id="atk_13"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00014.png" id="atk_14"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00015.png" id="atk_15"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00016.png" id="atk_16"]
+[ext_resource type="Texture2D" path="res://textures/mobs/mob_1_attack/mob_1_attack_00017.png" id="atk_17"]
 
 [ext_resource type="Script" uid="uid://dsabkrdimbjiq" path="res://scripts/enemies/mutants.gd" id="1_j5pes"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="2_d5wo6"]
@@ -59,10 +77,64 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jhy0a"]
 animations = [{
-"frames": [],
-"loop": 1,
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("atk_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_13")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_14")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("atk_17")
+}],
+"loop": false,
 "name": &"attack",
-"speed": 5.0
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -242,6 +314,9 @@ collision_mask = 151
 script = ExtResource("1_j5pes")
 stats = ExtResource("2_xlv1c")
 base_move_speed = 1.5
+animation_offsets = {
+&"attack": Vector2(-58, 111)
+}
 attack_cooldown = 1.0
 knockback_multiplier = 1.5
 loot_pool = Array[ExtResource("3_hbhe7")]([ExtResource("6_m4cp3"), ExtResource("7_8dncx")])

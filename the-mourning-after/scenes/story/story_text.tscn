@@ -1,0 +1,46 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/story/story_text.gd" id="1_text"]
+[ext_resource type="Texture2D" path="res://textures/ui/arrow.png" id="2_arrow"]
+
+[node name="StoryText" type="CanvasLayer"]
+layer = 11
+script = ExtResource("1_text")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Lines" type="VBoxContainer" parent="Center"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Hint" type="TextureRect" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -136.0
+offset_top = -110.0
+offset_right = -64.0
+offset_bottom = -55.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("2_arrow")
+expand_mode = 1
+stretch_mode = 5

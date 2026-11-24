@@ -6,7 +6,7 @@ signal player_entered
 
 @export_file("*.tscn") var target_room := ""
 @export var target_entry: StringName = &"" # PathExit node name in the target room
-@export_file("*.tscn") var cutscene := "" # optional: plays between leaving and arriving
+@export_file("*.txt") var cutscene := "" # optional scene script (dialogue/*.txt): plays between leaving and arriving
 
 @onready var spawn_point: Marker3D = $Spawn
 @onready var path_mesh: MeshInstance3D = $PathMesh

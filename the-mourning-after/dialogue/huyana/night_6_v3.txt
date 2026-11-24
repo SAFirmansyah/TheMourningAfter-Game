@@ -1,0 +1,18 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 6 v3
+@move gwenith FireRight
+@walk constance Campfire
+@settle
+CONSTANCE (neutral): Hey, sis… you look down.
+GWENITH (pout): You don’t say?
+GWENITH (neutral): Listen, I’ve never actually been scared of death. Did you know that?
+GWENITH (neutral): Sure, I take it as our great foe, sworn to overcome like everyone else here.
+GWENITH (neutral): But I never personally worried about my death or feared it.
+CONSTANCE (happy): Ah, another one of your late nights philosophizing your own life, is it?
+GWENITH (neutral): Not… quite.
+GWENITH (pout): I’m questioning myself a lot. That’s not something that happens often, and…
+GWENITH (scared): …I think it might be because I’m reckoning with the fact that we might fail after all.
+GWENITH (scared): Death could get the best of us. Again.
+CONSTANCE (sad): And that scares you now?
+GWENITH (scared): I… I think so, yes.

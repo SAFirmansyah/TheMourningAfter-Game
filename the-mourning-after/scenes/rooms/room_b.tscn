@@ -1,7 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/world/room.gd" id="1_room"]
-[ext_resource type="Material" path="res://materials/ground.tres" id="2_ground"]
+[ext_resource type="Material" path="res://materials/ground_faint.tres" id="2_ground"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_exit"]
 [ext_resource type="PackedScene" path="res://scenes/test/prop.tscn" id="4_prop"]
 [ext_resource type="PackedScene" path="res://scenes/world/interactable.tscn" id="5_interact"]

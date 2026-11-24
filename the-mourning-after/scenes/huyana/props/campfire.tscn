@@ -3,9 +3,19 @@
 [ext_resource type="Script" path="res://scripts/world/obstacle.gd" id="1_obstacle"]
 [ext_resource type="Script" path="res://scripts/visual/facing_card.gd" id="2_card"]
 [ext_resource type="Texture2D" path="res://textures/huyana/campfire.png" id="3_tex"]
+[ext_resource type="Texture2D" path="res://textures/huyana/campfire layer 2.png" id="4_logs"]
+[ext_resource type="Script" path="res://scripts/visual/animated_card.gd" id="5_anim"]
+[ext_resource type="Script" path="res://scripts/huyana/campfire_glow.gd" id="6_glow"]
+[ext_resource type="Texture2D" path="res://textures/huyana/campfire layer 3 animation/bonfire_fire1_1.png" id="f1"]
+[ext_resource type="Texture2D" path="res://textures/huyana/campfire layer 3 animation/bonfire_fire1_2.png" id="f2"]
+[ext_resource type="Texture2D" path="res://textures/huyana/campfire layer 3 animation/bonfire_fire1_3.png" id="f3"]
+[ext_resource type="Texture2D" path="res://textures/huyana/campfire layer 3 animation/bonfire_fire1_4.png" id="f4"]
+[ext_resource type="Texture2D" path="res://textures/huyana/campfire layer 3 animation/bonfire_fire1_5.png" id="f5"]
+[ext_resource type="Texture2D" path="res://textures/huyana/campfire layer 3 animation/bonfire_fire1_6.png" id="f6"]
+[ext_resource type="Texture2D" path="res://textures/huyana/campfire layer 3 animation/bonfire_fire1_7.png" id="f7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_footprint"]
-size = Vector3(3.669, 2, 3.0)
+size = Vector3(3.663, 2, 3.0)
 
 [node name="Campfire" type="StaticBody3D" node_paths=PackedStringArray("card")]
 collision_layer = 2
@@ -15,13 +25,47 @@ card = NodePath("Card")
 footprint_depth = 3.0
 
 [node name="Card" type="Sprite3D" parent="."]
-transform = Transform3D(1.0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-offset = Vector2(0, 126.0)
-pixel_size = 0.01609
+offset = Vector2(0, 405)
+pixel_size = 0.0037
+texture_filter = 0
 alpha_cut = 1
 texture = ExtResource("3_tex")
+region_enabled = true
+region_rect = Rect2(140, 460, 990, 810)
 script = ExtResource("2_card")
 see_through_over_player = true
+
+[node name="Fire" type="Sprite3D" parent="Card"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0.05)
+offset = Vector2(0, 405)
+pixel_size = 0.0037
+texture_filter = 0
+alpha_cut = 1
+texture = ExtResource("f1")
+region_enabled = true
+region_rect = Rect2(140, 460, 990, 810)
+script = ExtResource("5_anim")
+see_through_over_player = true
+casts_shadow = false
+frames = [ExtResource("f1"), ExtResource("f2"), ExtResource("f3"), ExtResource("f4"), ExtResource("f5"), ExtResource("f6"), ExtResource("f7")]
+
+[node name="Logs" type="Sprite3D" parent="Card"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+offset = Vector2(0, 405)
+pixel_size = 0.0037
+texture_filter = 0
+alpha_cut = 1
+texture = ExtResource("4_logs")
+region_enabled = true
+region_rect = Rect2(140, 460, 990, 810)
+script = ExtResource("2_card")
+see_through_over_player = true
+casts_shadow = false
+
+[node name="Glow" type="Node3D" parent="." node_paths=PackedStringArray("fire")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+script = ExtResource("6_glow")
+fire = NodePath("../Card/Fire")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

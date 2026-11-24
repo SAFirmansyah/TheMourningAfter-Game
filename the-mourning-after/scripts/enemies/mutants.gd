@@ -55,6 +55,11 @@ var _damage_flash: DamageFlash
 @onready var _health_bar: MobHealthBar = get_node_or_null(^"HealthBar")
 @onready var sprite: AnimatedSprite3D = $Card
 
+## Per animation, how far (art pixels) to shift the card so its feet line up with the idle art, for
+## animations drawn on a different canvas (e.g. {&"attack": Vector2(-58, 111)}). Mirrors with flip_h.
+@export var animation_offsets := {}
+var _base_offset := Vector2.ZERO
+
 var _attacking := false
 
 
@@ -75,6 +80,7 @@ func _ready():
 		_alert.hide()
 	_pace = 1.0 + randf_range(-chase_pace_variation, chase_pace_variation)
 	sprite.animation_finished.connect(_on_sprite_animation_finished)
+	_base_offset = sprite.offset
 	add_to_group(&"enemies")
 
 
@@ -314,3 +320,11 @@ func _spawn_hitbox() -> void:
 func _on_hitbox_hit(target_body: Node3D) -> void:
 	if target_body.has_method("receive_hit"):
 		target_body.receive_hit(stats.get_damage())
+
+
+## Keeps the body still when an animation's frames sit differently in their canvas.
+func _process(_delta: float) -> void:
+	var shift: Vector2 = animation_offsets.get(sprite.animation, Vector2.ZERO)
+	if sprite.flip_h:
+		shift.x = -shift.x
+	sprite.offset = _base_offset + shift

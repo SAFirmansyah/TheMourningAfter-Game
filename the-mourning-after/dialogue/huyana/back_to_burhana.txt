@@ -1,0 +1,21 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# CUTSCENE: Back to Burhana
+@text
+Behind every surrender is a spirit too broken to fight.
+
+Some causes are simply too lost to continue.
+The sisters of Huyana would never know if theirs – the cure to death – was truly one such cause.
+But having decided it was, they let time win the race.
+
+The people of Silvaluca would never know what they could’ve lost that night.
+A boy of fourteen has a troubled night, dreaming of a stranger that walked their roads, and took something precious from his people.
+But he wakes the next morning, still fourteen, and goes about his day.
+
+The rumours of strange, mutated creatures outside their walls would be proven true, but not pose much of a threat to the combined might of the Silvalu forces.
+
+The sisters of Huyana would pass to the next world and meet again their lost sisters, and everybody the plague had taken from Burhana, too.
+
+The cycle of pain and death never would begin.
+There would be no mourning after.
+@end

@@ -1,0 +1,30 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# CUTSCENE: The Plague
+@text
+Behind every surrender is a spirit too broken to fight.
+Behind every fight is a soul too desperate to surrender.
+
+Behind every story, lies another.
+Your time-thieving foes, the witches that brought Silvaluca to its knees…
+Were once stolen from much the same. Not by outsiders,
+Not by anybody they could paint up as perfect villains, no—
+Rather, by a force of nature they could not cull.
+
+Once upon a time, far, far north, where your people have never ventured,
+Flourished a people not too different from your own, give or take a few occult interests…
+They were called Burhana.
+
+Then, a plague ravaged through their numbers. A manageable nuisance at first,
+Fevers and coughing fits that soon confined them to their beds,
+Then led them to their burning pyres.
+
+Mere dozens were left standing – hardly something you’d call a civilization anymore.
+So, they moved, hoping not to carry with them the deadly disease.
+
+But an illness far worse did fester amongst those sparse survivors—
+An obsession with death itself… an all-consuming desire to overcome it.
+
+“Can one live forever?” was no longer a question to the sisters of Huyana.
+It was their only reason to live.
+@end

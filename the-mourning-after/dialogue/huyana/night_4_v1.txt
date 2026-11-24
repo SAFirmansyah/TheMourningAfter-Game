@@ -1,0 +1,13 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NIGHT SCENE 4 v1
+@move gwenith FireRight
+@walk constance Campfire
+@settle
+GWENITH (lost in thought): I don’t know what to do.
+CONSTANCE (sad): Still thinking about what Shuyi said?
+GWENITH (neutral): It’s less about what she said. I’m sure with how far apart we are in age, we can’t always meet eye to eye.
+GWENITH (scared): But… I hope she’s not upset with me.
+CONSTANCE (happy): Aw, Gwen. Come here. I’m sure she isn’t. She’s shaken, but she loves us. Most of all, you.
+GWENITH (neutral): Why me?
+CONSTANCE (happy): I think she’d had enough of mine and Rudrama’s nonsense by the time we graduated.

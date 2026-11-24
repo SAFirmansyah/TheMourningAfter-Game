@@ -1,0 +1,31 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @text ... @end is a black-screen text cutscene (blank lines split stanzas).
+# NARRATIVE BEAT: Motivation
+@room base Start
+@fade in
+PERRIN (sad): This place feels so empty without her.
+PERRIN (neutral): I loved watching her at work. She did everything so gracefully, I never understood how.
+PERRIN (sad): All that time observing, and now that I’m on my own, I have no idea where to start.
+# Perrin inspects the portrait of Avelina.
+@walk perrin Portrait
+PERRIN (neutral): Lady Marshal Avelina… my mother.
+PERRIN (sad): After father fell in battle, she took up his station as though they had been the same person.
+PERRIN (neutral): Nobody ever doubted her.
+PERRIN (confident): Or if they did, she squashed every inch of that doubt.
+PERRIN (neutral): Leading Silvaluca’s elite warriors, monitoring information from outside our borders, and keeping order within.
+PERRIN (neutral): Soon, all of that will fall to me. But first, we need to reverse the damage from that night.
+# Camera pans away from Perrin.
+@pan SwordStand
+PERRIN (out of sight): Her swords… now those, I’m familiar with. She trained me well.
+PERRIN (out of sight): She never did get to train me with the other weapons up in her armory, though.
+@pan PrayerSpot
+PERRIN (out of sight): She didn’t raise me particularly religious, either. But gods, whoever you are, if you’re out there…
+PERRIN (out of sight): Please. Give me the strength to take back the time those witches stole from us.
+PERRIN (out of sight): We know who it is, now. Or at least, where they live.
+@pan SouthExit
+PERRIN (out of sight): I’m going to be the one to fight through those beasts and carve a path to their leader.
+# Camera pans back to Perrin.
+@pan back
+PERRIN (confident): I’ll bring everyone back. I’ll fix it all. I have to.
+# Perrin walks to the sword stand.
+@walk perrin SwordStand

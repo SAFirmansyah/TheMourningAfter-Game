@@ -1,5 +1,9 @@
 [gd_scene format=3 uid="uid://cywkvj6a2b6qt"]
+[ext_resource type="PackedScene" path="res://scenes/ui/atmosphere.tscn" id="94_mood"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hero_tutorial.tscn" id="93_herotut"]
+[ext_resource type="Script" path="res://scripts/world/hero_story.gd" id="92_herostory"]
 
+[ext_resource type="PackedScene" path="res://scenes/ui/test_skip.tscn" id="91_testskip"]
 [ext_resource type="Script" uid="uid://crvbgui6750ee" path="res://scripts/world/world.gd" id="1_world"]
 [ext_resource type="PackedScene" uid="uid://cr0w4u33y1d57" path="res://scenes/player/player.tscn" id="2_player"]
 [ext_resource type="PackedScene" path="res://scenes/camera/camera_rig.tscn" id="3_rig"]
@@ -8,7 +12,6 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/interaction_hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/pause_menu.tscn" id="6_pause"]
 [ext_resource type="PackedScene" path="res://scenes/ui/save_indicator.tscn" id="7_saving"]
-[ext_resource type="PackedScene" path="res://scenes/ui/skip_prompt.tscn" id="8_skip"]
 [ext_resource type="PackedScene" uid="uid://cyoq8xehvpyji" path="res://scenes/ui/player_hud.tscn" id="9_1yooq"]
 [ext_resource type="PackedScene" path="res://scenes/ui/fate_bargain.tscn" id="10_fate"]
 [ext_resource type="PackedScene" path="res://scenes/ui/test_tools.tscn" id="90_tools"]
@@ -42,6 +45,7 @@ distance = 13.0
 
 [node name="InteractionHUD" parent="." unique_id=551992976 node_paths=PackedStringArray("player") instance=ExtResource("5_hud")]
 player = NodePath("../Player")
+hand_drawn = true
 
 [node name="Transition" type="CanvasLayer" parent="." unique_id=402137032]
 layer = 10
@@ -60,11 +64,21 @@ world = NodePath("..")
 
 [node name="SaveIndicator" parent="." unique_id=1111831389 instance=ExtResource("7_saving")]
 
-[node name="SkipPrompt" parent="." unique_id=2000870685 instance=ExtResource("8_skip")]
-
 [node name="PlayerHUD" parent="." unique_id=1921822603 instance=ExtResource("9_1yooq")]
 
 [node name="FateBargain" parent="." unique_id=298331091 instance=ExtResource("10_fate")]
 
 [node name="TestTools" parent="." unique_id=2014849901 node_paths=PackedStringArray("world") instance=ExtResource("90_tools")]
 world = NodePath("..")
+
+[node name="TestSkip" parent="." node_paths=PackedStringArray("world") instance=ExtResource("91_testskip")]
+world = NodePath("..")
+
+[node name="HeroStory" type="Node" parent="." node_paths=PackedStringArray("world")]
+script = ExtResource("92_herostory")
+world = NodePath("..")
+
+[node name="HeroTutorial" parent="." node_paths=PackedStringArray("world") instance=ExtResource("93_herotut")]
+world = NodePath("..")
+
+[node name="Atmosphere" parent="." instance=ExtResource("94_mood")]
