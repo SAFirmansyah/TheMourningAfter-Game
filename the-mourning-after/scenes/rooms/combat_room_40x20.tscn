@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://c5i7s5reh0n2l"]
 
 [ext_resource type="Script" uid="uid://chm8scfmsnvei" path="res://scripts/world/combat_room.gd" id="1_02tjn"]
-[ext_resource type="Texture2D" uid="uid://ccjrrxcuhjp88" path="res://textures/tile_stone_light.png" id="2_02tjn"]
 [ext_resource type="PackedScene" uid="uid://ckakiy7lmk260" path="res://scenes/world/grass.tscn" id="2_wgijv"]
-[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_sxs3r"]
+[ext_resource type="PackedScene" uid="uid://764k273fks56" path="res://scenes/world/path_exit.tscn" id="3_sxs3r"]
 [ext_resource type="Texture2D" uid="uid://bvkrvehb2lhbh" path="res://textures/Grass/grass_tile_nobg_12.png" id="3_yfu0s"]
 [ext_resource type="Texture2D" uid="uid://du10dxp0mxfsr" path="res://textures/Grass/grass_tile_nobg_1.png" id="4_6b4tt"]
 [ext_resource type="Texture2D" uid="uid://bdidw2btubx25" path="res://textures/Grass/grass_tile_nobg_2.png" id="5_f462t"]
@@ -16,12 +15,15 @@
 [ext_resource type="Texture2D" uid="uid://mf7ufqkoflqu" path="res://textures/Grass/grass_tile_nobg_9.png" id="12_y0mc5"]
 [ext_resource type="Texture2D" uid="uid://dtrchb214mfmt" path="res://textures/Grass/grass_tile_nobg_10.png" id="13_ryf5o"]
 [ext_resource type="Texture2D" uid="uid://dnyjr52nd52fi" path="res://textures/Grass/grass_tile_nobg_11.png" id="14_x0fnb"]
+[ext_resource type="Shader" uid="uid://c1s6kpuokatt1" path="res://shaders/ground.gdshader" id="15_wgijv"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q81l4"]
-albedo_texture = ExtResource("2_02tjn")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8fy0y"]
+render_priority = 0
+shader = ExtResource("15_wgijv")
+shader_parameter/world_uv_scale = 0.25
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_06onj"]
-material = SubResource("StandardMaterial3D_q81l4")
+material = SubResource("ShaderMaterial_8fy0y")
 size = Vector2(27.713, 13.856)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_02tjn"]
@@ -49,7 +51,7 @@ size = Vector3(27.7128, 2, 0.4)
 script = ExtResource("1_02tjn")
 grass_scn = ExtResource("2_wgijv")
 grass_textures = Array[Texture2D]([ExtResource("3_yfu0s"), ExtResource("4_6b4tt"), ExtResource("5_f462t"), ExtResource("6_trhj3"), ExtResource("7_7bu71"), ExtResource("8_syemy"), ExtResource("9_6aa0k"), ExtResource("10_1rj04"), ExtResource("11_oq406"), ExtResource("12_y0mc5"), ExtResource("13_ryf5o"), ExtResource("14_x0fnb")])
-ground_tint = Color(0.32, 0.5, 0.28, 1)
+ground_tint = Color(0.21960784, 0.24313726, 0.14117648, 1)
 
 [node name="FloorStatic" type="StaticBody3D" parent="." unique_id=1633995675]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Material" uid="uid://bjs7uap1srsok" path="res://materials/ground.tres" id="1_3cb7q"]
 [ext_resource type="Script" uid="uid://c575pknxi1h5t" path="res://scripts/world/constance_fight.gd" id="1_pf74m"]
-[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="2_pf74m"]
+[ext_resource type="PackedScene" uid="uid://764k273fks56" path="res://scenes/world/path_exit.tscn" id="2_pf74m"]
 [ext_resource type="PackedScene" uid="uid://bmlc88qlhew43" path="res://scenes/enemies/perrin_enemy.tscn" id="4_hw0vx"]
 [ext_resource type="PackedScene" uid="uid://dhh6h5r6t4oq1" path="res://scenes/player/constance.tscn" id="5_d6gko"]
 [ext_resource type="PackedScene" path="res://scenes/camera/camera_rig.tscn" id="6_886oe"]
@@ -139,6 +139,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7)
 process_priority = -10
 process_physics_priority = 10
 transform = Transform3D(1, 0, 0, 0, 0.9063077, 0.42261824, 0, -0.42261824, 0.9063077, 0, 0.8, 0)
+distance = 13.0
 
 [node name="PlayerHUD" parent="." unique_id=1921822603 instance=ExtResource("7_mr52n")]
 

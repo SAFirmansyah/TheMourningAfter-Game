@@ -59,6 +59,11 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jhy0a"]
 animations = [{
+"frames": [],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("6_xlv1c")
@@ -238,7 +243,7 @@ script = ExtResource("1_j5pes")
 stats = ExtResource("2_xlv1c")
 base_move_speed = 1.5
 attack_cooldown = 1.0
-knockback_multiplier = 2.0
+knockback_multiplier = 1.5
 loot_pool = Array[ExtResource("3_hbhe7")]([ExtResource("6_m4cp3"), ExtResource("7_8dncx")])
 metadata/_custom_type_script = "uid://dnbf3vat68acm"
 

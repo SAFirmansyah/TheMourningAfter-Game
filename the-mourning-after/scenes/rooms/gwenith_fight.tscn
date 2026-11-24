@@ -1,9 +1,14 @@
 [gd_scene format=3 uid="uid://bemo8fs2seh6f"]
 
-[ext_resource type="PackedScene" path="res://scenes/boss/gwenith_char.tscn" id="91_boss"]
 [ext_resource type="Script" uid="uid://dpt8nyhhmf7kl" path="res://scripts/world/boss_room.gd" id="1_jibqg"]
-[ext_resource type="Material" path="res://materials/ground.tres" id="2_5o2fl"]
-[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_ghhom"]
+[ext_resource type="Material" uid="uid://bjs7uap1srsok" path="res://materials/ground.tres" id="2_5o2fl"]
+[ext_resource type="PackedScene" uid="uid://764k273fks56" path="res://scenes/world/path_exit.tscn" id="3_ghhom"]
+[ext_resource type="PackedScene" uid="uid://bo67plntlruy6" path="res://scenes/test/prop.tscn" id="5_5o2fl"]
+[ext_resource type="Texture2D" uid="uid://rnkuokuk8dqp" path="res://textures/Gwenith/Farmer Boss/farmerboss_sack.png" id="6_ghhom"]
+[ext_resource type="Texture2D" uid="uid://58yb5yhhxwty" path="res://textures/Gwenith/Farmer Boss/farmerboss_haycarrier.png" id="7_xigvd"]
+[ext_resource type="Texture2D" uid="uid://b5vehe24c8cgv" path="res://textures/Gwenith/Farmer Boss/farmerboss_uprightbarrel.png" id="8_bt380"]
+[ext_resource type="Texture2D" uid="uid://b4vyc3kjk7m2w" path="res://textures/Gwenith/Farmer Boss/farmerboss_3barrel.png" id="9_7eud7"]
+[ext_resource type="PackedScene" uid="uid://77hyg5pj24v0" path="res://scenes/boss/gwenith_char.tscn" id="91_boss"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_gip0k"]
 material = ExtResource("2_5o2fl")
@@ -30,23 +35,23 @@ size = Vector3(0.4, 2, 6)
 script = ExtResource("1_jibqg")
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=1514557725]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 mesh = SubResource("PlaneMesh_gip0k")
 
 [node name="Floor2" type="MeshInstance3D" parent="." unique_id=1021883000]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 mesh = SubResource("PlaneMesh_bt380")
 
 [node name="Floor3" type="MeshInstance3D" parent="." unique_id=910577746]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 9, 0, 0)
 mesh = SubResource("PlaneMesh_bt380")
 
 [node name="Floor4" type="MeshInstance3D" parent="." unique_id=1210602577]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 0)
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 18, 0, 0)
 mesh = SubResource("PlaneMesh_bt380")
 
-[node name="PlayerStart" type="Marker3D" parent="." unique_id=2084446842]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0)
-
 [node name="Walls" type="StaticBody3D" parent="." unique_id=267476110]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 
 [node name="North" type="CollisionShape3D" parent="Walls" unique_id=1126435396]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -13)
@@ -121,12 +126,213 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 1, 10)
 shape = SubResource("BoxShape3D_6mbcj")
 
 [node name="BossEntry" parent="." unique_id=1793029507 instance=ExtResource("3_ghhom")]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -15, 0, 0)
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, -12, 0, 0)
 target_entry = &"East"
 
 [node name="BossExit" parent="." unique_id=228642142 instance=ExtResource("3_ghhom")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
 target_entry = &"WestExit"
 
-[node name="Gwenith" parent="." instance=ExtResource("91_boss")]
+[node name="PlayerStart" type="Marker3D" parent="." unique_id=2084446842]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 0)
+
+[node name="Gwenith" parent="." unique_id=1543071855 instance=ExtResource("91_boss")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+
+[node name="Prop" type="Node3D" parent="." unique_id=1241965099]
+
+[node name="PropStone" parent="Prop" unique_id=125809204 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 8, 0.3, 7)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropStone" unique_id=351090667]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("6_ghhom")
+
+[node name="PropStone2" parent="Prop" unique_id=824560099 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -5, 0.3, -5)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropStone2" unique_id=1888385458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("6_ghhom")
+
+[node name="PropGerobak" parent="Prop" unique_id=574868374 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 3.5, 0.1, -5)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropGerobak" unique_id=1549218122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("7_xigvd")
+
+[node name="PropBarrelV" parent="Prop" unique_id=2060456575 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, 0.4, -5)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrelV" unique_id=1539261248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("8_bt380")
+
+[node name="PropBarrel" parent="Prop" unique_id=1231900000 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, -11.5, 0.4, -5)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrel" unique_id=1078182688]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.8, 0)
+texture = ExtResource("9_7eud7")
+
+[node name="PropBarrel2" parent="Prop" unique_id=1596557216 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, -11.5, 0.4, -6)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrel2" unique_id=50967784]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.8, 0)
+texture = ExtResource("9_7eud7")
+
+[node name="PropBarrel3" parent="Prop" unique_id=1179840530 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, -11.5, 0.4, -7)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrel3" unique_id=2096661733]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.8, 0)
+texture = ExtResource("9_7eud7")
+
+[node name="PropBarrel4" parent="Prop" unique_id=1188809564 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, -11.5, 0.4, -8)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrel4" unique_id=273756780]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.8, 0)
+texture = ExtResource("9_7eud7")
+
+[node name="PropBarrel5" parent="Prop" unique_id=1168412001 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, -11.5, 0.4, 5)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrel5" unique_id=94568638]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.8, 0)
+texture = ExtResource("9_7eud7")
+
+[node name="PropBarrel6" parent="Prop" unique_id=195025879 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, -11.5, 0.4, 6)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrel6" unique_id=1976331709]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.8, 0)
+texture = ExtResource("9_7eud7")
+
+[node name="PropBarrel7" parent="Prop" unique_id=835731021 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, -11.5, 0.4, 7)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrel7" unique_id=1371079612]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.8, 0)
+texture = ExtResource("9_7eud7")
+
+[node name="PropBarrel8" parent="Prop" unique_id=609318300 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, -11.5, 0.4, 8)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrel8" unique_id=1637685730]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.8, 0)
+texture = ExtResource("9_7eud7")
+
+[node name="PropGerobak2" parent="Prop" unique_id=737292636 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -6.5, 0.1, -8)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropGerobak2" unique_id=1930350954]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("7_xigvd")
+
+[node name="PropGerobak3" parent="Prop" unique_id=897600748 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -6.5, 0.1, -6)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropGerobak3" unique_id=599692171]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("7_xigvd")
+
+[node name="PropGerobak4" parent="Prop" unique_id=1123481658 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -6.5, 0.1, 8)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropGerobak4" unique_id=1596480076]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("7_xigvd")
+
+[node name="PropGerobak5" parent="Prop" unique_id=1301247037 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -6.5, 0.1, 6)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropGerobak5" unique_id=1320685115]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("7_xigvd")
+
+[node name="PropBarrelV2" parent="Prop" unique_id=1075994074 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.4, 10)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrelV2" unique_id=2067384627]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("8_bt380")
+
+[node name="PropBarrelV3" parent="Prop" unique_id=462238787 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 2, 0.4, 10)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrelV3" unique_id=877062722]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("8_bt380")
+
+[node name="PropBarrelV4" parent="Prop" unique_id=1853146193 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -2, 0.4, 10)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrelV4" unique_id=1991382995]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("8_bt380")
+
+[node name="PropStone3" parent="Prop" unique_id=1153671982 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5, 0.3, 5)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropStone3" unique_id=1725186514]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("6_ghhom")
+
+[node name="PropGerobak6" parent="Prop" unique_id=2144215717 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -4.5, 0.1, 5)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropGerobak6" unique_id=753780404]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("7_xigvd")
+
+[node name="PropBarrelV5" parent="Prop" unique_id=635131260 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0.4, -10)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrelV5" unique_id=307738462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("8_bt380")
+
+[node name="PropBarrelV6" parent="Prop" unique_id=1460782140 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 2, 0.4, -10)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrelV6" unique_id=1738234676]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("8_bt380")
+
+[node name="PropBarrelV7" parent="Prop" unique_id=1780907299 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -2, 0.4, -10)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrelV7" unique_id=1672927689]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("8_bt380")
+
+[node name="PropStone4" parent="Prop" unique_id=218947431 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 11, 0.3, -8)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropStone4" unique_id=1399897804]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("6_ghhom")
+
+[node name="PropBarrel9" parent="Prop" unique_id=1353048353 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, 10, 0.4, 9)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrel9" unique_id=1837770434]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.8, 0)
+texture = ExtResource("9_7eud7")
+
+[node name="PropBarrel10" parent="Prop" unique_id=161043027 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(-1.7484556e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.7484556e-08, 8, 0.4, -9)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropBarrel10" unique_id=93824011]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.8, 0)
+texture = ExtResource("9_7eud7")
+
+[node name="PropGerobak7" parent="Prop" unique_id=745938002 instance=ExtResource("5_5o2fl")]
+transform = Transform3D(-1.7484556e-08, 0.4, 0, -0.4, -1.7484556e-08, 0, 0, 0, 0.4, 11, 0.7, 4)
+
+[node name="Sprite3D" type="Sprite3D" parent="Prop/PropGerobak7" unique_id=991445835]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+texture = ExtResource("7_xigvd")

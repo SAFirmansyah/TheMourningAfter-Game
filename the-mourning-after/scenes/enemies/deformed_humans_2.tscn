@@ -233,7 +233,7 @@ script = ExtResource("1_bfsl6")
 stats = ExtResource("2_3kid2")
 base_move_speed = 1.5
 attack_cooldown = 1.0
-knockback_multiplier = 2.0
+knockback_multiplier = 1.5
 
 [node name="Card" type="AnimatedSprite3D" parent="." unique_id=1100473988]
 transform = Transform3D(-0.2, 0, -1.7484556e-08, 0, 0.2, 0, 1.7484556e-08, 0, -0.2, 0, 0.9, 0)

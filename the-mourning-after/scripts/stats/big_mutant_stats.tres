@@ -4,11 +4,11 @@
 
 [resource]
 script = ExtResource("1_upqwp")
-min_damage = 2
-max_damage = 5
-max_mutant_health = 50
+min_damage = 4
+max_damage = 9
+min_mutant_health = 50
 hitbox_radius = 1.0
 hitbox_height = 1.0
-spawn_vertical_offset = 1.0
+spawn_vertical_offset = 0.0
 unit_type = 1
 metadata/_custom_type_script = "uid://bjkrpp4lr4m5f"

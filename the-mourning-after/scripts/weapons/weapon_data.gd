@@ -6,7 +6,7 @@ extends Resource
 @export var attack_cooldown := 0.4 # TUNE: seconds between swings
 @export var active_window := 0.3 # TUNE: how long the hitbox stays on
 @export var active_delay := 0.1 # TUNE: windup before hitbox turns on
-@export var hitbox_radius := 0.7 # TUNE: sword reach around each hit point (m)
+@export var hitbox_radius := 0.4 # TUNE: sword reach around each hit point (m)
 @export var hitbox_height := 1.6 # TUNE: vertical coverage of the swing (m); never less than 2x radius
 
 @export_group("Ability")

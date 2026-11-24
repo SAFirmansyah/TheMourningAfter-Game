@@ -18,7 +18,7 @@ signal all_enemies_defeated
 @export_group("Grass")
 @export var grass_scn: PackedScene = load("res://scenes/world/grass.tscn")
 @export var grass_textures: Array[Texture2D] = [] # fill with all 20 variants in the inspector
-@export var grass_count := Vector2i(6, 14)
+@export var grass_count := Vector2i(10000, 10000)
 @export var grass_wall_clearance := 0.3
 
 var big_enemy_scn: PackedScene = load("res://scenes/enemies/low_mutant.tscn")

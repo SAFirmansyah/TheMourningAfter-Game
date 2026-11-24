@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bob5v6fkppymb"]
 
 [ext_resource type="Script" uid="uid://dvtvhxkx8nbyv" path="res://scripts/world/prep_room.gd" id="1_3fhjk"]
-[ext_resource type="Material" path="res://materials/ground.tres" id="1_q8h2i"]
-[ext_resource type="PackedScene" path="res://scenes/test/prop.tscn" id="2_3fhjk"]
+[ext_resource type="Material" uid="uid://bjs7uap1srsok" path="res://materials/ground.tres" id="1_q8h2i"]
+[ext_resource type="PackedScene" uid="uid://bo67plntlruy6" path="res://scenes/test/prop.tscn" id="2_3fhjk"]
 [ext_resource type="PackedScene" path="res://scenes/world/heal_spot.tscn" id="3_ih58b"]
-[ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="4_krrcy"]
+[ext_resource type="PackedScene" uid="uid://764k273fks56" path="res://scenes/world/path_exit.tscn" id="4_krrcy"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_l5q7s"]
 material = ExtResource("1_q8h2i")
@@ -18,7 +18,7 @@ size = Vector3(0.4, 2, 13)
 
 [node name="CooldownNC" type="Node3D" unique_id=2084714350]
 script = ExtResource("1_3fhjk")
-ground_tint = Color(0.72, 0.66, 0.42, 1)
+ground_tint = Color(0.34901962, 0.38039216, 0.23921569, 1)
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=1003235353]
 mesh = SubResource("PlaneMesh_l5q7s")
@@ -56,11 +56,9 @@ shape = SubResource("BoxShape3D_nccns")
 [node name="RestSpot" parent="Props" unique_id=1471819551 instance=ExtResource("2_3fhjk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
 
-[node name="Card" parent="Props/RestSpot" index="0"]
-modulate = Color(0.55, 0.85, 0.95, 1)
-
 [node name="HealSpot" parent="Props/RestSpot" unique_id=1107182048 instance=ExtResource("3_ih58b")]
 action_label = "Drink"
+lines = PackedStringArray()
 
 [node name="WestExit" parent="." unique_id=1856596219 instance=ExtResource("4_krrcy")]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -15, 0, 0)

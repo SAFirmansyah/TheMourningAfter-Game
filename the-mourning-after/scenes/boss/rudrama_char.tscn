@@ -1,18 +1,88 @@
 [gd_scene format=3 uid="uid://dvmnvlpfa8kbk"]
 
-[ext_resource type="Script" path="res://scripts/boss/rudrama_char.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://bumtsbrwnl4i6" path="res://scripts/boss/rudrama_char.gd" id="1_script"]
 [ext_resource type="Resource" path="res://scripts/boss/rudrama_stats.tres" id="2_stats"]
-[ext_resource type="Texture2D" uid="uid://dwkbfm00c2muy" path="res://icon.svg" id="3_icon"]
+[ext_resource type="Texture2D" uid="uid://c75pohe2formq" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00000.png" id="3_4fy7k"]
+[ext_resource type="Texture2D" uid="uid://b4k27ed7tftrg" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00001.png" id="4_he5tx"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="4_hurtbox"]
 [ext_resource type="PackedScene" path="res://scenes/ui/boss_health_bar.tscn" id="5_bar"]
+[ext_resource type="Texture2D" uid="uid://08ucboevjckt" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00002.png" id="5_plugm"]
+[ext_resource type="Texture2D" uid="uid://c3ntid0ulkkcd" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00003.png" id="6_dyspl"]
+[ext_resource type="Texture2D" uid="uid://psrgnrr7uv6p" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00004.png" id="7_xsavq"]
+[ext_resource type="Texture2D" uid="uid://cx55oxpjpq10l" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00005.png" id="8_6t6ad"]
+[ext_resource type="Texture2D" uid="uid://crmu882tyajet" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00006.png" id="9_oupq8"]
+[ext_resource type="Texture2D" uid="uid://bmvyxi37m6mq4" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00007.png" id="10_2keb5"]
+[ext_resource type="Texture2D" uid="uid://v22erh80fyow" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00008.png" id="11_uqudo"]
+[ext_resource type="Texture2D" uid="uid://cx0qje7slftv5" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00009.png" id="12_p82u7"]
+[ext_resource type="Texture2D" uid="uid://y3f3apgj0bnb" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00010.png" id="13_x4dtd"]
+[ext_resource type="Texture2D" uid="uid://c5krdelkxlobi" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00011.png" id="14_vl5yv"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jhy0a"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4fy7k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_he5tx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_plugm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_dyspl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xsavq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6t6ad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_oupq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2keb5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_uqudo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_p82u7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_x4dtd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vl5yv")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
 radius = 0.6
-height = 2.8
+height = 1.85
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hurt"]
 radius = 0.6
-height = 2.4
+height = 1.8
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_shield"]
 shading_mode = 0
@@ -39,46 +109,45 @@ size = Vector2(0.16, 0.16)
 offsets = PackedFloat32Array(0, 0.25, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="RudramaChar" type="CharacterBody3D"]
+[node name="RudramaChar" type="CharacterBody3D" unique_id=1554028094]
 collision_layer = 8
 collision_mask = 135
 motion_mode = 1
 script = ExtResource("1_script")
 stats = ExtResource("2_stats")
 display_name = "Rudrama"
-move_speed_multiplier = 1.0
 
-[node name="Card" type="Sprite3D" parent="."]
-modulate = Color(0.95, 0.5, 0.4, 1)
-pixel_size = 0.024
+[node name="Card" type="AnimatedSprite3D" parent="." unique_id=1559152768]
+transform = Transform3D(0.065, 0, 0, 0, 0.065, 0, 0, 0, 0.065, 0, 1.1, 0)
 offset = Vector2(0, 64)
-texture = ExtResource("3_icon")
+pixel_size = 0.024
+sprite_frames = SubResource("SpriteFrames_jhy0a")
+animation = &"idle"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1727088404]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 shape = SubResource("CapsuleShape3D_body")
 
-[node name="HurtboxArea" type="Area3D" parent="."]
+[node name="HurtboxArea" type="Area3D" parent="." unique_id=891498210]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 script = ExtResource("4_hurtbox")
 
-[node name="CollisionHurtbox" type="CollisionShape3D" parent="HurtboxArea"]
+[node name="CollisionHurtbox" type="CollisionShape3D" parent="HurtboxArea" unique_id=154159576]
 shape = SubResource("CapsuleShape3D_hurt")
 
-[node name="StatusLabel" type="Label3D" parent="."]
+[node name="StatusLabel" type="Label3D" parent="." unique_id=1110380075]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0)
 pixel_size = 0.01
 billboard = 1
 no_depth_test = true
 text = "Status"
 font_size = 48
-outline_size = 12
 
-[node name="ShieldVisual" type="MeshInstance3D" parent="."]
+[node name="ShieldVisual" type="MeshInstance3D" parent="." unique_id=1099558809]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0.55)
 mesh = SubResource("BoxMesh_shield")
 
-[node name="Aura" type="CPUParticles3D" parent="."]
+[node name="Aura" type="CPUParticles3D" parent="." unique_id=205764594]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
 emitting = false
 amount = 24
@@ -95,4 +164,4 @@ scale_amount_min = 0.6
 scale_amount_max = 1.4
 color_ramp = SubResource("Gradient_aura")
 
-[node name="BossHealthBar" parent="." instance=ExtResource("5_bar")]
+[node name="BossHealthBar" parent="." unique_id=612851388 instance=ExtResource("5_bar")]

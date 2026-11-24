@@ -1,16 +1,11 @@
 [gd_scene format=3 uid="uid://764k273fks56"]
 
 [ext_resource type="Script" uid="uid://dehwhg0tnq675" path="res://scripts/world/path_exit.gd" id="1_exit"]
-[ext_resource type="Texture2D" uid="uid://ccjrrxcuhjp88" path="res://textures/tile_stone_light.png" id="2_xfprw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_trigger"]
 size = Vector3(1.5, 2, 4)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_upxxc"]
-albedo_texture = ExtResource("2_xfprw")
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_path"]
-material = SubResource("StandardMaterial3D_upxxc")
 size = Vector2(6, 4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_side"]
