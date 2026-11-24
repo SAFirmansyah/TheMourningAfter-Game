@@ -1,0 +1,56 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/huyana/ui/request_branches.gd" id="1_branches"]
+[ext_resource type="Script" path="res://scripts/huyana/ui/branch_view.gd" id="2_branch"]
+[ext_resource type="Texture2D" path="res://textures/ui/Requests_Branch 2.png" id="4_requests"]
+[ext_resource type="Texture2D" path="res://textures/ui/Gwen_Order_Progress 2.png" id="5_gwen"]
+[ext_resource type="Texture2D" path="res://textures/ui/Shuyi_Order_Progress.png" id="6_shuyi"]
+
+[node name="RequestBranches" type="CanvasLayer"]
+layer = 3
+script = ExtResource("1_branches")
+
+[node name="Requests" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 6.0
+offset_right = 644.0
+offset_bottom = 369.0
+mouse_filter = 2
+script = ExtResource("2_branch")
+art = ExtResource("4_requests")
+bulbs = PackedVector2Array(140, 388, 267, 307, 413, 360, 560, 343, 693, 411, 818, 368)
+
+[node name="Gwenith" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -598.0
+offset_top = -438.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("2_branch")
+art = ExtResource("5_gwen")
+bulbs = PackedVector2Array(262, 450, 483, 456, 648, 407)
+bulb_diameter = 86.0
+urgent_below = -1.0
+
+[node name="Shuyi" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -583.0
+offset_right = 307.0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("2_branch")
+art = ExtResource("6_shuyi")
+bulbs = PackedVector2Array(347, 415, 240, 656)
+bulb_diameter = 86.0
+urgent_below = -1.0

@@ -33,17 +33,52 @@ const ITEMS := {
 }
 
 
+## Item art (textures/resources); repairs (no art) use a gear.
+## Each picture sits in a large canvas; ICON_BOUNDS is the drawn part (as shares of the canvas).
+const ICON_BOUNDS := {
+	&"infused_dew": Rect2(0.236, 0.0, 0.528, 1.0),
+	&"willow_bark": Rect2(0.055, 0.0, 0.891, 1.0),
+	&"graceroot": Rect2(0.33, 0.0, 0.341, 1.0),
+	&"bloodflower": Rect2(0.0, 0.08, 1.0, 0.84),
+	&"obsidian_grass": Rect2(0.378, 0.0, 0.245, 1.0),
+	&"pearls_of_night": Rect2(0.0, 0.052, 1.0, 0.897),
+	&"haemoshear": Rect2(0.188, 0.0, 0.624, 1.0),
+	&"nacrescorch": Rect2(0.188, 0.0, 0.624, 1.0),
+	&"capillanyx": Rect2(0.188, 0.0, 0.624, 1.0),
+}
+const ICONS := {
+	&"infused_dew": preload("res://textures/resources/resource_dew.png"),
+	&"willow_bark": preload("res://textures/resources/resource_bark.png"),
+	&"graceroot": preload("res://textures/resources/resource_mandrake.png"),
+	&"bloodflower": preload("res://textures/resources/resource_bloodflower.png"),
+	&"obsidian_grass": preload("res://textures/resources/resource_grassobsidian.png"),
+	&"pearls_of_night": preload("res://textures/resources/resource_pearl.png"),
+	&"haemoshear": preload("res://textures/resources/resource_haemoshear.png"),
+	&"nacrescorch": preload("res://textures/resources/resource_nacrescorch.png"),
+	&"capillanyx": preload("res://textures/resources/resource_capillanyx.png"),
+}
+
+
 static func info(item: StringName) -> Dictionary:
 	return ITEMS.get(item, ITEMS[REPAIR])
 
 
-## Placeholder icon: the item's initials, coloured by whose station it comes from; repairs are a gear.
+## The item's art fitted inside a circle of `radius`; without art, its initials coloured by whose
+## station it comes from (repairs are a gear).
 static func draw_icon(canvas: CanvasItem, item: StringName, center: Vector2, radius: float) -> void:
+	var icon: Texture2D = ICONS.get(item)
+	if icon:
+		var share: Rect2 = ICON_BOUNDS.get(item, Rect2(0, 0, 1, 1))
+		var region := Rect2(share.position * icon.get_size(), share.size * icon.get_size())
+		var fit := minf(radius * 2.0 / region.size.x, radius * 2.0 / region.size.y)
+		var icon_size := region.size * fit
+		canvas.draw_texture_rect_region(icon, Rect2(center - icon_size / 2.0, icon_size), region)
+		return
 	var data := info(item)
 	if item == REPAIR:
 		_draw_gear(canvas, center, radius, data.color)
 		return
-	var font := ThemeDB.fallback_font
+	var font: Font = GameFonts.BODY
 	var font_size := int(radius * 1.25)
 	var text: String = data.initials
 	var text_size := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size)

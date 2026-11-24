@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/campfire.tscn" id="6_campfire"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/med_station.tscn" id="7_med"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/planter_boxes.tscn" id="8_planters"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/props/med_station_2.tscn" id="9_med2"]
 [ext_resource type="PackedScene" path="res://scenes/characters/npc.tscn" id="10_npc"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/order_point.tscn" id="11_order"]
 [ext_resource type="Script" path="res://scripts/huyana/worker_npc.gd" id="12_rudrama"]
@@ -87,11 +88,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0, -7)
 [node name="Campfire" parent="Stations" instance=ExtResource("6_campfire")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.333)
 
-[node name="MedStation" parent="Stations" instance=ExtResource("7_med")]
+[node name="MedStations" type="Node3D" parent="Stations"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, 7.5)
+script = ExtResource("13_station")
+worker = "shuyi"
+menu_height = 3.8
 
-[node name="PlanterBoxes" parent="Stations" instance=ExtResource("8_planters")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6.875)
+[node name="MedStation" parent="Stations/MedStations" instance=ExtResource("7_med")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0, 0)
+
+[node name="MedStation2" parent="Stations/MedStations" instance=ExtResource("9_med2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 0)
+
+[node name="Planters" type="Node3D" parent="Stations"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6.9)
+script = ExtResource("13_station")
+worker = "gwenith"
+menu_height = 3.4
+
+[node name="Planter1" parent="Stations/Planters" instance=ExtResource("8_planters")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0, 1.1)
+
+[node name="Planter2" parent="Stations/Planters" instance=ExtResource("8_planters")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+
+[node name="Planter3" parent="Stations/Planters" instance=ExtResource("8_planters")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, 1.1)
 
 [node name="Characters" type="Node3D" parent="."]
 
@@ -111,7 +133,7 @@ tint = Color(0.85, 0.85, 0.55, 1)
 [node name="Gwenith" parent="Characters" instance=ExtResource("10_npc")]
 script = ExtResource("12_rudrama")
 worker = "gwenith"
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 7.333)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 0, 6.8)
 character_name = "Gwenith"
 tint = Color(0.6, 0.9, 0.5, 1)
 
@@ -138,66 +160,47 @@ interact_radius = 2.0
 
 [node name="OrderPoint" parent="Characters/Shuyi" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 pauses_worker = true
-station = NodePath("../../../Stations/MedStation/WorkStation")
+station = NodePath("../../../Stations/MedStations")
 worker = "shuyi"
 menu_height = 2.4
 interact_radius = 2.0
 
 [node name="OrderPoint" parent="Characters/Gwenith" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 pauses_worker = true
-station = NodePath("../../../Stations/PlanterBoxes/WorkStation")
+station = NodePath("../../../Stations/Planters")
 worker = "gwenith"
 menu_height = 2.4
 interact_radius = 2.0
 
-[node name="WorkStation" type="Node3D" parent="Stations/PlanterBoxes"]
-script = ExtResource("13_station")
-worker = "gwenith"
-slot_depth = 0.0
-bubble_height = 5.0
-menu_height = 6.4
-
-[node name="Slot1" parent="Stations/PlanterBoxes/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, 0)
+[node name="OrderPoint" parent="Stations/Planters/Planter1" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 worker = "gwenith"
 slot = 0
-station = NodePath("..")
-interact_radius = 2.6
+station = NodePath("../..")
+interact_radius = 1.8
 
-[node name="Slot2" parent="Stations/PlanterBoxes/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0, 0)
+[node name="OrderPoint" parent="Stations/Planters/Planter2" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 worker = "gwenith"
 slot = 1
-station = NodePath("..")
-interact_radius = 2.6
+station = NodePath("../..")
+interact_radius = 1.8
 
-[node name="Slot3" parent="Stations/PlanterBoxes/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 0, 0)
+[node name="OrderPoint" parent="Stations/Planters/Planter3" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 worker = "gwenith"
 slot = 2
-station = NodePath("..")
-interact_radius = 2.6
+station = NodePath("../..")
+interact_radius = 1.8
 
-[node name="WorkStation" type="Node3D" parent="Stations/MedStation"]
-script = ExtResource("13_station")
-worker = "shuyi"
-slot_depth = 0.0
-bubble_height = 3.6
-menu_height = 5.0
-
-[node name="Slot1" parent="Stations/MedStation/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, 0)
+[node name="OrderPoint" parent="Stations/MedStations/MedStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 worker = "shuyi"
 slot = 0
-station = NodePath("..")
-interact_radius = 1.6
+station = NodePath("../..")
+interact_radius = 1.5
 
-[node name="Slot2" parent="Stations/MedStation/WorkStation" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0, 0)
+[node name="OrderPoint" parent="Stations/MedStations/MedStation2" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 worker = "shuyi"
 slot = 1
-station = NodePath("..")
-interact_radius = 1.6
+station = NodePath("../..")
+interact_radius = 1.8
 
 [node name="NarrativeBeat" parent="Stations/Campfire" instance=ExtResource("14_beat")]
 

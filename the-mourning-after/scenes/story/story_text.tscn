@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scripts/story/story_text.gd" id="1_text"]
+[ext_resource type="Texture2D" path="res://textures/ui/arrow.png" id="2_arrow"]
 
 [node name="StoryText" type="CanvasLayer"]
 layer = 11
@@ -27,19 +28,19 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Hint" type="Label" parent="."]
+[node name="Hint" type="TextureRect" parent="."]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -360.0
-offset_top = -84.0
-offset_right = -48.0
-offset_bottom = -44.0
+offset_left = -136.0
+offset_top = -110.0
+offset_right = -64.0
+offset_bottom = -55.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_colors/font_color = Color(0.7, 0.67, 0.6, 0.85)
-theme_override_font_sizes/font_size = 22
-text = "Click to continue"
-horizontal_alignment = 2
+mouse_filter = 2
+texture = ExtResource("2_arrow")
+expand_mode = 1
+stretch_mode = 5

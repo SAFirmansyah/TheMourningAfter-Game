@@ -10,6 +10,10 @@ var _progress := 0.0
 var _streaming := false
 
 
+func _ready() -> void:
+	visible_characters_behavior = TextServer.VC_CHARS_AFTER_SHAPING # lay out the whole line first, so centred text doesn't shift as it types
+
+
 func stream(new_text: String) -> void:
 	text = new_text
 	visible_characters = 0

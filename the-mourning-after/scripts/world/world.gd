@@ -203,10 +203,6 @@ func is_hero_side() -> bool:
 	return fate_bargain != null
 
 
-func can_view_stats() -> bool:
-	return is_hero_side() and not _in_cutscene
-
-
 ## Something worth saving happened since the last save (interaction, pickup, dialogue, order...).
 func mark_unsaved() -> void:
 	_unsaved = true

@@ -1,24 +1,37 @@
 [gd_scene format=3]
 
+[ext_resource type="FontFile" path="res://fonts/IMFellGreatPrimerSC-Regular.ttf" id="f_title"]
+
 [ext_resource type="Script" path="res://scripts/huyana/ui/order_menus.gd" id="1_menus"]
 [ext_resource type="Script" path="res://scripts/huyana/ui/item_badge.gd" id="2_badge"]
 [ext_resource type="Script" path="res://scripts/huyana/ui/bubble_tip.gd" id="3_tip"]
+[ext_resource type="Texture2D" path="res://textures/ui/gwenith_order_placement_.png" id="4_gwen"]
+[ext_resource type="Texture2D" path="res://textures/ui/shuyi_order_placement_.png" id="5_shuyi"]
+[ext_resource type="Texture2D" path="res://textures/ui/rudrama_order_placement.png" id="6_rudrama"]
+[ext_resource type="Texture2D" path="res://textures/resources/containment1.png" id="7_c1"]
+[ext_resource type="Texture2D" path="res://textures/resources/containment2.png" id="7_c2"]
+[ext_resource type="Texture2D" path="res://textures/resources/containment3.png" id="7_c3"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
-content_margin_left = 22.0
-content_margin_top = 16.0
-content_margin_right = 22.0
-content_margin_bottom = 16.0
-bg_color = Color(0.94, 0.92, 0.87, 0.97)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(0.12, 0.11, 0.1, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gwen"]
+content_margin_left = 45
+content_margin_top = 45
+content_margin_right = 45
+content_margin_bottom = 45
+texture = ExtResource("4_gwen")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_shuyi"]
+content_margin_left = 50
+content_margin_top = 50
+content_margin_right = 50
+content_margin_bottom = 50
+texture = ExtResource("5_shuyi")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rudrama"]
+content_margin_left = 45
+content_margin_top = 32
+content_margin_right = 45
+content_margin_bottom = 32
+texture = ExtResource("6_rudrama")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_button"]
 
@@ -36,10 +49,6 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_sep"]
-color = Color(0.12, 0.11, 0.1, 0.5)
-thickness = 2
-
 [node name="OrderMenus" type="CanvasLayer"]
 layer = 7
 script = ExtResource("1_menus")
@@ -53,21 +62,27 @@ offset_bottom = 340.0
 mouse_filter = 2
 
 [node name="Panel" type="PanelContainer" parent="Gwenith"]
+custom_minimum_size = Vector2(470, 415)
 layout_mode = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+theme_override_styles/panel = SubResource("StyleBoxTexture_gwen")
 
 [node name="Content" type="VBoxContainer" parent="Gwenith/Panel"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 8
 
 [node name="FoodLabel" type="Label" parent="Gwenith/Panel/Content"]
+theme_override_fonts/font = ExtResource("f_title")
 layout_mode = 2
-theme_override_colors/font_color = Color(0.35, 0.33, 0.3, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.45, 0.16, 0.1, 1)
+theme_override_font_sizes/font_size = 21
 text = "Food"
+horizontal_alignment = 1
 
 [node name="FoodRow" type="HBoxContainer" parent="Gwenith/Panel/Content"]
 layout_mode = 2
+alignment = 1
 theme_override_constants/separation = 8
 
 [node name="infused_dew" type="Button" parent="Gwenith/Panel/Content/FoodRow"]
@@ -158,13 +173,16 @@ caption = "Graceroot"
 count = 0
 
 [node name="IngredientLabel" type="Label" parent="Gwenith/Panel/Content"]
+theme_override_fonts/font = ExtResource("f_title")
 layout_mode = 2
-theme_override_colors/font_color = Color(0.35, 0.33, 0.3, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.45, 0.16, 0.1, 1)
+theme_override_font_sizes/font_size = 21
 text = "Ingredients"
+horizontal_alignment = 1
 
 [node name="IngredientRow" type="HBoxContainer" parent="Gwenith/Panel/Content"]
 layout_mode = 2
+alignment = 1
 theme_override_constants/separation = 8
 
 [node name="bloodflower" type="Button" parent="Gwenith/Panel/Content/IngredientRow"]
@@ -257,10 +275,12 @@ count = 0
 [node name="Status" type="Label" parent="Gwenith/Panel/Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.35, 0.33, 0.3, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 text = "Idle    E to close"
+horizontal_alignment = 1
 
 [node name="Tip" type="Control" parent="Gwenith"]
+visible = false
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 20.0
@@ -276,11 +296,14 @@ offset_bottom = 340.0
 mouse_filter = 2
 
 [node name="Panel" type="PanelContainer" parent="Shuyi"]
+custom_minimum_size = Vector2(620, 547)
 layout_mode = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+theme_override_styles/panel = SubResource("StyleBoxTexture_shuyi")
 
 [node name="Content" type="VBoxContainer" parent="Shuyi/Panel"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 8
 
 [node name="Rows" type="VBoxContainer" parent="Shuyi/Panel/Content"]
@@ -288,7 +311,7 @@ layout_mode = 2
 theme_override_constants/separation = 4
 
 [node name="haemoshear" type="Button" parent="Shuyi/Panel/Content/Rows"]
-custom_minimum_size = Vector2(560, 100)
+custom_minimum_size = Vector2(520, 100)
 layout_mode = 2
 focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
@@ -309,7 +332,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 10
-alignment = 0
+alignment = 1
 
 [node name="Medicine" type="Control" parent="Shuyi/Panel/Content/Rows/haemoshear/Line"]
 layout_mode = 2
@@ -322,10 +345,10 @@ count = 0
 
 [node name="Name" type="Label" parent="Shuyi/Panel/Content/Rows/haemoshear/Line"]
 layout_mode = 2
-custom_minimum_size = Vector2(190, 0)
+custom_minimum_size = Vector2(170, 0)
 size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 27
 text = "Haemoshear :"
 
 [node name="First" type="Control" parent="Shuyi/Panel/Content/Rows/haemoshear/Line"]
@@ -341,7 +364,7 @@ caption = "Bloodflower"
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 27
 text = "&"
 
 [node name="Second" type="Control" parent="Shuyi/Panel/Content/Rows/haemoshear/Line"]
@@ -354,7 +377,7 @@ diameter = 52.0
 caption = "Obsidian Grass"
 
 [node name="nacrescorch" type="Button" parent="Shuyi/Panel/Content/Rows"]
-custom_minimum_size = Vector2(560, 100)
+custom_minimum_size = Vector2(520, 100)
 layout_mode = 2
 focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
@@ -375,7 +398,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 10
-alignment = 0
+alignment = 1
 
 [node name="Medicine" type="Control" parent="Shuyi/Panel/Content/Rows/nacrescorch/Line"]
 layout_mode = 2
@@ -388,10 +411,10 @@ count = 0
 
 [node name="Name" type="Label" parent="Shuyi/Panel/Content/Rows/nacrescorch/Line"]
 layout_mode = 2
-custom_minimum_size = Vector2(190, 0)
+custom_minimum_size = Vector2(170, 0)
 size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 27
 text = "Nacrescorch :"
 
 [node name="First" type="Control" parent="Shuyi/Panel/Content/Rows/nacrescorch/Line"]
@@ -407,7 +430,7 @@ caption = "Obsidian Grass"
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 27
 text = "&"
 
 [node name="Second" type="Control" parent="Shuyi/Panel/Content/Rows/nacrescorch/Line"]
@@ -420,7 +443,7 @@ diameter = 52.0
 caption = "Pearls of Night"
 
 [node name="capillanyx" type="Button" parent="Shuyi/Panel/Content/Rows"]
-custom_minimum_size = Vector2(560, 100)
+custom_minimum_size = Vector2(520, 100)
 layout_mode = 2
 focus_mode = 0
 theme_override_styles/normal = SubResource("StyleBoxEmpty_button")
@@ -441,7 +464,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 10
-alignment = 0
+alignment = 1
 
 [node name="Medicine" type="Control" parent="Shuyi/Panel/Content/Rows/capillanyx/Line"]
 layout_mode = 2
@@ -454,10 +477,10 @@ count = 0
 
 [node name="Name" type="Label" parent="Shuyi/Panel/Content/Rows/capillanyx/Line"]
 layout_mode = 2
-custom_minimum_size = Vector2(190, 0)
+custom_minimum_size = Vector2(170, 0)
 size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 27
 text = "Capillanyx :"
 
 [node name="First" type="Control" parent="Shuyi/Panel/Content/Rows/capillanyx/Line"]
@@ -473,7 +496,7 @@ caption = "Pearls of Night"
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 27
 text = "&"
 
 [node name="Second" type="Control" parent="Shuyi/Panel/Content/Rows/capillanyx/Line"]
@@ -485,25 +508,22 @@ item = &"bloodflower"
 diameter = 52.0
 caption = "Bloodflower"
 
-[node name="Separator" type="HSeparator" parent="Shuyi/Panel/Content"]
-layout_mode = 2
-theme_override_styles/separator = SubResource("StyleBoxLine_sep")
-
 [node name="Hint" type="Label" parent="Shuyi/Panel/Content"]
 layout_mode = 2
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.12, 0.11, 0.1, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 21
 text = "Ingredients can be ordered from Gwenith (Farmer)."
 
 [node name="Status" type="Label" parent="Shuyi/Panel/Content"]
 layout_mode = 2
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.35, 0.33, 0.3, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 text = "Idle    E to close"
 
 [node name="Tip" type="Control" parent="Shuyi"]
+visible = false
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 20.0
@@ -519,11 +539,14 @@ offset_bottom = 860.0
 mouse_filter = 2
 
 [node name="Panel" type="PanelContainer" parent="Rudrama"]
+custom_minimum_size = Vector2(390, 187)
 layout_mode = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+theme_override_styles/panel = SubResource("StyleBoxTexture_rudrama")
 
 [node name="Content" type="VBoxContainer" parent="Rudrama/Panel"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 8
 
 [node name="Bubbles" type="HBoxContainer" parent="Rudrama/Panel/Content"]
@@ -555,7 +578,7 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("2_badge")
-label_text = "1"
+icon = ExtResource("7_c1")
 diameter = 66.0
 
 [node name="2" type="Button" parent="Rudrama/Panel/Content/Bubbles"]
@@ -582,7 +605,7 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("2_badge")
-label_text = "2"
+icon = ExtResource("7_c2")
 diameter = 66.0
 
 [node name="3" type="Button" parent="Rudrama/Panel/Content/Bubbles"]
@@ -609,17 +632,18 @@ mouse_filter = 2
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("2_badge")
-label_text = "3"
+icon = ExtResource("7_c3")
 diameter = 66.0
 
 [node name="Status" type="Label" parent="Rudrama/Panel/Content"]
 layout_mode = 2
 horizontal_alignment = 1
 theme_override_colors/font_color = Color(0.35, 0.33, 0.3, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 18
 text = "Ready at the anvil    E to close"
 
 [node name="Tip" type="Control" parent="Rudrama"]
+visible = false
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 20.0

@@ -1,9 +1,13 @@
 [gd_scene format=3]
 
-[ext_resource type="PackedScene" path="res://scenes/huyana/props/story_prop.tscn" id="9_prop"]
 [ext_resource type="Script" path="res://scripts/world/room.gd" id="1_room"]
 [ext_resource type="Material" path="res://materials/ground.tres" id="2_ground"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_exit"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/props/altar/podium.tscn" id="4_podium"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/props/altar/bookshelf.tscn" id="5_shelf"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/props/altar/writing_table.tscn" id="6_writing"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/props/altar/chair.tscn" id="7_chair"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/props/altar/fortune_table.tscn" id="8_fortune"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
 material = ExtResource("2_ground")
@@ -63,10 +67,10 @@ target_entry = &"East"
 [node name="Stage" type="Node3D" parent="."]
 
 [node name="SonPortrait" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0, 0, -5.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2, 0, -4.4)
 
 [node name="Podium" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0, -5.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, -4.6)
 
 [node name="Exit" type="Marker3D" parent="Stage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4, 0, 0.0)
@@ -91,14 +95,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -4.0)
 
 [node name="Props" type="Node3D" parent="."]
 
-[node name="SonPortrait" parent="Props" instance=ExtResource("9_prop")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0, 0, -6.6)
+[node name="Podium" parent="Props" instance=ExtResource("4_podium")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.4)
 
-[node name="Label" parent="Props/SonPortrait" index="1"]
-text = "Mico's portrait"
+[node name="Bookshelf" parent="Props" instance=ExtResource("5_shelf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4, 0, -6.0)
 
-[node name="Podium" parent="Props" instance=ExtResource("9_prop")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.6)
+[node name="WritingTable" parent="Props" instance=ExtResource("6_writing")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6, 0, 6.6)
 
-[node name="Label" parent="Props/Podium" index="1"]
-text = "Altar podium"
+[node name="Chair" parent="Props" instance=ExtResource("7_chair")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3, 0, -5.8)
+
+[node name="FortuneTable" parent="Props" instance=ExtResource("8_fortune")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3, 0, 6.6)
