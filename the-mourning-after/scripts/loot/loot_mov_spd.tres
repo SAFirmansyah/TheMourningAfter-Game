@@ -7,5 +7,5 @@ script = ExtResource("1_sp048")
 loot_id = &"mov_spd_up"
 display_name = "Movemen Speed Up"
 effect = 3
-value = 0.2
+value = 0.1
 metadata/_custom_type_script = "uid://boygl2hxayimj"

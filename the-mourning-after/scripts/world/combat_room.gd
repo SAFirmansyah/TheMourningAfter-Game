@@ -71,11 +71,9 @@ func spawn_grass() -> void:
 		print("spawn_grass bailed: grass_scn=", grass_scn, " textures=", grass_textures.size())
 		return
 	var count := _rng.randi_range(grass_count.x, grass_count.y)
-	print("spawning ", count, " grass")
 	for i in count:
 		var pos: Variant = _random_grass_point(_floor_bounds)
 		if pos == null:
-			print("grass spot ", i, " rejected")
 			continue
 		var grass := grass_scn.instantiate() as Grass
 		add_child(grass)
