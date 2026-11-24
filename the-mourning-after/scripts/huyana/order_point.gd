@@ -29,8 +29,9 @@ func _ready() -> void:
 	if npc:
 		var card := npc.get_node(^"Card") as Sprite3D
 		character_name = npc.character_name
-		character_portrait = npc.portrait if npc.portrait else card.texture
-		character_portrait_tint = Color.WHITE if npc.portrait else npc.tint
+		var art: Texture2D = npc.portrait if npc.portrait else StoryPlayer.portrait(npc.character_name.to_lower(), "neutral")
+		character_portrait = art if art else card.texture
+		character_portrait_tint = Color.WHITE if art else npc.tint
 	var line := DialogueLine.new()
 	line.text = busy_line
 	_busy_conversation.append(line)

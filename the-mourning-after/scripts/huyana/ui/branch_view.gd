@@ -28,6 +28,7 @@ const SPARKLE_SIZE := 1.1 # TUNE: ready sparkle's size, relative to the bulb's d
 @export var bar_gap := 36.0 # TUNE: bar's distance below the bulb's circle (screen px)
 @export var urgent_below := 0.25 # TUNE: bar turns red below this share (requests' time left); -1 = never
 @export var draw_backing := false # parchment behind icons, for art whose circles are still empty
+@export var sparkle_scale := 1.1 # TUNE: ready sparkle size, relative to the bulb
 @export var pop_time := 0.3 # TUNE: a new item's pop-in time (s)
 @export var bar_glide := 8.0 # TUNE: how quickly bars catch up to their value (higher = snappier)
 
@@ -102,7 +103,7 @@ func _draw() -> void:
 				if entry.get("repair", -1.0) >= 0.0:
 					entry.repair = _bars[i]
 				pop = _ease_out_back(_pops[i])
-			draw_entry(self, bulb_center(i), bulb_radius(), entry, bar_size, bar_gap, urgent_below, draw_backing, pop)
+			draw_entry(self, bulb_center(i), bulb_radius(), entry, bar_size, bar_gap, urgent_below, draw_backing, pop, sparkle_scale)
 
 
 ## 0 -> 1 with a slight overshoot.
@@ -114,13 +115,13 @@ static func _ease_out_back(t: float) -> float:
 ## One entry in a circle of `radius` at `center`: optional parchment backing, icon, ready sparkle,
 ## and the progress bar `gap` below the circle.
 ## pop scales the icon (a new item popping in).
-static func draw_entry(canvas: CanvasItem, center: Vector2, radius: float, entry: Dictionary, bar: Vector2, gap: float, urgent: float, backing := false, pop := 1.0) -> void:
+static func draw_entry(canvas: CanvasItem, center: Vector2, radius: float, entry: Dictionary, bar: Vector2, gap: float, urgent: float, backing := false, pop := 1.0, sparkle_scale := SPARKLE_SIZE) -> void:
 	if backing:
 		canvas.draw_circle(center, radius * 0.98, BACKING)
 	RequestCatalog.draw_icon(canvas, entry.item, center, radius * pop * (0.85 if RequestCatalog.ICONS.has(entry.item) else 0.55))
 	if entry.get("sparkle", false):
 		var pulse := 0.5 + 0.5 * sin(Time.get_ticks_msec() / 600.0) # same calm pulse as the stations' sparkles
-		var side := radius * 2.0 * SPARKLE_SIZE * lerpf(0.9, 1.05, pulse)
+		var side := radius * 2.0 * sparkle_scale * lerpf(0.9, 1.05, pulse)
 		var sparkle_size := Vector2(side * SPARKLE.get_width() / SPARKLE.get_height(), side)
 		canvas.draw_texture_rect(SPARKLE, Rect2(center - sparkle_size / 2.0, sparkle_size), false, Color(1, 1, 1, lerpf(0.75, 1.0, pulse)))
 	var repair: float = entry.get("repair", -1.0)
