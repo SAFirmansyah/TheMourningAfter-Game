@@ -42,7 +42,7 @@ size = Vector3(7.1082, 2, 0.4)
 size = Vector3(18.9551, 2, 0.4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fit_EastBig"]
-size = Vector3(0.4, 2, 14.1119)
+size = Vector3(0.4, 2, 13.0597)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fit_WestSmallBot"]
 size = Vector3(0.4, 2, 0.3695)
@@ -73,13 +73,13 @@ shape = SubResource("BoxShape3D_wqfc1")
 shape = SubResource("BoxShape3D_ljejd")
 
 [node name="PlayerStart" type="Marker3D" parent="." unique_id=1815642706]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4217, 0, 7.5821)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4217, 0, 6.53)
 
 [node name="Walls" type="StaticBody3D" parent="." unique_id=1851108306]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3694, 1, -0.9477)
 
 [node name="EastBig" type="CollisionShape3D" parent="Walls" unique_id=141305201]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5261)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.05218)
 shape = SubResource("BoxShape3D_fit_EastBig")
 
 [node name="West" type="CollisionShape3D" parent="Walls" unique_id=1185509555]
@@ -115,7 +115,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.847, 0, -12.1362)
 shape = SubResource("BoxShape3D_fit_WestSmallTop2")
 
 [node name="WestExit" parent="." unique_id=597944303 instance=ExtResource("2_wqfc1")]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -2.3694, 0, 7.5821)
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -2.3694, 0, 6.53)
 
 [node name="EastExit" parent="." unique_id=713890851 instance=ExtResource("2_wqfc1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.4776, 0, -10.8992)

@@ -9,6 +9,8 @@ uniform float night_brightness = 0.45; // TUNE: brightness at full night (1 = no
 uniform float night_desaturation = 0.4; // TUNE: colour loss at full night (0 = none, 1 = grayscale)
 
 group_uniforms mood;
+uniform vec3 room_tint = vec3(1.0); // set by the room (eerie places)
+uniform float room_brightness = 1.0; // set by the room
 uniform float warmth = 0.0; // 0-1, set by the day cycle: golden hour at dawn and dusk
 uniform vec3 warm_tint : source_color = vec3(1.0, 0.8, 0.58); // TUNE: golden-hour colour
 uniform float warm_strength = 0.22; // TUNE: how strong golden hour gets
@@ -40,6 +42,8 @@ void fragment() {
 	vec3 dark = mix(color, night, amount * (1.0 - clamp(lit, 0.0, 0.9)));
 	vec3 result = dark * mix(vec3(1.0), light_color * 1.6, light_warmth * lit * amount);
 	result *= mix(vec3(1.0), warm_tint, warmth * warm_strength * (1.0 - amount));
+
+	result *= room_tint * room_brightness;
 
 	vec2 centred = (SCREEN_UV - 0.5) * vec2(SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x, 1.0);
 	result *= 1.0 - vignette * smoothstep(vignette_softness * 0.4, vignette_softness, length(centred) * 1.2);

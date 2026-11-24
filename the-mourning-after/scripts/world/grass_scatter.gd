@@ -14,6 +14,8 @@ const SIDE_MARGIN := 0.4 # TUNE: how far a card reaches sideways past its spot (
 const DEPTH_MARGIN := 0.08 # the card stands upright, so front/back it barely needs any room
 const PROP_CLEARANCE := 0.35 # TUNE: distance kept from props (m)
 const PROP_LAYERS := 2 # environment props / obstacles (not walls, not mobs)
+const SWAY_SCENE := preload("res://scenes/world/grass_sway.tscn")
+const SWAY_SHARE := 0.4 # TUNE: share of grass that sways in the wind (the rest stays still, to keep it light)
 
 var _rng := RandomNumberGenerator.new()
 
@@ -104,7 +106,7 @@ static func _clear(space: PhysicsDirectSpaceState3D, at: Vector3) -> bool:
 
 
 static func _plant(parent: Node3D, scene: PackedScene, tex: Array[Texture2D], rng: RandomNumberGenerator, at: Vector3) -> void:
-	var grass := scene.instantiate() as Grass
+	var grass := (SWAY_SCENE if rng.randf() < SWAY_SHARE else scene).instantiate() as Grass
 	parent.add_child(grass)
 	grass.global_position = at
 	grass.set_texture(tex[rng.randi() % tex.size()])

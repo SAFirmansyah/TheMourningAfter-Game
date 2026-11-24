@@ -1,4 +1,5 @@
 [gd_scene format=3 uid="uid://cywkvj6a2b6qt"]
+[ext_resource type="Script" path="res://scripts/visual/sprite_parallax.gd" id="95_parallax"]
 [ext_resource type="PackedScene" path="res://scenes/ui/atmosphere.tscn" id="94_mood"]
 [ext_resource type="PackedScene" path="res://scenes/ui/hero_tutorial.tscn" id="93_herotut"]
 [ext_resource type="Script" path="res://scripts/world/hero_story.gd" id="92_herostory"]
@@ -82,3 +83,6 @@ world = NodePath("..")
 world = NodePath("..")
 
 [node name="Atmosphere" parent="." instance=ExtResource("94_mood")]
+
+[node name="SpriteParallax" type="Node" parent="."]
+script = ExtResource("95_parallax")

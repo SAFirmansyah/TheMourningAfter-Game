@@ -15,7 +15,7 @@ script = ExtResource("1_obstacle")
 card = NodePath("Card")
 footprint_depth = 1.0
 footprint_width_scale = 0.773
-bubble_height = 6.2
+bubble_height = 3.1
 
 [node name="Card" type="Sprite3D" parent="."]
 offset = Vector2(0, 1032)

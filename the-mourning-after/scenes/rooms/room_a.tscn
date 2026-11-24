@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://inqew075ugr8"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/story_prop.tscn" id="15_storyprop"]
 
-[ext_resource type="Material" path="res://materials/ground.tres" id="m_ground"]
+[ext_resource type="Material" path="res://materials/ground_carpet.tres" id="m_ground"]
 
 [ext_resource type="Script" uid="uid://kx8x5if2lsig" path="res://scripts/world/base_room.gd" id="1_room"]
 [ext_resource type="PackedScene" uid="uid://764k273fks56" path="res://scenes/world/path_exit.tscn" id="3_exit"]
@@ -36,7 +36,8 @@ size = Vector3(4.3912, 2, 0.4)
 
 [node name="RoomA" type="Node3D" unique_id=1578787311]
 script = ExtResource("1_room")
-ground_tint = Color(0.17078546, 0.18878841, 0.10717378, 1)
+ground_tint = Color(0.3725, 0, 0.1765, 1)
+static_shadows = true
 
 [node name="PlayerStart" type="Marker3D" parent="." unique_id=1734752841]
 
@@ -149,6 +150,7 @@ texture = ExtResource("13_ph04b")
 script = ExtResource("7_awkto")
 
 [node name="Portrait" parent="Props" instance=ExtResource("15_storyprop")]
+visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -5.2)
 
 [node name="Label" parent="Props/Portrait" index="1"]
@@ -160,7 +162,7 @@ text = "Avelina's portrait"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0.5)
 
 [node name="Portrait" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -4.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.825, 0, -3.9)
 
 [node name="SwordStand" type="Marker3D" parent="Stage"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 1.9)

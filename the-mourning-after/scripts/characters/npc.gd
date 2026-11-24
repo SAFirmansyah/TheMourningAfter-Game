@@ -17,6 +17,7 @@ extends StaticBody3D
 
 
 func _ready() -> void:
+	add_to_group(&"parallax_character")
 	card.modulate = tint
 	if Engine.is_editor_hint():
 		return

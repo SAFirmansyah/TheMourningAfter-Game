@@ -265,7 +265,7 @@ attack_reach = 0.75
 
 [node name="Card" type="AnimatedSprite3D" parent="." unique_id=814884419]
 process_physics_priority = 20
-transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, 0, 0.9, 0)
+transform = Transform3D(0.095, 0, 0, 0, 0.095, 0, 0, 0, 0.095, 0, 0.747, 0)
 offset = Vector2(0, 64)
 pixel_size = 0.014
 alpha_cut = 1

@@ -37,6 +37,7 @@ func _ready() -> void:
 	panel.hide()
 	resume_button.pressed.connect(close)
 	save_button.pressed.connect(world.save_game)
+	_add_testing_toggle()
 	quit_button.pressed.connect(_on_quit)
 	_quit_no_save.pressed.connect(_quit_to_title)
 	for button: Button in [resume_button, save_button, quit_button, _quit_no_save]:
@@ -211,3 +212,21 @@ func _art_style(texture: Texture2D, art_size: Vector2, margins: Vector4) -> Styl
 	style.content_margin_bottom = margins.w * art_size.y
 	return style
 
+
+## "Testing tools: shown / hidden" under Save: toggles the testing buttons (top right, Skip scene).
+func _add_testing_toggle() -> void:
+	var toggle := Button.new()
+	toggle.name = "TestingTools"
+	toggle.flat = true
+	toggle.focus_mode = Control.FOCUS_ALL
+	toggle.add_theme_font_size_override(&"font_size", 26)
+	toggle.add_theme_color_override(&"font_color", Color(0.3, 0.32, 0.42))
+	toggle.add_theme_color_override(&"font_hover_color", HAND_TITLE)
+	HoverArt.apply(toggle)
+	var refresh := func() -> void: toggle.text = "Testing tools: %s" % ("shown" if TestTools.shown else "hidden")
+	refresh.call()
+	toggle.pressed.connect(func() -> void:
+		TestTools.shown = not TestTools.shown
+		refresh.call())
+	save_button.get_parent().add_child(toggle)
+	save_button.get_parent().move_child(toggle, save_button.get_index() + 1)

@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://bkv8mbatjv6bh"
+path="res://.godot/imported/beat_choice.txt-31996aa438b3b6e3110f43d5c9d8d513.res"
+
+[deps]
+
+source_file="res://dialogue/huyana/beat_choice.txt"
+dest_files=["res://.godot/imported/beat_choice.txt-31996aa438b3b6e3110f43d5c9d8d513.res"]
+
+[params]
+

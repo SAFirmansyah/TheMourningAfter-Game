@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bob5v6fkppymb"]
 [ext_resource type="Texture2D" path="res://icon.svg" id="p_icon"]
+[ext_resource type="Texture2D" path="res://textures/Pond Heal.png" id="p_pond"]
 [ext_resource type="Script" path="res://scripts/visual/facing_card.gd" id="p_card"]
 
 [ext_resource type="Script" uid="uid://dvtvhxkx8nbyv" path="res://scripts/world/prep_room.gd" id="1_3fhjk"]
@@ -27,15 +28,6 @@ size = Vector3(0.4, 2, 3.65)
 [sub_resource type="BoxShape3D" id="BoxShape3D_fit_EastLower"]
 size = Vector3(0.4, 2, 3.65)
 
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_pond"]
-top_radius = 1.2
-bottom_radius = 1.2
-height = 0.02
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pond"]
-shading_mode = 0
-albedo_color = Color(0.25, 0.45, 0.62, 1)
 
 [node name="CooldownNC" type="Node3D" unique_id=2084714350]
 script = ExtResource("1_3fhjk")
@@ -78,25 +70,23 @@ shape = SubResource("BoxShape3D_fit_EastLower")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5067)
 
 [node name="Card" type="Sprite3D" parent="Props/RestSpot"]
+visible = false
 modulate = Color(0.45, 0.65, 0.9, 1)
 offset = Vector2(0, 64)
 pixel_size = 0.009
 texture = ExtResource("p_icon")
 script = ExtResource("p_card")
 
-[node name="PondWater" type="MeshInstance3D" parent="Props/RestSpot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 1.2)
-mesh = SubResource("CylinderMesh_pond")
-surface_material_override/0 = SubResource("StandardMaterial3D_pond")
-
-[node name="PondLabel" type="Label3D" parent="Props/RestSpot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
-pixel_size = 0.008
-billboard = 1
-no_depth_test = true
-text = "Pond"
-font_size = 40
-outline_size = 10
+[node name="PondWater" type="Sprite3D" parent="Props/RestSpot"]
+offset = Vector2(0, 367)
+pixel_size = 0.00126
+alpha_cut = 1
+texture = ExtResource("p_pond")
+region_enabled = true
+region_rect = Rect2(280, 1259, 2378, 734)
+script = ExtResource("p_card")
+turn_sideways = false
+casts_shadow = false
 
 [node name="HealSpot" parent="Props/RestSpot" unique_id=1107182048 instance=ExtResource("3_ih58b")]
 action_label = "Drink"

@@ -33,6 +33,7 @@ size = Vector3(0.4, 2, 6)
 
 [node name="GwenithFight" type="Node3D" unique_id=1359824026]
 script = ExtResource("1_jibqg")
+ground_tint = Color(0.6510, 0.6078, 0.2078, 1)
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=1514557725]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)

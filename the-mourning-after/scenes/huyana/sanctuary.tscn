@@ -1,4 +1,59 @@
 [gd_scene format=3]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_idle/gwenith_idle_00000.png" id="gidle0"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_idle/gwenith_idle_00001.png" id="gidle1"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_idle/gwenith_idle_00002.png" id="gidle2"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_idle/gwenith_idle_00003.png" id="gidle3"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_idle/gwenith_idle_00004.png" id="gidle4"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_idle/gwenith_idle_00005.png" id="gidle5"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_idle/gwenith_idle_00006.png" id="gidle6"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_idle/gwenith_idle_00007.png" id="gidle7"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_idle/gwenith_idle_00008.png" id="gidle8"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_idle/gwenith_idle_00009.png" id="gidle9"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_idle/gwenith_idle_00010.png" id="gidle10"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_idle/gwenith_idle_00011.png" id="gidle11"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0001.png" id="gwalk0"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0002.png" id="gwalk1"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0003.png" id="gwalk2"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0004.png" id="gwalk3"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0005.png" id="gwalk4"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0006.png" id="gwalk5"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0007.png" id="gwalk6"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0008.png" id="gwalk7"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0009.png" id="gwalk8"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0010.png" id="gwalk9"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0011.png" id="gwalk10"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0012.png" id="gwalk11"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0013.png" id="gwalk12"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0014.png" id="gwalk13"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0015.png" id="gwalk14"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0016.png" id="gwalk15"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0017.png" id="gwalk16"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0018.png" id="gwalk17"]
+[ext_resource type="Texture2D" path="res://textures/Gwenith/gwenith_walk/gwenith_walk0019.png" id="gwalk18"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_idle/shuyi_idle_00000.png" id="sidle0"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_idle/shuyi_idle_00001.png" id="sidle1"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_idle/shuyi_idle_00002.png" id="sidle2"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_idle/shuyi_idle_00003.png" id="sidle3"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_idle/shuyi_idle_00004.png" id="sidle4"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_idle/shuyi_idle_00005.png" id="sidle5"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_idle/shuyi_idle_00006.png" id="sidle6"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_idle/shuyi_idle_00007.png" id="sidle7"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_idle/shuyi_idle_00008.png" id="sidle8"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_idle/shuyi_idle_00009.png" id="sidle9"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_idle/shuyi_idle_00010.png" id="sidle10"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_idle/shuyi_idle_00011.png" id="sidle11"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_walk/shuyi_walk_00000.png" id="swalk0"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_walk/shuyi_walk_00001.png" id="swalk1"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_walk/shuyi_walk_00002.png" id="swalk2"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_walk/shuyi_walk_00003.png" id="swalk3"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_walk/shuyi_walk_00004.png" id="swalk4"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_walk/shuyi_walk_00005.png" id="swalk5"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_walk/shuyi_walk_00006.png" id="swalk6"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_walk/shuyi_walk_00007.png" id="swalk7"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_walk/shuyi_walk_00008.png" id="swalk8"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_walk/shuyi_walk_00009.png" id="swalk9"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_walk/shuyi_walk_00010.png" id="swalk10"]
+[ext_resource type="Texture2D" path="res://textures/Shuyi/shuyi_walk/shuyi_walk_00011.png" id="swalk11"]
 [ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00000.png" id="ridle0"]
 [ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00001.png" id="ridle1"]
 [ext_resource type="Texture2D" path="res://textures/rudrama/rudrama_idle/rudrama_idle_00002.png" id="ridle2"]
@@ -26,18 +81,13 @@
 
 [ext_resource type="Script" path="res://scripts/world/room.gd" id="1_room"]
 [ext_resource type="Script" path="res://scripts/world/grass_scatter.gd" id="15_grass"]
-[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_1.png" id="g1"]
 [ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_2.png" id="g2"]
 [ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_3.png" id="g3"]
-[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_4.png" id="g4"]
-[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_5.png" id="g5"]
-[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_6.png" id="g6"]
 [ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_7.png" id="g7"]
 [ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_8.png" id="g8"]
 [ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_9.png" id="g9"]
 [ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_10.png" id="g10"]
 [ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_11.png" id="g11"]
-[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_12.png" id="g12"]
 [ext_resource type="Material" path="res://materials/ground_faint.tres" id="2_ground"]
 [ext_resource type="PackedScene" path="res://scenes/world/path_exit.tscn" id="3_exit"]
 [ext_resource type="PackedScene" path="res://scenes/huyana/props/containment.tscn" id="4_containment"]
@@ -54,143 +104,150 @@
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
 material = ExtResource("2_ground")
-size = Vector2(30, 20)
+size = Vector2(15, 10)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_North"]
-size = Vector3(30.40, 2, 0.40)
+size = Vector3(15.2, 2, 0.4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_South"]
-size = Vector3(30.40, 2, 0.40)
+size = Vector3(15.2, 2, 0.4)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_West"]
-size = Vector3(0.40, 2, 20.40)
+size = Vector3(0.4, 2, 10.2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_EastUpper"]
-size = Vector3(0.40, 2, 7.65)
+[sub_resource type="BoxShape3D" id="BoxShape3D_fit_EastUpper"]
+size = Vector3(0.4, 2, 2.925)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_EastLower"]
-size = Vector3(0.40, 2, 9.15)
+[sub_resource type="BoxShape3D" id="BoxShape3D_fit_EastLower"]
+size = Vector3(0.4, 2, 3.675)
 
 [node name="Sanctuary" type="Node3D"]
 script = ExtResource("1_room")
-ground_tint = Color(0.45, 0.65, 0.4, 1)
+ground_tint = Color(0.1412, 0.2000, 0.0510, 1)
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_floor")
 
 [node name="PlayerStart" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, -0.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.25, 0, -0.375)
 
 [node name="Grass" type="Node3D" parent="."]
 script = ExtResource("15_grass")
-textures = Array[Texture2D]([ExtResource("g1"), ExtResource("g2"), ExtResource("g3"), ExtResource("g4"), ExtResource("g5"), ExtResource("g6"), ExtResource("g7"), ExtResource("g8"), ExtResource("g9"), ExtResource("g10"), ExtResource("g11"), ExtResource("g12")])
+textures = Array[Texture2D]([ExtResource("g2"), ExtResource("g3"), ExtResource("g7"), ExtResource("g8"), ExtResource("g9"), ExtResource("g10"), ExtResource("g11")])
 
 [node name="Walls" type="StaticBody3D" parent="."]
 
 [node name="North" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
 shape = SubResource("BoxShape3D_North")
 
 [node name="South" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5)
 shape = SubResource("BoxShape3D_South")
 
 [node name="West" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 1, 0)
 shape = SubResource("BoxShape3D_West")
 
 [node name="EastUpper" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, -6.375)
-shape = SubResource("BoxShape3D_EastUpper")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1, -3.6375)
+shape = SubResource("BoxShape3D_fit_EastUpper")
 
 [node name="EastLower" type="CollisionShape3D" parent="Walls"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 1, 5.625)
-shape = SubResource("BoxShape3D_EastLower")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1, 3.2625)
+shape = SubResource("BoxShape3D_fit_EastLower")
 
 [node name="Containments" type="Node3D" parent="."]
 
 [node name="Containment1" parent="Containments" instance=ExtResource("4_containment")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.583, 0, -9.333)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -5.7915, 0, -4.6665)
 number = 1
 
 [node name="Containment2" parent="Containments" instance=ExtResource("4_containment")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.333, 0, -9.333)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.6665, 0, -4.6665)
 number = 2
 
 [node name="Containment3" parent="Containments" instance=ExtResource("4_containment")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.917, 0, -9.333)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.4585, 0, -4.6665)
 number = 3
 
 [node name="Stations" type="Node3D" parent="."]
 
 [node name="Anvil" parent="Stations" instance=ExtResource("5_anvil")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.625, 0, -7)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 5.3125, 0, -3.5)
 
 [node name="Campfire" parent="Stations" instance=ExtResource("6_campfire")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.333)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -0.1665)
 
 [node name="MedStations" type="Node3D" parent="Stations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, 7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75, 0, 3.75)
 script = ExtResource("13_station")
 worker = "shuyi"
-menu_height = 3.8
+menu_height = 1.9
 
 [node name="MedStation" parent="Stations/MedStations" instance=ExtResource("7_med")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.85, 0, 0)
 
 [node name="MedStation2" parent="Stations/MedStations" instance=ExtResource("9_med2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.2, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.6, 0, 0)
 
 [node name="Planters" type="Node3D" parent="Stations"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3.45)
 script = ExtResource("13_station")
 worker = "gwenith"
-menu_height = 3.4
+menu_height = 1.7
 
 [node name="Planter1" parent="Stations/Planters" instance=ExtResource("8_planters")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0, 1.1)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.8, 0, 0.55)
 
 [node name="Planter2" parent="Stations/Planters" instance=ExtResource("8_planters")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, -0.75)
 
 [node name="Planter3" parent="Stations/Planters" instance=ExtResource("8_planters")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, 1.1)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.8, 0, 0.55)
 
 [node name="Characters" type="Node3D" parent="."]
 
 [node name="Rudrama" parent="Characters" instance=ExtResource("10_npc")]
 script = ExtResource("12_rudrama")
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.25, 0, -6.667)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.125, 0, -3.3335)
 character_name = "Rudrama"
 tint = Color(0.55, 0.62, 0.85, 1)
 idle_frames = Array[Texture2D]([ExtResource("ridle0"), ExtResource("ridle1"), ExtResource("ridle2"), ExtResource("ridle3"), ExtResource("ridle4"), ExtResource("ridle5"), ExtResource("ridle6"), ExtResource("ridle7"), ExtResource("ridle8"), ExtResource("ridle9"), ExtResource("ridle10"), ExtResource("ridle11")])
 walk_frames = Array[Texture2D]([ExtResource("rwalk0"), ExtResource("rwalk1"), ExtResource("rwalk2"), ExtResource("rwalk3"), ExtResource("rwalk4"), ExtResource("rwalk5"), ExtResource("rwalk6"), ExtResource("rwalk7"), ExtResource("rwalk8"), ExtResource("rwalk9"), ExtResource("rwalk10"), ExtResource("rwalk11")])
+art_pixel_size = 0.00124
 
 [node name="Shuyi" parent="Characters" instance=ExtResource("10_npc")]
 script = ExtResource("12_rudrama")
 worker = "shuyi"
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7, 0, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85, 0, 4)
 character_name = "Shuyi"
 tint = Color(0.85, 0.85, 0.55, 1)
+idle_frames = Array[Texture2D]([ExtResource("sidle0"), ExtResource("sidle1"), ExtResource("sidle2"), ExtResource("sidle3"), ExtResource("sidle4"), ExtResource("sidle5"), ExtResource("sidle6"), ExtResource("sidle7"), ExtResource("sidle8"), ExtResource("sidle9"), ExtResource("sidle10"), ExtResource("sidle11")])
+walk_frames = Array[Texture2D]([ExtResource("swalk0"), ExtResource("swalk1"), ExtResource("swalk2"), ExtResource("swalk3"), ExtResource("swalk4"), ExtResource("swalk5"), ExtResource("swalk6"), ExtResource("swalk7"), ExtResource("swalk8"), ExtResource("swalk9"), ExtResource("swalk10"), ExtResource("swalk11")])
+art_pixel_size = 0.00123
 
 [node name="Gwenith" parent="Characters" instance=ExtResource("10_npc")]
 script = ExtResource("12_rudrama")
 worker = "gwenith"
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.6, 0, 6.8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8, 0, 3.4)
 character_name = "Gwenith"
 tint = Color(0.6, 0.9, 0.5, 1)
+idle_frames = Array[Texture2D]([ExtResource("gidle0"), ExtResource("gidle1"), ExtResource("gidle2"), ExtResource("gidle3"), ExtResource("gidle4"), ExtResource("gidle5"), ExtResource("gidle6"), ExtResource("gidle7"), ExtResource("gidle8"), ExtResource("gidle9"), ExtResource("gidle10"), ExtResource("gidle11")])
+walk_frames = Array[Texture2D]([ExtResource("gwalk0"), ExtResource("gwalk1"), ExtResource("gwalk2"), ExtResource("gwalk3"), ExtResource("gwalk4"), ExtResource("gwalk5"), ExtResource("gwalk6"), ExtResource("gwalk7"), ExtResource("gwalk8"), ExtResource("gwalk9"), ExtResource("gwalk10"), ExtResource("gwalk11"), ExtResource("gwalk12"), ExtResource("gwalk13"), ExtResource("gwalk14"), ExtResource("gwalk15"), ExtResource("gwalk16"), ExtResource("gwalk17"), ExtResource("gwalk18")])
+art_pixel_size = 0.00123
 
 [node name="West" parent="." instance=ExtResource("3_exit")]
-transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -15, 0, -0.75)
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -7.5, 0, -0.375)
 
 [node name="East" parent="." instance=ExtResource("3_exit")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, -0.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -0.375)
 target_room = "res://scenes/huyana/altar.tscn"
 target_entry = &"West"
 
 [node name="OrderPoint" parent="Stations/Anvil" instance=ExtResource("11_order")]
 worker = "rudrama"
-menu_height = 3.4
+menu_height = 1.7
 interact_radius = 2.6
 
 
@@ -198,21 +255,21 @@ interact_radius = 2.6
 [node name="OrderPoint" parent="Characters/Rudrama" instance=ExtResource("11_order")]
 worker = "rudrama"
 pauses_worker = true
-menu_height = 2.4
+menu_height = 1.2
 interact_radius = 2.0
 
 [node name="OrderPoint" parent="Characters/Shuyi" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 pauses_worker = true
 station = NodePath("../../../Stations/MedStations")
 worker = "shuyi"
-menu_height = 2.4
+menu_height = 1.2
 interact_radius = 2.0
 
 [node name="OrderPoint" parent="Characters/Gwenith" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
 pauses_worker = true
 station = NodePath("../../../Stations/Planters")
 worker = "gwenith"
-menu_height = 2.4
+menu_height = 1.2
 interact_radius = 2.0
 
 [node name="OrderPoint" parent="Stations/Planters/Planter1" node_paths=PackedStringArray("station") instance=ExtResource("11_order")]
@@ -250,31 +307,31 @@ interact_radius = 1.8
 [node name="Stage" type="Node3D" parent="."]
 
 [node name="Campfire" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0, 2.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
 
 [node name="FireLeft" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0, 0, 0.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0.3)
 
 [node name="FireRight" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0, 0, 0.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0.3)
 
 [node name="FireBack" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 0, -3.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.6)
 
 [node name="Containments" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, 0, -7.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.65, 0, -3.5)
 
 [node name="Planters" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0, 0, 6.9)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3.45)
 
 [node name="MedStation" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0, 7.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75, 0, 3.75)
 
 [node name="Anvil" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6, 0, -7.0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 0, -3.5)
 
 [node name="Entrance" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -0.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.75, 0, -0.375)
 
 [node name="Exit" type="Marker3D" parent="Stage"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5, 0, -0.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.75, 0, -0.375)

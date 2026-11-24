@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dod6t167tj8mp"
-path="res://.godot/imported/grass_tile_nobg_5.png-82b5a80171a3a6a18a16e45ad764bc66.ctex"
+uid="uid://fuy1mpm1seav"
+path="res://.godot/imported/shuyi_walk_00009.png-6388eef67212c1ae7da2661d8176dde6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/Grass/grass_tile_nobg_5.png"
-dest_files=["res://.godot/imported/grass_tile_nobg_5.png-82b5a80171a3a6a18a16e45ad764bc66.ctex"]
+source_file="res://textures/Shuyi/shuyi_walk/shuyi_walk_00009.png"
+dest_files=["res://.godot/imported/shuyi_walk_00009.png-6388eef67212c1ae7da2661d8176dde6.ctex"]
 
 [params]
 

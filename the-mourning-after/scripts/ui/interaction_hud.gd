@@ -88,7 +88,38 @@ func _ready() -> void:
 	prompt.gui_input.connect(_on_prompt_input)
 
 
+## Portraits drift gently against the cursor (and breathe a touch); the one speaking moves more.
+@export var portrait_drift := 6.0 # TUNE: listener's drift at the screen edge (px)
+@export var portrait_drift_speaking := 16.0 # TUNE: speaker's drift (px)
+var _portrait_home := {}
+var _portrait_shift := {}
+
+
+func _drift_portraits(delta: float) -> void:
+	var view := get_viewport().get_visible_rect().size
+	if view.x <= 0.0:
+		return
+	var cursor := (get_viewport().get_mouse_position() - view / 2.0) / (view / 2.0)
+	cursor = cursor.clamp(-Vector2.ONE, Vector2.ONE)
+	for rect: TextureRect in [player_portrait, character_portrait]:
+		if not _portrait_home.has(rect) or not rect.visible:
+			_portrait_home[rect] = Vector2(rect.offset_left, rect.offset_top)
+			_portrait_shift[rect] = Vector2.ZERO
+			continue
+		var speaking := rect.self_modulate.is_equal_approx(Color.WHITE)
+		var breath := Vector2(0.0, sin(Time.get_ticks_msec() / 900.0 + (0.0 if rect == player_portrait else 1.7)) * (3.0 if speaking else 1.0))
+		var target := -cursor * (portrait_drift_speaking if speaking else portrait_drift) + breath
+		_portrait_shift[rect] = (_portrait_shift[rect] as Vector2).lerp(target, 1.0 - exp(-5.0 * delta))
+		var home: Vector2 = _portrait_home[rect]
+		var size := Vector2(rect.offset_right - rect.offset_left, rect.offset_bottom - rect.offset_top)
+		rect.offset_left = home.x + _portrait_shift[rect].x
+		rect.offset_top = home.y + _portrait_shift[rect].y
+		rect.offset_right = rect.offset_left + size.x
+		rect.offset_bottom = rect.offset_top + size.y
+
+
 func _process(_delta: float) -> void:
+	_drift_portraits(_delta)
 	if _arrow:
 		var more := _has_more or (_story and _line_part + 1 < _line_parts.size())
 		_arrow.visible = dialogue.visible and more and not dialogue_label.is_streaming() and _choice_box == null

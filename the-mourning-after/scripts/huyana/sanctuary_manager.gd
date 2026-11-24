@@ -53,11 +53,11 @@ const STORY_EVENTS: Array[StringName] = [&"gwenith", &"shuyi", &"rudrama", &"fat
 @export var order_slots := {&"gwenith": 3, &"shuyi": 2} # TUNE: orders each worker can hold at once (one per station slot; Rudrama always takes one repair)
 @export var repair_order_time := 10.0 # TUNE: seconds Rudrama spends repairing once she arrives
 @export var rudrama_speed := 5.0 # TUNE: Rudrama's walking speed at 1x (m/s); matches the player
-@export var rudrama_home := Vector3(8.25, 0.0, -6.667) # where Rudrama waits by the anvil
+@export var rudrama_home := Vector3(4.125, 0.0, -3.333) # where Rudrama waits by the anvil
 @export_group("Wandering")
-@export var worker_homes := {&"gwenith": Vector3(6.0, 0.0, 7.333), &"shuyi": Vector3(-5.7, 0.0, 8.0)} # where Gwenith and Shuyi stand at their stations
-@export var campfire_spot := Vector3(0.0, 0.0, -0.333) # centre of the campfire
-@export var campfire_stand_radius := 3.2 # TUNE: how far from the campfire's centre wanderers stand (m)
+@export var worker_homes := {&"gwenith": Vector3(3.0, 0.0, 3.65), &"shuyi": Vector3(-2.85, 0.0, 4.0)} # where Gwenith and Shuyi stand at their stations
+@export var campfire_spot := Vector3(0.0, 0.0, -0.167) # centre of the campfire
+@export var campfire_stand_radius := 1.8 # TUNE: how far from the campfire's centre wanderers stand (m)
 @export var wander_check_min := 15.0 # TUNE: shortest wait at the station before maybe wandering off (s)
 @export var wander_check_max := 35.0 # TUNE: longest wait at the station before maybe wandering off (s)
 @export var wander_chance := 0.5 # TUNE: chance she heads to the campfire at each check
@@ -73,7 +73,8 @@ const STORY_EVENTS: Array[StringName] = [&"gwenith", &"shuyi", &"rudrama", &"fat
 @export var walk_pace_variation := 0.12 # TUNE: random pace difference between walks (fraction of full speed)
 @export var walk_bounds := Rect2(-14.0, -8.4, 28.0, 17.4) # TUNE: floor area (x, z) paths bend within; keeps them off the containments
 @export_group("Orders")
-@export var repair_spots := PackedVector3Array([Vector3(-11.583, 0.0, -8.333), Vector3(-5.333, 0.0, -8.333), Vector3(0.917, 0.0, -8.333)]) # where Rudrama stands to repair containment 1, 2, 3
+@export var containment_front := -3.9 # TUNE: workers stay in front of (south of) this line, clear of the containments
+@export var repair_spots := PackedVector3Array([Vector3(-5.792, 0.0, -3.9), Vector3(-2.667, 0.0, -3.9), Vector3(0.458, 0.0, -3.9)]) # where Rudrama stands to repair containment 1, 2, 3
 
 ## Each request: {id, containment (0-based), slot (0 left / 1 right), item, duration, time_left}
 var requests: Array[Dictionary] = []
@@ -333,6 +334,27 @@ func _walk_rudrama(target: Vector3, dt: float) -> bool:
 
 # --- Gwenith and Shuyi -----------------------------------------------------------------------------
 
+## Everyone back at their station (the opening's first look at the Sanctuary).
+func all_home() -> void:
+	for worker: StringName in [&"rudrama"] + wanderers.keys():
+		send_home(worker)
+	rudrama_state = RudramaState.HOME
+
+
+## A worker found off the floor (e.g. a save from an older, bigger Sanctuary) goes back to her station.
+func send_home(worker: StringName) -> void:
+	if worker == &"rudrama":
+		rudrama_position = rudrama_home
+		_rudrama_route = {}
+		if rudrama_state != RudramaState.WORKING and rudrama_state != RudramaState.TO_JOB:
+			rudrama_state = RudramaState.HOME
+	elif wanderers.has(worker):
+		wanderers[worker].position = worker_homes[worker]
+		wanderers[worker].target = worker_homes[worker]
+		wanderers[worker].state = WanderState.HOME
+		wanderers[worker].route = {}
+
+
 func worker_position(worker: StringName) -> Vector3:
 	return rudrama_position if worker == &"rudrama" else wanderers[worker].position
 
@@ -415,6 +437,7 @@ func _step_along(walker: Dictionary, target: Vector3, speed: float, dt: float) -
 	var from: Vector3 = route.from
 	var bend: Vector3 = route.bend
 	walker.position = from.lerp(bend, t).lerp(bend.lerp(target, t), t)
+	walker.position.z = maxf(walker.position.z, containment_front) # never round the back of the containments
 	return false
 
 

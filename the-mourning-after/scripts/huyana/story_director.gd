@@ -117,6 +117,7 @@ func _play_opening() -> void:
 		if world.fade.color.a > 0.0: # resuming here
 			await _fade(0.0)
 			if not is_inside_tree(): return
+		manager.all_home() # Constance's first look: everyone at their station
 		await world.story.play_file(SCRIPT_PATH % "huyanas_sanctuary")
 		if not is_inside_tree(): return
 		await _fade(1.0)

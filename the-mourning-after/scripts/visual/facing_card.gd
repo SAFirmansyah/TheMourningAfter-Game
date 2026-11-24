@@ -144,4 +144,16 @@ func _apply_pivot() -> void:
 		return
 	var frame_h: float = region_rect.size.y if region_enabled else texture.get_height() / float(vframes)
 	centered = true
-	offset.y = frame_h / 2.0
+	offset.y = frame_h / 2.0 - _bottom_gap() # the drawing's lowest pixel on the floor, not the image's blank edge
+
+
+## Blank rows under a whole-image texture's drawing (cropped regions are already tight).
+static var _gaps := {}
+
+func _bottom_gap() -> float:
+	if region_enabled or vframes > 1 or texture is not CompressedTexture2D:
+		return 0.0
+	if not _gaps.has(texture):
+		var img := texture.get_image()
+		_gaps[texture] = (img.get_height() - img.get_used_rect().end.y) if img else 0
+	return _gaps[texture]

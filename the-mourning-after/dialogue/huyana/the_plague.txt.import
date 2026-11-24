@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://c2k6jo3dbfums"
+path="res://.godot/imported/the_plague.txt-39a57c6ac79fcd3d10afeac15ceac093.res"
+
+[deps]
+
+source_file="res://dialogue/huyana/the_plague.txt"
+dest_files=["res://.godot/imported/the_plague.txt-39a57c6ac79fcd3d10afeac15ceac093.res"]
+
+[params]
+

@@ -7,6 +7,7 @@ const TITLE_SCENE := "res://scenes/ui/title_screen.tscn"
 
 static var no_health_loss := false # Perrin takes no damage
 static var ignore_residue := false # every Fate bargain is allowed and costs nothing
+static var shown := false # testing buttons on screen (toggled from the pause menu); hidden by default
 
 @export var world: World
 
@@ -36,3 +37,7 @@ static func reset_save(tree: SceneTree) -> void:
 	SaveSystem.clear_ended() # undoes the 'Destroy the spell' self-deletion too
 	tree.paused = false
 	tree.change_scene_to_file(TITLE_SCENE)
+
+
+func _process(_delta: float) -> void:
+	visible = shown

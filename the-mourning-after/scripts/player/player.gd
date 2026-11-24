@@ -131,6 +131,9 @@ func _physics_process(delta: float) -> void:
 		_facing = input.normalized()
 		if input.x != 0:
 			sprite.flip_h = input.x < 0
+	if _attacking and sprite.animation != &"attack":
+		_attacking = false # the swing was cut short (e.g. by a dash) and will never report finishing
+		sprite.speed_scale = 1.0
 	if not _dashing and not _attacking and not animation_held:
 		sprite.play("walk" if input != Vector2.ZERO else "idle")
 
@@ -271,6 +274,8 @@ func _try_dash() -> void:
 		return
 	dashes_available -= 1
 	_dashing = true
+	_attacking = false # a dash cuts the swing's animation short
+	sprite.speed_scale = 1.0
 	sprite.play("dash")
 	_dash_time_left = dash_duration
 	_dash_velocity = _to_world(_facing) * (dash_distance / dash_duration)
