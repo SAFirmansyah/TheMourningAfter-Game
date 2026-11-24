@@ -1,8 +1,8 @@
 @tool
 class_name ItemBadge
 extends Control
-## Round badge for order menus: an item icon (or a short label like a containment number),
-## an optional checkmark, stock count and caption.
+## Badge for order menus: an item's art (or a round badge with its initials, or a short label like
+## a containment number), an optional checkmark, stock count and caption.
 
 const BACKGROUND := Color(0.97, 0.95, 0.9)
 const OUTLINE := Color(0.12, 0.11, 0.1)
@@ -15,6 +15,10 @@ const CHECK := Color(0.3, 0.75, 0.35)
 @export var label_text := "": # shown instead of the icon when set
 	set(value):
 		label_text = value
+		queue_redraw()
+@export var icon: Texture2D: # drawn instead of the item/label, with no circle (e.g. Rudrama's containment numerals)
+	set(value):
+		icon = value
 		queue_redraw()
 @export var diameter := 56.0:
 	set(value):
@@ -40,7 +44,7 @@ func _ready() -> void:
 
 
 func _resize() -> void:
-	custom_minimum_size = Vector2(maxf(diameter + 12.0, 96.0 if caption != "" else 0.0), diameter + (24.0 if caption != "" else 6.0))
+	custom_minimum_size = Vector2(maxf(diameter + 12.0, 96.0 if caption != "" else 0.0), diameter + (27.0 if caption != "" else 6.0))
 	queue_redraw()
 
 
@@ -48,9 +52,17 @@ func _draw() -> void:
 	var font := get_theme_default_font()
 	var center := Vector2(size.x / 2.0, diameter / 2.0 + 3.0)
 	var radius := diameter / 2.0
-	draw_circle(center, radius, OUTLINE)
-	draw_circle(center, radius - 3.0, BACKGROUND)
-	if label_text != "":
+	var has_art := icon != null or (label_text == "" and RequestCatalog.ICONS.has(item))
+	if not has_art: # art sits straight on the parchment
+		draw_circle(center, radius, OUTLINE)
+		draw_circle(center, radius - 3.0, BACKGROUND)
+	if icon:
+		var fit := minf(diameter / icon.get_width(), diameter / icon.get_height())
+		var icon_size := icon.get_size() * fit
+		draw_texture_rect(icon, Rect2(center - icon_size / 2.0, icon_size), false)
+	elif has_art:
+		RequestCatalog.draw_icon(self, item, center, radius * 0.95)
+	elif label_text != "":
 		var font_size := int(diameter * 0.5)
 		var width := font.get_string_size(label_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size).x
 		draw_string(font, center + Vector2(-width / 2.0, font_size * 0.35), label_text, HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, OUTLINE)
@@ -67,5 +79,5 @@ func _draw() -> void:
 		draw_rect(tag_rect, OUTLINE)
 		draw_string(font, tag_rect.position + Vector2(5, 15), tag, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, BACKGROUND)
 	if caption != "":
-		var width := font.get_string_size(caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 15).x
-		draw_string(font, Vector2((size.x - width) / 2.0, diameter + 22.0), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, OUTLINE)
+		var width := font.get_string_size(caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 17).x
+		draw_string(font, Vector2((size.x - width) / 2.0, diameter + 25.0), caption, HORIZONTAL_ALIGNMENT_LEFT, -1, 17, OUTLINE)

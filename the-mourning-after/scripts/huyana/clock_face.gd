@@ -1,43 +1,63 @@
 @tool
 class_name ClockFace
 extends Control
-## Placeholder day/night dial: day sector, night sector, pointer. Starts at the top, runs clockwise.
+## The pocket-watch clock: the face art, with the hand art turning on top. The night wedge is painted
+## on the face; the day runs clockwise from the wedge's right edge round to its left edge.
+## Angles are degrees clockwise from straight up. In game the hand eases to its time (so nightfall
+## and dawn sweep rather than jump).
 
-@export_range(0.05, 0.5) var night_fraction := 0.15: # TUNE: share of the dial shown as night
+@export var face: Texture2D:
 	set(value):
-		night_fraction = value
+		face = value
 		queue_redraw()
-@export_range(0.0, 1.0) var pointer_turn := 0.3: # pointer position, 0–1 around the dial from the top
+@export var hand: Texture2D:
 	set(value):
-		pointer_turn = value
+		hand = value
 		queue_redraw()
-@export var day_color := Color(0.95, 0.78, 0.38)
-@export var night_color := Color(0.2, 0.24, 0.48)
-@export var rim_color := Color(0.08, 0.08, 0.09)
-@export var pointer_color := Color(0.95, 0.95, 0.92)
+@export var face_pivot := Vector2(105, 160) # where the hand turns, in the face art's pixels
+@export var hand_pivot := Vector2(15, 78) # the hand's turning point, in the hand art's pixels
+@export var night_start := -27.0 # left edge of the face's night wedge (degrees)
+@export var night_end := 37.0 # right edge of the face's night wedge (degrees)
+@export_range(0.0, 1.0) var day_progress := 0.3: # editor preview / current time of day
+	set(value):
+		day_progress = value
+		queue_redraw()
+@export var is_night := false:
+	set(value):
+		is_night = value
+		queue_redraw()
+@export var hand_ease := 3.0 # TUNE: how quickly the hand catches up to the time (higher = snappier)
+
+var _shown := NAN # the hand's drawn angle in game (radians)
+
+
+## Day: 0 at dawn (the wedge's right edge) to 1 at dusk (its left edge). Night: the middle of the wedge.
+func set_time(night: bool, progress: float) -> void:
+	is_night = night
+	day_progress = progress
+
+
+func hand_angle() -> float:
+	if is_night:
+		return (night_start + night_end) / 2.0
+	return lerpf(night_end, night_start + 360.0, clampf(day_progress, 0.0, 1.0))
+
+
+func _process(delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	var target := deg_to_rad(hand_angle())
+	_shown = target if is_nan(_shown) else lerp_angle(_shown, target, 1.0 - exp(-hand_ease * delta))
+	queue_redraw()
 
 
 func _draw() -> void:
-	var center := size / 2.0
-	var radius := minf(size.x, size.y) / 2.0 - 6.0
-	var top := -PI / 2.0
-	var day_end := top + TAU * (1.0 - night_fraction)
-	draw_circle(center, radius + 5.0, rim_color)
-	_draw_sector(center, radius, top, day_end, day_color)
-	_draw_sector(center, radius, day_end, top + TAU, night_color)
-	var angle := top + TAU * pointer_turn
-	var dir := Vector2(cos(angle), sin(angle))
-	var tip := center + dir * (radius - 6.0)
-	draw_line(center, tip - dir * 10.0, pointer_color, 4.0, true)
-	var side := Vector2(-dir.y, dir.x) * 8.0
-	draw_colored_polygon(PackedVector2Array([tip, tip - dir * 16.0 + side, tip - dir * 16.0 - side]), pointer_color)
-	draw_circle(center, 6.0, pointer_color)
-
-
-func _draw_sector(center: Vector2, radius: float, from: float, to: float, color: Color) -> void:
-	var points := PackedVector2Array([center])
-	var steps := maxi(4, int(48.0 * (to - from) / TAU))
-	for i in steps + 1:
-		var a := lerpf(from, to, float(i) / steps)
-		points.append(center + Vector2(cos(a), sin(a)) * radius)
-	draw_colored_polygon(points, color)
+	if not face:
+		return
+	var scale := size.x / face.get_width() # the node keeps the face's shape
+	draw_texture_rect(face, Rect2(Vector2.ZERO, face.get_size() * scale), false)
+	if hand:
+		var angle := deg_to_rad(hand_angle()) if Engine.is_editor_hint() or is_nan(_shown) else _shown
+		draw_set_transform(face_pivot * scale, angle, Vector2.ONE * scale)
+		draw_texture(hand, -hand_pivot)
+		draw_set_transform(Vector2.ZERO)

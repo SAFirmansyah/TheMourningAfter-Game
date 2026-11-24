@@ -13,10 +13,10 @@ GWENITH (pout): That’s right…
 GWENITH (neutral): Our lost sisters. I’ve been into their containments.
 CONSTANCE (neutral): Gwenith! That isn’t safe, that’s why nobody goes in but me, you know this–
 GWENITH (pout): They’re still our sisters! And I had a good reason!
-CONSTANCE (sad): What could possibly warrant risking your life like that? As if we haven’t suffered enough!
-CONSTANCE (sad): As if our entire mission isn’t to prevent needless loss of life–
+CONSTANCE (sad): What could possibly warrant risking your life like that? As if we haven’t suffered enough! As if our entire mission isn’t to prevent needless loss of life–
 GWENITH (pout): Sister! Listen to me, please.
-GWENITH (pout): I wanted to study them. All forms of life fall under my field of study, and the lost sisters are an entirely new life form.
+GWENITH (pout): I wanted to study them.
+GWENITH (neutral): All forms of life fall under my field of study, and the lost sisters are an entirely new life form.
 GWENITH (pout): I would be failing my responsibilities to Huyana if I didn’t follow through on the experiments that created the mutations.
 CONSTANCE (neutral): Thank your stars you are unscathed. So, what exactly did you study, you madlady?
 GWENITH (lost in thought): I took as much as I could from them without hurting them… at least, significantly.

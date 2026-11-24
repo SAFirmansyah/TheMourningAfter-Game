@@ -9,7 +9,9 @@ extends CanvasLayer
 @export var hint_delay := 0.4 # TUNE: pause after a stanza finishes before the hint appears (s)
 
 @onready var lines_box: VBoxContainer = $Center/Lines
-@onready var hint: Label = $Hint
+@onready var hint: TextureRect = $Hint # the arrow, bobbing, once a stanza is done
+
+var _hint_x := 0.0
 
 var _advance := false
 var _skipping := false
@@ -18,10 +20,18 @@ var _font: FontVariation
 
 func _ready() -> void:
 	hint.hide()
+	_hint_x = hint.offset_left
 	lines_box.add_theme_constant_override(&"separation", line_separation)
 	_font = FontVariation.new()
-	_font.base_font = ThemeDB.fallback_font
+	_font.base_font = GameFonts.CUTSCENE
 	_font.variation_transform = Transform2D(Vector2(1.0, 0.0), Vector2(0.2, 1.0), Vector2.ZERO) # italic
+
+
+func _process(_delta: float) -> void:
+	if hint.visible:
+		var width := hint.offset_right - hint.offset_left
+		hint.offset_left = _hint_x + 3.0 + 3.0 * sin(Time.get_ticks_msec() / 1000.0 * TAU / 0.9) # same bob as the text box arrow
+		hint.offset_right = hint.offset_left + width
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -49,7 +59,7 @@ func play(stanzas: Array) -> void:
 			label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 			label.custom_minimum_size = Vector2(1200, 0)
 			label.add_theme_font_override(&"font", _font)
-			label.add_theme_font_size_override(&"font_size", 34)
+			label.add_theme_font_size_override(&"font_size", 38)
 			label.add_theme_color_override(&"font_color", Color(0.92, 0.9, 0.85))
 			label.text = text
 			label.visible_characters = 0
@@ -61,7 +71,7 @@ func play(stanzas: Array) -> void:
 				break
 			label.stream(label.text)
 			while label.is_streaming():
-				if _skipping:
+				if _skipping or not is_inside_tree():
 					return
 				if _advance:
 					_advance = false
@@ -74,13 +84,13 @@ func play(stanzas: Array) -> void:
 				label.visible_characters = -1
 		await _wait(hint_delay) # a click in here already counts as moving on
 		hint.show()
-		while not _advance and not _skipping:
+		while not _advance and not _skipping and is_inside_tree():
 			await get_tree().process_frame
 
 
 func _wait(seconds: float) -> void:
 	var left := seconds
-	while left > 0.0 and not _skipping and not _advance:
+	while left > 0.0 and not _skipping and not _advance and is_inside_tree():
 		await get_tree().process_frame
 		if can_process():
 			left -= get_process_delta_time()

@@ -1,11 +1,11 @@
 @tool
 class_name Containment
 extends Obstacle
-## Mutant containment facade with a request slot at each end. Each slot's request shows as a
-## bubble above that end, and E near that end tends to it. On the wall layer, so dashes can't pass through.
+## Mutant containment facade with a request slot at each end. Requests show on the request branch;
+## E near an end hands over what that slot's request needs, once it's in stock. On the wall layer, so dashes can't pass through.
 
 @export_range(1, 3) var number := 1 # which containment this is (1 = leftmost); also picks its food
-@export var bubble_height := 4.4 # TUNE: height of the request bubbles above the floor (m)
+@export var bubble_height := 4.4 # TUNE: height the tutorial's arrow points at above a slot (m)
 @export var slot_offset := 2.2: # TUNE: distance of each request slot from the facade's centre (m)
 	set(value):
 		slot_offset = value
@@ -35,11 +35,9 @@ func _process(delta: float) -> void:
 		return
 	for i in slots.size():
 		var request := _manager.request_at(number - 1, i)
-		slots[i].enabled = not request.is_empty()
 		var hand_over: bool = not request.is_empty() and request.item != RequestCatalog.REPAIR and _manager.is_fulfillable(request)
-		slots[i].prompt_label = "Fulfill" if hand_over else "Check"
-		if not slots[i].player_in_range:
-			_manager.collapse(number - 1, i)
+		slots[i].enabled = hand_over
+		slots[i].prompt_label = "Fulfill"
 
 
 func slot_bubble_position(slot: int) -> Vector3:

@@ -6,6 +6,11 @@ extends Control
 ## which starts at that milestone's narrative beat.
 
 const WORLD_SCENE := "res://scenes/world/world.tscn"
+const INK := Color(0.24, 0.15, 0.09)
+const INK_HOVER := Color(0.45, 0.16, 0.1)
+const INK_TEST := Color(0.3, 0.32, 0.42) # the testing-only option, set apart
+
+@export var title_gap := 90 # TUNE: space between the title art and the buttons (px)
 
 @onready var play_button: Button = $Center/Content/Play
 @onready var start_from_button: Button = $Center/Content/StartFrom
@@ -24,9 +29,8 @@ func _ready() -> void:
 	World.pending_start = ""
 	start_box.hide()
 	play_button.text = "Resume game" if SaveSystem.has_save(SaveSystem.DEFAULT_SLOT) else "New game"
-	if SaveSystem.is_ended(): # the game "deleted itself": only the testing option is left
+	if SaveSystem.is_ended(): # the game "deleted itself": only Exit and the testing option are left
 		play_button.hide()
-		exit_button.hide()
 	play_button.pressed.connect(_on_play)
 	start_from_button.pressed.connect(_open_start_box)
 	exit_button.pressed.connect(get_tree().quit)
@@ -38,7 +42,23 @@ func _ready() -> void:
 	cancel_button.pressed.connect(_close_start_box)
 	for button: Button in [play_button, start_from_button, exit_button, silvaluca_button, first_boss_button, huyana_button, cancel_button] + milestone_buttons:
 		button.mouse_entered.connect(button.grab_focus)
+	_style_menu()
 	(start_from_button if SaveSystem.is_ended() else play_button).grab_focus()
+
+
+## Dark ink on the paper backdrop, the brush hover, and the title face (as in the pause menu).
+func _style_menu() -> void:
+	var gap := $Center/Content/Separator as HSeparator # no line (dividers live in the pause menu), just space
+	gap.add_theme_stylebox_override(&"separator", StyleBoxEmpty.new())
+	gap.add_theme_constant_override(&"separation", title_gap)
+	for button: Button in [play_button, start_from_button, exit_button]:
+		HoverArt.apply(button)
+		button.add_theme_font_override(&"font", GameFonts.TITLE)
+		var ink := INK_TEST if button == start_from_button else INK
+		for state: StringName in [&"font_color", &"font_focus_color"]:
+			button.add_theme_color_override(state, ink)
+		for state: StringName in [&"font_hover_color", &"font_pressed_color", &"font_hover_pressed_color"]:
+			button.add_theme_color_override(state, INK_HOVER)
 
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -1,7 +1,7 @@
 class_name StoryDirector
 extends Node
 ## Constance's story: which scene plays when.
-## Opening (new save): The Plague -> Huyana's Altar -> Huyana's Sanctuary -> the tutorial's Night 0.
+## Opening (new save): The Plague -> Huyana's Altar -> Huyana's Sanctuary -> the tutorial's Day 0.
 ## Nights (at the campfire): a milestone night plays that sister's narrative beat; the first night after
 ## each milestone plays that stretch's fixed scene (1, 3, 5, 7); later nights pick an unplayed variant
 ## (2, 4, 6) at random, and once those run out a short note shows instead. A sister whose variant was
@@ -9,6 +9,7 @@ extends Node
 ## into the next day. The Fates' beat (0%) leads straight into The Choice:
 ## cast -> "To be continued" and the title (the save stays at The Choice);
 ## destroy -> Back to Burhana, then the game "deletes itself" (every save erased, title stripped bare).
+## After each await it stops if the world has left the tree (quitting to the title mid-scene).
 
 const SCRIPT_PATH := "res://dialogue/huyana/%s.txt"
 const FIXED_SCENES: Array[String] = ["night_1", "night_3", "night_5", "night_7"] # first night after each milestone (0 = start)
@@ -66,7 +67,7 @@ func _begin() -> void:
 	elif opening != Opening.DONE:
 		_play_opening()
 	elif tutorial.stage == Tutorial.Stage.AT_ALTAR:
-		tutorial.begin_night_0()
+		tutorial.begin_day_0()
 
 
 ## Start from (testing): the night a milestone is reached, as if everything before it had played,
@@ -91,6 +92,7 @@ func _start_at_milestone(index: int) -> void:
 	day_cycle.load_save_data({"day": 2 + index * 6, "phase": DayCycle.Phase.NIGHT, "elapsed": day_cycle.day_length, "awaiting_beat": true})
 	world.hold_black()
 	await _fade(0.0)
+	if not is_inside_tree(): return
 	play_night()
 
 
@@ -101,10 +103,12 @@ func _play_opening() -> void:
 	world.hold_black()
 	if opening == Opening.PLAGUE:
 		await world.story.play_file(SCRIPT_PATH % "the_plague")
+		if not is_inside_tree(): return
 		opening = Opening.ALTAR
 	if opening == Opening.ALTAR:
 		_ensure_room(altar_room)
 		await world.story.play_file(SCRIPT_PATH % "huyanas_altar") # ends walking out into the Sanctuary
+		if not is_inside_tree(): return
 		world.story.release()
 		opening = Opening.SANCTUARY
 		world.save_game(false)
@@ -112,13 +116,17 @@ func _play_opening() -> void:
 		_ensure_room(sanctuary_room, &"East")
 		if world.fade.color.a > 0.0: # resuming here
 			await _fade(0.0)
+			if not is_inside_tree(): return
 		await world.story.play_file(SCRIPT_PATH % "huyanas_sanctuary")
+		if not is_inside_tree(): return
 		await _fade(1.0)
+		if not is_inside_tree(): return
 		world.story.release()
 		opening = Opening.DONE
-		tutorial.begin_night_0()
+		tutorial.begin_day_0()
 		world.save_game(false)
 		await _fade(0.0)
+		if not is_inside_tree(): return
 	busy = false
 
 
@@ -142,6 +150,7 @@ func play_night() -> void:
 	if event != &"":
 		manager.pending_story_event = &""
 		await world.story.play_file(SCRIPT_PATH % MILESTONE_BEATS[event])
+		if not is_inside_tree(): return
 		if event == &"fates":
 			at_choice = true
 			world.save_game(false) # resuming from here replays The Choice
@@ -153,25 +162,30 @@ func play_night() -> void:
 		if not fixed_done.has(stretch):
 			fixed_done.append(stretch)
 			await world.story.play_file(SCRIPT_PATH % FIXED_SCENES[stretch])
+			if not is_inside_tree(): return
 		else:
 			var left: Array = VARIANT_SCENES[stretch].filter(func(id: String) -> bool: return not variants_used.has(id))
 			if left.is_empty():
 				world.player.input_enabled = false
 				world.hud.show_note(no_scene_note, no_scene_note_time)
 				await _wait(no_scene_note_time)
+				if not is_inside_tree(): return
 			else:
 				var owed := _owed_sisters(stretch)
 				var first: Array = left.filter(func(id: String) -> bool: return owed.has(_variant_sister(id)))
 				var pick: String = (first if not first.is_empty() else left).pick_random()
 				variants_used.append(pick)
 				await world.story.play_file(SCRIPT_PATH % pick)
+				if not is_inside_tree(): return
 	await _next_day()
+	if not is_inside_tree(): return
 	busy = false
 
 
 ## Short fade to black, back to the campfire if the scene ended elsewhere, and the next day.
 func _next_day() -> void:
 	await _fade(1.0)
+	if not is_inside_tree(): return
 	world.story.release()
 	if _ensure_room(sanctuary_room):
 		var spot := world.current_room.get_node_or_null(^"Stage/Campfire") as Node3D
@@ -180,6 +194,7 @@ func _next_day() -> void:
 		world.camera_rig.snap_to_target()
 	day_cycle.start_day() # saves
 	await _fade(0.0)
+	if not is_inside_tree(): return
 
 
 ## Sisters whose variant was missed in an earlier stretch and hasn't been made up for since.
@@ -212,12 +227,16 @@ func _play_choice() -> void:
 	busy = true
 	world.hold_black()
 	var choice := await world.story.play_file(SCRIPT_PATH % "beat_choice")
+	if not is_inside_tree(): return
 	await _fade(1.0, decision_fade_time)
+	if not is_inside_tree(): return
 	if choice == "cast":
 		# The cast-the-spell route isn't built yet: the save stays at The Choice.
 		await world.story.play_steps([{"type": "text", "stanzas": [PackedStringArray([to_be_continued])]}])
+		if not is_inside_tree(): return
 	else:
 		await world.story.play_file(SCRIPT_PATH % "back_to_burhana")
+		if not is_inside_tree(): return
 		SaveSystem.delete_all()
 		SaveSystem.mark_ended()
 	get_tree().change_scene_to_file(TestTools.TITLE_SCENE)
@@ -229,11 +248,13 @@ func _fade(alpha: float, seconds := -1.0) -> void:
 	var tween := create_tween()
 	tween.tween_property(world.fade, "color:a", alpha, day_fade_time if seconds < 0.0 else seconds)
 	await tween.finished
+	if not is_inside_tree(): return
 
 
 func _wait(seconds: float) -> void:
 	var timer := get_tree().create_timer(seconds, false)
 	await timer.timeout
+	if not is_inside_tree(): return
 
 
 func get_save_data() -> Dictionary:

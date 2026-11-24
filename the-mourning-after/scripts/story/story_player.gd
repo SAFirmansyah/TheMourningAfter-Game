@@ -61,10 +61,13 @@ func play_file(path: String) -> String:
 func play_steps(steps: Array[Dictionary]) -> String:
 	_begin()
 	var result := ""
-	for step in steps:
+	for i in steps.size():
+		if not is_inside_tree():
+			return result # the scene was left mid-cutscene (e.g. quit to the title)
+		var step := steps[i]
 		match step.type:
 			"line":
-				await _line(step)
+				await _line(step, i + 1 < steps.size() and steps[i + 1].type == "line")
 			"text":
 				await play_text(step.stanzas)
 			"choice":
@@ -117,6 +120,8 @@ func release() -> void:
 # --- Running -------------------------------------------------------------------------------------
 
 func _begin() -> void:
+	if not is_inside_tree():
+		return
 	playing = true
 	_skipping = false
 	var player := world.player
@@ -134,6 +139,8 @@ func _begin() -> void:
 
 
 func _end() -> void:
+	if not is_inside_tree():
+		return # the world is being torn down
 	world.hud.story_end()
 	world.camera_rig.follow_target = world.player
 	world.camera_rig.follow_smoothing = _held.get("smoothing", world.camera_rig.follow_smoothing)
@@ -149,22 +156,23 @@ func _end() -> void:
 	_skipping = false
 
 
-func _line(step: Dictionary) -> void:
+## has_more: another line follows straight on (the text box shows its arrow).
+func _line(step: Dictionary, has_more := false) -> void:
 	var key: String = step.speaker.replace(",", "")
 	var off_screen: bool = step.variant.begins_with("out of sight")
 	var left := key == "constance"
-	world.hud.story_line(_display_name(step.speaker), key, left, portrait(key, step.variant), step.text, not off_screen)
-	while not world.hud.story_line_done() and not _skipping:
+	world.hud.story_line(_display_name(step.speaker), key, left, portrait(key, step.variant), step.text, not off_screen, has_more)
+	while is_inside_tree() and not world.hud.story_line_done() and not _skipping:
 		await get_tree().process_frame
 
 
 func _choice(options: Array) -> String:
 	world.hud.story_choice(options)
 	var picked := world.hud.story_choice_result()
-	while picked < 0:
+	while picked < 0 and is_inside_tree():
 		await get_tree().process_frame
 		picked = world.hud.story_choice_result()
-	return String(options[picked].id)
+	return String(options[picked].id) if picked >= 0 else ""
 
 
 func _command(name: String, args: Array) -> void:
@@ -182,7 +190,7 @@ func _command(name: String, args: Array) -> void:
 			world.hud.story_hide_box()
 			_move(args[0], args[1])
 		"settle":
-			while _movers > 0 and not _skipping:
+			while _movers > 0 and not _skipping and is_inside_tree():
 				await get_tree().process_frame
 		"show":
 			var actor := _actor(args[0])
@@ -200,7 +208,7 @@ func _command(name: String, args: Array) -> void:
 			for who: String in args:
 				_move(who, "Exit", true)
 				world.hud.story_clear_right(who) # her portrait leaves with her
-			while _movers > 0 and not _skipping:
+			while _movers > 0 and not _skipping and is_inside_tree():
 				await get_tree().process_frame
 		"pan":
 			world.hud.story_hide_box()
@@ -271,7 +279,7 @@ func _walk(who: String, mark_name: String, vanish := false) -> void:
 	else:
 		var tween := actor.create_tween()
 		tween.tween_property(actor, "global_position", target, distance / walk_speed)
-		while tween.is_running() and not _skipping:
+		while tween.is_running() and not _skipping and is_inside_tree():
 			await get_tree().process_frame
 		if _skipping:
 			tween.kill()
@@ -305,7 +313,7 @@ func _pan(target_name: String) -> void:
 
 func _wait(seconds: float) -> void:
 	var left := seconds
-	while left > 0.0 and not _skipping:
+	while left > 0.0 and not _skipping and is_inside_tree():
 		await get_tree().process_frame
 		if can_process():
 			left -= get_process_delta_time()

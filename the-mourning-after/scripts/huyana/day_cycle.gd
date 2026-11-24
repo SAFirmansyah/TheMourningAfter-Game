@@ -14,10 +14,15 @@ enum Phase { DAY, NIGHT }
 @export var day_length := 360.0 # TUNE: real seconds per day at 1x
 @export var night_fade_time := 1.5 # TUNE: seconds to darken at dusk / brighten at dawn
 @export var sanctuary: SanctuaryManager
-@export_multiline var first_night_note := "This is the Sanctuary's health. Every request left unfulfilled during the day lowers it, and it never comes back up." # shown on Night 1's modal
+const CHECKMARK := preload("res://textures/ui/checkmark.png")
+
+@export_multiline var first_night_note := "This is the current health of your lost sisters in the sanctuary. It decays each time a request is left unfulfilled after the timer runs out, and never comes back up." # shown on Night 0's modal
+@export var night_0_spacing := 22 # TUNE: gap between heading, bar, note and OK on Night 0 (px)
+@export var later_night_spacing := 30 # TUNE: gap between heading, bar and OK on nights after Night 0 (px)
 @export var skip_day_health_loss := 4.0 # TUNE: Sanctuary Health the Skip day test button costs (%)
 
 @export_group("Sun")
+@export_range(0.0, 0.5) var golden_hour := 0.2 # TUNE: share of the day at each end lit golden (dusk full, dawn softer)
 @export var shadow_angle_start := 170.0 # TUNE: shadow direction at dawn (degrees; 0 = right, 90 = away from camera, 180 = left)
 @export var shadow_angle_end := 10.0 # TUNE: shadow direction at dusk
 @export var shadow_length_long := 1.6 # TUNE: shadow length at dawn/dusk (times object height)
@@ -42,7 +47,9 @@ var clock_paused := false
 @onready var night_shade: ColorRect = $NightOverlay/Shade
 @onready var night_modal: Control = $NightModal/Panel
 @onready var night_title: Label = $NightModal/Panel/Content/Title
-@onready var health_bar: ProgressBar = $NightModal/Panel/Content/HealthBar
+@onready var health_label: Label = $NightModal/Panel/Content/HealthLabel
+@onready var health_bar: TextureProgressBar = $NightModal/Panel/Content/HealthBar # the bar art over its background; shortens as health drops
+@onready var health_percent: Label = $NightModal/Panel/Content/HealthBar/Percent
 @onready var night_note: Label = $NightModal/Panel/Content/Note
 @onready var proceed_button: Button = $NightModal/Panel/Content/Proceed
 
@@ -55,6 +62,7 @@ func _ready() -> void:
 	skip_day_button.pressed.connect(_skip_day)
 	_set_night_amount(0.0)
 	night_modal.hide()
+	HoverArt.icon_button(proceed_button, CHECKMARK, Vector2(90, 70)) # OK
 	proceed_button.pressed.connect(_on_proceed)
 	reset_button.pressed.connect(_reset_save)
 	for button: Button in speed_buttons.get_children():
@@ -132,10 +140,14 @@ func start_day() -> void:
 
 
 func _show_night_modal() -> void:
-	night_title.text = "Night"
+	var first := day == 1 # the night after Day 0
+	night_title.text = "Night %d" % (day - 1) if first else "Night %d - Sanctuary Health" % (day - 1)
 	health_bar.value = sanctuary.health
+	health_percent.text = "%d%%" % roundi(sanctuary.health)
 	night_note.text = first_night_note
-	night_note.visible = day == 1 and first_night_note != ""
+	night_note.visible = first and first_night_note != ""
+	health_label.hide() # the heading names the bar on later nights; Night 0's note explains it
+	night_modal.get_node(^"Content").add_theme_constant_override(&"separation", night_0_spacing if first else later_night_spacing)
 	night_modal.show()
 	proceed_button.grab_focus()
 
@@ -165,14 +177,15 @@ func _update_sun() -> void:
 	RenderingServer.global_shader_parameter_set(&"sun_shadow_dir", Vector2(cos(angle), -sin(angle)))
 	RenderingServer.global_shader_parameter_set(&"sun_shadow_length", lerpf(shadow_length_long, shadow_length_short, sin(PI * p)))
 	RenderingServer.global_shader_parameter_set(&"sun_shadow_alpha", shadow_opacity * fade)
+	var golden := maxf(0.6 * (1.0 - smoothstep(0.0, golden_hour, p)), smoothstep(1.0 - golden_hour, 1.0, p)) # dawn softer than dusk
+	(night_shade.material as ShaderMaterial).set_shader_parameter("warmth", golden if phase == Phase.DAY else 0.0)
 
 
 func _update_clock() -> void:
-	var night_share := clock.night_fraction
-	clock.pointer_turn = (1.0 - night_share / 2.0) if phase == Phase.NIGHT else progress() * (1.0 - night_share)
+	clock.set_time(phase == Phase.NIGHT, progress())
 
 
-## Night darkness outside the normal cycle (the tutorial's Night 0).
+## Night darkness outside the normal cycle (e.g. staged scenes).
 func set_darkness(value: float, fade := false) -> void:
 	if fade:
 		_fade_shade(value)
@@ -192,6 +205,11 @@ func _fade_shade(target: float) -> void:
 
 func _set_night_amount(value: float) -> void:
 	(night_shade.material as ShaderMaterial).set_shader_parameter("amount", value)
+
+
+## Current night darkness, 0 (day) to 1 (full night).
+func night_amount() -> float:
+	return _get_night_amount()
 
 
 func _get_night_amount() -> float:

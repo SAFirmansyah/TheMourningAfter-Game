@@ -6,6 +6,8 @@ render_mode unshaded, depth_prepass_alpha;
 global uniform vec3 occlusion_target;
 
 uniform sampler2D card_texture : source_color, filter_linear_mipmap;
+uniform sampler2D card_texture_pixel : source_color, filter_nearest; // same texture, for pixel art
+uniform bool pixel_art = false;
 uniform vec4 card_modulate : source_color = vec4(1.0);
 
 group_uniforms occlusion;
@@ -44,7 +46,7 @@ void fragment() {
 		uv = mix(UV, rotated, clamp(distance(UV, sway_pivot) * sway_bend, 0.0, 1.0));
 	}
 
-	vec4 tex = texture(card_texture, uv) * card_modulate;
+	vec4 tex = (pixel_art ? texture(card_texture_pixel, uv) : texture(card_texture, uv)) * card_modulate;
 	if (tex.a < 0.5) {
 		discard;
 	}

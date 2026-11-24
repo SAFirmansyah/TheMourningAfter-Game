@@ -106,6 +106,10 @@ skip_cutscene={
 3d/physics_engine="Jolt Physics"
 common/physics_interpolation=true
 
+[gui]
+
+theme/custom_font="res://fonts/IMFellDoublePica-Regular.ttf"
+
 [rendering]
 
 rendering_device/driver.windows="d3d12"
