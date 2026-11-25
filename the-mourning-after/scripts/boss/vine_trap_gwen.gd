@@ -4,9 +4,11 @@ extends Node3D
 ## is rooted, and the caster is told so it can follow up (Gwenith grabs Perrin; Constance grabs
 ## whichever opponent she's caught).
 
-@export var erupted_time := 0.5 # TUNE: how long the erupted vines stay visible (s)
-@export var trap_sprite_height := 0.4
-@export var trap_sprite_scale := 0.3 # TUNE: visual size of the Trap sprite, independent of ensnared_radius
+@export var erupted_time := 3 # TUNE: how long the erupted vines stay visible (s)
+@export var trap_sprite_height := 0
+@export var trap_sprite_scale := 0.2 # TUNE: visual size of the Trap sprite, independent of ensnared_radius
+@export var trap_caught_render_priority := 2 # TUNE: draws over the character's card when caught
+
 
 @onready var warning: MeshInstance3D = $Warning
 @onready var trap_sprite: AnimatedSprite3D = $Trap
@@ -14,8 +16,8 @@ extends Node3D
 var _caster: Node3D
 var _target: Node3D
 var _radius := 1.6
-var _warning_left := 5.0
-var _root_time := 5.0
+var _warning_left := 3.0
+var _root_time := 3.0
 var _damage := 5
 var _erupted := false
 
@@ -61,12 +63,12 @@ func _erupt() -> void:
 			if offset.length() <= _radius:
 				caught = true
 
+	if caught:
+		trap_sprite.render_priority = trap_caught_render_priority
+		trap_sprite.no_depth_test = true
 	trap_sprite.show()
 	trap_sprite.play("trap")
-	if caught:
-		trap_sprite.animation_finished.connect(trap_sprite.pause, CONNECT_ONE_SHOT)
-	else:
-		trap_sprite.animation_finished.connect(trap_sprite.hide, CONNECT_ONE_SHOT)
+	trap_sprite.animation_finished.connect(trap_sprite.pause, CONNECT_ONE_SHOT)
 
 	if caught:
 		if _target.has_method("receive_hit"):

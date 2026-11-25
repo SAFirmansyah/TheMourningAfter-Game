@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ctgat5o0m4tol"
+path="res://.godot/imported/sfx_knifeswing_3.wav-c80ce66fbf71669e473622cfd31cb2ea.sample"
+
+[deps]
+
+source_file="res://Sounds/Knife Swing/sfx_knifeswing_3.wav"
+dest_files=["res://.godot/imported/sfx_knifeswing_3.wav-c80ce66fbf71669e473622cfd31cb2ea.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

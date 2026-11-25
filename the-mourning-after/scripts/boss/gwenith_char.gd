@@ -41,11 +41,11 @@ const POLLEN_SCENE := preload("res://scenes/boss/pollen_cloud.tscn")
 @export_group("Ensnared")
 @export var ensnared_health_fraction := 0.3
 @export var ensnared_cooldown := 10.0
-@export var ensnared_patches := 3 # TUNE: vine patches per cast; the first is under Perrin
+@export var ensnared_patches := 6 # TUNE: vine patches per cast; the first is under Perrin
 @export var ensnared_radius := 1.6 # TUNE (m)
 @export var ensnared_spread := 4.0 # TUNE: other patches land this far from Perrin (m)
-@export var ensnared_warning := 5.0 # TUNE: patches show this long before erupting (s)
-@export var ensnared_root_time := 5.0 # TUNE: how long a caught Perrin stays rooted (s)
+@export var ensnared_warning := 3.0 # TUNE: patches show this long before erupting (s)
+@export var ensnared_root_time := 3.0 # TUNE: how long a caught Perrin stays rooted (s)
 @export var ensnared_damage := 5
 
 const DASH_COLOR := Color(1.0, 0.9, 0.55) # TUNE: indicator colours per move
