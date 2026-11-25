@@ -1,0 +1,35 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @cue NAME lets the game act mid-scene; @dark on/off puts black behind the dialogue; @flash flashes white.
+# NARRATIVE BEAT: Life (first fall, first Fate ever)
+@dark on
+PERRIN (scared): I’m completely beat up.
+PERRIN (scared): I can’t go on like this. I’ve barely gotten anywhere, either.
+PERRIN (scared): This cannot be how it ends for me. No, no…
+THE FATES (silhouette): It isn’t over yet.
+PERRIN (angry): What? Who’s there?
+PERRIN (scared): Who are you? Are you… are you gods?
+THE FATES (silhouette): Not quite.
+PERRIN (scared): Well… can- can you help?
+THE FATES (silhouette): You strive to set things right, and your heart is in a good place…
+THE FATES (silhouette): At least, as far as we can tell. It’s hard for us to communicate like this.
+PERRIN (neutral): Like what? And… how am I hearing you then?
+THE FATES (silhouette): We don’t know that ourselves. But there must be a reason. Likely to do with what you picked up.
+THE FATES (silhouette): That residue.
+PERRIN (neutral): Um… okay.
+PERRIN (neutral): So, can you help me?
+KANO (silhouette): Allow me to try.
+@cue revive
+KANO (silhouette): The extent of my power is thus: you can stand once more, but your foes still remain.
+KANO (silhouette): You still have to fight on. Fate can be altered, but not avoided.
+PERRIN (confident): So, you can just… do that? Bring me back each time I fall?
+KANO (silhouette): I wouldn’t be too certain of that, were I you.
+KANO (silhouette): It also appears my magic has taken something from you as its cost. A cost that will only grow.
+PERRIN (angry): Wait, what–
+PERRIN (angry): You witches, with your magic… never straightforward, is it? Never just content to be the way things ought to?
+THE FATES (silhouette): Watch your words, please.
+THE FATES (silhouette): We aid you because we believe there are things you need to see through with your enemy on the other side.
+THE FATES (silhouette): That is all.
+PERRIN (neutral): Mmmh, alright. I misspoke.
+PERRIN (neutral): Thank you, whoever you may be.
+@dark off
+PERRIN (scared): Here goes…

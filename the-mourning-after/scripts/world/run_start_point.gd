@@ -33,5 +33,5 @@ func _on_interacted() -> void:
 	if kind == Kind.LOADOUT:
 		RunInventory.take_loadout()
 		get_tree().call_group(&"hero_tutorial", &"show_once") # the mission, the first time only
-	else:
-		RunInventory.try_bargain()
+	elif RunInventory.try_bargain():
+		get_tree().call_group(&"hero_story", &"say_weapon_bargain")

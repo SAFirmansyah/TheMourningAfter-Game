@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://c3amlh473vkon"
+path="res://.godot/imported/first_residue_a.txt-38dc49c11a030c892f2d3a1d7eb01c93.res"
+
+[deps]
+
+source_file="res://dialogue/hero/first_residue_a.txt"
+dest_files=["res://.godot/imported/first_residue_a.txt-38dc49c11a030c892f2d3a1d7eb01c93.res"]
+
+[params]
+

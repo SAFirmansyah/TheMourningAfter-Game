@@ -16,9 +16,9 @@ signal boss_changed
 	"RUDRAMA": "res://scenes/rooms/huyana/forge.tscn",
 }
 @export var sanctuary_path := "res://scenes/rooms/huyana/sanctuary_gate.tscn" # stand-in for reaching the Sanctuary
-@export var boss_bargain_cost := 2 # TUNE: Fate 2 re-roll of the boss (once per run)
+@export var boss_bargain_cost := 1 # TUNE: Fate 2 re-roll of the boss (once per run)
 @export var first_boss_shown := "RUDRAMA" # forced Fate 2: the boss first glimpsed on a fresh save
-@export var first_boss_fought := "SHUYI" # ...and the one the forced bargain swaps in
+@export var first_boss_fought := "GWENITH" # Seira: "she used to be their farmer" # ...and the one the forced bargain swaps in
 
 var gauntlet_count := 0
 var chosen_boss := ""

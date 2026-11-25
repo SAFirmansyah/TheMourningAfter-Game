@@ -355,6 +355,9 @@ func _fade_to(alpha: float) -> void:
 func _on_player_died() -> void:
 	if _transitioning or fate_bargain.is_open:
 		return
+	var story_node := get_tree().get_first_node_in_group(&"hero_story") as HeroStory
+	if story_node and story_node.handle_death():
+		return # the first fall: a Fate steps in
 	if not RunInventory.can_revive():
 		_end_run_at_base()
 		return
@@ -365,6 +368,7 @@ func _on_player_died() -> void:
 ## Bargain taken: full health now, the fight resumes once the countdown ends.
 func _on_revive_chosen() -> void:
 	RunInventory.buy_revive()
+	get_tree().call_group(&"hero_story", &"say_revive")
 	player.clear_stun()
 	player.stats.on_health_set(player.stats.current_max_health)
 	await fate_bargain.countdown_finished
@@ -416,6 +420,7 @@ func _end_run_at_base() -> void:
 	await _fade_to(1.0)
 
 	RunInventory.reset_on_death()
+	get_tree().call_group(&"hero_story", &"on_died_to_base")
 	player.clear_stun()
 	CampaignState.reset_campaign()
 	player.stats.on_health_set(player.stats.current_max_health)

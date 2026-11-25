@@ -1,0 +1,19 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @cue NAME lets the game act mid-scene; @dark on/off puts black behind the dialogue; @flash flashes white.
+# NARRATIVE BEAT: Archi (first return to base with residue, Fates met before; at the base's exit)
+@flash
+@walk perrin SwordStand
+PERRIN (neutral): I can do this as many times as it takes to reach my goal.
+PERRIN (scared): But what’s to say this won’t destroy my resolve? My body feels fine, but I remember it all. The injuries, the pain, my screams and theirs…
+PERRIN (neutral): I really must find a way to get things done more efficiently if I’m to succeed.
+@dark on
+ARCHI (silhouette): Salutations, child.
+PERRIN (scared): Oh! It’s… it’s another of you.
+PERRIN (neutral): Can you help me with this?
+ARCHI (silhouette): Allow me to try.
+@cue weapon_bargain
+ARCHI (silhouette): The extent of my power is thus: your weapon may be better suited to your psyche this time.
+ARCHI (silhouette): But you must fight regardless. Fate can be altered, but not avoided.
+PERRIN (neutral): I see. That’s alright. This second chance is already more than I could ask for.
+PERRIN (neutral): Thank you.
+@dark off

@@ -1,0 +1,10 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @cue NAME lets the game act mid-scene; @dark on/off puts black behind the dialogue; @flash flashes white.
+# After pressing E to collect it.
+PERRIN (scared): Wait, what am I doing? I didn’t think before picking this up, oh no…
+PERRIN (scared): It’s got magic on it!
+PERRIN (neutral): Well, it seems harmless thus far–
+PERRIN (neutral): Hm? Is it actually…
+PERRIN (confident): Helping me?
+PERRIN (confident): Oh, those witches don’t know what’s headed their way.
+PERRIN (confident): If I could get my hands on more of these, and use their own magic against them, it’s over!

@@ -1,4 +1,12 @@
 [gd_scene format=3 uid="uid://bob5v6fkppymb"]
+[ext_resource type="Script" path="res://scripts/world/grass_scatter.gd" id="gs_scatter"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_2.png" id="gt2"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_3.png" id="gt3"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_7.png" id="gt7"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_8.png" id="gt8"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_9.png" id="gt9"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_10.png" id="gt10"]
+[ext_resource type="Texture2D" path="res://textures/Grass/grass_tile_nobg_11.png" id="gt11"]
 [ext_resource type="Texture2D" path="res://icon.svg" id="p_icon"]
 [ext_resource type="Texture2D" path="res://textures/Pond Heal.png" id="p_pond"]
 [ext_resource type="Script" path="res://scripts/visual/facing_card.gd" id="p_card"]
@@ -99,3 +107,7 @@ target_entry = &"East"
 [node name="CombatEntry" parent="." unique_id=819054404 instance=ExtResource("4_krrcy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.65, 0, 0)
 target_entry = &"WestExit"
+
+[node name="Grass" type="Node3D" parent="."]
+script = ExtResource("gs_scatter")
+textures = Array[Texture2D]([ExtResource("gt2"), ExtResource("gt3"), ExtResource("gt7"), ExtResource("gt8"), ExtResource("gt9"), ExtResource("gt10"), ExtResource("gt11")])

@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://dpe01ofcvcqe6"
+path="res://.godot/imported/anxiety.txt-e38860c76b4e66eed24aa2d2b9cbc8ba.res"
+
+[deps]
+
+source_file="res://dialogue/hero/anxiety.txt"
+dest_files=["res://.godot/imported/anxiety.txt-e38860c76b4e66eed24aa2d2b9cbc8ba.res"]
+
+[params]
+

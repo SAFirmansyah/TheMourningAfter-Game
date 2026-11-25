@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://bo5betuehjrd1"
+path="res://.godot/imported/gwenith_2.txt-b7d631ff043dc0dcd81c09c66f09a904.res"
+
+[deps]
+
+source_file="res://dialogue/hero/gwenith_2.txt"
+dest_files=["res://.godot/imported/gwenith_2.txt-b7d631ff043dc0dcd81c09c66f09a904.res"]
+
+[params]
+

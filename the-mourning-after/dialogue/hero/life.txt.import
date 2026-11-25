@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://bagdk2btnyas"
+path="res://.godot/imported/life.txt-cca4d9cd637553211a0726ab58069af5.res"
+
+[deps]
+
+source_file="res://dialogue/hero/life.txt"
+dest_files=["res://.godot/imported/life.txt-cca4d9cd637553211a0726ab58069af5.res"]
+
+[params]
+

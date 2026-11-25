@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://bk06pctc66or3"
+path="res://.godot/imported/doubt.txt-156e3682eb4d99f5dc8a56a4a65f9440.res"
+
+[deps]
+
+source_file="res://dialogue/hero/doubt.txt"
+dest_files=["res://.godot/imported/doubt.txt-156e3682eb4d99f5dc8a56a4a65f9440.res"]
+
+[params]
+

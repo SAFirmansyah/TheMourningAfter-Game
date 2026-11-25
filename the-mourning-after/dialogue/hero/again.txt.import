@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://bybrh7c0yb587"
+path="res://.godot/imported/again.txt-7fc6722541cb139537df9870d6094362.res"
+
+[deps]
+
+source_file="res://dialogue/hero/again.txt"
+dest_files=["res://.godot/imported/again.txt-7fc6722541cb139537df9870d6094362.res"]
+
+[params]
+

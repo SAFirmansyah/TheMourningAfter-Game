@@ -27,6 +27,7 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 
 [node name="PlayerHUD" type="CanvasLayer" unique_id=1921822603]
+layer = 3
 script = ExtResource("1_e6e0b")
 
 [node name="Panel" type="Control" parent="."]

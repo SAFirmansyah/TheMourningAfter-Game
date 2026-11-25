@@ -38,6 +38,7 @@ const CAST_TINTS := { # placeholder card colours in the world until the characte
 @export var pan_hold := 1.4 # TUNE: time given to a @pan before the next line (s)
 
 signal scene_started(path: String)
+signal cue(name: String) # @cue NAME: lets the game act mid-scene (e.g. a Fate bargain going through)
 
 var world: World
 var playing := false
@@ -140,6 +141,8 @@ func _begin() -> void:
 
 
 func _end() -> void:
+	if _dark:
+		_dark.hide()
 	if not is_inside_tree():
 		return # the world is being torn down
 	world.hud.story_end()
@@ -162,7 +165,7 @@ func _line(step: Dictionary, has_more := false) -> void:
 	var key: String = step.speaker.replace(",", "")
 	var off_screen: bool = step.variant.begins_with("out of sight")
 	var left := key == protagonist() # the side being played sits on the left
-	world.hud.story_line(_display_name(step.speaker), key, left, portrait(key, step.variant), step.text, not off_screen, has_more)
+	world.hud.story_line(_speaker_label(step), key, left, portrait(key, step.variant), step.text, not off_screen, has_more)
 	while is_inside_tree() and not world.hud.story_line_done() and not _skipping:
 		await get_tree().process_frame
 
@@ -221,8 +224,46 @@ func _command(name: String, args: Array) -> void:
 				await _wait(day_cycle.night_fade_time)
 		"wait":
 			await _wait(float(args[0]))
+		"dark": # @dark on|off: black behind the dialogue (portraits, box and health bar stay visible)
+			_set_dark(args.is_empty() or args[0] != "off")
+		"flash": # a quick white flash
+			if not _skipping:
+				var was := world.fade.color
+				world.fade.color = Color(1, 1, 1, 0)
+				var tween := world.create_tween()
+				tween.tween_property(world.fade, "color:a", 0.9, 0.08)
+				tween.tween_property(world.fade, "color:a", 0.0, 0.35)
+				await tween.finished
+				world.fade.color = Color(0, 0, 0, was.a)
+		"cue":
+			cue.emit(args[0])
 		_:
 			push_warning("Unknown story command @%s" % name)
+
+
+var _dark: CanvasLayer
+
+func _set_dark(on: bool) -> void:
+	if _dark == null:
+		_dark = CanvasLayer.new()
+		_dark.layer = 2 # over the room and its atmosphere; under the HUD, portraits and box
+		var rect := ColorRect.new()
+		rect.color = Color.BLACK
+		rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		rect.set_anchors_preset(Control.PRESET_FULL_RECT)
+		_dark.add_child(rect)
+		add_child(_dark)
+	if _skipping:
+		_dark.visible = on
+		return
+	var rect := _dark.get_child(0) as ColorRect
+	if on:
+		_dark.visible = true
+		rect.modulate.a = 0.0
+	var tween := create_tween()
+	tween.tween_property(rect, "modulate:a", 1.0 if on else 0.0, 0.4)
+	if not on:
+		tween.tween_callback(_dark.hide)
 
 
 func _fade(mode: String) -> void:
@@ -408,8 +449,37 @@ static func portrait(key: String, variant: String) -> Texture2D:
 	for v in [variant, variant.replace(" ", "-"), variant.replace("-", " ")]:
 		var path: String = _portrait_files.get("%s %s" % [key, v], "")
 		if not path.is_empty():
-			return load(path)
+			return _framed(load(path)) if variant.begins_with("silhouette") else load(path)
 	return null
+
+
+const FRAME_TOP := 0.175 # share of the portrait above a character's head (Perrin's art), so everyone stands as tall
+static var _framed_cache := {}
+
+## Silhouettes come on tighter canvases than the character art: crop them to the drawing and pad the
+## top like Perrin's, so in the same portrait frame they stand the same height as him.
+static func _framed(tex: Texture2D) -> Texture2D:
+	if tex == null:
+		return null
+	if _framed_cache.has(tex):
+		return _framed_cache[tex]
+	var img := tex.get_image()
+	var used := img.get_used_rect()
+	var pad := used.size.y * FRAME_TOP / (1.0 - FRAME_TOP)
+	var atlas := AtlasTexture.new()
+	atlas.atlas = tex
+	var top := float(used.position.y) - pad
+	atlas.region = Rect2(0, maxf(top, 0.0), img.get_width(), used.end.y - maxf(top, 0.0))
+	atlas.margin = Rect2(0, maxf(-top, 0.0), 0, maxf(-top, 0.0))
+	_framed_cache[tex] = atlas
+	return atlas
+
+
+## Unknown speakers (the Fates as silhouettes): "???" for the three together, "?" for one.
+func _speaker_label(step: Dictionary) -> String:
+	if String(step.variant).begins_with("silhouette"):
+		return "???" if String(step.speaker).to_lower() == "the fates" else "?"
+	return _display_name(step.speaker)
 
 
 func _display_name(speaker: String) -> String:

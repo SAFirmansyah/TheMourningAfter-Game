@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://cfj0ng133w2mi"
+path="res://.godot/imported/seira.txt-3d5464d0da0f7a685fe3e616e03ef711.res"
+
+[deps]
+
+source_file="res://dialogue/hero/seira.txt"
+dest_files=["res://.godot/imported/seira.txt-3d5464d0da0f7a685fe3e616e03ef711.res"]
+
+[params]
+

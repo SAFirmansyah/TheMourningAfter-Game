@@ -1,0 +1,5 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @cue NAME lets the game act mid-scene; @dark on/off puts black behind the dialogue; @flash flashes white.
+GWENITH (neutral): I see. Last time wasn’t chance, you really can return from the dead.
+PERRIN (angry): What’s it to you? Even if I don’t defeat you here, I’m not going to leave without at least slowing you down.
+PERRIN (angry): So let’s do it.
