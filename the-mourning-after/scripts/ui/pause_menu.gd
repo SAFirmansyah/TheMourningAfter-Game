@@ -90,7 +90,9 @@ func close() -> void:
 ## First click: straight out if nothing's unsaved, else offer Save & Quit / Quit without saving.
 ## Second click (as "Save & Quit"): save and go.
 func _on_quit() -> void:
-	if _asking:
+	if Demo.active():
+		_quit_to_title() # the demo never keeps a save
+	elif _asking:
 		_save_and_quit()
 	elif not world.has_unsaved_changes():
 		_quit_to_title()
@@ -215,6 +217,8 @@ func _art_style(texture: Texture2D, art_size: Vector2, margins: Vector4) -> Styl
 
 ## "Testing tools: shown / hidden" under Save: toggles the testing buttons (top right, Skip scene).
 func _add_testing_toggle() -> void:
+	if Demo.active():
+		return
 	var toggle := Button.new()
 	toggle.name = "TestingTools"
 	toggle.flat = true

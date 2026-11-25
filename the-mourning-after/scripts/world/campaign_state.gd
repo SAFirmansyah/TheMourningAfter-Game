@@ -62,7 +62,9 @@ func start_boss_selection() -> void:
 		return # already chosen — don't reroll on repeat visits to the chamber
 	_remaining_boss_pool.assign(boss_rooms.keys())
 	_remaining_boss_pool.shuffle()
-	if _is_first_ever_boss_visit():
+	if Demo.active():
+		chosen_boss = Demo.ONLY_BOSS # the only finished fight
+	elif _is_first_ever_boss_visit():
 		_remaining_boss_pool.erase(first_boss_shown)
 		chosen_boss = first_boss_shown
 	else:
@@ -95,7 +97,10 @@ func bargain_boss() -> bool:
 	if not free_boss_bargains:
 		RunInventory.spend(boss_bargain_cost) # never below 0
 	has_boss_bargained = true
-	if _is_first_ever_boss_visit():
+	if Demo.active():
+		RunInventory.has_reached_boss = true
+		chosen_boss = Demo.ONLY_BOSS # the bargain goes through, but the fight stays Gwenith's
+	elif _is_first_ever_boss_visit():
 		RunInventory.has_reached_boss = true
 		chosen_boss = first_boss_fought
 	else:

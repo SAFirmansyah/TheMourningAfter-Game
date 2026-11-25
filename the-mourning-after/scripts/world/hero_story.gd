@@ -64,6 +64,7 @@ var _start_point := ""
 var _room: Room
 var _died := false # the last trip back to base was a death
 var _preboss_waiting := false # drank at the first pre-boss pond: the exit plays the Fate beat
+var _demo_note_after_scene := false
 var _base_waiting := false # first return with residue: the exit plays Anxiety / Archi
 
 
@@ -138,6 +139,8 @@ func _on_room_entered(room: Room) -> void:
 				_set_exit_blocked(&"SouthExit", true)
 		else:
 			world.hud.show_note(RETURN_LINES.pick_random(), 3.5)
+	if Demo.active() and room is BossRoom:
+		(room as BossRoom).boss_defeated.connect(_play_demo_end, CONNECT_ONE_SHOT)
 	if room.scene_file_path == CampaignState.boss_rooms.get("GWENITH", ""):
 		var scene := "gwenith_first"
 		match gwenith_meetings:
@@ -166,6 +169,9 @@ func _play_preboss_beat() -> void:
 	_preboss_waiting = false
 	await _play(["seira" if fates_met else "doubt"])
 	fates_met = true
+	if _demo_note_after_scene:
+		_demo_note_after_scene = false
+		world.hud.show_note(Demo.ONLY_BOSS_NOTE, 4.0)
 	_set_exit_blocked(&"EastExit", false)
 	if world.current_room.has_method(&"_configure_boss_exit"):
 		world.current_room._configure_boss_exit() # now leads to the boss Seira swapped in
@@ -222,6 +228,7 @@ func _on_room_cleared(room: CombatRoom) -> void:
 	await tween.finished
 	await world.story.play_file(SCRIPT_PATH % "first_residue_a")
 	world.story.release()
+	player.input_enabled = true # free to walk up and press E (the exits stay shut)
 	busy = false
 	await residue.collected # the player presses E
 	await get_tree().create_timer(0.5).timeout
@@ -258,6 +265,8 @@ func _on_cue(cue_name: String) -> void:
 	match cue_name:
 		"boss_bargain":
 			CampaignState.bargain_boss()
+			if Demo.active():
+				_demo_note_after_scene = true
 		"revive":
 			RunInventory.buy_revive()
 			world.player.clear_stun()
@@ -275,6 +284,9 @@ func say_weapon_bargain() -> void:
 
 
 func say_boss_bargain() -> void:
+	if Demo.active():
+		world.hud.show_note(Demo.ONLY_BOSS_NOTE, 4.0)
+		return
 	world.hud.show_note(BOSS_LINES.pick_random() % BOSS_ROLES.get(CampaignState.chosen_boss, "witch"), 3.5)
 
 
@@ -297,3 +309,11 @@ func load_save_data(data: Dictionary) -> void:
 	first_death_done = bool(data.get("first_death_done", first_death_done))
 	first_return_done = bool(data.get("first_return_done", first_return_done))
 	gwenith_meetings = int(data.get("gwenith_meetings", gwenith_meetings))
+
+
+## Demo: beating the boss ends the demo: Perrin's lines, a thank-you, then the title (which wipes the save).
+func _play_demo_end() -> void:
+	await get_tree().create_timer(1.2).timeout
+	await _play(["demo_end"])
+	if not is_inside_tree(): return
+	get_tree().change_scene_to_file(TestTools.TITLE_SCENE)

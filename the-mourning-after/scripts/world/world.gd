@@ -274,7 +274,7 @@ func _restore_room_state(data: Dictionary) -> void:
 		pickup.loot_data = load(path)
 		pickup.loot_id = pickup.loot_data.loot_id
 		pickup.tint = pickup.loot_data.tint
-		pickup.auto_collect = true
+		pickup.auto_collect = pickup.loot_data == null or pickup.loot_data.effect != LootData.EffectType.MAGIC_RESIDUE
 		pickup.set_meta(&"dropped", true)
 		current_room.add_child(pickup)
 		pickup.global_position = Vector3(pos[0], pos[1], pos[2])

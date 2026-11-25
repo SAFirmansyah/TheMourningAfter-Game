@@ -125,7 +125,7 @@ func _drop_loot() -> void:
 		pickup.loot_id = loot.loot_id
 		pickup.loot_data = loot
 		pickup.tint = loot.tint
-		pickup.auto_collect = true
+		pickup.auto_collect = loot.effect != LootData.EffectType.MAGIC_RESIDUE # residue: walk up and press E
 		pickup.set_meta(&"dropped", true) # saved with the room if still on the floor
 
 		var offset := Vector3(

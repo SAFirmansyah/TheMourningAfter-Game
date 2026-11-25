@@ -33,7 +33,19 @@ var _collect_from := Vector3.ZERO
 var _player: Node3D
 
 
+const RESIDUE_ART := preload("res://textures/resources/Residue.png")
+const RESIDUE_REGION := Rect2(1317, 826, 260, 206) # the drawing inside the canvas
+const RESIDUE_WIDTH := 0.45 # TUNE: residue drop's size on the floor (m)
+
+
 func _ready() -> void:
+	if loot_data and loot_data.effect == LootData.EffectType.MAGIC_RESIDUE:
+		var art := AtlasTexture.new()
+		art.atlas = RESIDUE_ART
+		art.region = RESIDUE_REGION
+		card.texture = art
+		card.pixel_size = RESIDUE_WIDTH / RESIDUE_REGION.size.x
+		tint = Color.WHITE
 	card.modulate = tint
 	_phase = fposmod(position.x * 1.7 + position.z * 2.3, TAU)
 	if Engine.is_editor_hint():

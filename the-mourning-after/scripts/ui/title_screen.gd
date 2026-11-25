@@ -37,7 +37,12 @@ func _ready() -> void:
 	World.pending_start = ""
 	start_box.hide()
 	constance_box.hide()
+	if Demo.active():
+		Demo.wipe() # every visitor starts clean
 	play_button.text = "Resume game" if SaveSystem.has_save(SaveSystem.DEFAULT_SLOT) else "New game"
+	if Demo.active():
+		play_button.text = "Play Demo"
+		start_from_button.hide()
 	if SaveSystem.is_ended(): # the game "deleted itself": only Exit and the testing option are left
 		play_button.hide()
 	play_button.pressed.connect(_on_play)

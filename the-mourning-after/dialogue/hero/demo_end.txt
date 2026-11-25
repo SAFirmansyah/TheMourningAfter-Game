@@ -1,0 +1,10 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# Demo ending: Gwenith has fallen.
+PERRIN (neutral): I've done it.
+PERRIN (confident): I actually beat her.
+PERRIN (confident): I should let the developers know for a little extra reward...
+PERRIN (neutral): And then maybe try playing the other half of the game.
+@fade black
+@text
+Thank you for playing, and congratulations on beating the first boss!
+@end
