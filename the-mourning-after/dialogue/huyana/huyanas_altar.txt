@@ -14,9 +14,9 @@ CONSTANCE (sad): Nothing may ever bring you back, but…
 CONSTANCE (lost in thought): If we get our way, no one will be robbed of their life like you were, my child.
 # Constance walks to the altar podium.
 @walk constance Podium
-CONSTANCE (happy): These bloodstains don’t scare me.
+CONSTANCE (happy): The dark days we face don't scare me.
 CONSTANCE (happy): They’re proof of how far we’re willing to go for our cause.
-CONSTANCE (neutral): Cutting your palm here means pledging yourself to the trials and… unfortunately, errors, that it will take to find what we’re seeking.
+CONSTANCE (neutral): Living in Huyana means pledging yourself to the trials and… unfortunately, errors, that it will take to find what we’re seeking.
 CONSTANCE (praying): A cure for death.
 # Constance exits the Altar room.
 @walk constance Exit

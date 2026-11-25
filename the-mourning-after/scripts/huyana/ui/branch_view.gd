@@ -32,6 +32,15 @@ const SPARKLE_SIZE := 1.1 # TUNE: ready sparkle's size, relative to the bulb's d
 @export var pop_time := 0.3 # TUNE: a new item's pop-in time (s)
 @export var bar_glide := 8.0 # TUNE: how quickly bars catch up to their value (higher = snappier)
 
+@export var hover_sparkle_grow := 1.35 # TUNE: a hovered ready bulb's sparkle size, relative to normal
+@export var hover_label_size := 18 # TUNE: "Fulfill" label's font size (px)
+
+var hovered := -1: # the bulb under the mouse that can be clicked, or -1
+	set(value):
+		if value != hovered:
+			hovered = value
+			queue_redraw()
+
 ## One per bulb: {} = empty, or {item, ratio (0-1), sparkle (bool: ready to hand over / collect), repair (-1 or 0-1)}.
 var entries: Array = []
 
@@ -103,7 +112,26 @@ func _draw() -> void:
 				if entry.get("repair", -1.0) >= 0.0:
 					entry.repair = _bars[i]
 				pop = _ease_out_back(_pops[i])
-			draw_entry(self, bulb_center(i), bulb_radius(), entry, bar_size, bar_gap, urgent_below, draw_backing, pop, sparkle_scale)
+			var hover := i == hovered
+			draw_entry(self, bulb_center(i), bulb_radius(), entry, bar_size, bar_gap, urgent_below, draw_backing, pop, sparkle_scale * (hover_sparkle_grow if hover else 1.0), not hover)
+			if hover: # the label takes the progress bar's place
+				_draw_label(bulb_center(i) + Vector2(0.0, bulb_radius() + bar_gap + bar_size.y / 2.0), "Fulfill")
+
+
+## Index of the bulb whose circle holds `point` (this control's coordinates), or -1.
+func bulb_at(point: Vector2) -> int:
+	for i in bulbs.size():
+		if point.distance_to(bulb_center(i)) <= bulb_radius() * 1.1:
+			return i
+	return -1
+
+
+func _draw_label(center: Vector2, text: String) -> void:
+	var font := get_theme_default_font()
+	var width := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, hover_label_size).x
+	var base := center + Vector2(-width / 2.0, (font.get_ascent(hover_label_size) - font.get_descent(hover_label_size)) / 2.0) # centred on the point
+	draw_string_outline(font, base, text, HORIZONTAL_ALIGNMENT_LEFT, -1, hover_label_size, 5, Color(0.12, 0.08, 0.05, 0.9))
+	draw_string(font, base, text, HORIZONTAL_ALIGNMENT_LEFT, -1, hover_label_size, Color(1.0, 0.93, 0.75))
 
 
 ## 0 -> 1 with a slight overshoot.
@@ -115,7 +143,7 @@ static func _ease_out_back(t: float) -> float:
 ## One entry in a circle of `radius` at `center`: optional parchment backing, icon, ready sparkle,
 ## and the progress bar `gap` below the circle.
 ## pop scales the icon (a new item popping in).
-static func draw_entry(canvas: CanvasItem, center: Vector2, radius: float, entry: Dictionary, bar: Vector2, gap: float, urgent: float, backing := false, pop := 1.0, sparkle_scale := SPARKLE_SIZE) -> void:
+static func draw_entry(canvas: CanvasItem, center: Vector2, radius: float, entry: Dictionary, bar: Vector2, gap: float, urgent: float, backing := false, pop := 1.0, sparkle_scale := SPARKLE_SIZE, show_bar := true) -> void:
 	if backing:
 		canvas.draw_circle(center, radius * 0.98, BACKING)
 	RequestCatalog.draw_icon(canvas, entry.item, center, radius * pop * (0.85 if RequestCatalog.ICONS.has(entry.item) else 0.55))
@@ -124,6 +152,8 @@ static func draw_entry(canvas: CanvasItem, center: Vector2, radius: float, entry
 		var side := radius * 2.0 * sparkle_scale * lerpf(0.9, 1.05, pulse)
 		var sparkle_size := Vector2(side * SPARKLE.get_width() / SPARKLE.get_height(), side)
 		canvas.draw_texture_rect(SPARKLE, Rect2(center - sparkle_size / 2.0, sparkle_size), false, Color(1, 1, 1, lerpf(0.75, 1.0, pulse)))
+	if not show_bar:
+		return
 	var repair: float = entry.get("repair", -1.0)
 	var ratio: float = repair if repair >= 0.0 else entry.get("ratio", 0.0)
 	var color := GOLD # orders being prepared, and repairs under way

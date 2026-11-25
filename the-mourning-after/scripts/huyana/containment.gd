@@ -2,7 +2,7 @@
 class_name Containment
 extends Obstacle
 ## Mutant containment facade with a request slot at each end. Requests show on the request branch;
-## E near an end hands over what that slot's request needs, once it's in stock. On the wall layer, so dashes can't pass through.
+## E anywhere in front hands over what one of its requests needs, once it's in stock (that end's own first). On the wall layer, so dashes can't pass through.
 
 @export_range(1, 3) var number := 1 # which containment this is (1 = leftmost); also picks its food
 @export var bubble_height := 4.4 # TUNE: height the tutorial's arrow points at above a slot (m)
@@ -10,6 +10,8 @@ extends Obstacle
 	set(value):
 		slot_offset = value
 		_place_slots()
+
+@export var front_distance := 1.6 # TUNE: how far in front of the facade Constance stops to hand over (in its own scale)
 
 @onready var slots: Array[Interactable] = [$SlotLeft, $SlotRight]
 
@@ -26,18 +28,31 @@ func _ready() -> void:
 	for i in slots.size():
 		slots[i].interacted.connect(func() -> void:
 			if _manager:
-				_manager.interact(number - 1, i))
+				_manager.interact(number - 1, _ready_slot(i)))
 
 
 func _process(delta: float) -> void:
 	super(delta)
 	if Engine.is_editor_hint() or _manager == null:
 		return
+	var any_ready := _ready_slot(0) >= 0
 	for i in slots.size():
-		var request := _manager.request_at(number - 1, i)
-		var hand_over: bool = not request.is_empty() and request.item != RequestCatalog.REPAIR and _manager.is_fulfillable(request)
-		slots[i].enabled = hand_over
+		slots[i].enabled = any_ready
 		slots[i].prompt_label = "Fulfill"
+
+
+## The slot whose request can be handed over now, `preferred` first; -1 if none.
+func _ready_slot(preferred: int) -> int:
+	for i in [preferred, 1 - preferred]:
+		var request := _manager.request_at(number - 1, i)
+		if not request.is_empty() and request.item != RequestCatalog.REPAIR and _manager.is_fulfillable(request):
+			return i
+	return -1
+
+
+## Where Constance stands to hand over a slot's request: in front of the facade, toward that end.
+func fulfill_point(slot: int) -> Vector3:
+	return to_global(Vector3((slot * 2 - 1) * slot_offset * 0.5, 0.0, front_distance))
 
 
 func slot_bubble_position(slot: int) -> Vector3:

@@ -74,6 +74,11 @@ var dashes_available := 0
 var input_enabled := true
 var animation_held := false # a cutscene is animating the card itself (e.g. walking her to a mark)
 var forced_input := Vector2.ZERO # screen-space direction used while input is disabled
+var _auto_target := Vector3.INF # auto-walk destination (INF = none); any movement key cancels it
+var _auto_arrived := Callable()
+var _auto_stuck := 0.0
+const AUTO_ARRIVE := 0.25 # how close an auto-walk has to get (m)
+const AUTO_GIVE_UP := 0.8 # TUNE: an auto-walk blocked this long (s) gives up
 var charge_points := 0.0 # 0–MAX_CHARGE; fills from successful base hits, spent by the sword's ability (RMB/Q)
 
 var _facing := Vector2.DOWN
@@ -127,6 +132,8 @@ func _physics_process(delta: float) -> void:
 	var stunned := is_stunned()
 	var can_act := input_enabled and not stunned
 	var input := Vector2.ZERO if stunned else (Input.get_vector("move_left", "move_right", "move_up", "move_down") if input_enabled else forced_input)
+	if is_auto_walking():
+		input = _auto_walk_input(input, delta)
 	if input != Vector2.ZERO:
 		_facing = input.normalized()
 		if input.x != 0:
@@ -136,10 +143,11 @@ func _physics_process(delta: float) -> void:
 		sprite.speed_scale = 1.0
 	if not _dashing and not _attacking and not animation_held:
 		var moving := input != Vector2.ZERO
-		if weapon == null:
-			sprite.play("walk_unarmed" if moving else "idle_unarmed")
-		else:
-			sprite.play("walk" if moving else "idle")
+		var anim := &"walk" if moving else &"idle"
+		var unarmed := StringName(anim + "_unarmed")
+		if weapon == null and sprite.sprite_frames.has_animation(unarmed): # Perrin only; Constance has none
+			anim = unarmed
+		sprite.play(anim)
 
 	_recharge_dashes(delta)
 	if _dash_queued:
@@ -426,6 +434,43 @@ func _recharge_dashes(delta: float) -> void:
 	if _recharge_progress >= dash_recharge_time:
 		_recharge_progress = 0.0
 		dashes_available += 1
+
+
+## Walks Constance to `target` (on the floor) and calls `arrived` there. Pressing any movement key,
+## losing input, or getting blocked cancels it.
+func auto_walk_to(target: Vector3, arrived: Callable) -> void:
+	_auto_target = Vector3(target.x, global_position.y, target.z)
+	_auto_arrived = arrived
+	_auto_stuck = 0.0
+
+
+func cancel_auto_walk() -> void:
+	_auto_target = Vector3.INF
+	_auto_arrived = Callable()
+
+
+func is_auto_walking() -> bool:
+	return _auto_target != Vector3.INF
+
+
+func _auto_walk_input(keys: Vector2, delta: float) -> Vector2:
+	if keys != Vector2.ZERO or not input_enabled or is_stunned():
+		cancel_auto_walk()
+		return keys
+	var to := _auto_target - global_position
+	to.y = 0.0
+	if to.length() < AUTO_ARRIVE:
+		var arrived := _auto_arrived
+		cancel_auto_walk()
+		if arrived.is_valid():
+			arrived.call()
+		return Vector2.ZERO
+	_auto_stuck = _auto_stuck + delta if velocity.length() < base_move_speed * 0.2 else 0.0
+	if _auto_stuck > AUTO_GIVE_UP + 0.3: # (the first moment is the speed-up from standing)
+		cancel_auto_walk()
+		return Vector2.ZERO
+	var dir := Vector2(to.x, to.z / _depth_scale())
+	return dir.normalized() * clampf(to.length() / 0.6, 0.35, 1.0) # eases into the spot
 
 
 func _to_world(screen_dir: Vector2) -> Vector3:

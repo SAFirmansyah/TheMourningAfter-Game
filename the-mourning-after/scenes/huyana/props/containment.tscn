@@ -34,9 +34,9 @@ shape = SubResource("BoxShape3D_footprint")
 [node name="SlotLeft" parent="." instance=ExtResource("4_interact")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, 0)
 prompt_label = "Check"
-interact_radius = 2.0
+interact_radius = 2.6
 
 [node name="SlotRight" parent="." instance=ExtResource("4_interact")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 0, 0)
 prompt_label = "Check"
-interact_radius = 2.0
+interact_radius = 2.6
