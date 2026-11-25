@@ -91,6 +91,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _on_play() -> void:
+	if Demo.SIDE == "villain":
+		World.pending_start = "huyana" # Constance's side from the beginning
+		get_tree().change_scene_to_file(WORLD_SCENE)
+		return
 	if not SaveSystem.has_save(SaveSystem.DEFAULT_SLOT):
 		SaveSystem.delete_profile("") # no leftover Act 2 save under a new game
 	get_tree().change_scene_to_file(WORLD_SCENE)

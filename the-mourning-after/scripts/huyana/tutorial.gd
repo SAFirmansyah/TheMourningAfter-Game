@@ -42,7 +42,7 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	_normal_day_length = day_cycle.day_length
+	_normal_day_length = Demo.DAY_LENGTH if Demo.SIDE == "villain" else day_cycle.day_length
 	panel.hide()
 	for button: Button in [back_button, next_button]: # arrows grow on hover; "Begin" gets the brush
 		for state in [&"normal", &"focus", &"disabled"]:

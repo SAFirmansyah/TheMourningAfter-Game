@@ -164,6 +164,11 @@ func play_night() -> void:
 			fixed_done.append(stretch)
 			await world.story.play_file(SCRIPT_PATH % FIXED_SCENES[stretch])
 			if not is_inside_tree(): return
+			if Demo.SIDE == "villain" and FIXED_SCENES[stretch] == "night_7":
+				await world.story.play_steps([{"type": "text", "stanzas": [PackedStringArray([Demo.VILLAIN_THANKS])]}])
+				if not is_inside_tree(): return
+				get_tree().change_scene_to_file(TestTools.TITLE_SCENE) # the title wipes the save
+				return
 		else:
 			var left: Array = VARIANT_SCENES[stretch].filter(func(id: String) -> bool: return not variants_used.has(id))
 			if left.is_empty():

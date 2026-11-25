@@ -57,6 +57,8 @@ var _shade_tween: Tween
 
 
 func _ready() -> void:
+	if Demo.SIDE == "villain":
+		day_length = Demo.DAY_LENGTH
 	add_to_group(&"save_state")
 	add_to_group(&"day_cycle")
 	skip_day_button.pressed.connect(_skip_day)

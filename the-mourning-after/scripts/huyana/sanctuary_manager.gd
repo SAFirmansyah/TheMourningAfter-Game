@@ -632,6 +632,8 @@ func _expire(request: Dictionary) -> void:
 
 
 func expiry_penalty() -> float:
+	if Demo.SIDE == "villain":
+		return Demo.PENALTY_START + Demo.PENALTY_PER_NIGHT * maxi(day_cycle.day - 1, 0)
 	return expiry_penalties[mini(story_events_reached, expiry_penalties.size() - 1)]
 
 
