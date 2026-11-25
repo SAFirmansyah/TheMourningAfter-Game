@@ -1,0 +1,12 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @cue NAME lets the game act mid-scene; @dark on/off puts black behind the dialogue; @flash flashes white.
+# First time encountering Gwenith
+PERRIN (angry): You! Are you one of them? The witches that robbed us of everything?
+GWENITH (neutral): You came all this way, butchering anyone in your path, and now is when you’re stopping to ask questions?
+PERRIN (angry): It seems you’re not going to answer. In that case, you’re just another problem standing in my path.
+PERRIN (neutral): And one that looks strikingly similar to the foe I seek out in these woods.
+PERRIN (confident): So, I must be heading the right way. I’ll strike you down, witch.
+GWENITH (lost in thought): You seek my sister?
+GWENITH (neutral): I hope you don’t find what you seek, then. For your own sake, actually.
+PERRIN (confident): If she’s as formidable as you’re setting her up to be, let’s see if she shows up here…
+PERRIN (angry): …to save you when I’m through with you!

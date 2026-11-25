@@ -1,15 +1,12 @@
 [gd_scene format=3 uid="uid://inqew075ugr8"]
-[ext_resource type="PackedScene" path="res://scenes/huyana/props/story_prop.tscn" id="15_storyprop"]
-
-[ext_resource type="Material" path="res://materials/ground_carpet.tres" id="m_ground"]
 
 [ext_resource type="Script" uid="uid://kx8x5if2lsig" path="res://scripts/world/base_room.gd" id="1_room"]
 [ext_resource type="PackedScene" uid="uid://764k273fks56" path="res://scenes/world/path_exit.tscn" id="3_exit"]
 [ext_resource type="PackedScene" uid="uid://bo67plntlruy6" path="res://scenes/test/prop.tscn" id="4_prop"]
+[ext_resource type="Texture2D" uid="uid://dbd1h8n2sgohf" path="res://textures/Hero Base/stand_withsword.png" id="6_4we1m"]
 [ext_resource type="Texture2D" uid="uid://cb7bqej7hmnm3" path="res://textures/Hero Base/herobase_prayerbench.png" id="6_l5rmu"]
 [ext_resource type="Script" uid="uid://bue1mi5yjlgyn" path="res://scripts/visual/facing_card.gd" id="7_awkto"]
 [ext_resource type="Texture2D" uid="uid://cgt3ia73eatfq" path="res://textures/Hero Base/herobase_cabinet.png" id="7_eanj3"]
-[ext_resource type="Texture2D" path="res://textures/Hero Base/herobase_swordstand.png" id="14_swordstand"]
 [ext_resource type="Texture2D" uid="uid://btkgwuhytprjt" path="res://textures/Hero Base/herobase_bookshelf1.png" id="8_cqc2x"]
 [ext_resource type="PackedScene" path="res://scenes/world/run_start_point.tscn" id="8_start"]
 [ext_resource type="Texture2D" uid="uid://6uie6x20bxtf" path="res://textures/Hero Base/herobase_bookshelf2.png" id="9_eanj3"]
@@ -17,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://cph438mdbp1nh" path="res://textures/Hero Base/herobase_armor2.png" id="11_ph04b"]
 [ext_resource type="Texture2D" uid="uid://dmsfx4rhcdjec" path="res://textures/Hero Base/herobase_armor3.png" id="12_awkto"]
 [ext_resource type="Texture2D" uid="uid://cbcqbowx5mxts" path="res://textures/Hero Base/herobase_table.png" id="13_ph04b"]
+[ext_resource type="PackedScene" path="res://scenes/huyana/props/story_prop.tscn" id="15_storyprop"]
+[ext_resource type="Material" path="res://materials/ground_carpet.tres" id="m_ground"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_floor"]
 material = ExtResource("m_ground")
@@ -67,24 +66,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5956, 1, 5.65)
 shape = SubResource("BoxShape3D_fit_SouthLeft")
 
 [node name="SouthExit" parent="." unique_id=1257900106 instance=ExtResource("3_exit")]
-transform = Transform3D(-0, 0, -0.7, 0, 0.7, 0, 0.7, 0, -0, 0, 0, 5.5794)
+transform = Transform3D(0, 0, -0.7, 0, 0.7, 0, 0.7, 0, 0, 0, 0, 5.5794)
 target_entry = &"WestExit"
 
 [node name="Props" type="Node3D" parent="." unique_id=1260245742]
 
 [node name="SwordStand" parent="Props" unique_id=844313245 instance=ExtResource("4_prop")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1188, 0, 2.825)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.1188, 0, 2.825)
 
 [node name="RunStartPoint" parent="Props/SwordStand" unique_id=1780628412 instance=ExtResource("8_start")]
 lines = PackedStringArray()
 
-[node name="Sprite3D" type="Sprite3D" parent="Props/SwordStand"]
+[node name="Sprite3D" type="Sprite3D" parent="Props/SwordStand" unique_id=69989344]
 offset = Vector2(0, 708)
 pixel_size = 0.00075
 alpha_cut = 1
-texture = ExtResource("14_swordstand")
+texture = ExtResource("6_4we1m")
 region_enabled = true
-region_rect = Rect2(1, 327, 2751, 1416)
+region_rect = Rect2(-0.474, -0.19, 3306, 1611)
 
 [node name="PrayerSpot" parent="Props" unique_id=1780628413 instance=ExtResource("4_prop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.085)
@@ -105,67 +104,64 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.8, 0)
 texture = ExtResource("7_eanj3")
 
 [node name="PropShelf" parent="Props" unique_id=1610388842 instance=ExtResource("4_prop")]
-transform = Transform3D(-0, 0, 1, 0, 1, 0, -1, 0, -0, -5.2263, 0.5, 0.7063)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.2263, 0.5, 0.7063)
 
 [node name="Sprite3D" type="Sprite3D" parent="Props/PropShelf" unique_id=1997939223]
-transform = Transform3D(-0, 0, -1, 0, 1, 0, 1, 0, -0, 0, 0.8, 0)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0.8, 0)
 texture = ExtResource("8_cqc2x")
 
 [node name="PropShelf2" parent="Props" unique_id=1412136431 instance=ExtResource("4_prop")]
-transform = Transform3D(-0, 0, 1, 0, 1, 0, -1, 0, -0, -5.2263, 0.6, -1.4125)
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -5.2263, 0.6, -1.4125)
 
 [node name="Sprite3D" type="Sprite3D" parent="Props/PropShelf2" unique_id=1179169788]
-transform = Transform3D(-0, 0, -1, 0, 1, 0, 1, 0, -0, 0, 0.8, 0)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0.8, 0)
 texture = ExtResource("9_eanj3")
 
 [node name="PropArmor1" parent="Props" unique_id=1706927889 instance=ExtResource("4_prop")]
-transform = Transform3D(-0, 0, 0.8, 0, 0.8, 0, -0.8, 0, -0, 5.2263, 0.4, 0.7063)
+transform = Transform3D(0, 0, 0.8, 0, 0.8, 0, -0.8, 0, 0, 5.2263, 0.4, 0.7063)
 
 [node name="Sprite3D" type="Sprite3D" parent="Props/PropArmor1" unique_id=1708004342]
-transform = Transform3D(-0, 0, -1, 0, 1, 0, 1, 0, -0, 0, 0.8, 0)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0.8, 0)
 texture = ExtResource("10_6734w")
 
 [node name="PropArmor2" parent="Props" unique_id=1923288910 instance=ExtResource("4_prop")]
-transform = Transform3D(-0, 0, -0.8, 0, 0.8, 0, 0.8, 0, -0, 5.2263, 0.4, -1.4125)
+transform = Transform3D(0, 0, -0.8, 0, 0.8, 0, 0.8, 0, 0, 5.2263, 0.4, -1.4125)
 
 [node name="Sprite3D" type="Sprite3D" parent="Props/PropArmor2" unique_id=1359927165]
-transform = Transform3D(-0, 0, -1, 0, 1, 0, 1, 0, -0, 0, 0.8, 0)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0.8, 0)
 texture = ExtResource("11_ph04b")
 
 [node name="PropArmor3" parent="Props" unique_id=646814711 instance=ExtResource("4_prop")]
-transform = Transform3D(-0, 0, 0.8, 0, 0.8, 0, -0.8, 0, -0, 5.2263, 0.4, 2.825)
+transform = Transform3D(0, 0, 0.8, 0, 0.8, 0, -0.8, 0, 0, 5.2263, 0.4, 2.825)
 
 [node name="Sprite3D" type="Sprite3D" parent="Props/PropArmor3" unique_id=2119630484]
-transform = Transform3D(-0, 0, -1, 0, 1, 0, 1, 0, -0, 0, 0.8, 0)
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 0, 0.8, 0)
 texture = ExtResource("12_awkto")
 
 [node name="PropTable" parent="Props" unique_id=101002940 instance=ExtResource("4_prop")]
-transform = Transform3D(-0, 0, 0.7, 0, 0.7, 0, -0.7, 0, -0, -3.5312, 0, 0)
+transform = Transform3D(0, 0, 0.7, 0, 0.7, 0, -0.7, 0, 0, -3.5312, 0, 0)
 
 [node name="Sprite3D" type="Sprite3D" parent="Props/PropTable" unique_id=1597900970]
 process_physics_priority = 20
-transform = Transform3D(-0, 0, -0.7, 0, 0.7, 0, 0.7, 0, -0, 0, 0, 0)
+transform = Transform3D(0, 0, -0.7, 0, 0.7, 0, 0.7, 0, 0, 0, 0, 0)
 offset = Vector2(0, 160)
 texture = ExtResource("13_ph04b")
 script = ExtResource("7_awkto")
 
-[node name="Portrait" parent="Props" instance=ExtResource("15_storyprop")]
-visible = false
+[node name="Portrait" parent="Props" unique_id=1706674937 instance=ExtResource("15_storyprop")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -5.2)
+visible = false
 
-[node name="Label" parent="Props/Portrait" index="1"]
-text = "Avelina's portrait"
+[node name="Stage" type="Node3D" parent="." unique_id=626505362]
 
-[node name="Stage" type="Node3D" parent="."]
-
-[node name="Start" type="Marker3D" parent="Stage"]
+[node name="Start" type="Marker3D" parent="Stage" unique_id=1744196024]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0, 0.5)
 
-[node name="Portrait" type="Marker3D" parent="Stage"]
+[node name="Portrait" type="Marker3D" parent="Stage" unique_id=1006036303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.825, 0, -3.9)
 
-[node name="SwordStand" type="Marker3D" parent="Stage"]
+[node name="SwordStand" type="Marker3D" parent="Stage" unique_id=643311530]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 1.9)
 
-[node name="PrayerSpot" type="Marker3D" parent="Stage"]
+[node name="PrayerSpot" type="Marker3D" parent="Stage" unique_id=450525389]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.1)

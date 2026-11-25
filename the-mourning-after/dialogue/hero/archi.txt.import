@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://c60n068371yfv"
+path="res://.godot/imported/archi.txt-cfb99d10a2fe72b8977d28a60d0efb11.res"
+
+[deps]
+
+source_file="res://dialogue/hero/archi.txt"
+dest_files=["res://.godot/imported/archi.txt-cfb99d10a2fe72b8977d28a60d0efb11.res"]
+
+[params]
+

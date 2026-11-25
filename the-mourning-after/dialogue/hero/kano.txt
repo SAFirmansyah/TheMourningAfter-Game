@@ -1,0 +1,19 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @cue NAME lets the game act mid-scene; @dark on/off puts black behind the dialogue; @flash flashes white.
+# NARRATIVE BEAT: Kano (first fall, Fates met before)
+@dark on
+PERRIN (scared): I’m completely beat up.
+PERRIN (scared): I can’t go on like this. I’ve barely gotten anywhere, either.
+PERRIN (scared): This cannot be how it ends for me. No, no…
+KANO (silhouette): It isn’t over yet.
+PERRIN (scared): Oh! It’s… it’s another of you.
+PERRIN (scared): Can you help me with this?
+KANO (silhouette): Allow me to try.
+@cue revive
+KANO (silhouette): The extent of my power is thus: you can stand once more, but your foes still remain.
+KANO (silhouette): You still have to fight on. Fate can be altered, but not avoided.
+PERRIN (confident): So, you can just… do that? Bring me back each time I fall?
+KANO (silhouette): I wouldn’t be too certain of that, were I you.
+PERRIN (neutral): I see. That’s alright. This second chance is already more than I could ask for.
+PERRIN (neutral): Thank you.
+@dark off

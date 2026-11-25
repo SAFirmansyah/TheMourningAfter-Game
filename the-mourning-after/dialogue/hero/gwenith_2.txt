@@ -1,0 +1,10 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @cue NAME lets the game act mid-scene; @dark on/off puts black behind the dialogue; @flash flashes white.
+GWENITH (pout): You… what? How are you here again?
+PERRIN (angry): The gods granted me another go, if you will.
+GWENITH (neutral): Listen, kid, I’m not stupid.
+GWENITH (neutral): I’m a witch. I know witchcraft when I see it.
+GWENITH (lost in thought): But I also know you aren’t one, so… I can only assume you’re being aided by witches.
+GWENITH (neutral): I cannot fathom how, but…
+PERRIN (confident): You needn’t fathom a thing.
+PERRIN (angry): Just fight me. Fall, witch, and clear my path for me.

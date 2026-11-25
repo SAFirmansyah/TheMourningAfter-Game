@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://cflxrk3urvptg"
+path="res://.godot/imported/gwenith_3.txt-c80786f5c63eb8acd251d56e6ae899fb.res"
+
+[deps]
+
+source_file="res://dialogue/hero/gwenith_3.txt"
+dest_files=["res://.godot/imported/gwenith_3.txt-c80786f5c63eb8acd251d56e6ae899fb.res"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://bavy478u105wk"
+path="res://.godot/imported/kano.txt-6b1713d1356ebd3900029c6632d1848f.res"
+
+[deps]
+
+source_file="res://dialogue/hero/kano.txt"
+dest_files=["res://.godot/imported/kano.txt-6b1713d1356ebd3900029c6632d1848f.res"]
+
+[params]
+

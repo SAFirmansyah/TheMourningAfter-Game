@@ -1,0 +1,36 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @cue NAME lets the game act mid-scene; @dark on/off puts black behind the dialogue; @flash flashes white.
+# NARRATIVE BEAT: Anxiety (first return to base with residue, first Fate ever; at the base's exit)
+@flash
+@walk perrin SwordStand
+PERRIN (neutral): I can do this as many times as it takes to reach my goal.
+PERRIN (scared): But what’s to say this won’t destroy my resolve? My body feels fine, but I remember it all. The injuries, the pain, my screams and theirs…
+PERRIN (neutral): I really must find a way to get things done more efficiently if I’m to succeed.
+@dark on
+THE FATES (silhouette): Greetings, child.
+PERRIN (angry): What? Who’s there?
+PERRIN (scared): Who are you? Are you… are you gods?
+THE FATES (silhouette): Not quite.
+PERRIN (scared): Well… can- can you help?
+THE FATES (silhouette): You strive to set things right, and your heart is in a good place…
+THE FATES (silhouette): At least, as far as we can tell. It’s hard for us to communicate like this.
+PERRIN (neutral): Like what? And… how am I hearing you then?
+THE FATES (silhouette): We don’t know that ourselves. But there must be a reason. Likely to do with what you picked up before.
+THE FATES (silhouette): That residue.
+PERRIN (neutral): Um… okay.
+PERRIN (neutral): So, can you help me?
+ARCHI (silhouette): Allow me to try.
+@cue weapon_bargain
+ARCHI (silhouette): The extent of my power is thus: your weapon may be better suited to your psyche this time.
+ARCHI (silhouette): But you must fight regardless. Fate can be altered, but not avoided.
+ARCHI (silhouette): It also appears my magic has taken something from you as its cost.
+PERRIN (angry): Wait, what–
+PERRIN (angry): You witches, with your magic… never straightforward, is it? Never just content to be the way things ought to?
+THE FATES (silhouette): Watch your words, please.
+THE FATES (silhouette): We aid you because we believe there are things you need to see through with your enemy on the other side.
+THE FATES (silhouette): That is all.
+PERRIN (neutral): Mmmh, alright. I misspoke.
+PERRIN (neutral): Thank you, whoever you may be.
+@dark off
+@walk perrin SouthExit
+PERRIN (scared): Here goes…

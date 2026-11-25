@@ -1,0 +1,4 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @cue NAME lets the game act mid-scene; @dark on/off puts black behind the dialogue; @flash flashes white.
+# Upon the first time collecting Residue: Perrin has walked up to it.
+PERRIN (neutral): What’s this? That terrifying creature left something behind when I killed it.

@@ -1,0 +1,8 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @cue NAME lets the game act mid-scene; @dark on/off puts black behind the dialogue; @flash flashes white.
+PERRIN (neutral): Yes, it’s me. Save your surprise.
+GWENITH (pout): If only you’d tell me how you’re doing this. I’m actually curious.
+GWENITH (neutral): There is residue on you. Traces of magic. I can confirm there’s nothing magical about you, yourself.
+PERRIN (angry): Am I meant to be offended?
+GWENITH (neutral): You’re not meant to be anything. You’re an insignificant hurdle I must keep out of my home, that is all.
+PERRIN (angry): Well, good luck with that!

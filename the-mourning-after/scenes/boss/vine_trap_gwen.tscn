@@ -1,6 +1,24 @@
 [gd_scene format=3 uid="uid://dgkxrixhlsbxi"]
 
 [ext_resource type="Script" uid="uid://cpmrke0u134aq" path="res://scripts/boss/vine_trap_gwen.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bni2j5xl5tggq" path="res://textures/Gwenith/vine trap/vine trap_00000.png" id="2_a8j7q"]
+[ext_resource type="Texture2D" uid="uid://b756gu1102kqy" path="res://textures/Gwenith/vine trap/vine trap_00001.png" id="3_tefaq"]
+[ext_resource type="Texture2D" uid="uid://o3txljfifk1b" path="res://textures/Gwenith/vine trap/vine trap_00002.png" id="4_i2y4a"]
+[ext_resource type="Texture2D" uid="uid://drrkjkmtugq45" path="res://textures/Gwenith/vine trap/vine trap_00003.png" id="5_w5o8p"]
+[ext_resource type="Texture2D" uid="uid://b0b14e7vhsd70" path="res://textures/Gwenith/vine trap/vine trap_00004.png" id="6_0310v"]
+[ext_resource type="Texture2D" uid="uid://txegstpu6byl" path="res://textures/Gwenith/vine trap/vine trap_00005.png" id="7_pou5t"]
+[ext_resource type="Texture2D" uid="uid://bk1a27mb4ilny" path="res://textures/Gwenith/vine trap/vine trap_00006.png" id="8_uimfh"]
+[ext_resource type="Texture2D" uid="uid://dsr7oyhmxdqnx" path="res://textures/Gwenith/vine trap/vine trap_00007.png" id="9_0dvov"]
+[ext_resource type="Texture2D" uid="uid://dxrafnby2cx2f" path="res://textures/Gwenith/vine trap/vine trap_00008.png" id="10_ufae1"]
+[ext_resource type="Texture2D" uid="uid://b7ncg4etmlgdy" path="res://textures/Gwenith/vine trap/vine trap_00009.png" id="11_bn3a7"]
+[ext_resource type="Texture2D" uid="uid://d217mvxiwlj5q" path="res://textures/Gwenith/vine trap/vine trap_00010.png" id="12_g8wuo"]
+[ext_resource type="Texture2D" uid="uid://fap60itmw751" path="res://textures/Gwenith/vine trap/vine trap_00011.png" id="13_snq8p"]
+[ext_resource type="Texture2D" uid="uid://7ak3be7ry0mp" path="res://textures/Gwenith/vine trap/vine trap_00012.png" id="14_5mide"]
+[ext_resource type="Texture2D" uid="uid://bujnseuxcdfp4" path="res://textures/Gwenith/vine trap/vine trap_00013.png" id="15_i6rtm"]
+[ext_resource type="Texture2D" uid="uid://cdtnsu83h8p7k" path="res://textures/Gwenith/vine trap/vine trap_00014.png" id="16_riv2r"]
+[ext_resource type="Texture2D" uid="uid://r06n7b851cq3" path="res://textures/Gwenith/vine trap/vine trap_00015.png" id="17_nhxar"]
+[ext_resource type="Texture2D" uid="uid://csb1x4mdv0qxv" path="res://textures/Gwenith/vine trap/vine trap_00016.png" id="18_dt0qs"]
+[ext_resource type="Texture2D" uid="uid://c6v38ftgaa5xs" path="res://textures/Gwenith/vine trap/vine trap_00017.png" id="19_q2lwj"]
 
 [sub_resource type="StandardMaterial3D" id="Mat_warning"]
 transparency = 1
@@ -9,20 +27,69 @@ albedo_color = Color(0.25, 0.45, 0.15, 0.5)
 
 [sub_resource type="CylinderMesh" id="Mesh_warning"]
 material = SubResource("Mat_warning")
-top_radius = 1.0
-bottom_radius = 1.0
 height = 0.04
 
-[sub_resource type="StandardMaterial3D" id="Mat_vines"]
-transparency = 1
-shading_mode = 0
-albedo_color = Color(0.2, 0.6, 0.2, 0.85)
-
-[sub_resource type="CylinderMesh" id="Mesh_vines"]
-material = SubResource("Mat_vines")
-top_radius = 0.3
-bottom_radius = 1.0
-height = 1.6
+[sub_resource type="SpriteFrames" id="SpriteFrames_jhy0a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a8j7q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_tefaq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_i2y4a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_w5o8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0310v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pou5t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_uimfh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_0dvov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ufae1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_bn3a7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_g8wuo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_snq8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_5mide")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_i6rtm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_riv2r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_nhxar")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_dt0qs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_q2lwj")
+}],
+"loop": 0,
+"name": &"trap",
+"speed": 18.0
+}]
 
 [node name="VineTrapGwen" type="Node3D" unique_id=265877179]
 script = ExtResource("1_script")
@@ -31,6 +98,6 @@ script = ExtResource("1_script")
 transform = Transform3D(1.6, 0, 0, 0, 1, 0, 0, 0, 1.6, 0, 0.04, 0)
 mesh = SubResource("Mesh_warning")
 
-[node name="Vines" type="MeshInstance3D" parent="." unique_id=77175992]
-transform = Transform3D(1.6, 0, 0, 0, 1, 0, 0, 0, 1.6, 0, 0.8, 0)
-mesh = SubResource("Mesh_vines")
+[node name="Trap" type="AnimatedSprite3D" parent="." unique_id=2128234988]
+sprite_frames = SubResource("SpriteFrames_jhy0a")
+animation = &"trap"

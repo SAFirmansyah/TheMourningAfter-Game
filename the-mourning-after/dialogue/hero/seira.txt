@@ -1,0 +1,25 @@
+# Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
+# @cue NAME lets the game act mid-scene; @dark on/off puts black behind the dialogue; @flash flashes white.
+# NARRATIVE BEAT: Seira (Fates met before, at the pre-boss room's exit)
+@flash
+@walk perrin Pond
+PERRIN (scared): I can tell there’s someone dangerous on the other side of this.
+PERRIN (scared): I hear armour clanking and anguished growls. I’m almost at the gates of that cult, and this must be their guard.
+PERRIN (scared): Ugh… this is terrifying.
+@dark on
+SEIRA (silhouette): Greetings, child.
+PERRIN (scared): Oh! It’s… it’s another of you.
+PERRIN (scared): Can you help me with this?
+SEIRA (silhouette): Let me try.
+@cue boss_bargain
+SEIRA (silhouette): The extent of my power is thus: what awaits you beyond this clearing is no longer the guard.
+SEIRA (silhouette): There is somebody else. Fate can be altered, but not avoided.
+PERRIN (scared): Who is he, then?
+SEIRA (silhouette): She’s… well, she used to be their farmer of all things to do with witchcraft.
+PERRIN (confident): A farmer? Well, you certainly have eased my ‘fate’ then.
+SEIRA (silhouette): I wouldn’t be too certain of that, were I you.
+PERRIN (neutral): Mmmh, alright.
+PERRIN (neutral): Thank you, whoever you are.
+@dark off
+@walk perrin EastExit
+PERRIN (scared): Here goes…

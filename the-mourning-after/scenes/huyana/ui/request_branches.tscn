@@ -20,6 +20,7 @@ mouse_filter = 2
 script = ExtResource("2_branch")
 art = ExtResource("4_requests")
 bulbs = PackedVector2Array(140, 388, 267, 307, 413, 360, 560, 343, 693, 411, 818, 368)
+sparkle_scale = 2.0
 
 [node name="Gwenith" type="Control" parent="."]
 layout_mode = 3

@@ -1,0 +1,14 @@
+[remap]
+
+importer="the_mourning_after.story_text"
+type="Resource"
+uid="uid://dgcbmodmetgvo"
+path="res://.godot/imported/gwenith_4.txt-13311732bd6ece5da328ffb9d473085e.res"
+
+[deps]
+
+source_file="res://dialogue/hero/gwenith_4.txt"
+dest_files=["res://.godot/imported/gwenith_4.txt-13311732bd6ece5da328ffb9d473085e.res"]
+
+[params]
+

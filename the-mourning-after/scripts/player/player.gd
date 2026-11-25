@@ -135,7 +135,11 @@ func _physics_process(delta: float) -> void:
 		_attacking = false # the swing was cut short (e.g. by a dash) and will never report finishing
 		sprite.speed_scale = 1.0
 	if not _dashing and not _attacking and not animation_held:
-		sprite.play("walk" if input != Vector2.ZERO else "idle")
+		var moving := input != Vector2.ZERO
+		if weapon == null:
+			sprite.play("walk_unarmed" if moving else "idle_unarmed")
+		else:
+			sprite.play("walk" if moving else "idle")
 
 	_recharge_dashes(delta)
 	if _dash_queued:

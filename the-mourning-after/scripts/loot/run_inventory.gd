@@ -8,7 +8,7 @@ var applied_effects: Array[LootData] = [] # kept only so we know what to undo on
 
 @export var first_run_residue_grant := 0 # TUNE: residue given on the very first ever run
 @export var reseed_cost := 1 # TUNE: Fate 1 re-seed of starting stats (no limit per run)
-@export var revive_costs: Array[int] = [2, 3] # TUNE: Fate 3 cost of each revive in a run; its length is the revive limit
+@export var revive_costs: Array[int] = [1, 2, 3] # TUNE: Fate 3 cost of each revive in a run; its length is the revive limit
 @export var _wood_sword: WeaponData = preload("res://scripts/weapons/sword_wood.tres")
 @export var _bone_sword: WeaponData = preload("res://scripts/weapons/sword_bone.tres") # first run's Fate 1 bargain
 @export var _starting_weapon_pool: Array[WeaponData] = [
@@ -211,7 +211,11 @@ func try_bargain() -> bool:
 		return false
 	spend(reseed_cost)
 	has_bargained_this_run = true
-	_player.weapon = _bone_sword if _first_run_active else _starting_weapon_pool.pick_random()
+	if _first_run_active:
+		_player.weapon = _bone_sword
+	else: # always a different sword than the one in hand
+		var others := _starting_weapon_pool.filter(func(w: WeaponData) -> bool: return w != _player.weapon)
+		_player.weapon = (others if not others.is_empty() else _starting_weapon_pool).pick_random()
 	effects_changed.emit()
 	bargained.emit()
 	return true
