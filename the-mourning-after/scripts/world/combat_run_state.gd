@@ -33,6 +33,9 @@ var _remaining_pool: Array[String] = []
 var _gauntlet_sizes: Array[int] = []
 var _gauntlet := 0 # 0–1 forest (before / after the pond), 2–3 Huyana (before / after its non-combat room)
 var _room_index := 0 # combat rooms entered in the current gauntlet (1 = first)
+var runs_taken := 0 # runs started from the sword stand (1 = the first run)
+var mutants_this_run := 0 # low mutants spawned so far this run
+const FIRST_RUN_MUTANT_BY := 3 # TUNE: on the first run, this combat room has a low mutant if none has spawned yet
 
 
 func _ready() -> void:
@@ -46,6 +49,7 @@ func start_new_run() -> void:
 	for i in GAUNTLETS:
 		_gauntlet_sizes.append(randi_range(ROOMS_PER_GAUNTLET.x, ROOMS_PER_GAUNTLET.y))
 	_room_index = 0
+	mutants_this_run = 0
 	rests_used.clear()
 	first_room_path = pick_next_room_path()
 	print("new run: gauntlets ", _gauntlet_sizes, ", first room ", first_room_path)
@@ -59,6 +63,8 @@ func save_state() -> Dictionary:
 		"room_index": _room_index,
 		"first_room_path": first_room_path,
 		"rests_used": rests_used,
+		"runs_taken": runs_taken,
+		"mutants_this_run": mutants_this_run,
 	}
 
 
@@ -71,6 +77,8 @@ func load_state(state: Dictionary) -> void:
 	_room_index = int(state.get("room_index", 0))
 	first_room_path = state.get("first_room_path", "")
 	rests_used.assign(state.get("rests_used", []).map(func(n: float) -> int: return int(n)))
+	runs_taken = int(state.get("runs_taken", 0))
+	mutants_this_run = int(state.get("mutants_this_run", 0))
 
 
 ## Called by non-combat rooms and the cleared boss room: the next combat room starts a new gauntlet.
@@ -135,7 +143,11 @@ func current_room_weight() -> float:
 	return BASE_ROOM_WEIGHT * pow(1.0 + ROOM_WEIGHT_GROWTH, maxi(combat_room_number() - 1, 0))
 
 
-## Rolls (low mutants, deformed humans, new enemies) that exactly fill this room's weight, any mix.
+## On the first run, a combat room this far in with no low mutant spawned yet must have one.
+func needs_first_run_mutant() -> bool:
+	return runs_taken <= 1 and combat_room_number() >= FIRST_RUN_MUTANT_BY and mutants_this_run == 0
+
+
 ## Rolls (low mutants, deformed humans, deformed humans 2) that exactly fill this room's weight, any mix.
 func roll_room_mobs() -> Vector3i:
 	var units := roundi(current_room_weight() / LOW_MUTANT_WEIGHT) # smallest unit is now low mutants

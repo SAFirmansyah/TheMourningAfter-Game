@@ -135,6 +135,7 @@ func take_loadout() -> bool:
 		return false
 	start_new_run_loadout()
 	loadout_taken = true
+	CombatRunState.runs_taken += 1
 	CombatRunState.start_new_run()
 	CampaignState.reset_campaign()
 	effects_changed.emit()

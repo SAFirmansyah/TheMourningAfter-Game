@@ -136,7 +136,8 @@ func _begin() -> void:
 	playing = true
 	_skipping = false
 	var player := world.player
-	_held = {"input": player.input_enabled}
+	# A room transition switches input off only until its fade ends: that isn't the state to come back to.
+	_held = {"input": player.input_enabled or world.is_transitioning()}
 	player.input_enabled = false
 	player.forced_input = Vector2.ZERO
 	world.set_story_active(true)
@@ -157,7 +158,7 @@ func _end() -> void:
 	world.hud.story_end()
 	world.camera_rig.follow_target = world.player
 	world.camera_rig.follow_smoothing = _held.get("smoothing", world.camera_rig.follow_smoothing)
-	world.player.input_enabled = _held.input
+	world.player.input_enabled = _held.input and not world.is_transitioning() # mid-transition, its end gives input back
 	var manager := get_tree().get_first_node_in_group(&"sanctuary_manager") as SanctuaryManager
 	if manager:
 		manager.frozen = _held.frozen
