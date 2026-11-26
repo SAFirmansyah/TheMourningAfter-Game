@@ -165,6 +165,11 @@ func set_story_active(on: bool) -> void:
 	_in_cutscene = on
 
 
+## A room change or return to base is fading (input comes back when it ends, unless a scene is playing).
+func is_transitioning() -> bool:
+	return _transitioning
+
+
 func is_story_playing() -> bool:
 	return story != null and story.playing
 
@@ -293,8 +298,8 @@ func _on_exit_requested(target_room: String, target_entry: StringName, exit_dire
 		await play_cutscene(cutscene, false)
 	await _fade_to(0.0)
 	player.forced_input = Vector2.ZERO
-	player.input_enabled = true
 	_transitioning = false
+	player.input_enabled = not is_story_playing() # a scene that started on arrival gives it back when it ends
 
 
 func _load_room(path: String, entry: StringName, changes := {}, restoring := false) -> void:
@@ -430,7 +435,7 @@ func _end_run_at_base() -> void:
 	save_game()
 
 	await _fade_to(0.0)
-	player.input_enabled = true
 	_transitioning = false
+	player.input_enabled = not is_story_playing() # a scene that started on arrival gives it back when it ends
 	
 	

@@ -75,6 +75,12 @@ func spawn_grass() -> void:
 ## so every visit to a room lays them out differently.
 func spawn_enemies() -> void:
 	var mobs := CombatRunState.roll_room_mobs()
+	# (spawned as: x deformed humans, y deformed humans 2, z low mutants)
+	if mobs.z == 0 and CombatRunState.needs_first_run_mutant():
+		if mobs.y > 0: mobs.y -= 1
+		elif mobs.x > 0: mobs.x -= 1
+		mobs.z = 1 # one mob swapped for a low mutant, so the first run meets residue
+	CombatRunState.mutants_this_run += mobs.z
 	print("room weight ", snappedf(CombatRunState.current_room_weight(), 0.01), ": ", mobs.x, " deformed humans, ", mobs.y, " deformed humans 2, ", mobs.z, " low mutants")
 	var queue: Array[PackedScene] = []
 	for i in mobs.x:
