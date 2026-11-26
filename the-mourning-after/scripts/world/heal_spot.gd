@@ -7,6 +7,8 @@ extends Interactable
 @export var action_label := "Rest" # prompt verb, e.g. "Drink" at the pond
 @export var once_per_visit := false # on: usable once each time the room is entered (ponds); off: once per gauntlet
 
+var always_usable := false # set by the story: usable even at full health (a Fate is waiting at this pond)
+
 var _used_here := false
 
 
@@ -21,8 +23,8 @@ func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	var amount := _heal_amount()
-	prompt_label = "%s (+%d HP)" % [action_label, amount]
-	enabled = not _is_used() and amount > 0
+	prompt_label = "%s (+%d HP)" % [action_label, amount] if amount > 0 else action_label
+	enabled = not _is_used() and (amount > 0 or always_usable)
 
 
 func _heal_amount() -> int:
@@ -34,7 +36,7 @@ func _heal_amount() -> int:
 
 func _on_interacted() -> void:
 	var amount := _heal_amount()
-	if _is_used() or amount <= 0:
+	if _is_used() or (amount <= 0 and not always_usable):
 		return
 	if once_per_visit:
 		_used_here = true

@@ -3,17 +3,16 @@ extends Node
 ## Perrin's story: which scene plays when (the hero side's counterpart to Huyana's StoryDirector).
 ## - New game: CUTSCENE Inciting Incident, then NARRATIVE BEAT Motivation, ending at the sword stand.
 ## - First residue: once the room is cleared he walks up to it; the room stays shut until it's collected.
-## - First pre-boss room (with residue): after drinking at the pond, reaching the exit flashes white and
-##   plays Doubt (first Fate met) or Seira, which re-rolls the boss.
+## - First pre-boss room (with residue): drinking at the pond flashes white and plays Doubt (first Fate
+##   met) or Seira, which re-rolls the boss. The exit stays shut until then.
 ## - First fall (with residue): Life (first Fate met) or Kano, which revives him.
-## - First return to base after dying: Again (no residue), or at the base's exit Anxiety / Archi, which
-##   re-seeds his sword.
+## - First return to base after dying: Again (no residue), or, on taking up arms at the sword stand,
+##   Anxiety / Archi, which re-seeds his sword. The exit stays shut until then.
 ## - Gwenith's chamber: her first meeting, then three set encounters, then random short ones.
 ## - Flavour captions for returning to base and for every bargain taken the normal way.
 ## Older saves and Start from: first boss skip the opening.
 
 const SCRIPT_PATH := "res://dialogue/hero/%s.txt"
-const EXIT_TRIGGER := 3.0 # TUNE: how close to an exit path the pre-boss / base beats start (m)
 const BOSS_ROLES := {"GWENITH": "farmer", "SHUYI": "medic", "RUDRAMA": "guard"}
 
 const RETURN_LINES := [
@@ -63,9 +62,9 @@ var _had_save := false
 var _start_point := ""
 var _room: Room
 var _died := false # the last trip back to base was a death
-var _preboss_waiting := false # drank at the first pre-boss pond: the exit plays the Fate beat
+var _preboss_waiting := false # first pre-boss room with residue: drinking at the pond plays the Fate beat
 var _demo_note_after_scene := false
-var _base_waiting := false # first return with residue: the exit plays Anxiety / Archi
+var _base_waiting := false # first return with residue: taking up arms plays Anxiety / Archi
 
 
 func _enter_tree() -> void:
@@ -112,9 +111,9 @@ func _process(_delta: float) -> void:
 		return
 	if _preboss_waiting and _room.scene_file_path == CampaignState.pre_boss_chamber_path:
 		var pond := _room.get_node_or_null(^"Pond/HealSpot") as HealSpot
-		if pond and (pond._is_used() or pond._heal_amount() <= 0) and _near_exit(&"EastExit"):
+		if pond and pond._is_used(): # right after drinking at the pond
 			_play_preboss_beat()
-	elif _base_waiting and _room is BaseRoom and RunInventory.loadout_taken and _near_exit(&"SouthExit"): # only once he's taken up arms
+	elif _base_waiting and _room is BaseRoom and RunInventory.loadout_taken: # right as he takes up arms at the sword stand
 		_play_base_beat()
 
 
@@ -128,6 +127,9 @@ func _on_room_entered(room: Room) -> void:
 		if RunInventory.magic_residue >= 1:
 			_preboss_waiting = true
 			_set_exit_blocked(&"EastExit", true)
+			var pond := room.get_node_or_null(^"Pond/HealSpot") as HealSpot
+			if pond:
+				pond.always_usable = true # the Fate waits at the pond, even at full health
 	if room is BaseRoom and _died:
 		_died = false
 		if not first_return_done:
@@ -152,11 +154,6 @@ func _on_room_entered(room: Room) -> void:
 		gwenith_meetings += 1
 		await get_tree().create_timer(0.6).timeout
 		await _play([scene])
-
-
-func _near_exit(exit_name: StringName) -> bool:
-	var exit := _room.get_exit(exit_name)
-	return exit != null and world.player.global_position.distance_to(exit.global_position) < EXIT_TRIGGER
 
 
 func _set_exit_blocked(exit_name: StringName, blocked: bool) -> void:
