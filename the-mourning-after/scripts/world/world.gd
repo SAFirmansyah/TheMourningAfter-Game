@@ -353,9 +353,11 @@ func _fade_to(alpha: float) -> void:
 
 ## Fate 3: pause and offer a paid revive if Perrin can afford one; otherwise straight back to base.
 func _on_player_died() -> void:
-	if _transitioning or fate_bargain.is_open:
-		return
 	var story_node := get_tree().get_first_node_in_group(&"hero_story") as HeroStory
+	if _transitioning or fate_bargain.is_open or player.stats.health > 0:
+		return
+	if is_story_playing() or (story_node and story_node.busy):
+		return # already being handled (e.g. a second hit the same moment, while the first-fall Fate scene plays)
 	if story_node and story_node.handle_death():
 		return # the first fall: a Fate steps in
 	if not RunInventory.can_revive():

@@ -9,6 +9,6 @@ script = ExtResource("2_whnhx")
 weapon_name = "Bronze Sword"
 damage = 24.0
 attack_cooldown = 0.75
-hits_to_charge = 8
+hits_to_charge = 6
 charged_abilities = Array[ExtResource("1_a2jmu")]([ExtResource("3_ability")])
 metadata/_custom_type_script = "uid://dver5jfnn77l2"
