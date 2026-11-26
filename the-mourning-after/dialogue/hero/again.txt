@@ -1,6 +1,6 @@
 # Format: NAME (portrait variant): line. Lines starting with @ are staging; # is a comment.
 # @cue NAME lets the game act mid-scene; @dark on/off puts black behind the dialogue; @flash flashes white.
-# NARRATIVE BEAT: Again (first return to base, no residue)
+# NARRATIVE BEAT: Again? (died before ever meeting the Fates, no residue)
 PERRIN (scared): NO!!
 PERRIN (scared): …
 PERRIN (scared): I’m… I’m home?
@@ -8,9 +8,18 @@ PERRIN (scared): I’m fine?
 @dark on
 PERRIN (scared): ..!
 THE FATES (silhouette): You’re granted another go at this life.
+THE FATES (silhouette): It isn’t over yet.
+PERRIN (angry): What? Who’s there?
+PERRIN (scared): Who are you? Are you… are you gods?
+THE FATES (silhouette): Not quite.
+PERRIN (scared): Why are you helping me?
+THE FATES (silhouette): You strive to set things right, and your heart is in a good place…
+THE FATES (silhouette): At least, as far as we can tell. It’s hard for us to communicate like this.
+PERRIN (neutral): Like what? And… how am I hearing you then?
+THE FATES (silhouette): We don’t know that ourselves. But there must be a reason.
 THE FATES (silhouette): Keep trying. We’ll bring you back here if we cannot prolong your attempt out there.
 THE FATES (silhouette): As many times as you need.
 PERRIN (neutral): Oh…
-PERRIN (neutral): Thank you. Thank you so much. I don’t know why you’re doing this exactly, but I won’t stop.
+PERRIN (neutral): Thank you. Thank you so much. I don’t know who you are or what you want, but I won’t stop.
 PERRIN (neutral): Thank you!
 @dark off

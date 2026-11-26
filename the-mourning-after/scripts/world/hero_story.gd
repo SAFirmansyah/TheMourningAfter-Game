@@ -6,8 +6,9 @@ extends Node
 ## - First pre-boss room (with residue): drinking at the pond flashes white and plays Doubt (first Fate
 ##   met) or Seira, which re-rolls the boss. The exit stays shut until then.
 ## - First fall (with residue): Life (first Fate met) or Kano, which revives him.
-## - First return to base after dying: Again (no residue), or, on taking up arms at the sword stand,
-##   Anxiety / Archi, which re-seeds his sword. The exit stays shut until then.
+## - Dying before ever meeting the Fates, with no residue: Again, where they introduce themselves.
+## - First return to base after dying with residue: on taking up arms at the sword stand, Anxiety
+##   (first Fate met) or Archi, which re-seeds his sword. The exit stays shut until then.
 ## - Gwenith's chamber: her first meeting, then three set encounters, then random short ones.
 ## - Flavour captions for returning to base and for every bargain taken the normal way.
 ## Older saves and Start from: first boss skip the opening.
@@ -17,7 +18,7 @@ const BOSS_ROLES := {"GWENITH": "farmer", "SHUYI": "medic", "RUDRAMA": "guard"}
 
 const RETURN_LINES := [
 	"Home again… I’ve got another go at this.",
-	"The beings that keep helping me out… I wonder what they want from me?",
+	"The beings that keep helping me out… I wonder what they want?",
 	"I can’t waste time here. I fell, but I have to get back up.",
 	"Time to take up weapons again and keep going.",
 	"Mother, you taught me better than to quit. So I won’t.",
@@ -132,13 +133,13 @@ func _on_room_entered(room: Room) -> void:
 				pond.always_usable = true # the Fate waits at the pond, even at full health
 	if room is BaseRoom and _died:
 		_died = false
-		if not first_return_done:
+		if not fates_met and RunInventory.magic_residue <= 0:
+			fates_met = true # the Fates introduce themselves; every first bargain after this is Archi / Seira / Kano
+			await _play(["again"])
+		elif not first_return_done and RunInventory.magic_residue >= 1:
 			first_return_done = true
-			if RunInventory.magic_residue <= 0:
-				await _play(["again"])
-			else:
-				_base_waiting = true
-				_set_exit_blocked(&"SouthExit", true)
+			_base_waiting = true
+			_set_exit_blocked(&"SouthExit", true)
 		else:
 			world.hud.show_note(RETURN_LINES.pick_random(), 3.5)
 	if Demo.active() and room is BossRoom:
@@ -252,8 +253,7 @@ func _play_first_fall() -> void:
 
 ## The world is sending Perrin home after a fall.
 func on_died_to_base() -> void:
-	first_death_done = true
-	_died = true
+	_died = true # (a fall with no residue doesn't use up the first-fall beat: Kano still comes later)
 
 
 # --- Cues: the bargains the Fates make mid-scene ----------------------------------------------------
