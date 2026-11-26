@@ -102,7 +102,7 @@ func _play_opening() -> void:
 	busy = true
 	world.hold_black()
 	if opening == Opening.PLAGUE:
-		await world.story.play_file(SCRIPT_PATH % "the_plague")
+		await world.story.play_file_skippable(SCRIPT_PATH % "the_plague")
 		if not is_inside_tree(): return
 		opening = Opening.ALTAR
 	if opening == Opening.ALTAR:

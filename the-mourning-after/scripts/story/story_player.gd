@@ -60,6 +60,15 @@ func play_file(path: String) -> String:
 	return await play_steps(StoryScript.load_steps(path))
 
 
+## The same, with a Skip prompt (Esc, or click it) for the whole scene: the openings of both sides.
+func play_file_skippable(path: String) -> String:
+	world.hud.show_skip_prompt(skip)
+	var result := await play_file(path)
+	if is_inside_tree():
+		world.hud.hide_skip_prompt()
+	return result
+
+
 func play_steps(steps: Array[Dictionary]) -> String:
 	_begin()
 	var result := ""
