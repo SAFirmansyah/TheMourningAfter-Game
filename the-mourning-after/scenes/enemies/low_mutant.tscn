@@ -3,11 +3,8 @@
 [ext_resource type="Script" uid="uid://dsabkrdimbjiq" path="res://scripts/enemies/mutants.gd" id="1_w71w8"]
 [ext_resource type="Resource" uid="uid://dufd88e1ost1r" path="res://scripts/stats/big_mutant_stats.tres" id="2_8gpck"]
 [ext_resource type="Script" uid="uid://boygl2hxayimj" path="res://scripts/loot/loot_data.gd" id="3_lh2w7"]
-[ext_resource type="Resource" uid="uid://da1rcp5236rtr" path="res://scripts/loot/loot_2x_dash.tres" id="4_40sm3"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="4_mxl8y"]
-[ext_resource type="Resource" uid="uid://c3vnvs1am64e2" path="res://scripts/loot/loot_dmg_reduction.tres" id="5_8gpck"]
 [ext_resource type="Resource" uid="uid://ccmhq5rc8u5g7" path="res://scripts/loot/loot_residue.tres" id="6_7jj0p"]
-[ext_resource type="Resource" uid="uid://dcob8m1oig70a" path="res://scripts/loot/loot_health.tres" id="7_hp"]
 [ext_resource type="Texture2D" uid="uid://w3mqg6x48i0k" path="res://textures/mobs/mutant_attack/mutant_attack_00000.png" id="8_v1i8m"]
 [ext_resource type="Script" uid="uid://d2themr4ood1v" path="res://scripts/ui/mob_health_bar.gd" id="9_hpbar"]
 [ext_resource type="Texture2D" uid="uid://cg22o8dwrng2m" path="res://textures/mobs/mutant_attack/mutant_attack_00001.png" id="9_t2otr"]
@@ -156,7 +153,7 @@ base_move_speed = 1.0
 attack_reach = 0.7
 attack_cooldown = 1.5
 attack_range = 1.5
-loot_pool = Array[ExtResource("3_lh2w7")]([ExtResource("4_40sm3"), ExtResource("6_7jj0p"), ExtResource("5_8gpck"), ExtResource("7_hp")])
+loot_pool = Array[ExtResource("3_lh2w7")]([ExtResource("6_7jj0p")])
 metadata/_custom_type_script = "uid://dnbf3vat68acm"
 
 [node name="Card" type="AnimatedSprite3D" parent="." unique_id=343223806]

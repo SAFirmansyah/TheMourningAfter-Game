@@ -52,6 +52,9 @@
 [ext_resource type="Texture2D" uid="uid://qsqou4l5f5w7" path="res://textures/mobs/mob_2_idle/mob_2_idle_00029.png" id="30_xnqdq"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="31_d5ulx"]
 [ext_resource type="Script" uid="uid://d2themr4ood1v" path="res://scripts/ui/mob_health_bar.gd" id="32_kwpt2"]
+[ext_resource type="Script" uid="uid://boygl2hxayimj" path="res://scripts/loot/loot_data.gd" id="40_lootdata"]
+[ext_resource type="Resource" uid="uid://c3vnvs1am64e2" path="res://scripts/loot/loot_dmg_reduction.tres" id="41_dmgred"]
+[ext_resource type="Resource" uid="uid://s2rdu7hidhdr" path="res://scripts/loot/loot_mov_spd.tres" id="42_movspd"]
 [ext_resource type="Texture2D" uid="uid://dksx6gqpuyy2i" path="res://textures/mobs/mob_2_walk/mob_2_walk_00000.png" id="33_yg842"]
 [ext_resource type="Texture2D" uid="uid://bgqbjxgr1bfwn" path="res://textures/mobs/mob_2_walk/mob_2_walk_00001.png" id="34_32rup"]
 [ext_resource type="Texture2D" uid="uid://bjshbda1bhmwc" path="res://textures/mobs/mob_2_walk/mob_2_walk_00002.png" id="35_jew12"]
@@ -314,6 +317,7 @@ animation_offsets = {
 }
 attack_cooldown = 1.0
 knockback_multiplier = 1.5
+loot_pool = Array[ExtResource("40_lootdata")]([ExtResource("41_dmgred"), ExtResource("42_movspd")])
 
 [node name="Card" type="AnimatedSprite3D" parent="." unique_id=1100473988]
 transform = Transform3D(-0.2, 0, 0, 0, 0.2, 0, 0, 0, -0.2, 0, 0.796, 0)
