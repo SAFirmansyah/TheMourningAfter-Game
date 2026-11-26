@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_whnhx")
 weapon_name = "Bronze Sword"
+sprite_prefix = &"bronze"
 damage = 24.0
 attack_cooldown = 0.75
 hits_to_charge = 6

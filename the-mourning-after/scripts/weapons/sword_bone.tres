@@ -7,6 +7,7 @@
 [resource]
 script = ExtResource("2_llh28")
 weapon_name = "Bone Sword"
+sprite_prefix = &"bone"
 damage = 16.0
 attack_cooldown = 0.5
 hits_to_charge = 5

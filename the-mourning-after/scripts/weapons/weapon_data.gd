@@ -2,6 +2,7 @@ class_name WeaponData
 extends Resource
 
 @export var weapon_name := "Sword"
+@export var sprite_prefix: StringName = &"wood"
 @export var damage := 1.0 # TUNE: base damage per hit
 @export var attack_cooldown := 0.4 # TUNE: seconds between swings
 @export var active_window := 0.3 # TUNE: how long the hitbox stays on

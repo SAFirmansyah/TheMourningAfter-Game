@@ -8,6 +8,8 @@ extends Interactable
 enum Kind { LOADOUT, RESEED }
 
 @export var kind := Kind.LOADOUT
+@export var card: Sprite3D # the stand's visual; swapped to its empty look once the weapon's taken
+@export var empty_texture: Texture2D # TUNE: the sword-stand art with no sword in it
 
 
 func _ready() -> void:
@@ -15,6 +17,7 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 	interacted.connect(_on_interacted)
+	_refresh_card()
 
 
 func _process(_delta: float) -> void:
@@ -32,6 +35,12 @@ func _process(_delta: float) -> void:
 func _on_interacted() -> void:
 	if kind == Kind.LOADOUT:
 		RunInventory.take_loadout()
+		_refresh_card()
 		get_tree().call_group(&"hero_tutorial", &"show_once") # the mission, the first time only
 	elif RunInventory.try_bargain():
 		get_tree().call_group(&"hero_story", &"say_weapon_bargain")
+
+
+func _refresh_card() -> void:
+	if kind == Kind.LOADOUT and card and empty_texture and RunInventory.loadout_taken:
+		card.texture = empty_texture

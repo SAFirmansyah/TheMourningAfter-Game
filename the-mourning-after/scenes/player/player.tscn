@@ -4,95 +4,725 @@
 [ext_resource type="Resource" uid="uid://26uqe6v7rx3s" path="res://scripts/stats/hero_stats.tres" id="2_p47bc"]
 [ext_resource type="Resource" uid="uid://fsd1jmnw4ict" path="res://scripts/weapons/sword_wood.tres" id="3_75vfm"]
 [ext_resource type="Texture2D" uid="uid://dn78qxvrla372" path="res://textures/Perrin/perrin_dash/perrin_dash_00000.png" id="4_hyqqp"]
-[ext_resource type="Texture2D" uid="uid://3icclc6j3duq" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00000.png" id="4_myrg7"]
+[ext_resource type="Texture2D" uid="uid://btuire8a4mw1" path="res://textures/Perrin/Bone Sword/perrin_attack_bone/perrin_attack_bone_00000.png" id="4_mkwaq"]
 [ext_resource type="Texture2D" uid="uid://c0eoh65ji75ju" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00000.png" id="4_upxxc"]
+[ext_resource type="Texture2D" uid="uid://qenh3nepwlxc" path="res://textures/Perrin/Bone Sword/perrin_attack_bone/perrin_attack_bone_00001.png" id="5_0falv"]
 [ext_resource type="Texture2D" uid="uid://b0ub8xskhthy4" path="res://textures/Perrin/perrin_dash/perrin_dash_00001.png" id="5_ds1xl"]
-[ext_resource type="Texture2D" uid="uid://bgcqw3xqwtykf" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00001.png" id="5_kvlxm"]
 [ext_resource type="Texture2D" uid="uid://diuni47yfdleo" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00001.png" id="5_ln3h3"]
 [ext_resource type="Texture2D" uid="uid://dmkaigtjnx78n" path="res://textures/Perrin/perrin_dash/perrin_dash_00002.png" id="6_1u1sw"]
 [ext_resource type="Script" uid="uid://ca6xhnojhcs8i" path="res://scripts/hitbox/body_hurtbox.gd" id="6_75vfm"]
-[ext_resource type="Texture2D" uid="uid://bvrlhmhuxe5qm" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00002.png" id="6_uf5tr"]
 [ext_resource type="Texture2D" uid="uid://edfpwu2fa0sw" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00002.png" id="6_uygh0"]
+[ext_resource type="Texture2D" uid="uid://cbgfq1ncy7maj" path="res://textures/Perrin/Bone Sword/perrin_attack_bone/perrin_attack_bone_00002.png" id="6_wvqjg"]
 [ext_resource type="Texture2D" uid="uid://c6w6fye2urtwv" path="res://textures/Perrin/perrin_dash/perrin_dash_00003.png" id="7_2t3bg"]
-[ext_resource type="Texture2D" uid="uid://mdb6lb43xybn" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00003.png" id="7_lgqa7"]
 [ext_resource type="Texture2D" uid="uid://d3mmxky6dduyf" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00003.png" id="7_t1aof"]
-[ext_resource type="Texture2D" uid="uid://bp6ea67ywptpa" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00004.png" id="8_8ydkj"]
+[ext_resource type="Texture2D" uid="uid://dgw5ng6ihivdc" path="res://textures/Perrin/Bone Sword/perrin_attack_bone/perrin_attack_bone_00003.png" id="7_xwj34"]
+[ext_resource type="Texture2D" uid="uid://co2vvgbgoc6qi" path="res://textures/Perrin/Bone Sword/perrin_attack_bone/perrin_attack_bone_00004.png" id="8_2ggvy"]
 [ext_resource type="Texture2D" uid="uid://dgwlk2kyi0ya3" path="res://textures/Perrin/perrin_dash/perrin_dash_00004.png" id="8_jrbya"]
 [ext_resource type="Texture2D" uid="uid://c30qq4e5xd8o" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00004.png" id="8_w8qe1"]
-[ext_resource type="Texture2D" uid="uid://b3crjmjoqm6i4" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00005.png" id="9_3j4b4"]
 [ext_resource type="Texture2D" uid="uid://c6aohgnrm8241" path="res://textures/Perrin/perrin_dash/perrin_dash_00005.png" id="9_ahqnk"]
 [ext_resource type="Texture2D" uid="uid://brmw76nnygo7l" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00005.png" id="9_hdvrm"]
+[ext_resource type="Texture2D" uid="uid://dgwbq8sigb5hf" path="res://textures/Perrin/Bone Sword/perrin_attack_bone/perrin_attack_bone_00005.png" id="9_hvgvr"]
 [ext_resource type="Texture2D" uid="uid://bhhkc1j3v13jc" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00006.png" id="10_5xbmr"]
+[ext_resource type="Texture2D" uid="uid://dg4e0435hxa8g" path="res://textures/Perrin/Bone Sword/perrin_attack_bone/perrin_attack_bone_00006.png" id="10_c63qf"]
 [ext_resource type="Texture2D" uid="uid://vxolkc02ppoq" path="res://textures/Perrin/perrin_dash/perrin_dash_00006.png" id="10_vb1ce"]
-[ext_resource type="Texture2D" uid="uid://cobjw3x4skthx" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00007.png" id="10_yj68g"]
 [ext_resource type="Texture2D" uid="uid://elhsj8lqnk2i" path="res://textures/Perrin/perrin_dash/perrin_dash_00007.png" id="11_0ncpa"]
 [ext_resource type="Texture2D" uid="uid://ut6pyydao2uv" path="res://textures/Perrin/perrin_attack1/perrin_attack1_00007.png" id="11_hir57"]
-[ext_resource type="Texture2D" uid="uid://demayut45ojbw" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00008.png" id="11_ioxgp"]
-[ext_resource type="Texture2D" uid="uid://csho88v7p7exs" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00009.png" id="12_cnsyf"]
+[ext_resource type="Texture2D" uid="uid://h5m5qdsf85hf" path="res://textures/Perrin/Bone Sword/perrin_attack_bone/perrin_attack_bone_00007.png" id="11_nqymb"]
+[ext_resource type="Texture2D" uid="uid://b5cpbx7oa6g52" path="res://textures/Perrin/Bone Sword/perrin_damage_bone/perrin_damage_bone_00002.png" id="12_n2wjg"]
 [ext_resource type="Texture2D" uid="uid://dmrorvpmapeb4" path="res://textures/Perrin/perrin_dash/perrin_dash_00008.png" id="12_upxxc"]
-[ext_resource type="Texture2D" uid="uid://27ugbdi33cth" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00010.png" id="13_007i1"]
 [ext_resource type="Texture2D" uid="uid://btvmo4hpl67uj" path="res://textures/Perrin/perrin_dash/perrin_dash_00009.png" id="13_ln3h3"]
-[ext_resource type="Texture2D" uid="uid://cvr8nty3i1waf" path="res://textures/Perrin/Perrin_Idle/perrin_idle_00011.png" id="14_6cv16"]
+[ext_resource type="Texture2D" uid="uid://blwomvo606v5x" path="res://textures/Perrin/Bone Sword/perrin_damage_bone/perrin_damage_bone_00003.png" id="13_vh6pe"]
+[ext_resource type="Texture2D" uid="uid://6c11awn7sov6" path="res://textures/Perrin/Bone Sword/perrin_damage_bone/perrin_damage_bone_00004.png" id="14_0b2jo"]
 [ext_resource type="Texture2D" uid="uid://c3dug7ae4dric" path="res://textures/Perrin/perrin_dash/perrin_dash_00010.png" id="14_uygh0"]
 [ext_resource type="Texture2D" uid="uid://bmoahhtpfy313" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00000.png" id="15_4hvnv"]
+[ext_resource type="Texture2D" uid="uid://brla76fax51cc" path="res://textures/Perrin/Bone Sword/perrin_damage_bone/perrin_damage_bone_00005.png" id="15_4ttds"]
 [ext_resource type="Texture2D" uid="uid://cth4r8bf36pud" path="res://textures/Perrin/perrin_dash/perrin_dash_00011.png" id="15_t1aof"]
+[ext_resource type="Texture2D" uid="uid://6hreh45prpwo" path="res://textures/Perrin/Bone Sword/perrin_damage_bone/perrin_damage_bone_00006.png" id="16_8ri8i"]
 [ext_resource type="Texture2D" uid="uid://bphkd01ipjwq7" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00001.png" id="16_bbmj2"]
 [ext_resource type="Texture2D" uid="uid://boab4yb6cl8hf" path="res://textures/Perrin/perrin_dash/perrin_dash_00012.png" id="16_w8qe1"]
 [ext_resource type="Texture2D" uid="uid://pv0wle25e24a" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00002.png" id="17_kxw46"]
+[ext_resource type="Texture2D" uid="uid://coy27di3bmv0w" path="res://textures/Perrin/Bone Sword/perrin_damage_bone/perrin_damage_bone_00007.png" id="17_vlfn3"]
 [ext_resource type="Texture2D" uid="uid://d0dxlt3ir3xwm" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00003.png" id="18_8qxvo"]
+[ext_resource type="Texture2D" uid="uid://d0w38im7l5eah" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00000.png" id="18_klwgm"]
 [ext_resource type="Texture2D" uid="uid://c4oqrd2msj18d" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00004.png" id="19_5q8fn"]
+[ext_resource type="Texture2D" uid="uid://ce2g8hc2ln3vq" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00001.png" id="19_xfldr"]
+[ext_resource type="Texture2D" uid="uid://cr4nb405b5hf0" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00002.png" id="20_uanu0"]
 [ext_resource type="Texture2D" uid="uid://dj21rod2haamp" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00005.png" id="20_wva7c"]
 [ext_resource type="Texture2D" uid="uid://diccyycqk6swv" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00006.png" id="21_7obkq"]
+[ext_resource type="Texture2D" uid="uid://luxx3kgn82f8" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00003.png" id="21_gt5hh"]
+[ext_resource type="Texture2D" uid="uid://cpq6faouml4mi" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00004.png" id="22_fwbd6"]
 [ext_resource type="Texture2D" uid="uid://i66y7nucaynr" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00007.png" id="22_vo27k"]
+[ext_resource type="Texture2D" uid="uid://bkyxvlokmex25" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00005.png" id="23_cgixr"]
 [ext_resource type="Texture2D" uid="uid://bicjnkugiaskn" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00008.png" id="23_genst"]
+[ext_resource type="Texture2D" uid="uid://bt0ih7ri001tg" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00006.png" id="24_hsum7"]
 [ext_resource type="Texture2D" uid="uid://blttaysgmuolm" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00009.png" id="24_niom3"]
+[ext_resource type="Texture2D" uid="uid://dcd77i5u3krrn" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00007.png" id="25_0ax6y"]
 [ext_resource type="Texture2D" uid="uid://74lt4abo1w0y" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00010.png" id="25_ttakn"]
+[ext_resource type="Texture2D" uid="uid://bccugbqq40fql" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00008.png" id="26_mern7"]
 [ext_resource type="Texture2D" uid="uid://latvxfrbf763" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00011.png" id="26_rw8a5"]
 [ext_resource type="Texture2D" uid="uid://d4bnplsr3w1uv" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00012.png" id="27_iwuka"]
+[ext_resource type="Texture2D" uid="uid://5cvlkrhhqaa6" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00009.png" id="27_jvss3"]
+[ext_resource type="Texture2D" uid="uid://cxgk3ppviv0d1" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00010.png" id="28_8i0fb"]
 [ext_resource type="Texture2D" uid="uid://b0ly8p6tw5pnk" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00013.png" id="28_hyqqp"]
 [ext_resource type="Texture2D" uid="uid://d2vwfeqahfkq0" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00014.png" id="29_ds1xl"]
+[ext_resource type="Texture2D" uid="uid://bxw4qpjqhlqqj" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00011.png" id="29_mvft6"]
 [ext_resource type="Texture2D" uid="uid://c4djlyvba5kjs" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00015.png" id="30_1u1sw"]
+[ext_resource type="Texture2D" uid="uid://dfyxivk2fthbi" path="res://textures/Perrin/Bone Sword/perrin_dash_bone/perrin_dash_bone_00012.png" id="30_mp02n"]
 [ext_resource type="Texture2D" uid="uid://dldm74kqepxvb" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00016.png" id="31_2t3bg"]
+[ext_resource type="Texture2D" uid="uid://b7h01uy1y67u8" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00000.png" id="31_shuay"]
 [ext_resource type="Texture2D" uid="uid://c7v67npipxhkx" path="res://textures/Perrin/Perrin_Walking/perrin_walk_b_00017.png" id="32_jrbya"]
+[ext_resource type="Texture2D" uid="uid://c1ysufdmb0p1y" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00001.png" id="32_kjv06"]
+[ext_resource type="Texture2D" uid="uid://cbak4r8o8mp3m" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00002.png" id="33_c7v2i"]
+[ext_resource type="Texture2D" uid="uid://o4a20gcr4wun" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00003.png" id="34_cw5v6"]
+[ext_resource type="Texture2D" uid="uid://ckqpw0fuyxhew" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00004.png" id="35_omcfn"]
 [ext_resource type="Texture2D" uid="uid://m0uiwbjygegu" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00000.png" id="36_7u1tp"]
+[ext_resource type="Texture2D" uid="uid://5lqpyuecm52g" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00005.png" id="36_ibuvc"]
+[ext_resource type="Texture2D" uid="uid://dxy5gd5m2kq5g" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00006.png" id="37_f11or"]
 [ext_resource type="Texture2D" uid="uid://b302mwap458bl" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00001.png" id="37_pq1ih"]
 [ext_resource type="Texture2D" uid="uid://0nxgmawvr1ff" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00002.png" id="38_31ki0"]
+[ext_resource type="Texture2D" uid="uid://d38o5kkqrocih" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00007.png" id="38_uskqc"]
 [ext_resource type="Texture2D" uid="uid://cybev0q1fxeer" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00003.png" id="39_hf5gj"]
+[ext_resource type="Texture2D" uid="uid://b5it0ufwvwt74" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00008.png" id="39_t1paj"]
+[ext_resource type="Texture2D" uid="uid://dknystme1j40s" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00009.png" id="40_8t7t6"]
 [ext_resource type="Texture2D" uid="uid://oksijfpwctyd" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00004.png" id="40_avmva"]
 [ext_resource type="Texture2D" uid="uid://bawc58jsb64g5" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00005.png" id="41_0ioy2"]
+[ext_resource type="Texture2D" uid="uid://bxs5vpd6kt744" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00010.png" id="41_4j0wb"]
 [ext_resource type="Texture2D" uid="uid://xwt2ulp3nu0r" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00006.png" id="42_vlhku"]
+[ext_resource type="Texture2D" uid="uid://3vowalh85t4e" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00011.png" id="42_wmsfe"]
+[ext_resource type="Texture2D" uid="uid://cqysrph2vvlk8" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00012.png" id="43_8ryfd"]
 [ext_resource type="Texture2D" uid="uid://bw6uumygvtdfw" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00007.png" id="43_ws0t6"]
+[ext_resource type="Texture2D" uid="uid://6hhdsh57fwio" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00013.png" id="44_5ksgn"]
 [ext_resource type="Texture2D" uid="uid://snm6uwksltqk" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00008.png" id="44_i6ap2"]
 [ext_resource type="Texture2D" uid="uid://cvm1jigde5egk" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00009.png" id="45_88c1f"]
+[ext_resource type="Texture2D" uid="uid://dm6p88bv8ljl4" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00014.png" id="45_b8qtp"]
 [ext_resource type="Texture2D" uid="uid://c1e6x7im6yayu" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00010.png" id="46_hdu4s"]
+[ext_resource type="Texture2D" uid="uid://q0trl5vkq5na" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00015.png" id="46_nr7d0"]
 [ext_resource type="Texture2D" uid="uid://c6106wcjrp2hn" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00011.png" id="47_0wr6q"]
+[ext_resource type="Texture2D" uid="uid://cdue2e0jt0hjr" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00016.png" id="47_gtgf8"]
+[ext_resource type="Texture2D" uid="uid://cej3omull1fro" path="res://textures/Perrin/Bone Sword/perrin_idle_bone/perrin_idle_bone_00017.png" id="48_kpv50"]
 [ext_resource type="Texture2D" uid="uid://cu1cgnlsbow0n" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00012.png" id="48_p0anf"]
+[ext_resource type="Texture2D" uid="uid://h0h3uresdjfu" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00000.png" id="49_55jxi"]
 [ext_resource type="Texture2D" uid="uid://b7o4xqlov0iv4" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00013.png" id="49_lhgc7"]
+[ext_resource type="Texture2D" uid="uid://comd1edqfbhfc" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00001.png" id="50_mprjq"]
 [ext_resource type="Texture2D" uid="uid://cry4ngm67xpy5" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00014.png" id="50_vy876"]
 [ext_resource type="Texture2D" uid="uid://xf0f1g74mb1o" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00015.png" id="51_0vtlm"]
+[ext_resource type="Texture2D" uid="uid://dcr8w8ii3bp3y" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00002.png" id="51_rucfp"]
 [ext_resource type="Texture2D" uid="uid://b2h4bx5crjclg" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00016.png" id="52_drv02"]
+[ext_resource type="Texture2D" uid="uid://cy3a03e3ig0ym" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00003.png" id="52_wvm7j"]
 [ext_resource type="Texture2D" uid="uid://daeu62of7nq1u" path="res://textures/Perrin/perrin_idle_barehand/perrin_idle_barehand_00017.png" id="53_tmafg"]
+[ext_resource type="Texture2D" uid="uid://dbear5vgabulg" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00004.png" id="53_ye315"]
+[ext_resource type="Texture2D" uid="uid://b1yc8akw3ixvh" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00005.png" id="54_ju27g"]
+[ext_resource type="Texture2D" uid="uid://b61jn58g86qym" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00006.png" id="55_y7aab"]
+[ext_resource type="Texture2D" uid="uid://c0epfgup86vbi" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00007.png" id="56_rfjfj"]
+[ext_resource type="Texture2D" uid="uid://clpkrfca3rpvn" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00008.png" id="57_1xxrn"]
+[ext_resource type="Texture2D" uid="uid://by6rgx6dh0nft" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00009.png" id="58_jnod0"]
+[ext_resource type="Texture2D" uid="uid://ccgyop1etaffn" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00010.png" id="59_tka1j"]
+[ext_resource type="Texture2D" uid="uid://bkdy65eudos35" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00011.png" id="60_reaxb"]
+[ext_resource type="Texture2D" uid="uid://bi5ya87s82whx" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00012.png" id="61_kovex"]
+[ext_resource type="Texture2D" uid="uid://cawrq1j17jqgf" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00013.png" id="62_nl1is"]
+[ext_resource type="Texture2D" uid="uid://7fq7t4owxlqp" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00014.png" id="63_cpnpm"]
+[ext_resource type="Texture2D" uid="uid://drok84gh6o76s" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00015.png" id="64_ckbxf"]
+[ext_resource type="Texture2D" uid="uid://dfamf05o1ardu" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00016.png" id="65_eehw1"]
+[ext_resource type="Texture2D" uid="uid://daqi5m340rdf8" path="res://textures/Perrin/Bone Sword/perrin_walk_bone/perrin_walk_bone_00017.png" id="66_4aaab"]
+[ext_resource type="Texture2D" uid="uid://cxt25ol6hbw4r" path="res://textures/Perrin/Bronze Sword/perrin_attack_bronze/perrin_attack_bronze_00000.png" id="67_nukj6"]
+[ext_resource type="Texture2D" uid="uid://3v4jwl3pfus6" path="res://textures/Perrin/Bronze Sword/perrin_attack_bronze/perrin_attack_bronze_00001.png" id="68_sjxw1"]
+[ext_resource type="Texture2D" uid="uid://cpe2jr34uoeu6" path="res://textures/Perrin/Bronze Sword/perrin_attack_bronze/perrin_attack_bronze_00002.png" id="69_nl1qp"]
+[ext_resource type="Texture2D" uid="uid://cprqh1dlhbgvq" path="res://textures/Perrin/Bronze Sword/perrin_attack_bronze/perrin_attack_bronze_00003.png" id="70_x65m5"]
+[ext_resource type="Texture2D" uid="uid://q48b744odxs3" path="res://textures/Perrin/Bronze Sword/perrin_attack_bronze/perrin_attack_bronze_00004.png" id="71_48q65"]
 [ext_resource type="Texture2D" uid="uid://6r3b0pl5qsqf" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00000.png" id="72_2enr6"]
+[ext_resource type="Texture2D" uid="uid://dnsceu3dr848c" path="res://textures/Perrin/Bronze Sword/perrin_attack_bronze/perrin_attack_bronze_00005.png" id="72_ja6t6"]
+[ext_resource type="Texture2D" uid="uid://bkkmkanwyn8na" path="res://textures/Perrin/Bronze Sword/perrin_attack_bronze/perrin_attack_bronze_00006.png" id="73_l1jm0"]
 [ext_resource type="Texture2D" uid="uid://bhrsd36qeqdb4" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00001.png" id="73_qxlpa"]
 [ext_resource type="Texture2D" uid="uid://brhrcjt0wsd2c" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00002.png" id="74_iwd08"]
+[ext_resource type="Texture2D" uid="uid://bd001d0n11wni" path="res://textures/Perrin/Bronze Sword/perrin_attack_bronze/perrin_attack_bronze_00007.png" id="74_o33k0"]
 [ext_resource type="Texture2D" uid="uid://dn80s33jpe8hu" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00003.png" id="75_5oeuk"]
+[ext_resource type="Texture2D" uid="uid://dsod6mmpef4ni" path="res://textures/Perrin/Bronze Sword/perrin_damage_bronze/perrin_damage_bronze_00002.png" id="75_m8ls2"]
+[ext_resource type="Texture2D" uid="uid://c0m66vd7esur2" path="res://textures/Perrin/Bronze Sword/perrin_damage_bronze/perrin_damage_bronze_00003.png" id="76_dmejt"]
 [ext_resource type="Texture2D" uid="uid://ccxfkis4uyr6n" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00004.png" id="76_oq5hk"]
 [ext_resource type="Texture2D" uid="uid://cva1mhcy6joac" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00005.png" id="77_kfile"]
+[ext_resource type="Texture2D" uid="uid://dpj6rrikumfur" path="res://textures/Perrin/Bronze Sword/perrin_damage_bronze/perrin_damage_bronze_00004.png" id="77_ww1ty"]
 [ext_resource type="Texture2D" uid="uid://6wgej0u43l8b" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00006.png" id="78_pkjeu"]
+[ext_resource type="Texture2D" uid="uid://dx0ld0l23hse3" path="res://textures/Perrin/Bronze Sword/perrin_damage_bronze/perrin_damage_bronze_00005.png" id="78_xmkqi"]
 [ext_resource type="Texture2D" uid="uid://bg05oc58v46ry" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00007.png" id="79_0epl4"]
+[ext_resource type="Texture2D" uid="uid://cg2riuhfwjr81" path="res://textures/Perrin/Bronze Sword/perrin_damage_bronze/perrin_damage_bronze_00006.png" id="79_xnlqf"]
 [ext_resource type="Texture2D" uid="uid://v6pu43kwmf83" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00008.png" id="80_3r8w6"]
+[ext_resource type="Texture2D" uid="uid://bq61e5o1rkx5" path="res://textures/Perrin/Bronze Sword/perrin_damage_bronze/perrin_damage_bronze_00007.png" id="80_u83qk"]
+[ext_resource type="Texture2D" uid="uid://bocbmypafn8v0" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00000.png" id="81_3gif2"]
 [ext_resource type="Texture2D" uid="uid://36q5sixn17c7" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00009.png" id="81_i816j"]
+[ext_resource type="Texture2D" uid="uid://b1qe2tvl5gpx8" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00001.png" id="82_fwa7d"]
 [ext_resource type="Texture2D" uid="uid://dt0i3w053h2h" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00010.png" id="82_laqvq"]
+[ext_resource type="Texture2D" uid="uid://xotrhnwasnm1" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00002.png" id="83_2ljpo"]
 [ext_resource type="Texture2D" uid="uid://bxa1lw5o7b0at" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00011.png" id="83_aq51r"]
+[ext_resource type="Texture2D" uid="uid://btme3rwhqq3ar" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00003.png" id="84_kf3x7"]
 [ext_resource type="Texture2D" uid="uid://babh6ipf8okwj" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00012.png" id="84_q3ejk"]
 [ext_resource type="Texture2D" uid="uid://ew6srru4in23" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00013.png" id="85_2dxln"]
+[ext_resource type="Texture2D" uid="uid://b8yeq575dukye" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00004.png" id="85_3m2o4"]
+[ext_resource type="Texture2D" uid="uid://ethv4qxqyenc" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00005.png" id="86_drfls"]
 [ext_resource type="Texture2D" uid="uid://chv0snwc621bl" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00014.png" id="86_gsldg"]
+[ext_resource type="Texture2D" uid="uid://bxosd4euyqv3g" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00006.png" id="87_a7mb0"]
 [ext_resource type="Texture2D" uid="uid://dnms3lu3hibkq" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00015.png" id="87_rrrpt"]
+[ext_resource type="Texture2D" uid="uid://dtpfh0a7sly3g" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00007.png" id="88_7xgxo"]
 [ext_resource type="Texture2D" uid="uid://cvdol0brg3qdv" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00016.png" id="88_us45u"]
+[ext_resource type="Texture2D" uid="uid://uvc5ae53c356" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00008.png" id="89_j6ala"]
 [ext_resource type="Texture2D" uid="uid://r3nno42i0up7" path="res://textures/Perrin/perrin_walk_barehand/perrin_walk_barehand_00017.png" id="89_wvv85"]
+[ext_resource type="Texture2D" uid="uid://cotqg77fn4ibo" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00009.png" id="90_1d12y"]
+[ext_resource type="Texture2D" uid="uid://b6ccmpxueq2o8" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00010.png" id="91_nv6in"]
+[ext_resource type="Texture2D" uid="uid://deye2fr5fymsr" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00011.png" id="92_v12di"]
+[ext_resource type="Texture2D" uid="uid://d2hccd7i4cyfb" path="res://textures/Perrin/Bronze Sword/perrin_dash_bronze/perrin_dash_bronze_00012.png" id="93_7hbao"]
+[ext_resource type="Texture2D" uid="uid://cg24ct72wiryn" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00000.png" id="94_0by01"]
+[ext_resource type="Texture2D" uid="uid://dyr1kv8lfkc76" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00001.png" id="95_xwr8i"]
+[ext_resource type="Texture2D" uid="uid://8gqgbkuwxt2k" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00002.png" id="96_s8ojp"]
+[ext_resource type="Texture2D" uid="uid://l2dibhdbiapg" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00003.png" id="97_0pu48"]
+[ext_resource type="Texture2D" uid="uid://dai0g342l7lim" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00004.png" id="98_inbhc"]
+[ext_resource type="Texture2D" uid="uid://ck5fmr1v3nwoh" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00005.png" id="99_fjc1s"]
+[ext_resource type="Texture2D" uid="uid://birapk4f6nmde" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00006.png" id="100_q700m"]
+[ext_resource type="Texture2D" uid="uid://dxwml0lowv0he" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00007.png" id="101_h2hrw"]
+[ext_resource type="Texture2D" uid="uid://ivgnwa87hdpr" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00008.png" id="102_0yvku"]
+[ext_resource type="Texture2D" uid="uid://cidluidsucng5" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00009.png" id="103_kxpmn"]
+[ext_resource type="Texture2D" uid="uid://cqyvwjb3yiff1" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00010.png" id="104_6ujt7"]
+[ext_resource type="Texture2D" uid="uid://b5px1fry4hxej" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00011.png" id="105_qg68u"]
+[ext_resource type="Texture2D" uid="uid://baghabhu2lurv" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00012.png" id="106_1lnoh"]
+[ext_resource type="Texture2D" uid="uid://dtxtb2utajch" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00013.png" id="107_xskfo"]
+[ext_resource type="Texture2D" uid="uid://btltybehm5omq" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00014.png" id="108_m43tx"]
+[ext_resource type="Texture2D" uid="uid://dktdknswg3xhe" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00015.png" id="109_7ui0c"]
+[ext_resource type="Texture2D" uid="uid://copmhoo5a8fnv" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00016.png" id="110_ps3am"]
+[ext_resource type="Texture2D" uid="uid://ggy0n4qiqu02" path="res://textures/Perrin/Bronze Sword/perrin_idle_bronze/perrin_idle_bronze_00017.png" id="111_bxg6w"]
+[ext_resource type="Texture2D" uid="uid://d26y2205816w8" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00000.png" id="112_arye8"]
+[ext_resource type="Texture2D" uid="uid://dh3hnjn07o1tu" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00001.png" id="113_iebig"]
+[ext_resource type="Texture2D" uid="uid://o6u2p4313hox" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00002.png" id="114_5jlye"]
+[ext_resource type="Texture2D" uid="uid://d0pkw6yje8h6g" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00003.png" id="115_ebbcm"]
+[ext_resource type="Texture2D" uid="uid://l7153j05xhe4" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00004.png" id="116_tt2it"]
+[ext_resource type="Texture2D" uid="uid://didt2yrsmg7a3" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00005.png" id="117_n3otv"]
+[ext_resource type="Texture2D" uid="uid://b8qhnawdocgkk" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00006.png" id="118_7fla5"]
+[ext_resource type="Texture2D" uid="uid://rl1v3lm6blld" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00007.png" id="119_j4r1w"]
+[ext_resource type="Texture2D" uid="uid://qawuf082apcq" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00008.png" id="120_ciwpb"]
+[ext_resource type="Texture2D" uid="uid://edd21823bfry" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00009.png" id="121_fivl2"]
+[ext_resource type="Texture2D" uid="uid://bxa4lqubc6a4" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00010.png" id="122_we2m2"]
+[ext_resource type="Texture2D" uid="uid://o5tnrd3h6qqc" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00011.png" id="123_gvh8h"]
+[ext_resource type="Texture2D" uid="uid://dxadal0kb0uqh" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00012.png" id="124_am64x"]
+[ext_resource type="Texture2D" uid="uid://r7ykfa02kkij" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00013.png" id="125_qbode"]
+[ext_resource type="Texture2D" uid="uid://cjh57ele4apfm" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00014.png" id="126_fucwk"]
+[ext_resource type="Texture2D" uid="uid://iqxhx3ax05ur" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00015.png" id="127_aaybx"]
+[ext_resource type="Texture2D" uid="uid://rbw2ofo12ajw" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00016.png" id="128_1ijca"]
+[ext_resource type="Texture2D" uid="uid://cw40cjo3tbnv6" path="res://textures/Perrin/Bronze Sword/perrin_walk_bronze/perrin_walk_bronze_00017.png" id="129_jhxlk"]
+[ext_resource type="Texture2D" uid="uid://bprp8naef3oq5" path="res://textures/Perrin/Iron Sword/perrin_damage_iron/perrin_damage_iron_00002.png" id="138_j5a23"]
+[ext_resource type="Texture2D" uid="uid://c1mluei605id4" path="res://textures/Perrin/Iron Sword/perrin_damage_iron/perrin_damage_iron_00003.png" id="139_7dt0f"]
+[ext_resource type="Texture2D" uid="uid://gnnkqqk78r8p" path="res://textures/Perrin/Iron Sword/perrin_damage_iron/perrin_damage_iron_00004.png" id="140_6745h"]
+[ext_resource type="Texture2D" uid="uid://dgof0s5kf5b1b" path="res://textures/Perrin/Iron Sword/perrin_damage_iron/perrin_damage_iron_00005.png" id="141_s4x8l"]
+[ext_resource type="Texture2D" uid="uid://db8ajia56xmvy" path="res://textures/Perrin/Iron Sword/perrin_damage_iron/perrin_damage_iron_00006.png" id="142_kwgs5"]
+[ext_resource type="Texture2D" uid="uid://cc3d06tgw4sro" path="res://textures/Perrin/Iron Sword/perrin_damage_iron/perrin_damage_iron_00007.png" id="143_c5vqo"]
+[ext_resource type="Texture2D" uid="uid://dvxkmiclvsre6" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00000.png" id="157_eprwj"]
+[ext_resource type="Texture2D" uid="uid://7on76jsqtkit" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00001.png" id="158_odfot"]
+[ext_resource type="Texture2D" uid="uid://kbkwctkjicy4" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00002.png" id="159_g52ms"]
+[ext_resource type="Texture2D" uid="uid://dni2su6b88hd8" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00003.png" id="160_0y3j3"]
+[ext_resource type="Texture2D" uid="uid://vimvtx1gpoyt" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00004.png" id="161_u6tnj"]
+[ext_resource type="Texture2D" uid="uid://cu1jxp1tvvrnp" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00005.png" id="162_8d2d2"]
+[ext_resource type="Texture2D" uid="uid://7usewewysn5j" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00006.png" id="163_3oj5r"]
+[ext_resource type="Texture2D" uid="uid://dwugnev50xi2j" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00007.png" id="164_6ff5v"]
+[ext_resource type="Texture2D" uid="uid://dpaxkwqgskji3" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00008.png" id="165_atw1a"]
+[ext_resource type="Texture2D" uid="uid://c44kehj8r6vqx" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00009.png" id="166_0gms1"]
+[ext_resource type="Texture2D" uid="uid://cly57g7165tyr" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00010.png" id="167_wjlje"]
+[ext_resource type="Texture2D" uid="uid://k2q86a4vidhp" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00011.png" id="168_qhw3a"]
+[ext_resource type="Texture2D" uid="uid://70j7ktkfyepo" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00012.png" id="169_s2cof"]
+[ext_resource type="Texture2D" uid="uid://b5akyel5b7xg7" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00013.png" id="170_lmrap"]
+[ext_resource type="Texture2D" uid="uid://dia56030dtt0k" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00014.png" id="171_61crj"]
+[ext_resource type="Texture2D" uid="uid://dtchllctcuqwj" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00015.png" id="172_hk10j"]
+[ext_resource type="Texture2D" uid="uid://bvxjvwa44t2hc" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00016.png" id="173_8cr26"]
+[ext_resource type="Texture2D" uid="uid://dgqe2c78ikx70" path="res://textures/Perrin/Iron Sword/perrin_idle_iron/perrin_idle_iron_00017.png" id="174_6eoqn"]
+[ext_resource type="Texture2D" uid="uid://c8yctsxynjyse" path="res://textures/Perrin/Wood Sword/perrin_attack_wood/perrin_attack_wood_00000.png" id="229_jabo7"]
+[ext_resource type="Texture2D" uid="uid://bqmosfxyjiv2x" path="res://textures/Perrin/Wood Sword/perrin_attack_wood/perrin_attack_wood_00001.png" id="230_bhu8h"]
+[ext_resource type="Texture2D" uid="uid://rhekt4ittq40" path="res://textures/Perrin/Wood Sword/perrin_attack_wood/perrin_attack_wood_00002.png" id="231_aknbg"]
+[ext_resource type="Texture2D" uid="uid://djkhxwnsroffs" path="res://textures/Perrin/Wood Sword/perrin_attack_wood/perrin_attack_wood_00003.png" id="232_cm1it"]
+[ext_resource type="Texture2D" uid="uid://bhikcvc1a0ud5" path="res://textures/Perrin/Wood Sword/perrin_attack_wood/perrin_attack_wood_00004.png" id="233_jch4e"]
+[ext_resource type="Texture2D" uid="uid://b2q24t3ohy1qa" path="res://textures/Perrin/Wood Sword/perrin_attack_wood/perrin_attack_wood_00005.png" id="234_mpklm"]
+[ext_resource type="Texture2D" uid="uid://b0ckwmarrkhdv" path="res://textures/Perrin/Wood Sword/perrin_attack_wood/perrin_attack_wood_00006.png" id="235_v46jo"]
+[ext_resource type="Texture2D" uid="uid://1ny6xw4kedaq" path="res://textures/Perrin/Wood Sword/perrin_attack_wood/perrin_attack_wood_00007.png" id="236_25lff"]
+[ext_resource type="Texture2D" uid="uid://drhgsw31qj6cs" path="res://textures/Perrin/Wood Sword/perrin_damage_wood/perrin_damage_wood_00002.png" id="237_wdhnh"]
+[ext_resource type="Texture2D" uid="uid://dnjrawyujefyw" path="res://textures/Perrin/Wood Sword/perrin_damage_wood/perrin_damage_wood_00003.png" id="238_7j7sm"]
+[ext_resource type="Texture2D" uid="uid://cyvh252irx7w" path="res://textures/Perrin/Wood Sword/perrin_damage_wood/perrin_damage_wood_00004.png" id="239_78lvv"]
+[ext_resource type="Texture2D" uid="uid://cisnq27a7dhky" path="res://textures/Perrin/Wood Sword/perrin_damage_wood/perrin_damage_wood_00005.png" id="240_03rar"]
+[ext_resource type="Texture2D" uid="uid://cbkv2chv1xrjp" path="res://textures/Perrin/Wood Sword/perrin_damage_wood/perrin_damage_wood_00006.png" id="241_6r75t"]
+[ext_resource type="Texture2D" uid="uid://cxyrk006yldcv" path="res://textures/Perrin/Wood Sword/perrin_damage_wood/perrin_damage_wood_00007.png" id="242_fd34o"]
+[ext_resource type="Texture2D" uid="uid://dwkwgn46hd7bo" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00000.png" id="243_m8gsn"]
+[ext_resource type="Texture2D" uid="uid://3qnffriyopbd" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00001.png" id="244_ehob6"]
+[ext_resource type="Texture2D" uid="uid://bejrys2vsu74g" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00002.png" id="245_ixh0f"]
+[ext_resource type="Texture2D" uid="uid://bec0x7lp7t13e" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00003.png" id="246_585xo"]
+[ext_resource type="Texture2D" uid="uid://l17g1p7wu1og" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00004.png" id="247_voknn"]
+[ext_resource type="Texture2D" uid="uid://68aw33g4lj2e" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00005.png" id="248_fd16a"]
+[ext_resource type="Texture2D" uid="uid://nfyuiluq7scf" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00006.png" id="249_si32w"]
+[ext_resource type="Texture2D" uid="uid://7lmy6vhggjcl" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00007.png" id="250_di31t"]
+[ext_resource type="Texture2D" uid="uid://cdk5du8x2u8a8" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00008.png" id="251_lna5o"]
+[ext_resource type="Texture2D" uid="uid://dlt6oosnclic3" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00009.png" id="252_amskk"]
+[ext_resource type="Texture2D" uid="uid://ibix617y73l8" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00010.png" id="253_jmxgx"]
+[ext_resource type="Texture2D" uid="uid://rx4xyovjqlji" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00011.png" id="254_pgsk0"]
+[ext_resource type="Texture2D" uid="uid://uivvxigb62fc" path="res://textures/Perrin/Wood Sword/perrin_dash_wood/perrin_dash_wood_00012.png" id="255_4xfua"]
+[ext_resource type="Texture2D" uid="uid://olonje5o1ml3" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00000.png" id="256_spl2t"]
+[ext_resource type="Texture2D" uid="uid://cyap5ctdsvyrb" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00001.png" id="257_tihaq"]
+[ext_resource type="Texture2D" uid="uid://w6vu0y1f0ywf" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00002.png" id="258_p2ycb"]
+[ext_resource type="Texture2D" uid="uid://cudsj7036x322" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00003.png" id="259_6msjc"]
+[ext_resource type="Texture2D" uid="uid://dobyc0e5qm06m" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00004.png" id="260_11gfq"]
+[ext_resource type="Texture2D" uid="uid://dubidx1r362vs" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00005.png" id="261_ufy53"]
+[ext_resource type="Texture2D" uid="uid://dk6dfcqpy6f6k" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00006.png" id="262_chmm4"]
+[ext_resource type="Texture2D" uid="uid://moyfr14214ok" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00007.png" id="263_u3dw5"]
+[ext_resource type="Texture2D" uid="uid://bnndwwdnr4pi6" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00008.png" id="264_e7w57"]
+[ext_resource type="Texture2D" uid="uid://dmjcrj2gkpapu" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00009.png" id="265_q1hf1"]
+[ext_resource type="Texture2D" uid="uid://dvo7w2fuknsqt" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00010.png" id="266_obiwd"]
+[ext_resource type="Texture2D" uid="uid://he2arbg8t1ue" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00011.png" id="267_s627a"]
+[ext_resource type="Texture2D" uid="uid://b8bker56l1t80" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00012.png" id="268_cwg87"]
+[ext_resource type="Texture2D" uid="uid://ydhcuwckjt20" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00013.png" id="269_msv74"]
+[ext_resource type="Texture2D" uid="uid://b4pse8ci063xv" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00014.png" id="270_xxwvj"]
+[ext_resource type="Texture2D" uid="uid://din4mc7cekoof" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00015.png" id="271_qu15q"]
+[ext_resource type="Texture2D" uid="uid://e4s6tbs5p8a6" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00016.png" id="272_di70u"]
+[ext_resource type="Texture2D" uid="uid://bgmvxo4rshdq1" path="res://textures/Perrin/Wood Sword/perrin_idle_wood/perrin_idle_wood_00017.png" id="273_n28k8"]
+[ext_resource type="Texture2D" uid="uid://cmteo16fcxki" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00000.png" id="274_51870"]
+[ext_resource type="Texture2D" uid="uid://cf7deluushqkj" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00001.png" id="275_7q0nv"]
+[ext_resource type="Texture2D" uid="uid://cls72hsm7omn2" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00002.png" id="276_jr8pt"]
+[ext_resource type="Texture2D" uid="uid://3olud6g8npe8" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00003.png" id="277_dta6o"]
+[ext_resource type="Texture2D" uid="uid://caf4tykjhbfoo" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00004.png" id="278_0k3a4"]
+[ext_resource type="Texture2D" uid="uid://dy8p05cadd0lc" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00005.png" id="279_kfiy1"]
+[ext_resource type="Texture2D" uid="uid://ydmb4upw62xg" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00006.png" id="280_dg6i0"]
+[ext_resource type="Texture2D" uid="uid://bwrknu2vgq7gu" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00007.png" id="281_k0f12"]
+[ext_resource type="Texture2D" uid="uid://xujdrq8ex1sd" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00008.png" id="282_pqrcv"]
+[ext_resource type="Texture2D" uid="uid://b2ljq7785hn5q" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00009.png" id="283_5orio"]
+[ext_resource type="Texture2D" uid="uid://0qfmofmwhfn3" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00010.png" id="284_xaeli"]
+[ext_resource type="Texture2D" uid="uid://rb7gqawhtjml" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00011.png" id="285_dq71m"]
+[ext_resource type="Texture2D" uid="uid://dhqty6weoc5fm" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00012.png" id="286_wk6rw"]
+[ext_resource type="Texture2D" uid="uid://cvr7xnofm8b6m" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00013.png" id="287_31615"]
+[ext_resource type="Texture2D" uid="uid://exvfyor7src" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00014.png" id="288_ps8ic"]
+[ext_resource type="Texture2D" uid="uid://dfcxop0djq3ko" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00015.png" id="289_k6j24"]
+[ext_resource type="Texture2D" uid="uid://heioyombtnsr" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00016.png" id="290_ufiwv"]
+[ext_resource type="Texture2D" uid="uid://e3l3aa0rx4aw" path="res://textures/Perrin/Wood Sword/perrin_walk_wood/perrin_walk_wood_00017.png" id="291_sqyq8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vlovs"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mkwaq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0falv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_wvqjg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_xwj34")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2ggvy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hvgvr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c63qf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_nqymb")
+}],
+"loop": 0,
+"name": &"bone_attack",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_n2wjg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_vh6pe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_0b2jo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_4ttds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_8ri8i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_vlfn3")
+}],
+"loop": 0,
+"name": &"bone_damage",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_klwgm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_xfldr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_uanu0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_gt5hh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_fwbd6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_cgixr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_hsum7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_0ax6y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_mern7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_jvss3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_8i0fb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_mvft6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_mp02n")
+}],
+"loop": 1,
+"name": &"bone_dash",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_shuay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_kjv06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_c7v2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_cw5v6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_omcfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_ibuvc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_f11or")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_uskqc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_t1paj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_8t7t6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_4j0wb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_wmsfe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_8ryfd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_5ksgn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_b8qtp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_nr7d0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_gtgf8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_kpv50")
+}],
+"loop": 1,
+"name": &"bone_idle",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("49_55jxi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_mprjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_rucfp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_wvm7j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_ye315")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_ju27g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_y7aab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_rfjfj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_1xxrn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_jnod0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_tka1j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_reaxb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_kovex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_nl1is")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_cpnpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_ckbxf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_eehw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_4aaab")
+}],
+"loop": 1,
+"name": &"bone_walk",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("67_nukj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_sjxw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_nl1qp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_x65m5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_48q65")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_ja6t6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_l1jm0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_o33k0")
+}],
+"loop": 0,
+"name": &"bronze_attack",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("75_m8ls2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_dmejt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_ww1ty")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_xmkqi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_xnlqf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_u83qk")
+}],
+"loop": 0,
+"name": &"bronze_damage",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("81_3gif2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("82_fwa7d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_2ljpo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_kf3x7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_3m2o4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_drfls")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_a7mb0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_7xgxo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_j6ala")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_1d12y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("91_nv6in")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_v12di")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_7hbao")
+}],
+"loop": 1,
+"name": &"bronze_dash",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("94_0by01")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_xwr8i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_s8ojp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_0pu48")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_inbhc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_fjc1s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("100_q700m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_h2hrw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_0yvku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_kxpmn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_6ujt7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_qg68u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_1lnoh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_xskfo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_m43tx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("109_7ui0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_ps3am")
+}, {
+"duration": 1.0,
+"texture": ExtResource("111_bxg6w")
+}],
+"loop": 1,
+"name": &"bronze_idle",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("112_arye8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("113_iebig")
+}, {
+"duration": 1.0,
+"texture": ExtResource("114_5jlye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("115_ebbcm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("116_tt2it")
+}, {
+"duration": 1.0,
+"texture": ExtResource("117_n3otv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("118_7fla5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("119_j4r1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("120_ciwpb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("121_fivl2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("122_we2m2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("123_gvh8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("124_am64x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("125_qbode")
+}, {
+"duration": 1.0,
+"texture": ExtResource("126_fucwk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("127_aaybx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("128_1ijca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("129_jhxlk")
+}],
+"loop": 1,
+"name": &"bronze_walk",
+"speed": 18.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_upxxc")
@@ -119,8 +749,31 @@ animations = [{
 "texture": ExtResource("11_hir57")
 }],
 "loop": 0,
-"name": &"attack",
+"name": &"iron_attack",
 "speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("138_j5a23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("139_7dt0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("140_6745h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("141_s4x8l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("142_kwgs5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("143_c5vqo")
+}],
+"loop": 0,
+"name": &"iron_damage",
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -163,104 +816,66 @@ animations = [{
 "texture": ExtResource("16_w8qe1")
 }],
 "loop": 1,
-"name": &"dash",
+"name": &"iron_dash",
 "speed": 24.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_myrg7")
+"texture": ExtResource("157_eprwj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_kvlxm")
+"texture": ExtResource("158_odfot")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_uf5tr")
+"texture": ExtResource("159_g52ms")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_lgqa7")
+"texture": ExtResource("160_0y3j3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_8ydkj")
+"texture": ExtResource("161_u6tnj")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_3j4b4")
+"texture": ExtResource("162_8d2d2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_yj68g")
+"texture": ExtResource("163_3oj5r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_ioxgp")
+"texture": ExtResource("164_6ff5v")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_cnsyf")
+"texture": ExtResource("165_atw1a")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_007i1")
+"texture": ExtResource("166_0gms1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_6cv16")
+"texture": ExtResource("167_wjlje")
+}, {
+"duration": 1.0,
+"texture": ExtResource("168_qhw3a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("169_s2cof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("170_lmrap")
+}, {
+"duration": 1.0,
+"texture": ExtResource("171_61crj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("172_hk10j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("173_8cr26")
+}, {
+"duration": 1.0,
+"texture": ExtResource("174_6eoqn")
 }],
 "loop": 1,
-"name": &"idle",
-"speed": 7.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("36_7u1tp")
-}, {
-"duration": 1.0,
-"texture": ExtResource("37_pq1ih")
-}, {
-"duration": 1.0,
-"texture": ExtResource("38_31ki0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("39_hf5gj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("40_avmva")
-}, {
-"duration": 1.0,
-"texture": ExtResource("41_0ioy2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("42_vlhku")
-}, {
-"duration": 1.0,
-"texture": ExtResource("43_ws0t6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("44_i6ap2")
-}, {
-"duration": 1.0,
-"texture": ExtResource("45_88c1f")
-}, {
-"duration": 1.0,
-"texture": ExtResource("46_hdu4s")
-}, {
-"duration": 1.0,
-"texture": ExtResource("47_0wr6q")
-}, {
-"duration": 1.0,
-"texture": ExtResource("48_p0anf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("49_lhgc7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("50_vy876")
-}, {
-"duration": 1.0,
-"texture": ExtResource("51_0vtlm")
-}, {
-"duration": 1.0,
-"texture": ExtResource("52_drv02")
-}, {
-"duration": 1.0,
-"texture": ExtResource("53_tmafg")
-}],
-"loop": 1,
-"name": &"idle_unarmed",
+"name": &"iron_idle",
 "speed": 9.0
 }, {
 "frames": [{
@@ -319,8 +934,67 @@ animations = [{
 "texture": ExtResource("32_jrbya")
 }],
 "loop": 1,
-"name": &"walk",
+"name": &"iron_walk",
 "speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_7u1tp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_pq1ih")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_31ki0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_hf5gj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_avmva")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_0ioy2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_vlhku")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_ws0t6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_i6ap2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_88c1f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_hdu4s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_0wr6q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_p0anf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_lhgc7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_vy876")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_0vtlm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_drv02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_tmafg")
+}],
+"loop": 1,
+"name": &"unarmed_idle",
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -378,7 +1052,221 @@ animations = [{
 "texture": ExtResource("89_wvv85")
 }],
 "loop": 1,
-"name": &"walk_unarmed",
+"name": &"unarmed_walk",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("229_jabo7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("230_bhu8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("231_aknbg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("232_cm1it")
+}, {
+"duration": 1.0,
+"texture": ExtResource("233_jch4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("234_mpklm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("235_v46jo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("236_25lff")
+}],
+"loop": 0,
+"name": &"wood_attack",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("237_wdhnh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("238_7j7sm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("239_78lvv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("240_03rar")
+}, {
+"duration": 1.0,
+"texture": ExtResource("241_6r75t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("242_fd34o")
+}],
+"loop": 0,
+"name": &"wood_damage",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("243_m8gsn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("244_ehob6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("245_ixh0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("246_585xo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("247_voknn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("248_fd16a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("249_si32w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("250_di31t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("251_lna5o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("252_amskk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("253_jmxgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("254_pgsk0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("255_4xfua")
+}],
+"loop": 1,
+"name": &"wood_dash",
+"speed": 24.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("256_spl2t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("257_tihaq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("258_p2ycb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("259_6msjc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("260_11gfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("261_ufy53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("262_chmm4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("263_u3dw5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("264_e7w57")
+}, {
+"duration": 1.0,
+"texture": ExtResource("265_q1hf1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("266_obiwd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("267_s627a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("268_cwg87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("269_msv74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("270_xxwvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("271_qu15q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("272_di70u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("273_n28k8")
+}],
+"loop": 1,
+"name": &"wood_idle",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("274_51870")
+}, {
+"duration": 1.0,
+"texture": ExtResource("275_7q0nv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("276_jr8pt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("277_dta6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("278_0k3a4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("279_kfiy1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("280_dg6i0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("281_k0f12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("282_pqrcv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("283_5orio")
+}, {
+"duration": 1.0,
+"texture": ExtResource("284_xaeli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("285_dq71m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("286_wk6rw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("287_31615")
+}, {
+"duration": 1.0,
+"texture": ExtResource("288_ps8ic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("289_k6j24")
+}, {
+"duration": 1.0,
+"texture": ExtResource("290_ufiwv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("291_sqyq8")
+}],
+"loop": 1,
+"name": &"wood_walk",
 "speed": 18.0
 }]
 
@@ -424,7 +1312,7 @@ offset = Vector2(0, 64)
 pixel_size = 0.014
 alpha_cut = 1
 sprite_frames = SubResource("SpriteFrames_vlovs")
-animation = &"idle_unarmed"
+animation = &"bronze_walk"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=623702916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)

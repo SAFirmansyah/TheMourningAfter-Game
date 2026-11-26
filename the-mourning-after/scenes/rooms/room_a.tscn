@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://764k273fks56" path="res://scenes/world/path_exit.tscn" id="3_exit"]
 [ext_resource type="PackedScene" uid="uid://bo67plntlruy6" path="res://scenes/test/prop.tscn" id="4_prop"]
 [ext_resource type="Texture2D" uid="uid://dbd1h8n2sgohf" path="res://textures/Hero Base/stand_withsword.png" id="6_4we1m"]
+[ext_resource type="Texture2D" uid="uid://dhlsiifegp7k" path="res://textures/Hero Base/stand_withoutsword.png" id="6_27o2k"]
 [ext_resource type="Texture2D" uid="uid://cb7bqej7hmnm3" path="res://textures/Hero Base/herobase_prayerbench.png" id="6_l5rmu"]
 [ext_resource type="Script" uid="uid://bue1mi5yjlgyn" path="res://scripts/visual/facing_card.gd" id="7_awkto"]
 [ext_resource type="Texture2D" uid="uid://cgt3ia73eatfq" path="res://textures/Hero Base/herobase_cabinet.png" id="7_eanj3"]
@@ -74,7 +75,9 @@ target_entry = &"WestExit"
 [node name="SwordStand" parent="Props" unique_id=844313245 instance=ExtResource("4_prop")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.1188, 0, 2.825)
 
-[node name="RunStartPoint" parent="Props/SwordStand" unique_id=1780628412 instance=ExtResource("8_start")]
+[node name="RunStartPoint" parent="Props/SwordStand" unique_id=1780628412 node_paths=PackedStringArray("card") instance=ExtResource("8_start")]
+card = NodePath("../Sprite3D")
+empty_texture = ExtResource("6_27o2k")
 lines = PackedStringArray()
 
 [node name="Sprite3D" type="Sprite3D" parent="Props/SwordStand" unique_id=69989344]

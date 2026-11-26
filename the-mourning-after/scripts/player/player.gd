@@ -90,6 +90,7 @@ var _attack_cooldown_left := 0.0
 var _ability_queued := false
 var _stun_time_left := 0.0
 var _damage_flash: DamageFlash
+var _hurting := false
 
 @onready var _body_shape: CollisionShape3D = $CollisionShape3D
 @onready var _sword: SwordVisual = get_node_or_null(^"Sword")
@@ -109,15 +110,22 @@ func _ready() -> void:
 	if _sword:
 		_sword.set_weapon(weapon)
 	sprite.animation_finished.connect(_on_sprite_animation_finished)
-	
+	stats.damaged.connect(_on_damaged)
+
 	print("weapon at _ready start: ", weapon.weapon_name if weapon else "null")
 	call_deferred("_print_health")
-	
+
 	stats.health_depleted.connect(_on_health_depleted)
+	
 		
 func _print_health() -> void:
 	print("player health: ", stats.health)
 	
+	
+func _anim_name(action: String) -> StringName:
+	var prefix := weapon.sprite_prefix if weapon else &"unarmed"
+	return StringName("%s_%s" % [prefix, action])
+
 
 func _physics_process(delta: float) -> void:
 	if _stun_time_left > 0.0:
@@ -131,15 +139,14 @@ func _physics_process(delta: float) -> void:
 		_facing = input.normalized()
 		if input.x != 0:
 			sprite.flip_h = input.x < 0
-	if _attacking and sprite.animation != &"attack":
+	if _attacking and not String(sprite.animation).ends_with("_attack"):
 		_attacking = false # the swing was cut short (e.g. by a dash) and will never report finishing
 		sprite.speed_scale = 1.0
-	if not _dashing and not _attacking and not animation_held:
+	if _hurting and not String(sprite.animation).ends_with("_damage"):
+		_hurting = false
+	if not _dashing and not _attacking and not _hurting and not animation_held:
 		var moving := input != Vector2.ZERO
-		if weapon == null:
-			sprite.play("walk_unarmed" if moving else "idle_unarmed")
-		else:
-			sprite.play("walk" if moving else "idle")
+		sprite.play(_anim_name("walk" if moving else "idle"))
 
 	_recharge_dashes(delta)
 	if _dash_queued:
@@ -179,6 +186,15 @@ func _physics_process(delta: float) -> void:
 		card.flip_h = input.x < 0.0
 	if _sword:
 		_sword.point(_facing)
+		
+		
+func _on_damaged(_amount: int) -> void:
+	if _dashing:
+		return # i-frames mean you can't actually be hit mid-dash anyway, but just in case
+	var damage_anim := _anim_name("damage")
+	if sprite.sprite_frames.has_animation(damage_anim):
+		_hurting = true
+		sprite.play(damage_anim)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -217,9 +233,12 @@ func is_stunned() -> bool:
 
 
 func _on_sprite_animation_finished() -> void:
-	if sprite.animation == &"attack":
+	var anim := String(sprite.animation)
+	if anim.ends_with("_attack"):
 		_attacking = false
 		sprite.speed_scale = 1.0
+	elif anim.ends_with("_damage"):
+		_hurting = false
 
 
 func teleport(pos: Vector3) -> void:
@@ -279,8 +298,11 @@ func _try_dash() -> void:
 	dashes_available -= 1
 	_dashing = true
 	_attacking = false # a dash cuts the swing's animation short
+	_hurting = false
 	sprite.speed_scale = 1.0
-	sprite.play("dash")
+	var dash_anim := _anim_name("dash")
+	if sprite.sprite_frames.has_animation(dash_anim):
+		sprite.play(dash_anim)
 	_dash_time_left = dash_duration
 	_dash_velocity = _to_world(_facing) * (dash_distance / dash_duration)
 	collision_mask &= ~dash_phase_layers
@@ -309,12 +331,13 @@ func _try_attack(ability_swing := false) -> bool:
 	_aim_at_nearby_enemy()
 	_attacking = true
 
+	var attack_anim := _anim_name("attack")
 	var frames := sprite.sprite_frames
-	var natural_duration := frames.get_frame_count(&"attack") / frames.get_animation_speed(&"attack")
+	var natural_duration := frames.get_frame_count(attack_anim) / frames.get_animation_speed(attack_anim)
 	var display_time := maxf(attack_anim_min_time, weapon.active_delay + weapon.active_window)
 	sprite.speed_scale = natural_duration / display_time
-	sprite.play("attack")
-	
+	sprite.play(attack_anim)
+
 	var swing := {
 		"damage": hit_damage(),
 		"abilities": weapon.charged_abilities if ability_swing else [],
@@ -330,7 +353,6 @@ func _try_attack(ability_swing := false) -> bool:
 	_spawn_hitbox(swing)
 	attack_ended.emit()
 	return true
-
 
 ## Turns the swing toward the closest enemy roughly in front, so near-misses connect.
 func _aim_at_nearby_enemy() -> void:
