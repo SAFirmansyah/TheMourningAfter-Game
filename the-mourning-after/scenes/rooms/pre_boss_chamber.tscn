@@ -37,6 +37,7 @@ size = Vector3(0.4, 2, 3.65)
 [node name="PreBossChamber" type="Node3D" unique_id=56238907]
 script = ExtResource("1_hfug0")
 boss_exit_name = &"EastExit"
+ground_tint = Color(0.6510, 0.6078, 0.2078, 1)
 
 [node name="Floor" type="MeshInstance3D" parent="." unique_id=1805978798]
 mesh = SubResource("PlaneMesh_ot1id")
@@ -87,15 +88,6 @@ disabled = true
 
 [node name="Interactable" parent="Bargain Spot" unique_id=2055157304 instance=ExtResource("5_xnjcq")]
 lines = PackedStringArray()
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=520922471]
-
-[node name="NextBossLabel" type="Label" parent="CanvasLayer" unique_id=1225846948]
-offset_left = 651.0
-offset_top = 181.0
-offset_right = 1137.0
-offset_bottom = 277.0
-text = "next boss"
 
 [node name="Pond" parent="." instance=ExtResource("p_pond")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
