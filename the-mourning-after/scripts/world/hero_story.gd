@@ -89,7 +89,7 @@ func _begin() -> void:
 		return
 	busy = true
 	world.hold_black()
-	await world.story.play_file(SCRIPT_PATH % "inciting_incident")
+	await world.story.play_file_skippable(SCRIPT_PATH % "inciting_incident")
 	if not is_inside_tree(): return
 	await world.story.play_file(SCRIPT_PATH % "motivation") # ends at the sword stand
 	if not is_inside_tree(): return

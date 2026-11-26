@@ -86,6 +86,7 @@ func _ready() -> void:
 	prompt.mouse_filter = Control.MOUSE_FILTER_STOP
 	prompt.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	prompt.gui_input.connect(_on_prompt_input)
+	_build_skip_prompt()
 
 
 ## Portraits drift gently against the cursor (and breathe a touch); the one speaking moves more.
@@ -687,3 +688,76 @@ func _fit_parts(text: String, label: Label, width: float) -> PackedStringArray:
 	if not line.is_empty():
 		parts.append(line)
 	return parts
+
+
+# --- Skip prompt (opening cutscenes) ---------------------------------------------------------------
+
+@export var skip_prompt_margin := Vector2(48, 40) # TUNE: Skip prompt's distance from the top-right corner (px)
+const SKIP_LAYER := 12 # above the black cutscene text (11), below the pause menu (20)
+
+var _skip_prompt: PanelContainer
+var _skip_action := Callable()
+
+
+## A copy of the E prompt reading "Esc - Skip", in the top-right corner, on its own layer over cutscenes.
+func _build_skip_prompt() -> void:
+	var layer := CanvasLayer.new()
+	layer.layer = SKIP_LAYER
+	add_child(layer)
+	_skip_prompt = prompt.duplicate() as PanelContainer
+	layer.add_child(_skip_prompt)
+	_skip_prompt.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	var size := prompt.size if prompt.size != Vector2.ZERO else prompt.custom_minimum_size
+	_skip_prompt.offset_right = -skip_prompt_margin.x
+	_skip_prompt.offset_left = _skip_prompt.offset_right - size.x
+	_skip_prompt.offset_top = skip_prompt_margin.y
+	_skip_prompt.offset_bottom = _skip_prompt.offset_top + size.y
+	_skip_prompt.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	_skip_prompt.grow_vertical = Control.GROW_DIRECTION_END
+	(_skip_prompt.get_node(^"Label") as Label).text = "Esc - Skip"
+	_skip_prompt.mouse_filter = Control.MOUSE_FILTER_STOP
+	_skip_prompt.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	_skip_prompt.gui_input.connect(func(event: InputEvent) -> void:
+		var click := event as InputEventMouseButton
+		if click and click.pressed and click.button_index == MOUSE_BUTTON_LEFT:
+			_skip_prompt.accept_event()
+			_use_skip())
+	_skip_prompt.hide()
+
+
+func show_skip_prompt(action: Callable) -> void:
+	_skip_action = action
+	_skip_prompt.modulate.a = 0.0
+	_skip_prompt.show()
+	_skip_prompt.create_tween().tween_property(_skip_prompt, "modulate:a", 1.0, 0.3)
+
+
+func hide_skip_prompt() -> void:
+	_skip_action = Callable()
+	_skip_prompt.hide()
+
+
+func _use_skip() -> void:
+	if _skip_action.is_valid() and not get_tree().paused:
+		var action := _skip_action
+		hide_skip_prompt()
+		action.call()
+
+
+## Esc skips: the opening cutscenes (with their prompt), and, unannounced, any other story scene or
+## conversation. Not while a choice or a Fate's offer is waiting; otherwise Esc opens the pause menu as usual.
+func _input(event: InputEvent) -> void:
+	if not event.is_action_pressed(&"pause") or get_tree().paused:
+		return
+	var world := get_tree().get_first_node_in_group(&"world") as World
+	if world and world.fate_bargain and world.fate_bargain.is_open:
+		return
+	if _skip_prompt and _skip_prompt.visible:
+		get_viewport().set_input_as_handled()
+		_use_skip()
+	elif world and world.story.playing and _choice_box == null:
+		get_viewport().set_input_as_handled()
+		world.story.skip()
+	elif _active:
+		get_viewport().set_input_as_handled()
+		_close()
